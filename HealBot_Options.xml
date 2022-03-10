@@ -8198,12 +8198,12 @@
 					-->
 					<EditBox name="SpellWacherEditBox" inherits="HealBot_Options_EditBoxTemplate" autoFocus="false" historyLines="32" justifyH="LEFT" virtual="true">
 						<Size>
-							<AbsDimension x="200" y="25"/>
+							<AbsDimension x="170" y="25"/>
 						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT" relativeTo="HealBot_Options_Panel8" relativePoint="TOPLEFT">
 								<Offset>
-									<AbsDimension x="170" y="-50"/>
+									<AbsDimension x="25" y="-85"/>
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -8391,7 +8391,7 @@
 				</Anchors>
 			</Button>
 			<!-- Spell Wacher Tab-->
-			<Button name="HealBot_OptionsTab8" inherits="HealBot_Options_Tab" id="8" text="Test">
+			<Button name="HealBot_OptionsTab8" inherits="HealBot_Options_Tab" id="8" text="Track">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="HealBot_OptionsTab7" relativePoint="RIGHT">
 						<Offset>
