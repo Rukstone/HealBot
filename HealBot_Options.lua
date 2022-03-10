@@ -7070,8 +7070,133 @@ function HealBot_Options_SetDefaults()
     HealBot_Config.ActionVisible = HealBot_Action:IsVisible();
     DoInitTab={[1]=true, [2]=true, [3]=true, [4]=true, [5]=true, [6]=true, [7]=true, [9]=true, [10]=true, }
 end
-function TestButton0(self)
-    print("worked.")
+local NewSPellWacher_ID_Name;
+
+local SPellWacherButtonDisplay;
+local SelectedSpellWacher;
+
+function OnSpellButtonClickDisplayHotOption(self,frame)
+
+    frame:SetText("Click me")
+    local _,class=UnitClass("player")
+    class=strsub(class,1,4)
+
+    local MyFrameOnclick = function( self, button )
+
+        if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
+            if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
+                 -- body
+                 HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 2;
+                 SPellWacherButtonDisplay:SetText("Self Cast Only")
+
+            elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
+                -- body
+                HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 3;
+                SPellWacherButtonDisplay:SetText("ALL")
+            elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 3 then
+                -- body
+                HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 1;
+                SPellWacherButtonDisplay:SetText("Dont Show")
+            end
+        end
+
+
+    end
+    frame:HookScript("OnClick", MyFrameOnclick)
+    SPellWacherButtonDisplay = frame;
+
+
+end
+function OnSpellWacher_Scroll_Load(self,frame)
+
+    local chilld = CreateFrame("Frame", nil, frame);
+    chilld:SetSize(200,300);
+    chilld.bg = chilld:CreateTexture(nil,"BACKGROUND");
+    chilld.bg:SetAllPoints(true);
+    frame:SetScrollChild(chilld)
+
+    local indexEE = 0
+    local _,class=UnitClass("player")
+    class=strsub(class,1,4)
+
+    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[class]) do
+        local button = CreateFrame("Button", nil, chilld)
+        button:SetPoint("TOP", chilld, "TOP", 0, indexEE)
+        button:SetWidth(200)
+        button:SetHeight(25)
+        
+        button:SetText(k)
+        button:SetNormalFontObject("GameFontNormal")
+        
+        local ntex = button:CreateTexture()
+        ntex:SetTexture("Interface/Buttons/UI-Panel-Button-Up")
+        ntex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ntex:SetAllPoints()	
+        button:SetNormalTexture(ntex)
+        
+        local htex = button:CreateTexture()
+        htex:SetTexture("Interface/Buttons/UI-Panel-Button-Highlight")
+        htex:SetTexCoord(0, 0.625, 0, 0.6875)
+        htex:SetAllPoints()
+        button:SetHighlightTexture(htex)
+        
+        local ptex = button:CreateTexture()
+        ptex:SetTexture("Interface/Buttons/UI-Panel-Button-Down")
+        ptex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ptex:SetAllPoints()
+        button:SetPushedTexture(ptex)
+        indexEE = indexEE - 30
+
+        local MyFrameOnclick = function( self, button )
+            
+
+
+            SelectedSpellWacher = k;
+
+
+            if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
+                if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
+                     -- body
+                     SPellWacherButtonDisplay:SetText("Dont Show")
+    
+                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
+                    -- body
+                    SPellWacherButtonDisplay:SetText("Self Cast Only")
+                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 3 then
+                    -- body
+                    SPellWacherButtonDisplay:SetText("ALL")
+                end
+            end
+
+
+        end
+        button:HookScript("OnClick", MyFrameOnclick)
+        
+
+    end
+
+  
+
+
+end
+local SPellWacherDropDown;
+
+function SpellWacherOnTextChange(self,SpellWacherEditBox)
+    NewSPellWacher_ID_Name = SpellWacherEditBox:GetText()
+
+end
+function AddNewSpellWach(self)
+
+
+    if (NewSPellWacher_ID_Name) then
+        local mySpellID
+        mySpellID = GetItemInfo(NewSPellWacher_ID_Name)
+
+    else
+        mySpellID = NewSPellWacher_ID_Name
+    end
+
+
 end
 function HealBot_Options_OnLoad(self)
 

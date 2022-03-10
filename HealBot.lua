@@ -5294,11 +5294,11 @@ function HealBot_Update_Skins()
         HealBot_Update_BuffsForSpec()
     end
     
+
     local _,class=UnitClass("player")
     class=strsub(class,1,4)
     local hbClassHoTwatchDef=HealBot_GlobalsDefaults.WatchHoT[class]
-   -- hbClassHoTwatch=HealBot_Globals.WatchHoT[class]
-    
+
     for sName,x  in pairs(hbClassHoTwatchDef) do
         if not HealBot_Globals.WatchHoT[class][sName] then
             HealBot_Globals.WatchHoT[class][sName]=x

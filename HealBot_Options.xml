@@ -2,6 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 	<Script file="HealBot_Options.lua" />
+
 	<Button name="HealBot_Options_Tab" inherits="CharacterFrameTabButtonTemplate" virtual="true">
 		<Scripts>
 			<OnClick>PlaySound("igMainMenuOpen");
@@ -134,8 +135,10 @@
 			</Layer>
 		</Layers>
 		<Frames>
+			<!-- General Tab Window-->
 			<Frame name="HealBot_Options_Panel1" hidden="true" setAllPoints="true">
 				<Frames>
+					
 					<Frame name="HealBot_Options_GenFrame">
 						<Size>
 							<AbsDimension y="270"/>
@@ -519,6 +522,7 @@
 					</Frame>
 				</Frames>
 			</Frame>
+			<!--Spells Action-->
 			<Frame name="HealBot_Options_Panel2" hidden="true" setAllPoints="true">
 				<Frames>
 					<Frame name="HealBot_Options_KeysFrame">
@@ -1534,6 +1538,7 @@
 					</Frame>
 				</Frames>
 			</Frame>
+			<!--Skins-->
 			<Frame name="HealBot_Options_Panel3" hidden="true" setAllPoints="true">
 				<Frames>
                     <Frame name="HealBot_Options_Skins" inherits="UIDropDownMenuTemplate">
@@ -1648,8 +1653,6 @@
                             </Frame>
                         </Frames>
                     </Frame>
-                    
-                    
 					<Frame name="HealBot_Options_SkinsFrameSelect">
 						<Size>
 							<AbsDimension y="118"/>
@@ -2130,7 +2133,6 @@
 
                         </Frames>
                     </Frame>
-                    
 					<Frame name="HealBot_Options_IconTextSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -2284,8 +2286,6 @@
 							</Slider>
                         </Frames>
                     </Frame>
-                        
-                        
 					<Frame name="HealBot_Options_AggroSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -2736,7 +2736,6 @@
                             </StatusBar>
                         </Frames>
                     </Frame>
-
 					<Frame name="HealBot_Options_GeneralSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -3058,8 +3057,6 @@
                     
                         </Frames>
                     </Frame>
-
-                    
 					<Frame name="HealBot_Options_HealingSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -3872,7 +3869,6 @@
                             </Frame>
 						</Frames>
                     </Frame>
-                    
 					<Frame name="HealBot_Options_IncHealsSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -3997,8 +3993,6 @@
 							</Slider>
 						</Frames>
                     </Frame>
-                    
-                    
 					<Frame name="HealBot_Options_ChatSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -4204,9 +4198,6 @@
 							</EditBox>
 						</Frames>
                     </Frame>
-                    
-                    
-                    
 					<Frame name="HealBot_Options_HeadersSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -4433,9 +4424,6 @@
 							</Slider>								
 						</Frames>
 					</Frame>
-
-                    
-                    
 					<Frame name="HealBot_Options_BarsSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -4768,8 +4756,6 @@
 							</StatusBar>
                         </Frames>
                     </Frame>
-                    
-                    
 					<Frame name="HealBot_Options_TextSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -5153,7 +5139,6 @@
 							</Slider>
 						</Frames>
                     </Frame>
-
 					<Frame name="HealBot_Options_IconsSkinsFrame">
 						<Size>
 							<AbsDimension y="358"/>
@@ -5442,7 +5427,6 @@
 									<OnClick>HealBot_HoTx2Bar_OnClick(self)</OnClick>
 								</Scripts>
 							</CheckButton>
-
 							<Slider name="HealBot_BarButtonIconScale" inherits="HealBot_Options_SliderTemplate">
 								<Size>
 									<AbsDimension x="288" y="18" />
@@ -5459,6 +5443,8 @@
 									<OnValueChanged>HealBot_BarButtonIconScale_OnValueChanged(self)</OnValueChanged>
 								</Scripts>
 							</Slider>
+
+							<!-- -->
                             <Frame name="HealBot_Options_FilterHoTctl" inherits="UIDropDownMenuTemplate">
                                 <Layers>
                                     <Layer level="BACKGROUND">
@@ -5484,6 +5470,7 @@
                                     <OnLoad>HealBot_Options_FilterHoTctl_OnLoad(self)</OnLoad>
                                 </Scripts>
                             </Frame>
+							<!-- -->
                             <Frame name="HealBot_Options_Class_HoTctlName" inherits="UIDropDownMenuTemplate">
                                 <Layers>
                                     <Layer level="BACKGROUND">
@@ -5518,6 +5505,7 @@
                                     <OnLoad>HealBot_Options_Class_HoTctlName_OnLoad(self)</OnLoad>
                                 </Scripts>
                             </Frame>
+							<!-- -->
                             <Frame name="HealBot_Options_Class_HoTctlAction" inherits="UIDropDownMenuTemplate">
                                 <Layers>
                                     <Layer level="BACKGROUND">
@@ -5542,10 +5530,12 @@
                                     <OnLoad>HealBot_Options_Class_HoTctlAction_OnLoad(self)</OnLoad>
                                 </Scripts>
                             </Frame>
+
 						</Frames>
 					</Frame>
 				</Frames>
 			</Frame>
+			<!--Cure-->
 			<Frame name="HealBot_Options_Panel4" hidden="true" setAllPoints="true">
 				<Frames>
 					<CheckButton name="HealBot_Options_MonitorDebuffs" inherits="OptionsCheckButtonTemplate">
@@ -6918,6 +6908,7 @@
 					</Frame>
 				</Frames>
 			</Frame>
+			<!--buffs-->
 			<Frame name="HealBot_Options_Panel6" hidden="true" setAllPoints="true">
 				<Frames>
 					<Frame name="HealBot_Options_TooltipsPanel">
@@ -7123,6 +7114,7 @@
 					</Frame>
 				</Frames>
 			</Frame>
+			<!--tips-->
 			<Frame name="HealBot_Options_Panel5" hidden="true" setAllPoints="true">
 				<Frames>
 					<CheckButton name="HealBot_Options_MonitorBuffs" inherits="OptionsCheckButtonTemplate">
@@ -7847,6 +7839,7 @@
 					</Frame>
 				</Frames>
 			</Frame>
+			<!--other-->
 			<Frame name="HealBot_Options_Panel7" hidden="true" setAllPoints="true">
 				<Frames>
 					<Frame name="HealBot_Options_CrashProtPanel">
@@ -8181,22 +8174,78 @@
                     </Frame>
                 </Frames>
             </Frame>
+			<!-- SPELL WACHER WINDOW -->
 			<Frame name="HealBot_Options_Panel8" hidden="true" setAllPoints="true" >
 				<frames>
 
-					<Button name="testButtonClick" text="Click Me">
-
-						<Script>
-							TestButton0(self)
-						</Script>
+					<Button name="HealBot_Options_AddSpellWach" inherits="UIPanelButtonTemplate" text="Add">
+						<Size>
+							<AbsDimension x="115" y="27"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="HealBot_Options_Panel8" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="-50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>AddNewSpellWach(self)</OnClick>
+						</Scripts>
+					</Button>
+					<EditBox name="SpellWacherEditBox" inherits="HealBot_Options_EditBoxTemplate" autoFocus="false" historyLines="32" justifyH="LEFT" virtual="true">
+						<Size>
+							<AbsDimension x="300" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="HealBot_Options_Panel8" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="170" y="-50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SpellWacherOnTextChange(self,SpellWacherEditBox)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<ScrollFrame name="SpellWacherScrollFrame" inherits="UIPanelScrollFrameTemplate">
+						<Size>
+							<AbsDimension x="200" y="350"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="HealBot_Options_Panel8">
+								<Offset>
+									<AbsDimension x="20" y="-125"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								OnSpellWacher_Scroll_Load(self,SpellWacherScrollFrame)
+							</OnLoad>
+						</Scripts>
+					</ScrollFrame>
+					<Button name="SpellWacherButtonDisplaySpellButton" inherits="UIPanelButtonTemplate" text="Click Me">
+						<Size>
+							<AbsDimension x="200" y="27"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="HealBot_Options_Panel8">
+								<Offset>
+									<AbsDimension x="250" y="-450"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								OnSpellButtonClickDisplayHotOption(self,SpellWacherButtonDisplaySpellButton)
+							</OnLoad>
+						</Scripts>
 					</Button>
 
-
 				</frames>
+
 			</Frame>
-
-
-
 
 			<Button name="HealBot_Options_Defaults" inherits="UIPanelButtonTemplate" text="HEALBOT_OPTIONS_INFO">
 				<Size>
@@ -8273,7 +8322,6 @@
 					<OnClick>HideUIPanel(self:GetParent()); HealBot_Options_Close()</OnClick>
 				</Scripts>
 			</Button>
-       
 			<Button name="HealBot_OptionsTab1" inherits="HealBot_Options_Tab" id="1" text="HEALBOT_OPTIONS_TAB_GENERAL">
 				<Anchors>
 					<Anchor point="BOTTOMLEFT">
@@ -8337,6 +8385,7 @@
 					</Anchor>
 				</Anchors>
 			</Button>
+			<!-- Spell Wacher Tab-->
 			<Button name="HealBot_OptionsTab8" inherits="HealBot_Options_Tab" id="8" text="Test">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="HealBot_OptionsTab7" relativePoint="RIGHT">
