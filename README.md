@@ -10,6 +10,5 @@ spell like "Power word shild" "Becon Of Light" "Renew" Can now be displayed on.
 dispells can be usable depending on the spell that you have. for example i have Dispell Curse / Remove Curse so i can track curse debbufs. but in case ascension decide to add a new spell that can decurse then won't show on the list so you will have to have one of thouse two spells to asing and use the custon one made by ascention if you decide so. the same aply for poison's.
 
 
-
 ###### Contact-me
 discord: Rukstone#6779
