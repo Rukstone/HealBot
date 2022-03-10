@@ -8174,10 +8174,12 @@
                     </Frame>
                 </Frames>
             </Frame>
+			<!--RUKSTONE-->
 			<!-- SPELL WACHER WINDOW -->
 			<Frame name="HealBot_Options_Panel8" hidden="true" setAllPoints="true" >
 				<frames>
 
+					<!-- 
 					<Button name="HealBot_Options_AddSpellWach" inherits="UIPanelButtonTemplate" text="Add">
 						<Size>
 							<AbsDimension x="115" y="27"/>
@@ -8193,9 +8195,10 @@
 							<OnClick>AddNewSpellWach(self)</OnClick>
 						</Scripts>
 					</Button>
+					-->
 					<EditBox name="SpellWacherEditBox" inherits="HealBot_Options_EditBoxTemplate" autoFocus="false" historyLines="32" justifyH="LEFT" virtual="true">
 						<Size>
-							<AbsDimension x="300" y="25"/>
+							<AbsDimension x="200" y="25"/>
 						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT" relativeTo="HealBot_Options_Panel8" relativePoint="TOPLEFT">
@@ -8205,9 +8208,11 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnTextChanged>SpellWacherOnTextChange(self,SpellWacherEditBox)</OnTextChanged>
+							<OnTextChanged>SpellWacherOnTextChange(SpellWacherEditBox)</OnTextChanged>
 						</Scripts>
 					</EditBox>
+					
+
 					<ScrollFrame name="SpellWacherScrollFrame" inherits="UIPanelScrollFrameTemplate">
 						<Size>
 							<AbsDimension x="200" y="350"/>

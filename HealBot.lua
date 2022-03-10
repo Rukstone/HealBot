@@ -1858,10 +1858,8 @@ end
 
 local hbClassHoTwatch={}
 function HealBot_configClassHoT(class, race)
+    
     hbClassHoTwatch=HealBot_Globals.WatchHoT[class]
-
-
-
     for k, v in pairs(hbClassHoTwatch) do
         if (v == 3) then
             HealBot_Watch_HoT[k]="A"-- for display on all
@@ -5300,9 +5298,7 @@ function HealBot_Update_Skins()
     local hbClassHoTwatchDef=HealBot_GlobalsDefaults.WatchHoT[class]
 
     for sName,x  in pairs(hbClassHoTwatchDef) do
-        if not HealBot_Globals.WatchHoT[class][sName] then
-            HealBot_Globals.WatchHoT[class][sName]=x
-        end
+        AddNewWachHOT(class,sName,x);
     end
 
     for dName, _ in pairs(HealBot_Config.HealBot_Custom_Debuffs) do
@@ -5310,35 +5306,16 @@ function HealBot_Update_Skins()
             HealBot_Config.HealBot_Custom_Debuffs[dName]=10
         end
     end
-    
     Healbot_Config_Skins.Skin_Version=HealBotSkinVersion
+    
+
 end
-
-function HealBot_Update_SpellCombos()
-    local combo=nil
-    local button=nil
-
-    for x=1,2 do
-        if x==1 then
-            combo = HealBot_Config.EnabledKeyCombo;
-        else
-            combo = HealBot_Config.DisabledKeyCombo;
-        end
-        for y=1,15 do
-            button = HealBot_Options_ComboClass_Button(y)
-            for z=1,3 do
-                if combo then
-                    combo[button..z] = combo[button]
-                    combo["Shift"..button..z] = combo["Shift"..button]
-                    combo["Ctrl"..button..z] = combo["Ctrl"..button]
-                    combo["Alt"..button..z] = combo["Alt"..button]
-                    combo["Ctrl-Shift"..button..z] = combo["Ctrl-Shift"..button]
-                    combo["Alt-Shift"..button..z] = combo["Alt-Shift"..button]
-                end
-            end
-        end
+function AddNewWachHOT(class,key,value)
+    if not HealBot_Globals.WatchHoT[class][key] then
+        HealBot_Globals.WatchHoT[class][key]=value
     end
 end
+
 
 function HealBot_Copy_SpellCombos()
     local combo=nil

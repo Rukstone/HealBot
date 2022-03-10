@@ -283,9 +283,6 @@ StaticPopupDialogs["HEALBOT_OPTIONS_ACCEPTSKIN"] = {
     whileDead = 1,
     hideOnEscape = 1
 };
-
-
-
 function HealBot_Options_retDebuffWatchTarget(debuffType, hbGUID)
     if HealBot_DebuffSpell[debuffType] and HealBot_Config.HealBot_BuffWatchGUID[HealBot_DebuffSpell[debuffType]] then
         return HealBot_DebuffWatchTarget[debuffType], HealBot_Config.HealBot_BuffWatchGUID[HealBot_DebuffSpell[debuffType]][hbGUID]
@@ -293,7 +290,6 @@ function HealBot_Options_retDebuffWatchTarget(debuffType, hbGUID)
         return HealBot_DebuffWatchTarget[debuffType], nil
     end
 end
-
 function HealBot_Options_retBuffWatchTarget(buffName, hbGUID)
     if HealBot_Config.HealBot_BuffWatchGUID[buffName] then
         return HealBot_BuffWatchTarget[buffName], HealBot_Config.HealBot_BuffWatchGUID[buffName][hbGUID]
@@ -301,12 +297,10 @@ function HealBot_Options_retBuffWatchTarget(buffName, hbGUID)
         return HealBot_BuffWatchTarget[buffName], nil
     end
 end
-
 local tmpDebugThrottle=GetTime()
 function HealBot_Options_retDebuffPriority(debuffName, debuffType)
     return HealBot_Config.HealBot_Custom_Debuffs[debuffName] or HealBot_Config.HealBotDebuffPriority[debuffType] or 99
 end
-
 function HealBot_Options_Pct_OnLoad(self,vText)
     self.text = vText;
     g=_G[self:GetName().."Text"]
@@ -318,7 +312,6 @@ function HealBot_Options_Pct_OnLoad(self,vText)
     self:SetMinMaxValues(0.00,1.00);
     self:SetValueStep(0.01);
 end
-
 function HealBot_Options_Pct_OnLoad_MinMax(self,vText,Min,Max,Step)
     self.text = vText;
 
@@ -334,7 +327,6 @@ function HealBot_Options_Pct_OnLoad_MinMax(self,vText,Min,Max,Step)
     self:SetMinMaxValues(Min,Max);
     self:SetValueStep(Step);
 end
-
 function HealBot_Options_val_OnLoad(self,vText,Min,Max,Step)
     self.text = vText;
     g=_G[self:GetName().."Text"]
@@ -346,7 +338,6 @@ function HealBot_Options_val_OnLoad(self,vText,Min,Max,Step)
     self:SetMinMaxValues(Min,Max);
     self:SetValueStep(Step);
 end
-
 function HealBot_Options_valNoCols_OnLoad(self,Min,Max)
     g=_G[self:GetName().."Text"]
     g:SetText(HealBot_Options_SetNoColsText);
@@ -357,7 +348,6 @@ function HealBot_Options_valNoCols_OnLoad(self,Min,Max)
     self:SetMinMaxValues(Min,Max);
     self:SetValueStep(1);
 end
-
 function HealBot_Options_val2_OnLoad(self,vText,Min,Max,Step,vDiv)
     self.text = vText;
 
@@ -370,7 +360,6 @@ function HealBot_Options_val2_OnLoad(self,vText,Min,Max,Step,vDiv)
     self:SetMinMaxValues(Min,Max);
     self:SetValueStep(Step);
 end
-
 function HealBot_Options_valtime_OnLoad(self,vText,Min,Max,Step,secsOnly)
     self.text = vText;
 
@@ -390,20 +379,16 @@ function HealBot_Options_valtime_OnLoad(self,vText,Min,Max,Step,secsOnly)
     self:SetMinMaxValues(Min,Max);
     self:SetValueStep(Step);
 end
-
 function HealBot_Options_SetText(self,vText)
     g=_G[self:GetName().."Text"]
     g:SetText(vText);
 end
-
 function HealBot_Options_NotifyHealMsg_OnTextChanged(self)
     Healbot_Config_Skins.NotifyHealMsg[Healbot_Config_Skins.Current_Skin] = self:GetText()
 end
-
 function HealBot_Options_NotifyOtherMsg_OnTextChanged(self)
     Healbot_Config_Skins.NotifyOtherMsg[Healbot_Config_Skins.Current_Skin] = self:GetText()
 end
-
 function HealBot_Options_SetNoColsText()
     if Healbot_Config_Skins.ShowHeader[Healbot_Config_Skins.Current_Skin]==1 then
         HealBot_Options_BarNumGroupPerCol:Hide()
@@ -417,7 +402,6 @@ function HealBot_Options_SetNoColsText()
         end
     end
 end
-
 local pct=nil
 function HealBot_Options_Pct_OnValueChanged(self)
     pct = floor(self:GetValue()*100+0.5);
@@ -425,8 +409,6 @@ function HealBot_Options_Pct_OnValueChanged(self)
     g:SetText(self.text .. " (" .. pct .. "%)");
     return self:GetValue();
 end
-
-
 function HealBot_Options_NewSkin_OnTextChanged(self)
     text= self:GetText()
     if strlen(text)>0 then
@@ -435,11 +417,9 @@ function HealBot_Options_NewSkin_OnTextChanged(self)
         HealBot_Options_NewSkinb:Disable();
     end
 end
-
 function HealBot_Options_NewSkinb_OnClick(self)
     HealBot_Options_setNewSkin(HealBot_Options_NewSkin:GetText())
 end
-
 function HealBot_Options_setNewSkin(newSkinName)
     Healbot_Config_Skins.numcols[newSkinName] = Healbot_Config_Skins.numcols[Healbot_Config_Skins.Current_Skin]
     Healbot_Config_Skins.btexture[newSkinName] = Healbot_Config_Skins.btexture[Healbot_Config_Skins.Current_Skin]
@@ -621,7 +601,6 @@ function HealBot_Options_setNewSkin(newSkinName)
     HealBot_Options_NewSkin:SetText("")
     HealBot_Options_Set_Current_Skin(newSkinName)
 end
-
 local hbDelSkinName=nil
 function HealBot_Options_DeleteSkin_OnClick(self)
     if Healbot_Config_Skins.Current_Skin~=HEALBOT_SKINS_STD then
@@ -803,18 +782,15 @@ function HealBot_Options_DeleteSkin_OnClick(self)
         HealBot_Options_Set_Current_Skin(HEALBOT_SKINS_STD)
     end
 end
-
 function HealBot_Options_CrashProt_OnClick(self)
     Healbot_Config_Skins.CrashProt[HealBot_Options_CurCPSkins["Crash"]]=self:GetChecked() or 0
     HealBot_useCrashProtection()
     if Delay_RecalcParty==0 then Delay_RecalcParty=1; end
 end
-
 function HealBot_Options_CombatProt_OnClick(self)
     Healbot_Config_Skins.CombatProt[HealBot_Options_CurCPSkins["Combat"]]=self:GetChecked() or 0
     if Delay_RecalcParty<2 then Delay_RecalcParty=2; end
 end
-
 function HealBot_Options_CrashProt_OnTextChanged(self)
     text = self:GetText()
     if strlen(text)<1 or strlen(text)>14 then
@@ -831,27 +807,24 @@ function HealBot_Options_CrashProt_OnTextChanged(self)
         HealBot_Config.CrashProtMacroName = self:GetText()
     end
 end
-
 function HealBot_Options_CrashProtStartTime_OnValueChanged(self)
     HealBot_Config.CrashProtStartTime = self:GetValue();
     g=_G[self:GetName().."Text"]
     g:SetText(self.text .. ": " .. self:GetValue().." "..HEALBOT_WORDS_SEC);
 end
-
 function HealBot_Options_CombatPartyNo_OnValueChanged(self)
     Healbot_Config_Skins.CombatProtParty[HealBot_Options_CurCPSkins["Combat"]] = self:GetValue();
     g=_G[self:GetName().."Text"]
     g:SetText(self:GetValue().." "..self.text);
     if Delay_RecalcParty<2 then Delay_RecalcParty=2; end
 end
-
 function HealBot_Options_CombatRaidNo_OnValueChanged(self)
     Healbot_Config_Skins.CombatProtRaid[HealBot_Options_CurCPSkins["Combat"]] = self:GetValue();
     g=_G[self:GetName().."Text"]
     g:SetText(self:GetValue().." "..self.text);
     if Delay_RecalcParty<2 then Delay_RecalcParty=2; end
 end
-        
+       
 function HealBot_Options_ShowHeaders_OnClick(self)
     Healbot_Config_Skins.ShowHeader[Healbot_Config_Skins.Current_Skin] = self:GetChecked() or 0;
     HealBot_Options_BarNumColsSText:SetText(HealBot_Options_SetNoColsText() .. ": " .. Healbot_Config_Skins.numcols[Healbot_Config_Skins.Current_Skin]);
@@ -6219,7 +6192,6 @@ end
 function HealBot_Options_getDropDownId_bySpec(ddId)
     return HealBot_Config.CurrentSpec..ddId
 end
-
 function HealBot_Options_ComboClass_Button(bNo)
     if bNo==2 then 
         button = "Middle"
@@ -6254,7 +6226,6 @@ function HealBot_Options_ComboClass_Button(bNo)
     end
     return button;
 end
-
 local usable=nil
 local HealBot_DebuffWatchTargetSpell=nil
 local FirstDebuffLoad=true
@@ -6331,8 +6302,6 @@ function HealBot_Options_Debuff_Reset()
     end
     FirstDebuffLoad=nil
 end
-
-
 local spells={}
 local Monitor_Buffs=nil
 local HealBot_BuffWatchTargetSpell=nil
@@ -6423,7 +6392,6 @@ function HealBot_Options_Buff_Reset()
     end
     FirstBuffLoad=nil
 end
-
 local BuffWatchSpell=" "
 StaticPopupDialogs["HEALBOT_OPTIONS_BUFFNAMEDTITLE"] = {
     text = HEALBOT_OPTIONS_BUFFNAMED.."%s",
@@ -6446,7 +6414,6 @@ StaticPopupDialogs["HEALBOT_OPTIONS_BUFFNAMEDTITLE"] = {
     hasEditBox = 1,
     hasWideEditBox = 1,
 };
-
 local gName=nil
 local gGUID=nil
 local myTargets={}
@@ -6532,7 +6499,6 @@ function HealBot_GuessName()
     if not gName then gName=HEALBOT_SORTBY_NAME..","..HEALBOT_SORTBY_NAME end
     return gName
 end
-
 local BuffWatchType=nil
 local BuffWatchID=nil
 local Uname=nil
@@ -6579,13 +6545,11 @@ function HealBot_Options_Set_BuffWatchGUID(unitName)
         end
     end
 end
-
 function HealBot_Options_CleanName(unitName)
     Uname=strtrim(unitName)
     Uname=strupper(strsub(Uname, 1, 1))..strlower(strsub(Uname, 2))
     return Uname
 end
-
 function HealBot_Options_Get_BuffWatchGUID(spellName, BuffType, ddID)
     if not ClickedBuffGroupDD or ClickedBuffGroupDD~=ddID then return end
     BuffWatchSpell=spellName
@@ -6594,7 +6558,6 @@ function HealBot_Options_Get_BuffWatchGUID(spellName, BuffType, ddID)
     StaticPopup_Show ("HEALBOT_OPTIONS_BUFFNAMEDTITLE", BuffWatchSpell);
     ClickedBuffGroupDD=nil
 end
-
 function HealBot_Options_Get_deBuffWatchGUID(spellName, BuffType, ddID)
     if not ClickedBuffGroupDD or ClickedBuffGroupDD~=ddID then return end
     BuffWatchSpell=spellName
@@ -6603,11 +6566,9 @@ function HealBot_Options_Get_deBuffWatchGUID(spellName, BuffType, ddID)
     StaticPopup_Show ("HEALBOT_OPTIONS_BUFFNAMEDTITLE", BuffWatchSpell);
     ClickedBuffGroupDD=nil
 end
-
 function HealBot_Options_RetBuffRGB(spellName)
     return HealBot_buffbarcolr[spellName],HealBot_buffbarcolg[spellName],HealBot_buffbarcolb[spellName];
 end
-
 function HealBot_Colorpick_OnClick(CDCType)
     HealBot_ColourObjWaiting=CDCType;
     if CDCType==HEALBOT_CUSTOM_en and HealBot_Options_StorePrev["CDebuffcustomName"] then
@@ -6624,7 +6585,6 @@ function HealBot_Colorpick_OnClick(CDCType)
         HealBot_UseColourPick(HealBot_Config.CDCBarColour[CDCType].R,HealBot_Config.CDCBarColour[CDCType].G,HealBot_Config.CDCBarColour[CDCType].B, nil)
     end
 end
-
 local R=nil
 local G=nil
 local B=nil
@@ -6725,7 +6685,6 @@ function HealBot_Returned_Colours(R, G, B, A)
         HealBot_setOptions_Timer(90)
     end
 end
-
 HealBot_Options_StorePrev["prevR"] = nil
 HealBot_Options_StorePrev["prevG"] = nil
 HealBot_Options_StorePrev["prevB"] = nil
@@ -6758,7 +6717,6 @@ function HealBot_UseColourPick(R, G, B, A)
     end
     return ColorPickerFrame:GetColorRGB();
 end
-
 function HealBot_SetCDCBarColours()
     HealBot_DiseaseColorpick:SetStatusBarColor(HealBot_Config.CDCBarColour[HEALBOT_DISEASE_en].R or 0.55,
                                                HealBot_Config.CDCBarColour[HEALBOT_DISEASE_en].G or 0.19,
@@ -6794,7 +6752,6 @@ function HealBot_SetCDCBarColours()
     HealBot_Action_SetDebuffAggroCols()
     HealBot_Options_setCustomDebuffList()
 end
-
 function HealBot_SetBuffBarColours()
     buffbarcolrClass = HealBot_Config.HealBotBuffColR
     buffbarcolgClass = HealBot_Config.HealBotBuffColG
@@ -6812,11 +6769,9 @@ function HealBot_SetBuffBarColours()
     HealBot_setOptions_Timer(40)
 end
 --------------------------------------------------------------------------------
-
 function HealBot_Options_NotifyChan_OnTextChanged(self)
     Healbot_Config_Skins.NotifyChan[Healbot_Config_Skins.Current_Skin] = self:GetText()
 end
-
 function HealBot_SpellAutoButton_OnClick(self, autoType, autoMod)
     if HealBot_ActionBarsCombo==1 then
         if autoType=="Target" then combo = HealBot_Config.EnabledSpellTarget;
@@ -6831,7 +6786,6 @@ function HealBot_SpellAutoButton_OnClick(self, autoType, autoMod)
     combo[autoMod..button..HealBot_Config.CurrentSpec] = self:GetChecked() or 0;
     HealBot_setOptions_Timer(400)
 end
-
 local spellText=nil
 function HealBot_Options_Click_OnTextChanged(self)
     if HealBot_ActionBarsCombo==1 then
@@ -6850,7 +6804,6 @@ function HealBot_Options_Click_OnTextChanged(self)
     end
     HealBot_Options_SoftReset_flag=true
 end
-
 function HealBot_Options_Shift_OnTextChanged(self)
     if HealBot_ActionBarsCombo==1 then
         combo = HealBot_Config.EnabledKeyCombo;
@@ -6868,7 +6821,6 @@ function HealBot_Options_Shift_OnTextChanged(self)
     end
     HealBot_Options_SoftReset_flag=true
 end
-
 function HealBot_Options_Ctrl_OnTextChanged(self)
     if HealBot_ActionBarsCombo==1 then
         combo = HealBot_Config.EnabledKeyCombo;
@@ -6886,7 +6838,6 @@ function HealBot_Options_Ctrl_OnTextChanged(self)
     end
     HealBot_Options_SoftReset_flag=true
 end
-
 function HealBot_Options_Alt_OnTextChanged(self)
     if HealBot_ActionBarsCombo==1 then
         combo = HealBot_Config.EnabledKeyCombo;
@@ -6904,7 +6855,6 @@ function HealBot_Options_Alt_OnTextChanged(self)
     end
     HealBot_Options_SoftReset_flag=true
 end
-
 function HealBot_Options_CtrlShift_OnTextChanged(self)
     if HealBot_ActionBarsCombo==1 then
         combo = HealBot_Config.EnabledKeyCombo;
@@ -6922,7 +6872,6 @@ function HealBot_Options_CtrlShift_OnTextChanged(self)
     end
     HealBot_Options_SoftReset_flag=true
 end
-
 function HealBot_Options_AltShift_OnTextChanged(self)
     if HealBot_ActionBarsCombo==1 then
         combo = HealBot_Config.EnabledKeyCombo;
@@ -6940,37 +6889,29 @@ function HealBot_Options_AltShift_OnTextChanged(self)
     end
     HealBot_Options_SoftReset_flag=true
 end
-
 function HealBot_Options_EnableHealthy_OnClick(self)
     HealBot_Config.EnableHealthy = self:GetChecked() or 0;
     HealBot_Action_ResetUnitStatus();
 end
-
 function HealBot_Options_EnableMouseWheel_OnClick(self)
     HealBot_Config.HealBot_Enable_MouseWheel = self:GetChecked() or 0;
     StaticPopup_Show ("HEALBOT_OPTIONS_RELOADUI");
 end
-
 function HealBot_Options_EnableSmartCast_OnClick(self)
     HealBot_Config.SmartCast = self:GetChecked() or 0;
 end
-
 function HealBot_Options_SmartCastDisspell_OnClick(self)
     HealBot_Config.SmartCastDebuff = self:GetChecked() or 0;
 end
-
 function HealBot_Options_SmartCastBuff_OnClick(self)
     HealBot_Config.SmartCastBuff = self:GetChecked() or 0;
 end
-
 function HealBot_Options_SmartCastHeal_OnClick(self)
     HealBot_Config.SmartCastHeal = self:GetChecked() or 0;
 end
-
 function HealBot_Options_SmartCastRes_OnClick(self)
     HealBot_Config.SmartCastRes = self:GetChecked() or 0;
 end
-
 local HealBot_CombosKeys_List = {"","Shift","Ctrl","Alt","Ctrl-Shift","Alt-Shift"}
 local HB_combo_prefix=nil
 local SpellTxtE=nil
@@ -7013,7 +6954,6 @@ function HealBot_Options_CheckCombos()
         end
     end
 end
-
 --------------------------------------------------------------------------------
 
 StaticPopupDialogs["HEALBOT_OPTIONS_SETDEFAULTS"] = {
@@ -7027,19 +6967,15 @@ StaticPopupDialogs["HEALBOT_OPTIONS_SETDEFAULTS"] = {
     whileDead = 1,
     hideOnEscape = 1
 };
-
 function HealBot_Options_Defaults_OnClick(self)
     StaticPopup_Show ("HEALBOT_OPTIONS_SETDEFAULTS");
 end
-
 function HealBot_Options_Reset_OnClick(self,mode)
     HealBot_SetResetFlag(mode)
 end
-
 function HealBot_Options_Info_OnClick(self)
     HealBot_Comms_Info()
 end
-
 function HealBot_Options_SetDefaults()
     HealBot_Config = HealBot_ConfigDefaults;
     HealBot_Globals = HealBot_GlobalsDefaults;
@@ -7070,134 +7006,7 @@ function HealBot_Options_SetDefaults()
     HealBot_Config.ActionVisible = HealBot_Action:IsVisible();
     DoInitTab={[1]=true, [2]=true, [3]=true, [4]=true, [5]=true, [6]=true, [7]=true, [9]=true, [10]=true, }
 end
-local NewSPellWacher_ID_Name;
 
-local SPellWacherButtonDisplay;
-local SelectedSpellWacher;
-
-function OnSpellButtonClickDisplayHotOption(self,frame)
-
-    frame:SetText("Click me")
-    local _,class=UnitClass("player")
-    class=strsub(class,1,4)
-
-    local MyFrameOnclick = function( self, button )
-
-        if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
-            if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
-                 -- body
-                 HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 2;
-                 SPellWacherButtonDisplay:SetText("Self Cast Only")
-
-            elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
-                -- body
-                HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 3;
-                SPellWacherButtonDisplay:SetText("ALL")
-            elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 3 then
-                -- body
-                HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 1;
-                SPellWacherButtonDisplay:SetText("Dont Show")
-            end
-        end
-
-
-    end
-    frame:HookScript("OnClick", MyFrameOnclick)
-    SPellWacherButtonDisplay = frame;
-
-
-end
-function OnSpellWacher_Scroll_Load(self,frame)
-
-    local chilld = CreateFrame("Frame", nil, frame);
-    chilld:SetSize(200,300);
-    chilld.bg = chilld:CreateTexture(nil,"BACKGROUND");
-    chilld.bg:SetAllPoints(true);
-    frame:SetScrollChild(chilld)
-
-    local indexEE = 0
-    local _,class=UnitClass("player")
-    class=strsub(class,1,4)
-
-    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[class]) do
-        local button = CreateFrame("Button", nil, chilld)
-        button:SetPoint("TOP", chilld, "TOP", 0, indexEE)
-        button:SetWidth(200)
-        button:SetHeight(25)
-        
-        button:SetText(k)
-        button:SetNormalFontObject("GameFontNormal")
-        
-        local ntex = button:CreateTexture()
-        ntex:SetTexture("Interface/Buttons/UI-Panel-Button-Up")
-        ntex:SetTexCoord(0, 0.625, 0, 0.6875)
-        ntex:SetAllPoints()	
-        button:SetNormalTexture(ntex)
-        
-        local htex = button:CreateTexture()
-        htex:SetTexture("Interface/Buttons/UI-Panel-Button-Highlight")
-        htex:SetTexCoord(0, 0.625, 0, 0.6875)
-        htex:SetAllPoints()
-        button:SetHighlightTexture(htex)
-        
-        local ptex = button:CreateTexture()
-        ptex:SetTexture("Interface/Buttons/UI-Panel-Button-Down")
-        ptex:SetTexCoord(0, 0.625, 0, 0.6875)
-        ptex:SetAllPoints()
-        button:SetPushedTexture(ptex)
-        indexEE = indexEE - 30
-
-        local MyFrameOnclick = function( self, button )
-            
-
-
-            SelectedSpellWacher = k;
-
-
-            if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
-                if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
-                     -- body
-                     SPellWacherButtonDisplay:SetText("Dont Show")
-    
-                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
-                    -- body
-                    SPellWacherButtonDisplay:SetText("Self Cast Only")
-                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 3 then
-                    -- body
-                    SPellWacherButtonDisplay:SetText("ALL")
-                end
-            end
-
-
-        end
-        button:HookScript("OnClick", MyFrameOnclick)
-        
-
-    end
-
-  
-
-
-end
-local SPellWacherDropDown;
-
-function SpellWacherOnTextChange(self,SpellWacherEditBox)
-    NewSPellWacher_ID_Name = SpellWacherEditBox:GetText()
-
-end
-function AddNewSpellWach(self)
-
-
-    if (NewSPellWacher_ID_Name) then
-        local mySpellID
-        mySpellID = GetItemInfo(NewSPellWacher_ID_Name)
-
-    else
-        mySpellID = NewSPellWacher_ID_Name
-    end
-
-
-end
 function HealBot_Options_OnLoad(self)
 
     table.insert(UISpecialFrames,self:GetName());
@@ -7274,18 +7083,15 @@ function HealBot_Options_OnLoad(self)
 
 
 end
-
 function HealBot_Options_OnShow(self)
     HealBot_Options_ShowPanel(self, self.selectedTab)
 end
-
 function HealBot_Options_Close()
     if HealBot_Options_SoftReset_flag then
         HealBot_Options_SoftReset_flag=false
         HealBot_setOptions_Timer(400)
     end
 end
-
 function HealBot_Options_ResetDoInittab(tabNo)
     if tabNo==1 then
         DoInitTab[1]=true
@@ -7315,7 +7121,6 @@ function HealBot_Options_ResetDoInittab(tabNo)
         HealBot_Options_Init(tabNo)
     end
 end
-
 function HealBot_Options_Init(tabNo)
     if tabNo==1 then
         if DoInitTab[1] then
@@ -7490,7 +7295,6 @@ function HealBot_Options_Init(tabNo)
         HealBot_Aggro3Colorpick:SetStatusBarTexture(LSM:Fetch('statusbar',HealBot_Default_Textures[16].name));
     end
 end
-
 function HealBot_Options_SetEFGroups()
     for x=1,8 do
         if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][x] then 
@@ -7502,7 +7306,6 @@ function HealBot_Options_SetEFGroups()
         end
     end
 end
-
 function HealBot_Options_SetSkins()
     if hbCurSkin~=Healbot_Config_Skins.Current_Skin then
         if not HealBot_Options_CurCPSkins["Crash"] then
@@ -7668,7 +7471,6 @@ function HealBot_Options_SetSkins()
         hbCurSkin=Healbot_Config_Skins.Current_Skin
     end
 end
-
 function HealBot_Options_SetSkinBars()
     HealBot_HeadBarColorpickt:SetFont(LSM:Fetch('font',Healbot_Config_Skins.headtextfont[Healbot_Config_Skins.Current_Skin]),Healbot_Config_Skins.headtextheight[Healbot_Config_Skins.Current_Skin],"");
     HealBot_HeadTextColorpickt:SetFont(LSM:Fetch('font',Healbot_Config_Skins.headtextfont[Healbot_Config_Skins.Current_Skin]),Healbot_Config_Skins.headtextheight[Healbot_Config_Skins.Current_Skin],"");
@@ -7735,9 +7537,7 @@ function HealBot_Options_SetSkinBars()
     HealBot_BarCustomColour:SetScale(barScale + 0.01);
     HealBot_BarCustomColour:SetScale(barScale);
 end
-
 local HealBot_Options_CurrentPanel = 0;
-
 function HealBot_Options_ShowPanel(self, tabNo)
     if HealBot_Options_CurrentPanel>0 then
         g=_G["HealBot_Options_Panel"..HealBot_Options_CurrentPanel]
@@ -7770,7 +7570,6 @@ function HealBot_Options_ShowSkinsPanel(frameName,barName)
     HealBot_Options_StorePrev["CurrentSkinsPanel"]=frameName
     HealBot_Options_StorePrev["CurrentbarName"]=barName
 end
-
 HealBot_Options_StorePrev["CurrentCurePanel"]="HealBot_Options_CureDispelCleanse"
 HealBot_Options_StorePrev["CurrentCurebarName"]="HealBot_CureFrameSelectDebuffFrame"
 function HealBot_Options_ShowCurePanel(frameName,barName)
@@ -7789,7 +7588,6 @@ function HealBot_Options_ShowCurePanel(frameName,barName)
     HealBot_Options_StorePrev["CurrentCurePanel"]=frameName
     HealBot_Options_StorePrev["CurrentCurebarName"]=barName
 end
-
 HealBot_Options_StorePrev["CurrentHealPanel"]="HealBot_Options_HealAlertFrame"
 HealBot_Options_StorePrev["CurrentHealbarName"]="HealBot_SkinsSubFrameSelectHealAlertFrame"
 function HealBot_Options_ShowHealPanel(frameName,barName)
@@ -7808,47 +7606,38 @@ function HealBot_Options_ShowHealPanel(frameName,barName)
     HealBot_Options_StorePrev["CurrentHealPanel"]=frameName
     HealBot_Options_StorePrev["CurrentHealbarName"]=barName
 end
-
 function HealBot_Options_OnMouseDown(self)
     HealBot_StartMoving(self);
 end
-
 function HealBot_Options_OnMouseUp(self)
     HealBot_StopMoving(self);
 end
-
 function HealBot_Options_OnDragStart(self)
     HealBot_StartMoving(self);
 end
-
 function HealBot_Options_OnDragStop(self)
     HealBot_StopMoving(self);
 end
-
 function HealBot_Options_DisablePlayerFrame()
     PlayerFrame:UnregisterAllEvents()
     PlayerFrameHealthBar:UnregisterAllEvents()
     PlayerFrameManaBar:UnregisterAllEvents()
     PlayerFrame:Hide()
 end
-
 function HealBot_Options_EnablePlayerFrame()
     PlayerFrame:RegisterAllEvents()
     PlayerFrameHealthBar:RegisterAllEvents()
     PlayerFrameManaBar:RegisterAllEvents()
     PlayerFrame:Show();
 end
-
 function HealBot_Options_DisablePetFrame()
     PetFrame:UnregisterAllEvents()
     PetFrame:Hide()
 end
-
 function HealBot_Options_EnablePetFrame()
     PetFrame:RegisterAllEvents()
     PetFrame:Show();
 end
-
 local f=nil
 function HealBot_Options_DisablePartyFrame()
   --  HidePartyFrame()
@@ -7869,7 +7658,6 @@ function HealBot_Options_DisablePartyFrame()
         g:UnregisterAllEvents()
     end
 end
-
 function HealBot_Options_EnablePartyFrame()
   --  hooksecurefunc("ShowPartyFrame", function()
   --      for x = 1,4 do
@@ -7889,7 +7677,6 @@ function HealBot_Options_EnablePartyFrame()
         g:RegisterAllEvents()
     end
 end
-
 function HealBot_Options_DisableTargetFrame()
     TargetFrame:UnregisterAllEvents()
     TargetFrameHealthBar:UnregisterAllEvents()
@@ -7898,21 +7685,18 @@ function HealBot_Options_DisableTargetFrame()
     TargetFrameToT:UnregisterAllEvents()
     TargetFrameToT:Hide()
 end
-
 function HealBot_Options_EnableTargetFrame()
     TargetFrame:RegisterAllEvents()
     TargetFrameHealthBar:RegisterAllEvents()
     TargetFrameManaBar:RegisterAllEvents()
     TargetFrameToT:RegisterAllEvents()
 end
-
 function HealBot_Options_SetSliderValue(slider,value,updating)
     updatingMedia = updating
     slider:SetValue(-1) -- Pre change value so that text gets updated if value does not change but media does
     updatingMedia = updating
     slider:SetValue(value or 0)
 end
-
 function HealBot_Options_UpdateMedia(panel)
     HealBot_AddDebug("Update Media Called")
     if panel == 3 then
@@ -7950,7 +7734,6 @@ function HealBot_Options_UpdateMedia(panel)
         HealBot_Options_SetSliderValue(HealBot_Options_WarningSound,soundsIndex[HealBot_Config.SoundDebuffPlay],true)
     end
 end
-
 function HealBot_UpdateUsedMedia(event, mediatype, key)
     if mediatype == "statusbar" then
         if Healbot_Config_Skins.headtexture and key == Healbot_Config_Skins.headtexture[Healbot_Config_Skins.Current_Skin] then 
@@ -8002,3 +7785,215 @@ function HealBot_UpdateUsedMedia(event, mediatype, key)
         end
     end
 end
+
+----------------------------------------RUKSTONE----------------------------------------
+
+local SpellWacherSearchBox; -- the spell name in the edit box.
+local SPellWacherButtonDisplay; -- the button that control the display of the spell
+local SelectedSpellWacher; -- the current selected spell (ID) from the GLOBAL wacher
+function OnSpellButtonClickDisplayHotOption(self,frame)--this function is called on LOAD.
+
+    local _,class=UnitClass("player")
+    class=strsub(class,1,4)
+
+    local MyFrameOnclick = function( self, button )--this function is caled when player click on the button.
+
+        if (SelectedSpellWacher) then
+            
+            if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
+                if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
+                    -- body
+                    HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 2;
+                    SPellWacherButtonDisplay:SetText("Self Cast Only")
+
+                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
+                    -- body
+                    HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 3;
+                    SPellWacherButtonDisplay:SetText("ALL")
+                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 3 then
+                    -- body
+                    HealBot_Globals.WatchHoT[class][SelectedSpellWacher] = 1;
+                    SPellWacherButtonDisplay:SetText("Dont Show")
+                end
+            end
+                --reset the HUD for the new config
+                HealBot_SetResetFlag("SOFT");
+        end
+        
+
+
+
+        
+        
+
+
+    end
+    frame:HookScript("OnClick", MyFrameOnclick)
+    SPellWacherButtonDisplay = frame;
+
+
+end
+local indexEE = 0
+local ScrollViewSpellList_BG;
+local ScrollViewSpellsButton = {}
+local MyCustonSpellWacher = {}
+function OnSpellWacher_Scroll_Load(self,frame)--this function is called only on "OnLoad"
+
+    ScrollViewSpellList_BG = CreateFrame("Frame", nil, frame);
+    ScrollViewSpellList_BG:SetSize(200,300);
+    ScrollViewSpellList_BG.bg = ScrollViewSpellList_BG:CreateTexture(nil,"BACKGROUND");
+    ScrollViewSpellList_BG.bg:SetAllPoints(true);
+    frame:SetScrollChild(ScrollViewSpellList_BG)
+
+
+    local _,class=UnitClass("player")
+    class=strsub(class,1,4)
+
+    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[class]) do
+        local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
+        button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+        button:SetWidth(200)
+        button:SetHeight(25)
+        
+        button:SetText(k)
+        button:SetNormalFontObject("GameFontNormal")
+        
+        local ntex = button:CreateTexture()
+        ntex:SetTexture("Interface/Buttons/UI-Panel-Button-Up")
+        ntex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ntex:SetAllPoints()	
+        button:SetNormalTexture(ntex)
+        
+        local htex = button:CreateTexture()
+        htex:SetTexture("Interface/Buttons/UI-Panel-Button-Highlight")
+        htex:SetTexCoord(0, 0.625, 0, 0.6875)
+        htex:SetAllPoints()
+        button:SetHighlightTexture(htex)
+        
+        local ptex = button:CreateTexture()
+        ptex:SetTexture("Interface/Buttons/UI-Panel-Button-Down")
+        ptex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ptex:SetAllPoints()
+        button:SetPushedTexture(ptex)
+        indexEE = indexEE - 30
+
+        local MyFrameOnclick = function( self, button )--this function is called when player click on one of the spells / it will select the current spell and the current state of it.
+            
+            SelectedSpellWacher = k;
+            if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
+                if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
+                     -- body
+                     SPellWacherButtonDisplay:SetText("Dont Show")
+    
+                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
+                    -- body
+                    SPellWacherButtonDisplay:SetText("Self Cast Only")
+                elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 3 then
+                    -- body
+                    SPellWacherButtonDisplay:SetText("ALL")
+                end
+            end
+
+
+        end
+        button:HookScript("OnClick", MyFrameOnclick)
+        ScrollViewSpellsButton[k] = button;
+
+        --table.insert(ScrollViewSpellsButton,k,button);
+
+
+
+    end
+
+
+
+end
+function SpellWacherOnTextChange(value)
+
+    SpellWacherSearchBox = value:GetText()
+
+    for k, v in pairs(ScrollViewSpellsButton) do
+        if string.find(k,SpellWacherSearchBox) then
+            if v then
+                 v:Show();
+                else
+                    print("Value not found:"..k)
+            end
+
+        elseif not string.find(k,SpellWacherSearchBox) then
+            -- body
+            v:Hide();
+        else
+            v:Show();
+        end
+    end
+end
+function AddNewSpellWach(self)
+
+
+  if SpellWacherSearchBox then
+
+    print("Add New Spell: "..SpellWacherSearchBox)
+
+    local _,class=UnitClass("player")
+    class=strsub(class,1,4)
+
+    AddNewWachHOT(class,SpellWacherSearchBox,SpellWacherSearchBox)
+
+    --create new Button frame
+    local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
+    button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+    button:SetWidth(200)
+    button:SetHeight(25)
+    
+    button:SetText(SpellWacherSearchBox)
+    button:SetNormalFontObject("GameFontNormal")
+    
+    local ntex = button:CreateTexture()
+    ntex:SetTexture("Interface/Buttons/UI-Panel-Button-Up")
+    ntex:SetTexCoord(0, 0.625, 0, 0.6875)
+    ntex:SetAllPoints()	
+    button:SetNormalTexture(ntex)
+    
+    local htex = button:CreateTexture()
+    htex:SetTexture("Interface/Buttons/UI-Panel-Button-Highlight")
+    htex:SetTexCoord(0, 0.625, 0, 0.6875)
+    htex:SetAllPoints()
+    button:SetHighlightTexture(htex)
+    
+    local ptex = button:CreateTexture()
+    ptex:SetTexture("Interface/Buttons/UI-Panel-Button-Down")
+    ptex:SetTexCoord(0, 0.625, 0, 0.6875)
+    ptex:SetAllPoints()
+    button:SetPushedTexture(ptex)
+    indexEE = indexEE - 30
+
+    local MyFrameOnclick = function( self, button )--this function is called when player click on one of the spells / it will select the current spell and the current state of it.
+        
+        SelectedSpellWacher = SpellWacherSearchBox;
+        if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
+            if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
+                 -- body
+                 SPellWacherButtonDisplay:SetText("Dont Show")
+
+            elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
+                -- body
+                SPellWacherButtonDisplay:SetText("Self Cast Only")
+            elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 3 then
+                -- body
+                SPellWacherButtonDisplay:SetText("ALL")
+            end
+        end
+
+
+    end
+    button:HookScript("OnClick", MyFrameOnclick);
+
+    SpellWacherSearchBox = nil;
+      --save the file with new updates.
+  end
+
+
+end
+
+------------------------------------------------------------------------------------------
