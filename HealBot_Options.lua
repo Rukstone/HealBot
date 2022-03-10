@@ -7787,7 +7787,10 @@ function HealBot_UpdateUsedMedia(event, mediatype, key)
 end
 
 ----------------------------------------RUKSTONE----------------------------------------
-
+local indexEE = 0
+local ScrollViewSpellList_BG;
+local ScrollViewSpellsButton = {}
+local MyCustonSpellWacher = {}
 local SpellWacherSearchBox; -- the spell name in the edit box.
 local SPellWacherButtonDisplay; -- the button that control the display of the spell
 local SelectedSpellWacher; -- the current selected spell (ID) from the GLOBAL wacher
@@ -7795,6 +7798,7 @@ function OnSpellButtonClickDisplayHotOption(self,frame)--this function is called
 
     local _,class=UnitClass("player")
     class=strsub(class,1,4)
+    SelectedSpellWacher = HEALBOT_RENEW;
 
     local MyFrameOnclick = function( self, button )--this function is caled when player click on the button.
 
@@ -7828,15 +7832,31 @@ function OnSpellButtonClickDisplayHotOption(self,frame)--this function is called
 
 
     end
+    frame:SetText("Self Cast Only");
+
     frame:HookScript("OnClick", MyFrameOnclick)
     SPellWacherButtonDisplay = frame;
 
+    frame:HookScript("OnEnter", OnEnter)
+    frame:HookScript("OnLeave", OnLeave)
+
 
 end
-local indexEE = 0
-local ScrollViewSpellList_BG;
-local ScrollViewSpellsButton = {}
-local MyCustonSpellWacher = {}
+function OnEnter(self, motion)
+	GameTooltip:SetOwner(self, "ANCHOR_TOP")
+    if self:GetText() == "Self Cast Only" then
+        GameTooltip:AddLine("".."[".. SelectedSpellWacher .."]".." Will only show on the HUD if casted by yorself.")
+    elseif self:GetText() == "ALL" then
+        GameTooltip:AddLine("".."[".. SelectedSpellWacher .."]".." will show on the HUD if a player have this spell active.")
+    elseif self:GetText() == "Dont Show" then
+        GameTooltip:AddLine("".."[".. SelectedSpellWacher .."]".." will not Show on HUD")
+    end
+	GameTooltip:Show()
+end
+
+function OnLeave(self, motion)
+	GameTooltip:Hide()
+end
 function OnSpellWacher_Scroll_Load(self,frame)--this function is called only on "OnLoad"
 
     ScrollViewSpellList_BG = CreateFrame("Frame", nil, frame);
@@ -7898,8 +7918,7 @@ function OnSpellWacher_Scroll_Load(self,frame)--this function is called only on 
         end
         button:HookScript("OnClick", MyFrameOnclick)
         ScrollViewSpellsButton[k] = button;
-
-        --table.insert(ScrollViewSpellsButton,k,button);
+        
 
 
 
@@ -7911,23 +7930,25 @@ end
 function SpellWacherOnTextChange(value)
 
     SpellWacherSearchBox = value:GetText()
-
+    if SpellWacherSearchBox ~= "" then
+        
+    indexEE = -30;
     for k, v in pairs(ScrollViewSpellsButton) do
-        if string.find(k,SpellWacherSearchBox) then
-            if v then
-                 v:Show();
-                else
-                    print("Value not found:"..k)
-            end
 
-        elseif not string.find(k,SpellWacherSearchBox) then
-            -- body
-            v:Hide();
-        else
+        if string.find( string.lower(k), string.lower(SpellWacherSearchBox)) then
             v:Show();
+            v:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, 0)
+
+        else
+            v:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+            indexEE = indexEE - 30
         end
+
     end
+    end
+    
 end
+
 function AddNewSpellWach(self)
 
 

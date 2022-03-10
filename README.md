@@ -10,4 +10,3 @@ Spells like "Power word shild" "Becon Of Light" "Renew" Can now be displayed on 
 
 ### New Spell Icon Tracker UI
 ![plot](./Features_Updates/Images/New_HealBotTab_SpellTracker.png)
-
