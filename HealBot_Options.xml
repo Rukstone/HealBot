@@ -8203,7 +8203,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT" relativeTo="HealBot_Options_Panel8" relativePoint="TOPLEFT">
 								<Offset>
-									<AbsDimension x="25" y="-85"/>
+									<AbsDimension x="35" y="-85"/>
 								</Offset>
 							</Anchor>
 						</Anchors>

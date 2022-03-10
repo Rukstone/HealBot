@@ -7790,7 +7790,6 @@ end
 local indexEE = 0
 local ScrollViewSpellList_BG;
 local ScrollViewSpellsButton = {}
-local MyCustonSpellWacher = {}
 local SpellWacherSearchBox; -- the spell name in the edit box.
 local SPellWacherButtonDisplay; -- the button that control the display of the spell
 local SelectedSpellWacher; -- the current selected spell (ID) from the GLOBAL wacher
@@ -7853,7 +7852,6 @@ function OnEnter(self, motion)
     end
 	GameTooltip:Show()
 end
-
 function OnLeave(self, motion)
 	GameTooltip:Hide()
 end
@@ -7918,37 +7916,41 @@ function OnSpellWacher_Scroll_Load(self,frame)--this function is called only on 
         end
         button:HookScript("OnClick", MyFrameOnclick)
         ScrollViewSpellsButton[k] = button;
-        
-
-
+    
 
     end
-
-
 
 end
 function SpellWacherOnTextChange(value)
 
     SpellWacherSearchBox = value:GetText()
-    if SpellWacherSearchBox ~= "" then
-        
-    indexEE = -30;
-    for k, v in pairs(ScrollViewSpellsButton) do
+    indexEE = 0;
+    for Key_, value in pairs(ScrollViewSpellsButton) do
+        if StringSearch(Key_,SpellWacherSearchBox) then
 
-        if string.find( string.lower(k), string.lower(SpellWacherSearchBox)) then
-            v:Show();
-            v:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, 0)
+            value:Show();
+            value:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+            indexEE = indexEE - 30;
 
+        elseif not StringSearch(Key_,SpellWacherSearchBox) then
+            value:Hide();
         else
-            v:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
-            indexEE = indexEE - 30
+            value:Show();
         end
+    end
 
-    end
-    end
-    
+
+
+
 end
+function StringSearch(value,StartWith)
 
+    StartWith = string.lower(StartWith);
+    value = string.lower(value);
+
+    return value:sub(0, #StartWith) == StartWith;
+
+end
 function AddNewSpellWach(self)
 
 
