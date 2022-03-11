@@ -357,7 +357,7 @@ HealBot_GlobalsDefaults = {
             [HEALBOT_LIGHT_BEACON]=2,
             [HEALBOT_MENDPET]=2,
             [HEALBOT_RIPTIDE]=2,
-            [HEALBOT_EARTHLIVING_WEAPON]=2,
+            --[HEALBOT_EARTHLIVING_WEAPON]=2,
             [HEALBOT_EARTH_SHIELD]=2,
             [HEALBOT_ANCESTRAL_FORTITUDE]=2,
             [HEALBOT_HEALING_WAY]=2,
@@ -373,7 +373,7 @@ HealBot_GlobalsDefaults = {
             [HEALBOT_DIVINE_SHIELD]=2,
             [HEALBOT_HAND_OF_SACRIFICE]=2,
             [HEALBOT_BLESSED]=2,
-            [HEALBOT_EARTHLIVING]=2,
+            [HEALBOT_EARTHLIVING]=1,
             [HEALBOT_INFUSION_OF_LIGHT]=2,
             [HEALBOT_INNER_FOCUS]=2,
             [HEALBOT_SERENDIPITY]=2,
@@ -406,7 +406,6 @@ HealBot_GlobalsDefaults = {
             [HEALBOT_WATER_SHIELD]=1,--Water Shiled
             [Seed_of_Life_hot] = 1,
             [Aura_Mastery] = 2,
-            [Cleasing_Totem] = 1,
             [Divine_Favor] = 1,
             [Divine_Illumination] = 1,
             [Divine_Sacrifice] = 1,
@@ -415,16 +414,13 @@ HealBot_GlobalsDefaults = {
             [Guardian_Spirit] = 1,
             [Dispersion] = 1,
             [Vampiric_Embrace] = 1,
-            [Shadowform] = 1,
             [Evasion] = 1,
             [Sprint] = 1,
             [Blade_Flurry] = 1,
             [Adrenaline_Rush] = 1,
             [Stealth] = 1,
             [Skull_Banner] = 1,
-            [Heroic_Leap] = 1,
             [Avatar] = 1,
-            [Bladestorm] = 1,
             [Spell_Reflection] = 1,
             [Last_Stand] = 1,
             [Vigilance] = 1,
@@ -432,13 +428,9 @@ HealBot_GlobalsDefaults = {
             [Moonkin_Form] = 1,
             [Frenzied_Regeneration] = 1,
             [Deterrence] = 1,
+            [Preservation] =2,
 
 
-
-
-
-
-            
 
 
 

@@ -2780,11 +2780,58 @@ local HealBot_Options_SelectHealSpellsCombo_List = {
     Efflorescence,
     Alter_Time,
     HEALBOT_POWER_WORD_SHIELD,
+    Cauterizing_Fire,
+
 
 
 }
 local hbHelpHealSelect=nil
 local hbHealDDlist=nil
+local HealBot_SelectOtherSpellsCombo=1;
+
+local HealBot_Options_SelectOtherSpellsCombo_List = {
+    HEALBOT_STONEFORM,
+    HEALBOT_INSPIRATION,
+    HEALBOT_POWER_WORD_SHIELD,
+    HEALBOT_REVIVE,
+    HEALBOT_GUARDIAN_SPIRIT,
+    HEALBOT_PURIFICATION,
+    HEALBOT_INTERVENE,
+    HEALBOT_RESURRECTION,
+    HEALBOT_REDEMPTION,
+    HEALBOT_REBIRTH,
+    HEALBOT_INNERVATE,
+    HEALBOT_ANCESTRALSPIRIT,
+    HEALBOT_PURIFY,
+    HEALBOT_CLEANSE,
+    HEALBOT_CURE_POISON,
+    HEALBOT_REMOVE_CURSE,
+    HEALBOT_ABOLISH_POISON,
+    HEALBOT_CURE_DISEASE,
+    HEALBOT_ABOLISH_DISEASE,
+    HEALBOT_DISPEL_MAGIC,
+    HEALBOT_CLEANSE_SPIRIT,
+    HEALBOT_CURE_TOXINS,
+    HEALBOT_HYSTERIA,
+    HEALBOT_LIFE_TAP,
+    HEALBOT_DIVINE_FAVOR,
+    HEALBOT_DIVINE_ILLUMINATION,
+    HEALBOT_DIVINE_PLEA,
+    HEALBOT_DIVINE_SHIELD,
+    HEALBOT_RIGHTEOUS_DEFENSE,
+    HEALBOT_NATURE_SWIFTNESS,
+    HEALBOT_INNER_FOCUS,
+    HEALBOT_DISPEL_CURSE,
+    Cleasing_Totem,
+    
+
+
+
+}
+local hbHelpOtherSelect=nil
+local hbOtherDDlist=nil
+
+
 function HealBot_Options_SelectHealSpellsCombo_DropDown()
     if getn(hbHealDDlist)>0 then
         for j=1, getn(hbHealDDlist), 1 do
@@ -2824,7 +2871,9 @@ function HealBot_Options_SelectHealSpellsCombo_Initialize()
 end
 
 function HealBot_Options_SelectHealSpellsCombo_Refresh(onselect)
-    if not onselect then HealBot_Options_SelectHealSpellsCombo_Initialize() end  -- or wrong menu may be used !
+    if not onselect then 
+        HealBot_Options_SelectHealSpellsCombo_Initialize() 
+    end  -- or wrong menu may be used !
     UIDropDownMenu_SetSelectedID(HealBot_Options_SelectHealSpellsCombo,HealBot_SelectHealSpellsCombo)
 end
 
@@ -2841,43 +2890,7 @@ end
 
 --------------------------------------------------------------------------------
 
-local HealBot_SelectOtherSpellsCombo=1;
 
-local HealBot_Options_SelectOtherSpellsCombo_List = {
-    HEALBOT_STONEFORM,
-    HEALBOT_INSPIRATION,
-    HEALBOT_POWER_WORD_SHIELD,
-    HEALBOT_REVIVE,
-    HEALBOT_GUARDIAN_SPIRIT,
-    HEALBOT_PURIFICATION,
-    HEALBOT_INTERVENE,
-    HEALBOT_RESURRECTION,
-    HEALBOT_REDEMPTION,
-    HEALBOT_REBIRTH,
-    HEALBOT_INNERVATE,
-    HEALBOT_ANCESTRALSPIRIT,
-    HEALBOT_PURIFY,
-    HEALBOT_CLEANSE,
-    HEALBOT_CURE_POISON,
-    HEALBOT_REMOVE_CURSE,
-    HEALBOT_ABOLISH_POISON,
-    HEALBOT_CURE_DISEASE,
-    HEALBOT_ABOLISH_DISEASE,
-    HEALBOT_DISPEL_MAGIC,
-    HEALBOT_CLEANSE_SPIRIT,
-    HEALBOT_CURE_TOXINS,
-    HEALBOT_HYSTERIA,
-    HEALBOT_LIFE_TAP,
-    HEALBOT_DIVINE_FAVOR,
-    HEALBOT_DIVINE_ILLUMINATION,
-    HEALBOT_DIVINE_PLEA,
-    HEALBOT_DIVINE_SHIELD,
-    HEALBOT_RIGHTEOUS_DEFENSE,
-    HEALBOT_NATURE_SWIFTNESS,
-    HEALBOT_INNER_FOCUS,
-}
-local hbHelpOtherSelect=nil
-local hbOtherDDlist=nil
 
 function HealBot_Options_SelectOtherSpellsCombo_DropDown()
     if getn(hbOtherDDlist)>0 then
@@ -5770,112 +5783,92 @@ function HealBot_Options_ComboClass_Text()
         HealBot_CtrlShiftSpellAutoTrinket2:SetChecked(combo["Ctrl-Shift"..button..HealBot_Config.CurrentSpec] or 0)
     end
 end
-
 function HealBot_Options_CDCTxt1_OnLoad(self)
     UIDropDownMenu_SetWidth(self,190)
  --   HealBot_Options_CDCTxt1_Initialize()
 end
-
 function HealBot_Options_CDCTxt2_OnLoad(self)
     UIDropDownMenu_SetWidth(self,190)
   --  HealBot_Options_CDCTxt2_Initialize()
 end
-
 function HealBot_Options_CDCTxt3_OnLoad(self)
     UIDropDownMenu_SetWidth(self,190)
    -- HealBot_Options_CDCTxt3_Initialize()
 end
-
 function HealBot_Options_CDCGroups1_OnLoad(self)
     UIDropDownMenu_SetWidth(self,130)
   --  HealBot_Options_CDCGroups1_Initialize()
 end
-
 function HealBot_Options_CDCGroups2_OnLoad(self)
     UIDropDownMenu_SetWidth(self,130)
   --  HealBot_Options_CDCGroups2_Initialize()
 end
-
 function HealBot_Options_CDCGroups3_OnLoad(self)
     UIDropDownMenu_SetWidth(self,130)
   --  HealBot_Options_CDCGroups3_Initialize()
 end
-
 function HealBot_Options_CDCPriority_OnLoad(self)
     UIDropDownMenu_SetWidth(self,70)
 end
-
 function HealBot_Options_CDCPriority_OnLoadC(self)
     UIDropDownMenu_SetWidth(self,80)
 end
-
 function HealBot_Options_CDCWarnRange_OnLoad(self)
     UIDropDownMenu_SetWidth(self,140)
 end
-
 function HealBot_Options_CDCTxt1_OnSelect(self)
     HealBot_Config.HealBotDebuffText[HealBot_Options_getDropDownId_bySpec(1)] = self:GetText()
     HealBot_Options_CDCTxt1_Refresh(true)
     HealBot_setOptions_Timer(50)
 end
-
 function HealBot_Options_CDCTxt2_OnSelect(self)
     HealBot_Config.HealBotDebuffText[HealBot_Options_getDropDownId_bySpec(2)] = self:GetText()
     HealBot_Options_CDCTxt2_Refresh(true)
     HealBot_setOptions_Timer(50)
 end
-
 function HealBot_Options_CDCTxt3_OnSelect(self)
     HealBot_Config.HealBotDebuffText[HealBot_Options_getDropDownId_bySpec(3)] = self:GetText()
     HealBot_Options_CDCTxt3_Refresh(true)
     HealBot_setOptions_Timer(50)
 end
-
 function HealBot_Options_CDCGroups1_OnSelect(self)
     HealBot_Config.HealBotDebuffDropDown[HealBot_Options_getDropDownId_bySpec(1)] = self:GetID()
     HealBot_Options_CDCGroups1_Refresh(true)
     ClickedBuffGroupDD=1
     HealBot_setOptions_Timer(50)
 end
-
 function HealBot_Options_CDCGroups2_OnSelect(self)
     HealBot_Config.HealBotDebuffDropDown[HealBot_Options_getDropDownId_bySpec(2)] = self:GetID()
     HealBot_Options_CDCGroups2_Refresh(true)
     ClickedBuffGroupDD=2
     HealBot_setOptions_Timer(50)
 end
-
 function HealBot_Options_CDCGroups3_OnSelect(self)
     HealBot_Config.HealBotDebuffDropDown[HealBot_Options_getDropDownId_bySpec(3)] = self:GetID()
     HealBot_Options_CDCGroups3_Refresh(true)
     ClickedBuffGroupDD=3
     HealBot_setOptions_Timer(50)
 end
-
 function HealBot_Options_CDCPriority1_OnSelect(self)
     HealBot_Config.HealBotDebuffPriority[HEALBOT_DISEASE_en] = self:GetID()
     HealBot_Options_CDCPriority1_Refresh(true)
     HealBot_Options_setCustomDebuffList()
 end
-
 function HealBot_Options_CDCPriority2_OnSelect(self)
     HealBot_Config.HealBotDebuffPriority[HEALBOT_MAGIC_en] = self:GetID()
     HealBot_Options_CDCPriority2_Refresh(true)
     HealBot_Options_setCustomDebuffList()
 end
-
 function HealBot_Options_CDCPriority3_OnSelect(self)
     HealBot_Config.HealBotDebuffPriority[HEALBOT_POISON_en] = self:GetID()
     HealBot_Options_CDCPriority3_Refresh(true)
     HealBot_Options_setCustomDebuffList()
 end
-
 function HealBot_Options_CDCPriority4_OnSelect(self)
     HealBot_Config.HealBotDebuffPriority[HEALBOT_CURSE_en] = self:GetID()
     HealBot_Options_CDCPriority4_Refresh(true)
     HealBot_Options_setCustomDebuffList()
 end
-
 function HealBot_Options_CDCPriorityC_OnSelect(self)
     if HealBot_Options_StorePrev["CDebuffcustomName"] then
         HealBot_Config.HealBot_Custom_Debuffs[HealBot_Options_StorePrev["CDebuffcustomName"]] = self:GetID()
@@ -5883,28 +5876,22 @@ function HealBot_Options_CDCPriorityC_OnSelect(self)
     HealBot_Options_CDCPriorityC_Refresh(true)
     HealBot_Options_setCustomDebuffList()
 end
-
 function HealBot_Options_CDCWarnRange1_OnSelect(self)
     HealBot_Config.HealBot_CDCWarnRange_Bar = self:GetID()
     HealBot_Options_CDCWarnRange1_Refresh(true)
 end
-
 function HealBot_Options_CDCWarnRange2_OnSelect(self)
     HealBot_Config.HealBot_CDCWarnRange_Aggro = self:GetID()
     HealBot_Options_CDCWarnRange2_Refresh(true)
 end
-
 function HealBot_Options_CDCWarnRange3_OnSelect(self)
     HealBot_Config.HealBot_CDCWarnRange_Screen = self:GetID()
     HealBot_Options_CDCWarnRange3_Refresh(true)
 end
-
 function HealBot_Options_CDCWarnRange4_OnSelect(self)
     HealBot_Config.HealBot_CDCWarnRange_Sound = self:GetID()
     HealBot_Options_CDCWarnRange4_Refresh(true)
 end
-
-
 local HealBot_CDebuffCat_List = {
     HEALBOT_CUSTOM_CAT_CUSTOM,
     HEALBOT_CUSTOM_CAT_CLASSIC,
@@ -5920,9 +5907,7 @@ local HealBot_CDebuffCat_List = {
     HEALBOT_CUSTOM_CAT_LK_ICC_FROSTWING,
     HEALBOT_CUSTOM_CAT_LK_ICC_THRONE,
 }
-
 HealBot_Options_StorePrev["CDebuffCatID"] = 6
-
 local CDebuffCat_List={}
 function HealBot_Options_CDebuffCat_genList()
     for x,_ in pairs(CDebuffCat_List) do
@@ -6186,9 +6171,7 @@ function HealBot_Options_setCustomDebuffList()
         textname:SetText(" ")
     end
 end
-
 ----------------------------------------------------------------------------------
-
 function HealBot_Options_getDropDownId_bySpec(ddId)
     return HealBot_Config.CurrentSpec..ddId
 end
@@ -6259,42 +6242,32 @@ function HealBot_Options_Debuff_Reset()
                     end
                     HealBot_DebuffWatchTargetSpell=HealBot_DebuffWatchTarget[dName];
 
-                    if DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==2 then
-                        HealBot_DebuffWatchTargetSpell["Self"]=true;
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==3 then
-                        HealBot_DebuffWatchTargetSpell["Party"]=true;
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==4 then
-                        HealBot_DebuffWatchTargetSpell["Raid"]=true;
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==5 then
-                        HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==15 then
-                        if HealBot_Config.EmergIncMelee[HEALBOT_DRUID]==1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+                    HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+
+                    if (DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]) then
+                        if DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==2 then
+                            HealBot_DebuffWatchTargetSpell["Self"]=true;
+                        elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==3 then
+                            HealBot_DebuffWatchTargetSpell["Party"]=true;
+                        elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==4 then
+                            HealBot_DebuffWatchTargetSpell["Raid"]=true;
+                        elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==19 then
+                            HealBot_DebuffWatchTargetSpell["PvP"]=true
+                        elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==20 then
+                            HealBot_DebuffWatchTargetSpell["MainTanks"]=true
+                        elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==21 then
+                            HealBot_DebuffWatchTargetSpell["MyTargets"]=true
+                        elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==22 then
+                            HealBot_DebuffWatchTargetSpell["Focus"]=true
+                        elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==23 then
+                            HealBot_DebuffWatchTargetSpell["Name"]=true
+                            if not FirstDebuffLoad then
+                                 HealBot_Options_Get_deBuffWatchGUID(sName, "Debuff", k)
+                            end
                         end
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==16 then
-                        if HealBot_Config.EmergIncRange[HEALBOT_DRUID]==1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
-                        end
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==17 then
-                        if HealBot_Config.EmergIncHealers[HEALBOT_DRUID]==1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
-                        end
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==18 then
-                        if HealBot_Config.EmergIncCustom[HEALBOT_DRUID]==1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
-                        end
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==19 then
-                        HealBot_DebuffWatchTargetSpell["PvP"]=true
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==20 then
-                        HealBot_DebuffWatchTargetSpell["MainTanks"]=true
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==21 then
-                        HealBot_DebuffWatchTargetSpell["MyTargets"]=true
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==22 then
-                        HealBot_DebuffWatchTargetSpell["Focus"]=true
-					elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==23 then
-						HealBot_DebuffWatchTargetSpell["Name"]=true
-                        if not FirstDebuffLoad then HealBot_Options_Get_deBuffWatchGUID(sName, "Debuff", k) end
-                    end        
+
+                    end
+      
                 end)
             end
         end
@@ -6559,7 +6532,9 @@ function HealBot_Options_Get_BuffWatchGUID(spellName, BuffType, ddID)
     ClickedBuffGroupDD=nil
 end
 function HealBot_Options_Get_deBuffWatchGUID(spellName, BuffType, ddID)
-    if not ClickedBuffGroupDD or ClickedBuffGroupDD~=ddID then return end
+    if not ClickedBuffGroupDD or ClickedBuffGroupDD~=ddID then 
+        return 
+    end
     BuffWatchSpell=spellName
     BuffWatchType=BuffType
     BuffWatchID=ddID
@@ -7006,7 +6981,6 @@ function HealBot_Options_SetDefaults()
     HealBot_Config.ActionVisible = HealBot_Action:IsVisible();
     DoInitTab={[1]=true, [2]=true, [3]=true, [4]=true, [5]=true, [6]=true, [7]=true, [9]=true, [10]=true, }
 end
-
 function HealBot_Options_OnLoad(self)
 
     table.insert(UISpecialFrames,self:GetName());
@@ -7785,7 +7759,6 @@ function HealBot_UpdateUsedMedia(event, mediatype, key)
         end
     end
 end
-
 ----------------------------------------RUKSTONE----------------------------------------
 local indexEE = 0
 local ScrollViewSpellList_BG;

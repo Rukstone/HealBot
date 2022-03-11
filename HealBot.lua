@@ -801,10 +801,12 @@ function HealBot_GetSpellName(id)
 end
 
 function HealBot_GetSpellId(spellName)
-    if (not spellName) then return nil end
+    if (not spellName) then 
+        return nil end
     x,y = 1,0;
     if HealBot_Spells[spellName] then   
-        if HealBot_Spells[spellName].x then return HealBot_Spells[spellName].x; end
+        if HealBot_Spells[spellName].x then
+             return HealBot_Spells[spellName].x; end
     end
     while true do 
         sName, sRank = GetSpellName(x,BOOKTYPE_SPELL);
@@ -928,7 +930,8 @@ function HealBot_FindHealSpells()
                 if initIncHeals then
                     initIncHealsVals[HealBot_Spells[spell].spell]=HealBot_Spells[spell].HealsCast+HealBot_Spells[spell].RealHealing
                     initIncHeals="nil"
-                    if HealBot_Spells[spell].spell==HEALBOT_REGROWTH then initIncHealsVals["H"..HealBot_Spells[spell].spell]=HealBot_Spells[spell].HealsExt+HealBot_Spells[spell].RealHealing end
+                    if HealBot_Spells[spell].spell==HEALBOT_REGROWTH then
+                         initIncHealsVals["H"..HealBot_Spells[spell].spell]=HealBot_Spells[spell].HealsExt+HealBot_Spells[spell].RealHealing end
                 else
                     HealBot_initHealData[HealBot_Spells[spell].spell]=true
                 end
@@ -1861,7 +1864,7 @@ function HealBot_configClassHoT(class, race)
     
     hbClassHoTwatch=HealBot_Globals.WatchHoT[class]
     for k, v in pairs(hbClassHoTwatch) do
-        if (v == 3) then
+        if v == 3 then
             HealBot_Watch_HoT[k]="A"-- for display on all
         elseif v == 2 then
             HealBot_Watch_HoT[k]="C"--display only for self cast
@@ -2622,7 +2625,6 @@ end
 
 function HealBot_CheckZone()
     local inBG=nil
---   z = GetRealZoneText()
     _,z = IsInInstance()
     if z=="pvp" or z == "arena" then inBG=true end
     HealBot_SetAddonComms(inBG)
@@ -2744,8 +2746,11 @@ function HealBot_HasMyBuffs(hbGUID)
         end
         k = 1
         HoTActive=nil
+
         while true do
+            --name, rank, icon, castTime, minRange, maxRange = GetSpellInfo(spellId or spellName or spellLink)
             bName,_,iTexture,bCount,_,_,expirationTime, caster,_,_,spellID = UnitAura(xUnit, k, "HELPFUL"); 
+
             if bName and caster then
                 y=HealBot_Watch_HoT[bName] or "nil"
                 if (y=="A" or (y=="C" and caster=="player")) and not hbExcludeSpells[spellID] then
@@ -4869,11 +4874,9 @@ function HealBot_InitNewChar(PlayerClassEN)
         HealBot_Options_setNewSkin(HealBot_PlayerName)
     end
 end
-
 function HealBot_ToggleOptions()
     HealBot_TogglePanel(HealBot_Options)
 end
-
 function HealBot_HasTalent(tab,icon,talentName)
     s,_,_,_,z,_ = GetTalentInfo(tab,icon);
     if s then
@@ -4887,7 +4890,6 @@ function HealBot_HasTalent(tab,icon,talentName)
     end
     return z
 end
-
 function HealBot_MMButton_UpdatePosition()
     HealBot_ButtonFrame:SetPoint(
         "TOPLEFT",
@@ -4897,14 +4899,12 @@ function HealBot_MMButton_UpdatePosition()
         (HealBot_Config.HealBot_ButtonRadius * sin(HealBot_Config.HealBot_ButtonPosition)) - 55
     );
 end
-
 function HealBot_MMButton_OnLoad(self)
     g=_G[self:GetName().."Icon"]
     g:SetVertexColor(1, 1, 0);
     self:RegisterForDrag("RightButton");
     self.dragme = false;
 end
-
 function HealBot_MMButton_Init()
     if HealBot_Config.ButtonShown==1 then
         HealBot_ButtonFrame:Show();
@@ -4913,14 +4913,12 @@ function HealBot_MMButton_Init()
         HealBot_ButtonFrame:Hide();
     end
 end
-
 function HealBot_MMButton_OnEnter(self)
     GameTooltip:SetOwner(self, "ANCHOR_LEFT");
     GameTooltip:SetText(HEALBOT_BUTTON_TOOLTIP);
     GameTooltipTextLeft1:SetTextColor(1, 1, 1);
     GameTooltip:Show();
 end
-
 function HealBot_MMButton_OnClick(self,button)
     if button~="RightButton" then
         HealBot_ToggleOptions()
@@ -4928,7 +4926,6 @@ function HealBot_MMButton_OnClick(self,button)
         HealBot_AddDebug("right click")
     end
 end
-
 function HealBot_MMButton_BeingDragged()
     w,x = GetCursorPosition() 
     y,z = Minimap:GetLeft(), Minimap:GetBottom() 
@@ -4936,7 +4933,6 @@ function HealBot_MMButton_BeingDragged()
     x = x/UIParent:GetScale()-z-70 
     HealBot_MMButton_SetPosition(math.deg(math.atan2(x,w)));
 end
-
 function HealBot_MMButton_SetPosition(c)
     if(c < 0) then
         c = c + 360;
@@ -4945,7 +4941,6 @@ function HealBot_MMButton_SetPosition(c)
     HealBot_Config.HealBot_ButtonPosition = c;
     HealBot_MMButton_UpdatePosition();
 end
-
 function HealBot_SmartCast(hbGUID,hlthDelta)
     w=nil;
     x=0;
@@ -4977,7 +4972,6 @@ function HealBot_SmartCast(hbGUID,hlthDelta)
     end
     return w;
 end
-
 local uRange=0
 function HealBot_UnitInRange(spellName, unit) -- added by Diacono of Ursin
     if UnitGUID(unit)==HealBot_PlayerGUID then
@@ -5002,7 +4996,6 @@ function HealBot_UnitInRange(spellName, unit) -- added by Diacono of Ursin
     end
     return uRange
 end
-
 function HealBot_ClearLocalArr(hbGUID, getTime)
     if (HealBot_UnitTime[hbGUID] or 0)<getTime then
         if HealBot_PlayerBuff[hbGUID] then HealBot_PlayerBuff[hbGUID]=nil end
@@ -5045,18 +5038,15 @@ function HealBot_ClearLocalArr(hbGUID, getTime)
         HealBot_Action_ClearLocalArr(hbGUID)
     end
 end
-
 function HealBot_immediateClearLocalArr(hbGUID)
     HealBot_ClearUnitAggro(HealBot_UnitID[hbGUID], hbGUID)
     HealBot_UnitName[hbGUID]=nil
     HealBot_UnitSpec[hbGUID]=nil
     HealBot_UnitID[hbGUID]=nil
 end
-
 function HealBot_setClearLocalArr(hbGUID)
     HealBot_cleanGUIDs[hbGUID]=GetTime()
 end
-
 function HealBot_Update_Skins()
 
     if HealBot_Config.Skin_Version then
@@ -5292,7 +5282,6 @@ function HealBot_Update_Skins()
         HealBot_Update_BuffsForSpec()
     end
     
-
     local _,class=UnitClass("player")
     class=strsub(class,1,4)
     local hbClassHoTwatchDef=HealBot_GlobalsDefaults.WatchHoT[class]
@@ -5315,8 +5304,6 @@ function AddNewWachHOT(class,key,value)
         HealBot_Globals.WatchHoT[class][key]=value
     end
 end
-
-
 function HealBot_Copy_SpellCombos()
     local combo=nil
     local button=nil
@@ -5342,7 +5329,6 @@ function HealBot_Copy_SpellCombos()
     HealBot_Update_SpellCombos()
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMSPELLCOPY)
 end
-
 function HealBot_Reset_Spells()
     HealBot_DoReset_Spells(HealBot_PlayerClassEN)
     HealBot_Config.ProtectPvP=HealBot_ConfigDefaults.ProtectPvP
@@ -5358,7 +5344,6 @@ function HealBot_Reset_Spells()
     HealBot_Options_ComboClass_Text()
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMSPELLRESET)
 end
-
 function HealBot_Reset_Buffs()
     HealBot_DoReset_Buffs(HealBot_PlayerClassEN)
     HealBot_Config.BuffWatch=HealBot_ConfigDefaults.BuffWatch
@@ -5370,7 +5355,6 @@ function HealBot_Reset_Buffs()
     HealBot_Options_Init(5)
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMBUFFSRESET)
 end
-
 function HealBot_Reset_Cures()
     HealBot_DoReset_Cures(HealBot_PlayerClassEN)
     HealBot_Config.SoundDebuffWarning=HealBot_ConfigDefaults.SoundDebuffWarning
@@ -5390,211 +5374,155 @@ function HealBot_Reset_Cures()
     HealBot_Options_Init(4)
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMCURESRESET)
 end
-
 function HealBot_DoReset_Buffs(PlayerClassEN)
-    HealBot_Config.HealBotBuffText = {[1]=HEALBOT_WORDS_NONE,[2]=HEALBOT_WORDS_NONE,[3]=HEALBOT_WORDS_NONE,[4]=HEALBOT_WORDS_NONE,[5]=HEALBOT_WORDS_NONE,
-                                      [6]=HEALBOT_WORDS_NONE,[7]=HEALBOT_WORDS_NONE,[8]=HEALBOT_WORDS_NONE,[9]=HEALBOT_WORDS_NONE,[10]=HEALBOT_WORDS_NONE}
-    HealBot_Config.HealBotBuffDropDown = {[1]=4,[2]=4,[3]=4,[4]=4,[5]=4,[6]=4,[7]=4,[8]=4,[9]=4,[10]=4}
-    if strsub(PlayerClassEN,1,4)=="DRUI" then
-          HealBot_Config.HealBotBuffText = {[1]=HEALBOT_MARK_OF_THE_WILD,[2]=HEALBOT_THORNS,[3]=HEALBOT_WORDS_NONE,[4]=HEALBOT_WORDS_NONE,[5]=HEALBOT_WORDS_NONE,
-                                      [6]=HEALBOT_WORDS_NONE,[7]=HEALBOT_WORDS_NONE,[8]=HEALBOT_WORDS_NONE,[9]=HEALBOT_WORDS_NONE,[10]=HEALBOT_WORDS_NONE}
-    elseif strsub(PlayerClassEN,1,4)=="PALA" then
-          HealBot_Config.HealBotBuffText = {[1]=HEALBOT_BLESSING_OF_MIGHT,[2]=HEALBOT_DEVOTION_AURA,[3]=HEALBOT_SEAL_OF_RIGHTEOUSNESS,[4]=HEALBOT_WORDS_NONE,
-                                            [5]=HEALBOT_WORDS_NONE,[6]=HEALBOT_WORDS_NONE,[7]=HEALBOT_WORDS_NONE,[8]=HEALBOT_WORDS_NONE,[9]=HEALBOT_WORDS_NONE,[10]=HEALBOT_WORDS_NONE}
-          HealBot_Config.HealBotBuffDropDown = {[1]=4,[2]=2,[3]=2,[4]=4,[5]=4,[6]=4,[7]=4,[8]=4,[9]=4,[10]=4}
-    elseif strsub(PlayerClassEN,1,4)=="PRIE" then
-          HealBot_Config.HealBotBuffText = {[1]=HEALBOT_POWER_WORD_FORTITUDE,[2]=HEALBOT_INNER_FIRE,[3]=HEALBOT_DIVINE_SPIRIT,[4]=HEALBOT_SHADOW_PROTECTION,
-                                            [5]=HEALBOT_WORDS_NONE,[6]=HEALBOT_WORDS_NONE,[7]=HEALBOT_WORDS_NONE,[8]=HEALBOT_WORDS_NONE,[9]=HEALBOT_WORDS_NONE,[10]=HEALBOT_WORDS_NONE}
-          HealBot_Config.HealBotBuffDropDown = {[1]=4,[2]=2,[3]=4,[4]=4,[5]=4,[6]=4,[7]=4,[8]=4,[9]=4,[10]=4}
-    elseif strsub(PlayerClassEN,1,4)=="SHAM" then
-          HealBot_Config.HealBotBuffText = {[1]=HEALBOT_WATER_SHIELD,[2]=HEALBOT_ROCKBITER_WEAPON,[3]=HEALBOT_WORDS_NONE,[4]=HEALBOT_WORDS_NONE,
-                                            [5]=HEALBOT_WORDS_NONE,[6]=HEALBOT_WORDS_NONE,[7]=HEALBOT_WORDS_NONE,[8]=HEALBOT_WORDS_NONE,[9]=HEALBOT_WORDS_NONE,[10]=HEALBOT_WORDS_NONE}
-          HealBot_Config.HealBotBuffDropDown = {[1]=2,[2]=2,[3]=4,[4]=4,[5]=4,[6]=4,[7]=4,[8]=4,[9]=4,[10]=4}
-    elseif strsub(PlayerClassEN,1,4)=="MAGE" then
-          HealBot_Config.HealBotBuffText = {[1]=HEALBOT_ARCANE_INTELLECT,[2]=HEALBOT_WORDS_NONE,[3]=HEALBOT_WORDS_NONE,[4]=HEALBOT_WORDS_NONE,
-                                            [5]=HEALBOT_WORDS_NONE,[6]=HEALBOT_WORDS_NONE,[7]=HEALBOT_WORDS_NONE,[8]=HEALBOT_WORDS_NONE,[9]=HEALBOT_WORDS_NONE,[10]=HEALBOT_WORDS_NONE}
-    end
+    HealBot_Config.HealBotBuffText = {
+        [1]=HEALBOT_WORDS_NONE,
+        [2]=HEALBOT_WORDS_NONE,
+        [3]=HEALBOT_WORDS_NONE,
+        [4]=HEALBOT_WORDS_NONE,
+        [5]=HEALBOT_WORDS_NONE,
+        [6]=HEALBOT_WORDS_NONE,
+        [7]=HEALBOT_WORDS_NONE,
+        [8]=HEALBOT_WORDS_NONE,
+        [9]=HEALBOT_WORDS_NONE,
+        [10]=HEALBOT_WORDS_NONE
+    }
+    HealBot_Config.HealBotBuffDropDown = {
+        [1]=4,
+        [2]=4,
+        [3]=4,
+        [4]=4,
+        [5]=4,
+        [6]=4,
+        [7]=4,
+        [8]=4,
+        [9]=4,
+        [10]=4
+    }
+    HealBot_Config.HealBotBuffText = {
+        [1]=HEALBOT_MARK_OF_THE_WILD,
+        [2]=HEALBOT_THORNS,
+        [3]=HEALBOT_BLESSING_OF_MIGHT,
+        [4]=HEALBOT_DEVOTION_AURA,
+        [5]=HEALBOT_SEAL_OF_RIGHTEOUSNESS,
+        [6]=HEALBOT_POWER_WORD_FORTITUDE,
+        [7]=HEALBOT_INNER_FIRE,
+        [8]=HEALBOT_DIVINE_SPIRIT,
+        [9]=HEALBOT_WATER_SHIELD,
+        [10]=HEALBOT_ARCANE_INTELLECT,
+    }
+ 
 end
-
-
 function HealBot_DoReset_Cures(PlayerClassEN)
-    HealBot_Config.HealBotDebuffText = {[1]=HEALBOT_WORDS_NONE,[2]=HEALBOT_WORDS_NONE,[3]=HEALBOT_WORDS_NONE}
-    HealBot_Config.HealBotDebuffDropDown = {[1]=4,[2]=4,[3]=4}
-    if strsub(PlayerClassEN,1,4)=="DRUI" then
-          HealBot_Config.HealBotDebuffText = {[1]=HEALBOT_CURE_POISON,[2]=HEALBOT_REMOVE_CURSE,[3]=HEALBOT_WORDS_NONE}
-    elseif strsub(PlayerClassEN,1,4)=="PALA" then
-          HealBot_Config.HealBotDebuffText = {[1]=HEALBOT_PURIFY,[2]=HEALBOT_CLEANSE,[3]=HEALBOT_WORDS_NONE}
-    elseif strsub(PlayerClassEN,1,4)=="PRIE" then
-          HealBot_Config.HealBotDebuffText = {[1]=HEALBOT_CURE_DISEASE,[2]=HEALBOT_DISPEL_MAGIC,[3]=HEALBOT_WORDS_NONE}
-    elseif strsub(PlayerClassEN,1,4)=="SHAM" then
-          HealBot_Config.HealBotDebuffText = {[1]=HEALBOT_CURE_TOXINS,[2]=HEALBOT_WORDS_NONE,[3]=HEALBOT_WORDS_NONE}
-    elseif strsub(PlayerClassEN,1,4)=="MAGE" then
-          HealBot_Config.HealBotDebuffText = {[1]=HEALBOT_REMOVE_CURSE,[2]=HEALBOT_WORDS_NONE,[3]=HEALBOT_WORDS_NONE}
-    end
-end
+    HealBot_Config.HealBotDebuffText = {
+        [1]=HEALBOT_WORDS_NONE,
+        [2]=HEALBOT_WORDS_NONE,
+        [3]=HEALBOT_WORDS_NONE,
+        [4]=HEALBOT_WORDS_NONE,
+        [5]=HEALBOT_WORDS_NONE,
+        [6]=HEALBOT_WORDS_NONE,
+        [7]=HEALBOT_WORDS_NONE,
+        [8]=HEALBOT_WORDS_NONE,
+        [9]=HEALBOT_WORDS_NONE,
+        
+    }
+    HealBot_Config.HealBotDebuffDropDown = {
+        [1]=4,
+        [2]=4,
+        [3]=4,
+        [4]=4,
+        [5]=4,
+        [6]=4,
+        [7]=4,
+        [8]=4,
+        [9]=4
+    }
+    HealBot_Config.HealBotDebuffText = {
+        [1]=HEALBOT_CURE_POISON,
+        [2]=HEALBOT_REMOVE_CURSE,
+        [3]=HEALBOT_PURIFY,
+        [4]=HEALBOT_CLEANSE,
+        [5]=HEALBOT_CURE_DISEASE,
+        [6]=HEALBOT_DISPEL_MAGIC,
+        [7]=HEALBOT_CURE_TOXINS,
+        [8]=HEALBOT_DISPEL_CURSE,
+        [9]=Cleasing_Totem,
 
+
+
+      }
+
+end
 function HealBot_DoReset_Spells(PlayerClassEN)
     HealBot_Config.EnabledKeyCombo = {}
     HealBot_Config.DisabledKeyCombo = {}
-    local bandage=HealBot_GetBandageType()
-    if strsub(PlayerClassEN,1,4)=="DRUI" then
-        HealBot_Config.EnabledKeyCombo = {
-          ["Left"] = HEALBOT_REGROWTH,
-          ["CtrlLeft"] =  HEALBOT_ABOLISH_POISON,
-          ["Right"] = HEALBOT_HEALING_TOUCH,
-          ["CtrlRight"] =  HEALBOT_REMOVE_CURSE,
-          ["Middle"] = HEALBOT_REJUVENATION,
-          ["ShiftMiddle"] = bandage,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
-          ["Alt-ShiftRight"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-        HealBot_Config.DisabledKeyCombo = {
-          ["Left"] = HEALBOT_DISABLED_TARGET,
-          ["ShiftLeft"] = HEALBOT_MARK_OF_THE_WILD,
-          ["Right"] = HEALBOT_ASSIST,
-          ["AltRight"] = HEALBOT_THORNS,
-          ["Middle"] = HEALBOT_REJUVENATION,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-    elseif strsub(PlayerClassEN,1,4)=="PALA" then
-        HealBot_Config.EnabledKeyCombo = {
-          ["Left"] = HEALBOT_FLASH_OF_LIGHT,
-          ["CtrlLeft"] =  HEALBOT_CLEANSE,
-          ["Right"] = HEALBOT_HOLY_LIGHT,
-          ["Middle"] =  HEALBOT_HAND_OF_SALVATION,
-          ["ShiftMiddle"] = bandage,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
-          ["Alt-ShiftRight"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-        HealBot_Config.DisabledKeyCombo = {
-          ["Left"] = HEALBOT_DISABLED_TARGET,
-          ["Middle"] =  HEALBOT_HAND_OF_SALVATION,
-          ["Right"] = HEALBOT_ASSIST,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-    elseif strsub(PlayerClassEN,1,4)=="PRIE" then
-        HealBot_Config.EnabledKeyCombo = {
-          ["Left"] = HEALBOT_FLASH_HEAL,
-          ["ShiftLeft"] = HEALBOT_BINDING_HEAL,
-          ["CtrlLeft"] = HEALBOT_ABOLISH_DISEASE,
-          ["Right"] = HEALBOT_GREATER_HEAL,
-          ["ShiftRight"] = HEALBOT_POWER_WORD_SHIELD,
-          ["CtrlRight"] = HEALBOT_DISPEL_MAGIC,
-          ["Middle"] = HEALBOT_RENEW,
-          ["ShiftMiddle"] = HEALBOT_PRAYER_OF_MENDING,
-          ["AltMiddle"] = HEALBOT_PRAYER_OF_HEALING,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
-          ["Alt-ShiftRight"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-        HealBot_Config.DisabledKeyCombo = {
-          ["Left"] = HEALBOT_DISABLED_TARGET,
-          ["Right"] = HEALBOT_ASSIST,
-          ["AltLeft"] = HEALBOT_RESURRECTION,
-          ["ShiftRight"] = HEALBOT_POWER_WORD_SHIELD,
-          ["Middle"] = HEALBOT_RENEW,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-    elseif strsub(PlayerClassEN,1,4)=="SHAM" then
-        HealBot_Config.EnabledKeyCombo = {
-          ["Left"] = HEALBOT_LESSER_HEALING_WAVE,
-          ["CtrlLeft"] =  HEALBOT_CURE_TOXINS,
-          ["Right"] = HEALBOT_HEALING_WAVE,
-          ["CtrlRight"] = HEALBOT_CURE_TOXINS,
-          ["Middle"] = HEALBOT_CHAIN_HEAL,
-          ["ShiftMiddle"] = bandage,
-          ["AltMiddle"] = HEALBOT_CLEANSE_SPIRIT,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
-          ["Alt-ShiftRight"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-        HealBot_Config.DisabledKeyCombo = {
-          ["Left"] = HEALBOT_DISABLED_TARGET,
-          ["Right"] = HEALBOT_ASSIST,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-                                         }
-    elseif strsub(PlayerClassEN,1,4)=="MAGE" then
-        HealBot_Config.EnabledKeyCombo = {
-          ["Left"] = HEALBOT_REMOVE_CURSE,
-          ["ShiftLeft"] = bandage,
-          ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
-          ["Alt-ShiftRight"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-                                         }
-        HealBot_Config.DisabledKeyCombo = {
-          ["Left"] = HEALBOT_DISABLED_TARGET,
-          ["ShiftLeft"] = bandage,
-          ["Right"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-                                         }
-    else
-        HealBot_Config.EnabledKeyCombo = {
-          ["Left"] = bandage,
-          ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
-          ["Alt-ShiftRight"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-                                         }
-        HealBot_Config.DisabledKeyCombo = {
-          ["Left"] = HEALBOT_DISABLED_TARGET,
-          ["ShiftLeft"] = bandage,
-          ["Right"] = HEALBOT_ASSIST,
-          ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
-          ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
-          ["Button4"] = HEALBOT_MAINTANK,
-          ["Button5"] = HEALBOT_MAINASSIST,
-                                         }
-    end
+    HealBot_Config.EnabledKeyCombo = {
+        ["Left"] = HEALBOT_WORDS_NONE,
+        ["CtrlLeft"] =  HEALBOT_WORDS_NONE,
+        ["Right"] = HEALBOT_WORDS_NONE,
+        ["CtrlRight"] =  HEALBOT_WORDS_NONE,
+        ["Middle"] = HEALBOT_WORDS_NONE,
+        ["ShiftMiddle"] = HEALBOT_WORDS_NONE,
+        ["Button4"] = HEALBOT_WORDS_NONE,
+        ["Button5"] = HEALBOT_WORDS_NONE,
+        ["Alt-ShiftLeft"] = HEALBOT_WORDS_NONE,
+        ["Alt-ShiftRight"] = HEALBOT_WORDS_NONE,
+        ["Ctrl-ShiftLeft"] = HEALBOT_WORDS_NONE,
+        ["Ctrl-ShiftRight"] = HEALBOT_WORDS_NONE,
+                                       }
+      HealBot_Config.DisabledKeyCombo = {
+        ["Left"] = HEALBOT_WORDS_NONE,
+        ["ShiftLeft"] = HEALBOT_WORDS_NONE,
+        ["Right"] = HEALBOT_WORDS_NONE,
+        ["AltRight"] = HEALBOT_WORDS_NONE,
+        ["Middle"] = HEALBOT_WORDS_NONE,
+        ["Button4"] = HEALBOT_WORDS_NONE,
+        ["Button5"] = HEALBOT_WORDS_NONE,
+        ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
+        ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
+                                       }
+
+      HealBot_Config.EnabledKeyCombo = {
+        ["Left"] = HEALBOT_WORDS_NONE,
+        ["ShiftLeft"] = HEALBOT_WORDS_NONE,
+        ["Alt-ShiftLeft"] = HEALBOT_WORDS_NONE,
+        ["Alt-ShiftRight"] = HEALBOT_WORDS_NONE,
+        ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
+        ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
+        ["Button4"] = HEALBOT_WORDS_NONE,
+        ["Button5"] = HEALBOT_WORDS_NONE,
+                                       }
+      HealBot_Config.DisabledKeyCombo = {
+        ["Left"] = HEALBOT_WORDS_NONE,
+        ["ShiftLeft"] = HEALBOT_WORDS_NONE,
+        ["Right"] = HEALBOT_WORDS_NONE,
+        ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
+        ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
+        ["Button4"] = HEALBOT_WORDS_NONE,
+        ["Button5"] = HEALBOT_WORDS_NONE,
+                                       }
+
+
+
+
 end
-
-
 function HealBot_Update_BuffsForSpec(buffType)
     if buffType then
         if buffType=="Debuff" then
-            for x=1,3 do
+
+            for x=1,8 do
                 HealBot_Update_BuffsForSpecDD(x,"Debuff")
+
             end
+            
         else
             for x=1,10 do
                 HealBot_Update_BuffsForSpecDD(x,"Buff")
+
             end
         end
     else
-        for x=1,3 do
+        for x=1,8 do
             HealBot_Update_BuffsForSpecDD(x,"Debuff")
         end
         for x=1,10 do
@@ -5602,10 +5530,11 @@ function HealBot_Update_BuffsForSpec(buffType)
         end
     end
 end
-
 function HealBot_Update_BuffsForSpecDD(ddId,bType)
     if bType=="Debuff" then
-        for z=1,3 do
+
+        
+        for z=1,8 do
             if HealBot_Config.HealBotDebuffDropDown[ddId] and not HealBot_Config.HealBotDebuffDropDown[z..ddId] then 
                 HealBot_Config.HealBotDebuffDropDown[z..ddId]=HealBot_Config.HealBotDebuffDropDown[ddId] 
             elseif not HealBot_Config.HealBotDebuffDropDown[z..ddId] then 
@@ -5618,7 +5547,7 @@ function HealBot_Update_BuffsForSpecDD(ddId,bType)
             end
         end
     else
-        for z=1,3 do
+        for z=1,8 do
             if HealBot_Config.HealBotBuffDropDown[ddId] and not HealBot_Config.HealBotBuffDropDown[z..ddId] then 
                 HealBot_Config.HealBotBuffDropDown[z..ddId]=HealBot_Config.HealBotBuffDropDown[ddId]
             elseif not HealBot_Config.HealBotBuffDropDown[z..ddId] then 
@@ -5632,4 +5561,3 @@ function HealBot_Update_BuffsForSpecDD(ddId,bType)
         end
     end
 end
-

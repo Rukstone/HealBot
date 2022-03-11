@@ -77,6 +77,10 @@ Moonkin_Form = GetItemInfo(24858) or "Moonkin Form";
 Frenzied_Regeneration = GetItemInfo(22842) or "Frenzied Regeneration";
 --ID 19263  [Deterrence]
 Deterrence = GetItemInfo(19263) or "Deterrence";
+--ID 86514  [Cauterizing Fire]
+Cauterizing_Fire = GetItemInfo(86514) or "Cauterizing Fire";
+--ID 888593 Preservation
+Preservation = GetItemInfo(888593) or "Preservation";
 
 
 -----------------------------------------------
