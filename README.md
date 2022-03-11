@@ -10,3 +10,9 @@ Spells like "Power word shild" "Becon Of Light" "Renew" Can now be displayed on 
 
 ### New Spell Icon Tracker UI
 ![plot](./Features_Updates/Images/New_HealBotTab_SpellTracker.png)
+
+### New Spells and RE Add
+ ###### Prayer of Preservation
+ ###### Cauterizing Fire
+ ###### Seed of Life
+ ###### Efflorescence
