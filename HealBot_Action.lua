@@ -301,40 +301,32 @@ function HealBot_Action_SetrSpell()
     HealBot_bSpell=HealBot_GetBandageType()
     HealBot_dSpell=HealBot_GetBandageType()
     HealBot_rSpell=HealBot_GetBandageType()
-    if strsub(HealBot_PlayerClassEN,1,4)=="DRUI" then
-        HealBot_hSpell=HEALBOT_REJUVENATION
-        HealBot_bSpell=HEALBOT_MARK_OF_THE_WILD
-        HealBot_dSpell=HEALBOT_CURE_POISON
-        HealBot_rSpell=HEALBOT_REVIVE
-    elseif strsub(HealBot_PlayerClassEN,1,4)=="HUNT" then
-        HealBot_hSpell=HEALBOT_MENDPET
-    elseif strsub(HealBot_PlayerClassEN,1,4)=="MAGE" then
-        HealBot_bSpell=HEALBOT_ARCANE_INTELLECT
-        HealBot_dSpell=HEALBOT_REMOVE_CURSE
-    elseif strsub(HealBot_PlayerClassEN,1,4)=="PALA" then
-        HealBot_hSpell=HEALBOT_HOLY_LIGHT
-        HealBot_bSpell=HEALBOT_BLESSING_OF_MIGHT
-        HealBot_dSpell=HEALBOT_PURIFY
-        HealBot_rSpell=HEALBOT_REDEMPTION
-    elseif strsub(HealBot_PlayerClassEN,1,4)=="PRIE" then
-        HealBot_hSpell=HEALBOT_LESSER_HEAL
-        HealBot_bSpell=HEALBOT_POWER_WORD_FORTITUDE
-        HealBot_dSpell=HEALBOT_CURE_DISEASE
-        HealBot_rSpell=HEALBOT_RESURRECTION
-    elseif strsub(HealBot_PlayerClassEN,1,4)=="SHAM" then
-        HealBot_hSpell=HEALBOT_HEALING_WAVE
-        HealBot_bSpell=HEALBOT_WATER_SHIELD
-        HealBot_dSpell=HEALBOT_CURE_DISEASE
-        HealBot_rSpell=HEALBOT_ANCESTRALSPIRIT
-    elseif strsub(HealBot_PlayerClassEN,1,4)=="WARL" then
-        HealBot_bSpell=HEALBOT_UNENDING_BREATH
-        HealBot_hSpell=HEALBOT_HEALTH_FUNNEL
-    elseif strsub(HealBot_PlayerClassEN,1,4)=="WARR" then
-        if HealBot_GetSpellId(HEALBOT_VIGILANCE) then
-            HealBot_hSpell=HEALBOT_VIGILANCE
-            HealBot_bSpell=HEALBOT_VIGILANCE
-        end
+    HealBot_hSpell=HEALBOT_REJUVENATION
+    HealBot_bSpell=HEALBOT_MARK_OF_THE_WILD
+    HealBot_dSpell=HEALBOT_CURE_POISON
+    HealBot_rSpell=HEALBOT_REVIVE
+    HealBot_hSpell=HEALBOT_MENDPET
+    HealBot_bSpell=HEALBOT_ARCANE_INTELLECT
+    HealBot_dSpell=HEALBOT_REMOVE_CURSE
+    HealBot_hSpell=HEALBOT_HOLY_LIGHT
+    HealBot_bSpell=HEALBOT_BLESSING_OF_MIGHT
+    HealBot_dSpell=HEALBOT_PURIFY
+    HealBot_rSpell=HEALBOT_REDEMPTION
+    HealBot_hSpell=HEALBOT_LESSER_HEAL
+    HealBot_bSpell=HEALBOT_POWER_WORD_FORTITUDE
+    HealBot_dSpell=HEALBOT_CURE_DISEASE
+    HealBot_rSpell=HEALBOT_RESURRECTION
+    HealBot_hSpell=HEALBOT_HEALING_WAVE
+    HealBot_bSpell=HEALBOT_WATER_SHIELD
+    HealBot_dSpell=HEALBOT_CURE_DISEASE
+    HealBot_rSpell=HEALBOT_ANCESTRALSPIRIT
+    HealBot_bSpell=HEALBOT_UNENDING_BREATH
+    HealBot_hSpell=HEALBOT_HEALTH_FUNNEL
+    if HealBot_GetSpellId(HEALBOT_VIGILANCE) then
+        HealBot_hSpell=HEALBOT_VIGILANCE
+        HealBot_bSpell=HEALBOT_VIGILANCE
     end
+    
     HealBot_Set_debuffSpell(HealBot_dSpell)
 --    HealBot_SetrSpells(HealBot_hSpell,HealBot_bSpell,HealBot_dSpell,HealBot_rSpell)
 end
@@ -3032,7 +3024,9 @@ local scuHlth, scuMaxHlth, scuHealsIn = nil,nil,nil
 function HealBot_Action_SmartCast(hbGUID)
     sName=nil
     rangeSpell=HealBot_hSpell
-    if HealBot_PlayerDead or not HealBot_UnitID[hbGUID] then return nil; end
+    if HealBot_PlayerDead or not HealBot_UnitID[hbGUID] then 
+        return nil;
+     end
   
     if HealBot_Config.SmartCastRes==1 and UnitIsDead(HealBot_UnitID[hbGUID]) and not UnitIsGhost(HealBot_UnitID[hbGUID]) then
         sName=HealBot_Init_retSmartCast_Res();
@@ -3047,7 +3041,7 @@ function HealBot_Action_SmartCast(hbGUID)
         scuHealsIn = HealBot_IncHeals_retHealsIn(hbGUID);
         scuHlth, scuMaxHlth = HealBot_UnitHealth(hbGUID, HealBot_UnitID[hbGUID]);
         x = scuMaxHlth-(scuHlth+scuHealsIn);
-        if x>200 then
+        if x > 200 then
             sName=HealBot_SmartCast(hbGUID,x)
         end
     end

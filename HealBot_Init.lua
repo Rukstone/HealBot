@@ -33,16 +33,12 @@ end
 
 function HealBot_Init_SetSpec()
 HealBot_Spec = {
-    ["DRUI"] = { [1] = HEALBOT_BALANCE,       [2] = HEALBOT_FERAL,        [3] = HEALBOT_RESTORATION, },
-    ["MAGE"] = { [1] = HEALBOT_ARCANE,        [2] = HEALBOT_FIRE,         [3] = HEALBOT_FROST,       },
-    ["PRIE"] = { [1] = HEALBOT_DISCIPLINE,    [2] = HEALBOT_HOLY,         [3] = HEALBOT_SHADOW,      },
-    ["ROGU"] = { [1] = HEALBOT_ASSASSINATION, [2] = HEALBOT_COMBAT,       [3] = HEALBOT_SUBTLETY,    },
-    ["WARR"] = { [1] = HEALBOT_ARMS,          [2] = HEALBOT_FURY,         [3] = HEALBOT_PROTECTION,  },
-    ["HUNT"] = { [1] = HEALBOT_BEASTMASTERY,  [2] = HEALBOT_MARKSMANSHIP, [3] = HEALBOT_SURVIVAL,    },
-    ["PALA"] = { [1] = HEALBOT_HOLY,          [2] = HEALBOT_PROTECTION,   [3] = HEALBOT_RETRIBUTION, },
-    ["SHAM"] = { [1] = HEALBOT_ELEMENTAL,     [2] = HEALBOT_ENHANCEMENT,  [3] = HEALBOT_SHAMAN_RESTORATION, },
-    ["WARL"] = { [1] = HEALBOT_AFFLICTION,    [2] = HEALBOT_DEMONOLOGY,   [3] = HEALBOT_DESTRUCTION, },
-    ["DEAT"] = { [1] = HEALBOT_BLOOD,         [2] = HEALBOT_FROST,        [3] = HEALBOT_UNHOLY, },
+    ["DRUI"] = {
+
+        [1] = HEALBOT_BALANCE,
+        [2] = HEALBOT_FERAL,
+        [3] = HEALBOT_RESTORATION,
+    },
     }
 end
 
@@ -801,18 +797,22 @@ function HealBot_Init_Spells_Defaults(class)
 end
 
 function HealBot_Init_SmartCast()
-    if HealBot_Spells[HEALBOT_REVIVE] then
-        -- body
-        SmartCast_Res=HEALBOT_REVIVE;
-    elseif HealBot_Spells[HEALBOT_RESURRECTION] then
-        -- body
-        SmartCast_Res=HEALBOT_RESURRECTION;
-    elseif HealBot_Spells[HEALBOT_REDEMPTION] then
-        -- body
-        SmartCast_Res=HEALBOT_REDEMPTION;
-    elseif HealBot_Spells[HEALBOT_ANCESTRALSPIRIT] then
-        -- body
-        SmartCast_Res=HEALBOT_ANCESTRALSPIRIT;
 
+    
+    SmartCast_Res = HEALBOT_REVIVE;
+    if IsSpellKnown(7328) then
+        SmartCast_Res = HEALBOT_REDEMPTION;
+        elseif IsSpellKnown(2006) then
+            SmartCast_Res = HEALBOT_RESURRECTION;
+            -- body
+        elseif IsSpellKnown(2008) then
+            -- body
+            SmartCast_Res = HEALBOT_ANCESTRALSPIRIT;
     end
+
+    print(SmartCast_Res);
+    return SmartCast_Res;
+    
 end
+
+

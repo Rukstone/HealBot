@@ -66,37 +66,6 @@ local initIncHeals=true
 local HealBot_Ignore_Class_Debuffs = {
     ["DRUI"] = {   [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
 
-    ["WARR"] = { [HEALBOT_DEBUFF_ANCIENT_HYSTERIA] = true,    
-                          [HEALBOT_DEBUFF_IGNITE_MANA] = true, 
-                          [HEALBOT_DEBUFF_TAINTED_MIND] = true, 
-                          [HEALBOT_DEBUFF_VIPER_STING] = true,
-                          [HEALBOT_DEBUFF_IMPOTENCE] = true,
-                          [HEALBOT_DEBUFF_DECAYED_INT] = true,
-                          [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-    ["ROGU"] = {   [HEALBOT_DEBUFF_SILENCE] = true,    
-                          [HEALBOT_DEBUFF_ANCIENT_HYSTERIA] = true, 
-                          [HEALBOT_DEBUFF_IGNITE_MANA] = true, 
-                          [HEALBOT_DEBUFF_TAINTED_MIND] = true, 
-                          [HEALBOT_DEBUFF_VIPER_STING] = true,
-                          [HEALBOT_DEBUFF_IMPOTENCE] = true,
-                          [HEALBOT_DEBUFF_DECAYED_INT] = true,
-                          [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-    ["HUNT"] = {  [HEALBOT_DEBUFF_MAGMA_SHACKLES] = true, 
-                          [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-    ["MAGE"] = {    [HEALBOT_DEBUFF_MAGMA_SHACKLES] = true, 
-                          [HEALBOT_DEBUFF_DECAYED_STR] = true,
-                          [HEALBOT_DEBUFF_CRIPPLE] = true,
-                          [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-
-    ["PALA"] = { [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-    ["PRIE"] = {  [HEALBOT_DEBUFF_DECAYED_STR] = true,
-                          [HEALBOT_DEBUFF_CRIPPLE] = true,
-                          [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-    ["SHAM"] = {  [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-    ["WARL"] = { [HEALBOT_DEBUFF_DECAYED_STR] = true,
-                          [HEALBOT_DEBUFF_CRIPPLE] = true,
-                          [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
-    ["DEAT"] = { [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,},
 };
 
 local HealBot_Ignore_Movement_Debuffs = {
@@ -181,7 +150,11 @@ local CooldownBuffs={[HEALBOT_FEAR_WARD]=true,
                      [HEALBOT_POWER_INFUSION]=true,
                      [HEALBOT_DIVINE_PLEA]=true,
                      [HEALBOT_DIVINE_FAVOR]=true,
-                     [HEALBOT_DIVINE_ILLUMINATION]=true,}
+                     [HEALBOT_DIVINE_ILLUMINATION]=true,
+                     --[Efflorescence] = true,
+                     --[Alter_Time] = true,
+
+                    }
 local debuffCodes={
     
     [HEALBOT_DISEASE_en]=5,
