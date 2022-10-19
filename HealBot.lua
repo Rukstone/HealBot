@@ -2950,7 +2950,7 @@ function HealBot_CheckUnitDebuffs(hbGUID)
                         checkthis=true;
                     elseif WatchTarget["Self"] and hbGUID==HealBot_PlayerGUID then
                         checkthis=true
-                    elseif WatchTarget[strsub(HEALBOT_HERO_EN,1,4)] then
+                    elseif WatchTarget[HEALBOT_HERO_EN] then
                         checkthis=true;
                     elseif WatchTarget["PvP"] and UnitIsPVP("player") then
                         checkthis=true;
@@ -2994,11 +2994,14 @@ function HealBot_CheckUnitDebuffs(hbGUID)
                             checkthis=false;
                         elseif HealBot_Config.IgnoreNonHarmfulDebuffs==1 and HealBot_Ignore_NonHarmful_Debuffs[dName] then
                             checkthis=false;
-                        elseif HealBot_Config.IgnoreClassDebuffs==1 then
-                            HealBot_Ignore_Debuffs_Class=HealBot_Ignore_Class_Debuffs[strsub(HEALBOT_HERO,1,4)];
-                            if HealBot_Ignore_Debuffs_Class[dName] then
-                                checkthis=false;
+                        elseif HealBot_Config.IgnoreClassDebuffs == 1 then
+                            HealBot_Ignore_Debuffs_Class=HealBot_Ignore_Class_Debuffs[HEALBOT_HERO_EN];
+                            if HealBot_Ignore_Debuffs_Class then
+                                if HealBot_Ignore_Debuffs_Class[dName] then
+                                    checkthis=false;
+                                end
                             end
+                           
                         end
                     end
                 end

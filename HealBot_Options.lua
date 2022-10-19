@@ -5306,8 +5306,8 @@ local HealBot_Debuff_RangeWarning_List = {
     HEALBOT_VISIBLE_RANGE,
     HEALBOT_SPELL_RANGE,
 }
-function HealBot_Options_GetDebuffSpells_List(class)
-    return HealBot_Debuff_Spells[class]
+function HealBot_Options_GetDebuffSpells_List()
+    return HealBot_Debuff_Spells[HEALBOT_HERO_EN]
 end
 
 function HealBot_Options_GetRacialDebuffSpells_List(race)
@@ -5317,7 +5317,7 @@ end
 local DebuffSpells_List=nil
 local RacialDebuffSpells_List=nil
 function HealBot_Options_CDCTxt1_DropDown()
-    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(HEALBOT_HERO_EN)
+    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List()
     RacialDebuffSpells_List = HealBot_Options_GetRacialDebuffSpells_List(strsub(HealBot_PlayerRaceEN,1,3))
     for x,_ in pairs(info) do
         info[x]=nil;
@@ -5355,7 +5355,7 @@ function HealBot_Options_CDCTxt1_DropDown()
 end
 
 function HealBot_Options_CDCTxt2_DropDown()
-    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(HEALBOT_HERO_EN)
+    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List()
     RacialDebuffSpells_List = HealBot_Options_GetRacialDebuffSpells_List(strsub(HealBot_PlayerRaceEN,1,3))
     for x,_ in pairs(info) do
         info[x]=nil;
@@ -5393,7 +5393,7 @@ function HealBot_Options_CDCTxt2_DropDown()
 end
 
 function HealBot_Options_CDCTxt3_DropDown()
-    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(HEALBOT_HERO_EN)
+    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List()
     RacialDebuffSpells_List = HealBot_Options_GetRacialDebuffSpells_List(strsub(HealBot_PlayerRaceEN,1,3))
     for x,_ in pairs(info) do
         info[x]=nil;
@@ -6244,7 +6244,7 @@ function HealBot_Options_Debuff_Reset()
                         HealBot_DebuffSpell[dName]=sName;
                     end
                     HealBot_DebuffWatchTargetSpell=HealBot_DebuffWatchTarget[dName];
-
+                    HealBot_DebuffWatchTargetSpell[HEALBOT_HERO_EN]=true;
 
 
                     if (DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]) then
@@ -6268,7 +6268,7 @@ function HealBot_Options_Debuff_Reset()
                                  HealBot_Options_Get_deBuffWatchGUID(sName, "Debuff", k)
                             end
                         end
-                        --HealBot_DebuffWatchTargetSpell[HEALBOT_HERO_EN[HEALBOT_HERO]]=true;
+
 
                     end
       
