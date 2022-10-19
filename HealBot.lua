@@ -5278,6 +5278,11 @@ function AddNewWachHOT(key,value)
     if(key == nil or value == nil) then
         return
     end
+    if not HealBot_Globals.WatchHoT[HEALBOT_HERO_EN] then
+        HealBot_Globals.WatchHoT[HEALBOT_HERO_EN] = {
+            [key] = value
+        }
+    end
 
     if not HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][key] then
         HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][key]=value
