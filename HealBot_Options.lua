@@ -3670,19 +3670,20 @@ end
 
 function HealBot_Options_EmergencyFilter_Reset()
   
-    HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 0;
-    if Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==1 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 1;
-    elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==2 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 1;
+
+
+    if Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==1 or Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==2 then
+        HealBot_EmergInc[HEALBOT_HERO] = HealBot_Config.EmergIncCustom[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==12 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
+        HealBot_EmergInc[HEALBOT_HERO] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==13 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncRange[HEALBOT_HERO];
+        HealBot_EmergInc[HEALBOT_HERO] = HealBot_Config.EmergIncRange[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==14 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncHealers[HEALBOT_HERO];
+        HealBot_EmergInc[HEALBOT_HERO] = HealBot_Config.EmergIncHealers[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==15 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncCustom[HEALBOT_HERO];
+        HealBot_EmergInc[HEALBOT_HERO] = HealBot_Config.EmergIncCustom[HEALBOT_HERO];
+    else
+        HealBot_EmergInc[HEALBOT_HERO] = HealBot_Config.EmergIncRange[HEALBOT_HERO];
     end
 
     if Delay_RecalcParty==0 then 
@@ -6244,7 +6245,7 @@ function HealBot_Options_Debuff_Reset()
                     end
                     HealBot_DebuffWatchTargetSpell=HealBot_DebuffWatchTarget[dName];
 
-                    HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]]=true;
+
 
                     if (DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]) then
                         if DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==2 then
@@ -6267,6 +6268,7 @@ function HealBot_Options_Debuff_Reset()
                                  HealBot_Options_Get_deBuffWatchGUID(sName, "Debuff", k)
                             end
                         end
+                        --HealBot_DebuffWatchTargetSpell[HEALBOT_HERO_EN[HEALBOT_HERO]]=true;
 
                     end
       

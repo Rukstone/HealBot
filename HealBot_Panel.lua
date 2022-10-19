@@ -1248,12 +1248,12 @@ function HealBot_Panel_PanelChanged(showHeaders)
                         end
                         if UnitExists(xUnit) and xGUID then
                             if HealBot_TrackNames[xGUID] then
-                                class,classEN=UnitClass(xUnit)
-                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and class and HealBot_EmergInc[strsub(classEN,1,4)]==1 then
+
+                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and HEALBOT_HERO and HealBot_EmergInc[HEALBOT_HERO_EN]==1 then
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
-                                        order[xUnit] = classEN;
+                                        order[xUnit] = HEALBOT_HERO_EN;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==3 then
                                         order[xUnit] = subgroup;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==4 then
@@ -1294,12 +1294,14 @@ function HealBot_Panel_PanelChanged(showHeaders)
                 else
                     z=0
                     for _,xUnit in ipairs(HealBot_Action_HealGroup) do
-                        class,classEN = UnitClass(xUnit);
+                        
+                        class = HEALBOT_HERO;
+                        classEN = HEALBOT_HERO_EN;
                         xGUID=HealBot_UnitGUID(xUnit)
                         uName=UnitName(xUnit);
                         if UnitExists(xUnit) then
                             if not HealBot_TrackNames[xGUID] then
-                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and HealBot_EmergInc[strsub(classEN,1,4)]==1 then
+                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and HealBot_EmergInc[HEALBOT_HERO_EN]==1 then
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
