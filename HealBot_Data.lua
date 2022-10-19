@@ -107,17 +107,17 @@ HealBot_ConfigDefaults = {
     [HEALBOT_CUSTOM_en] = { R = 0.45, G = 0, B = 0.26, }, -- added by Diacono
   },
   EmergIncRange = {
-    [HEALBOT_DRUID]  = 0, 
+    [HEALBOT_HERO]  = 0, 
 
   },
   EmergIncMelee = {
-    [HEALBOT_DRUID]  = 0, 
+    [HEALBOT_HERO]  = 0, 
   },
   EmergIncHealers = {
-    [HEALBOT_DRUID]  = 1,
+    [HEALBOT_HERO]  = 1,
   },
   EmergIncCustom = {
-    [HEALBOT_DRUID]  = 1,
+    [HEALBOT_HERO]  = 1,
   },
   SkinDefault = {[HEALBOT_SKINS_STD] = 1, [HEALBOT_OPTIONS_GROUPHEALS] = 1, [HEALBOT_OPTIONS_EMERGENCYHEALS] = 1, [HEALBOT_ZONE_AV] = 1,
              [HEALBOT_SKIN_FLUID] = 1, [HEALBOT_SKIN_VIVID] = 1, [HEALBOT_SKIN_LIGHT] = 1, [HEALBOT_SKIN_SQUARE] = 1, [HEALBOT_MAGIC] = 1,},
@@ -238,10 +238,7 @@ HealBot_ConfigDefaults = {
     },
 };
 
-HealBot_Class_En = { 
-                [HEALBOT_DRUID]="DRUI",
-
-}
+--HealBot_Class_En = { [HEALBOT_HERO]="HERO",}
 
 HealBot_GlobalsDefaults = {
     HoTindex=1,
@@ -325,11 +322,11 @@ HealBot_GlobalsDefaults = {
         [HEALBOT_DEBUFF_HARVEST_SOUL]      = 13,
     },
     HoTReserve = {
-        ["DRUI"] = {[1] = 1, [2] = 1, [3] = 1, [4] = 1},
+        [HEALBOT_HERO_EN] = {[1] = 1, [2] = 1, [3] = 1, [4] = 1},
 
     },
     WatchHoT = {
-        ["DRUI"] = { --1 for not displaying 2 for self only 3 for all
+        [HEALBOT_HERO_EN] = { --1 for not displaying 2 for self only 3 for all
             [HEALBOT_GUARDIAN_SPIRIT]=2,
             [HEALBOT_PAIN_SUPPRESSION]=2,
             [HEALBOT_POWER_INFUSION]=2,
@@ -429,6 +426,12 @@ HealBot_GlobalsDefaults = {
             [Frenzied_Regeneration] = 1,
             [Deterrence] = 1,
             [Preservation] =2,
+            [Mana_Shield] = 1,
+            [Guiding_Heal] =2,
+            [Adorned] = 2,
+            [Diciple_of_the_Tides] =1,
+            [Tidal_Swell] = 1,
+            
 
 
 
@@ -805,8 +808,6 @@ HealBot_IsFighting = nil;
 
 HealBot_Action_TooltipUnit=nil;
 Delay_RecalcParty=0;
-HealBot_PlayerClass=nil;
-HealBot_PlayerClassEN=nil;
 HealBot_PlayerRace=nil;
 HealBot_PlayerRaceEN=nil;
 HealBot_UnitName = {};

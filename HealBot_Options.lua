@@ -53,7 +53,7 @@ local HealBot_Options_BuffTxt_List = {
     HEALBOT_OPTIONS_BUFFSELF,
     HEALBOT_OPTIONS_BUFFPARTY,
     HEALBOT_OPTIONS_BUFFRAID,
-    HEALBOT_DRUID,
+    HEALBOT_HERO,
 
     HEALBOT_CLASSES_MELEE,
     HEALBOT_CLASSES_RANGES,
@@ -67,7 +67,7 @@ local HealBot_Options_BuffTxt_List = {
 }
 
 local HealBot_Buff_Spells_Total_List = {
-    ["DRUI"] = {
+    [HEALBOT_HERO_EN] = {
         HEALBOT_MARK_OF_THE_WILD,
         HEALBOT_GIFT_OF_THE_WILD,
         HEALBOT_THORNS,
@@ -170,6 +170,8 @@ local HealBot_Buff_Spells_Total_List = {
 
         HEALBOT_HORN_OF_WINTER,
         HEALBOT_BONE_SHIELD,
+        Mana_Shield,
+        
     },
 }
 
@@ -177,7 +179,7 @@ local HealBot_Buff_Spells_Class_List={}
 local HealBot_Buff_Spells_List ={}
 
 function HealBot_Options_InitBuffClassList()
-    HealBot_Buff_Spells_Class_List = HealBot_Buff_Spells_Total_List[strsub(HealBot_PlayerClassEN,1,4)]
+    HealBot_Buff_Spells_Class_List = HealBot_Buff_Spells_Total_List[HEALBOT_HERO_EN]
     table.sort (HealBot_Buff_Spells_Class_List)
 end
 
@@ -201,7 +203,7 @@ end
 
 local HealBot_Debuff_Spells = {
 
-  ["DRUI"] = {
+  [HEALBOT_HERO_EN] = {
     HEALBOT_PURIFY,
     HEALBOT_CLEANSE,
     HEALBOT_CURE_POISON,
@@ -1733,13 +1735,13 @@ end
 function HealBot_Options_EFClass_OnClick(self)
 
     if HealBot_Config.EmergencyFClass==1 then
-        HealBot_Config.EmergIncMelee[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
+        HealBot_Config.EmergIncMelee[HEALBOT_HERO] = HealBot_Options_EFClassDruid:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass==2 then
-        HealBot_Config.EmergIncRange[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
+        HealBot_Config.EmergIncRange[HEALBOT_HERO] = HealBot_Options_EFClassDruid:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass==3 then
-        HealBot_Config.EmergIncHealers[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
+        HealBot_Config.EmergIncHealers[HEALBOT_HERO] = HealBot_Options_EFClassDruid:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass==4 then
-        HealBot_Config.EmergIncCustom[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
+        HealBot_Config.EmergIncCustom[HEALBOT_HERO] = HealBot_Options_EFClassDruid:GetChecked() or 0;
     end
     if Delay_RecalcParty==0 then 
         Delay_RecalcParty=1; 
@@ -2602,16 +2604,16 @@ end
 
 function HealBot_Options_EFClass_Reset()
     if HealBot_Config.EmergencyFClass==1 then
-        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncMelee[HEALBOT_DRUID]);
+        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncMelee[HEALBOT_HERO]);
 
     elseif HealBot_Config.EmergencyFClass==2 then
-        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncRange[HEALBOT_DRUID]);
+        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncRange[HEALBOT_HERO]);
 
     elseif HealBot_Config.EmergencyFClass==3 then
-        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncHealers[HEALBOT_DRUID]);
+        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncHealers[HEALBOT_HERO]);
 
     elseif HealBot_Config.EmergencyFClass==4 then
-        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncCustom[HEALBOT_DRUID]);
+        HealBot_Options_EFClassDruid:SetChecked(HealBot_Config.EmergIncCustom[HEALBOT_HERO]);
 
     end
     if Delay_RecalcParty==0 then Delay_RecalcParty=1; end
@@ -3302,84 +3304,84 @@ function HealBot_Options_ActionBarsAnchor_OnSelect(self)
    -- HealBot_SetResetFlag("SOFT")
 end
 --------------------------------------------------------------------------------
-HealBot_Options_StorePrev["FilterHoTctlName"]=HEALBOT_DEATHKNIGHT
+HealBot_Options_StorePrev["FilterHoTctlName"]=HEALBOT_HERO
 
 local HealBot_Options_Class_HoTctlName_List = {
     [HEALBOT_GIFT_OF_THE_NAARU]="ALL",
-    [HEALBOT_LIFEBLOOM]=HEALBOT_DRUID,
-    [HEALBOT_MENDPET]=HEALBOT_DRUID,
-    [HEALBOT_PRAYER_OF_MENDING]=HEALBOT_DRUID,
-    [HEALBOT_REGROWTH]=HEALBOT_DRUID,
-    [HEALBOT_REJUVENATION]=HEALBOT_DRUID,
-    [HEALBOT_LIVING_SEED]=HEALBOT_DRUID,
-    [HEALBOT_RENEW]=HEALBOT_DRUID,
-    [HEALBOT_INNER_FOCUS]=HEALBOT_DRUID,
-    [HEALBOT_SERENDIPITY]=HEALBOT_DRUID,
-    [HEALBOT_RIPTIDE]=HEALBOT_DRUID,
-    [HEALBOT_TRANQUILITY]=HEALBOT_DRUID,
-    [HEALBOT_WILD_GROWTH]=HEALBOT_DRUID,
-    [HEALBOT_ABOLISH_DISEASE]=HEALBOT_DRUID,
-    [HEALBOT_ABOLISH_POISON]=HEALBOT_DRUID,
-    [HEALBOT_GUARDIAN_SPIRIT]=HEALBOT_DRUID,
-    [HEALBOT_FEAR_WARD]=HEALBOT_DRUID,
-    [HEALBOT_EARTHLIVING]=HEALBOT_DRUID,
-    [HEALBOT_BLESSED_HEALING]=HEALBOT_DRUID,
-    [HEALBOT_IMPROVED_LAY_ON_HANDS]=HEALBOT_DRUID,
-    [HEALBOT_HAND_OF_SALVATION]=HEALBOT_DRUID,
-    [HEALBOT_DIVINE_SHIELD]=HEALBOT_DRUID,
-    [HEALBOT_HAND_OF_SACRIFICE]=HEALBOT_DRUID,
-    [HEALBOT_BLESSED]=HEALBOT_DRUID,
-    [HEALBOT_INFUSION_OF_LIGHT]=HEALBOT_DRUID,
-    [HEALBOT_PAIN_SUPPRESSION]=HEALBOT_DRUID,
-    [HEALBOT_POWER_INFUSION]=HEALBOT_DRUID,
-    [HEALBOT_POWER_WORD_SHIELD]=HEALBOT_DRUID,
-    [HEALBOT_VIGILANCE]=HEALBOT_DRUID,
-    [HEALBOT_BEACON_OF_LIGHT]=HEALBOT_DRUID,
-    [HEALBOT_HANDOFPROTECTION]=HEALBOT_DRUID,
-    [HEALBOT_FLASH_OF_LIGHT]=HEALBOT_DRUID,
-    [HEALBOT_LIGHT_BEACON]=HEALBOT_DRUID,
-    [HEALBOT_SACRED_SHIELD]=HEALBOT_DRUID,
-    [HEALBOT_HAND_OF_FREEDOM]=HEALBOT_DRUID,
-    [HEALBOT_SACRED_CLEANSING]=HEALBOT_DRUID,
-    [HEALBOT_DIVINE_AEGIS]=HEALBOT_DRUID,
-    [HEALBOT_GRACE]=HEALBOT_DRUID,
-    [HEALBOT_LIGHTWELL_RENEW]=HEALBOT_DRUID,
-    [HEALBOT_SURGE_OF_LIGHT]=HEALBOT_DRUID,
-    [HEALBOT_HEALING_WAY]=HEALBOT_DRUID,
-    [HEALBOT_INSPIRATION]=HEALBOT_DRUID,
+    [HEALBOT_LIFEBLOOM]=HEALBOT_HERO,
+    [HEALBOT_MENDPET]=HEALBOT_HERO,
+    [HEALBOT_PRAYER_OF_MENDING]=HEALBOT_HERO,
+    [HEALBOT_REGROWTH]=HEALBOT_HERO,
+    [HEALBOT_REJUVENATION]=HEALBOT_HERO,
+    [HEALBOT_LIVING_SEED]=HEALBOT_HERO,
+    [HEALBOT_RENEW]=HEALBOT_HERO,
+    [HEALBOT_INNER_FOCUS]=HEALBOT_HERO,
+    [HEALBOT_SERENDIPITY]=HEALBOT_HERO,
+    [HEALBOT_RIPTIDE]=HEALBOT_HERO,
+    [HEALBOT_TRANQUILITY]=HEALBOT_HERO,
+    [HEALBOT_WILD_GROWTH]=HEALBOT_HERO,
+    [HEALBOT_ABOLISH_DISEASE]=HEALBOT_HERO,
+    [HEALBOT_ABOLISH_POISON]=HEALBOT_HERO,
+    [HEALBOT_GUARDIAN_SPIRIT]=HEALBOT_HERO,
+    [HEALBOT_FEAR_WARD]=HEALBOT_HERO,
+    [HEALBOT_EARTHLIVING]=HEALBOT_HERO,
+    [HEALBOT_BLESSED_HEALING]=HEALBOT_HERO,
+    [HEALBOT_IMPROVED_LAY_ON_HANDS]=HEALBOT_HERO,
+    [HEALBOT_HAND_OF_SALVATION]=HEALBOT_HERO,
+    [HEALBOT_DIVINE_SHIELD]=HEALBOT_HERO,
+    [HEALBOT_HAND_OF_SACRIFICE]=HEALBOT_HERO,
+    [HEALBOT_BLESSED]=HEALBOT_HERO,
+    [HEALBOT_INFUSION_OF_LIGHT]=HEALBOT_HERO,
+    [HEALBOT_PAIN_SUPPRESSION]=HEALBOT_HERO,
+    [HEALBOT_POWER_INFUSION]=HEALBOT_HERO,
+    [HEALBOT_POWER_WORD_SHIELD]=HEALBOT_HERO,
+    [HEALBOT_VIGILANCE]=HEALBOT_HERO,
+    [HEALBOT_BEACON_OF_LIGHT]=HEALBOT_HERO,
+    [HEALBOT_HANDOFPROTECTION]=HEALBOT_HERO,
+    [HEALBOT_FLASH_OF_LIGHT]=HEALBOT_HERO,
+    [HEALBOT_LIGHT_BEACON]=HEALBOT_HERO,
+    [HEALBOT_SACRED_SHIELD]=HEALBOT_HERO,
+    [HEALBOT_HAND_OF_FREEDOM]=HEALBOT_HERO,
+    [HEALBOT_SACRED_CLEANSING]=HEALBOT_HERO,
+    [HEALBOT_DIVINE_AEGIS]=HEALBOT_HERO,
+    [HEALBOT_GRACE]=HEALBOT_HERO,
+    [HEALBOT_LIGHTWELL_RENEW]=HEALBOT_HERO,
+    [HEALBOT_SURGE_OF_LIGHT]=HEALBOT_HERO,
+    [HEALBOT_HEALING_WAY]=HEALBOT_HERO,
+    [HEALBOT_INSPIRATION]=HEALBOT_HERO,
     [HEALBOT_PROTANCIENTKINGS]="ALL",
     [HEALBOT_FOUNTAIN_OF_LIGHT]="ALL",
-    [HEALBOT_ANCESTRAL_FORTITUDE]=HEALBOT_DRUID,
-    [HEALBOT_EARTHLIVING_WEAPON]=HEALBOT_DRUID,
-    [HEALBOT_EARTH_SHIELD]=HEALBOT_DRUID,
-    [HEALBOT_LIGHTNING_SHIELD]=HEALBOT_DRUID,
-    [HEALBOT_WATER_SHIELD]=HEALBOT_DRUID,
-    [HEALBOT_LAST_STAND]=HEALBOT_DRUID,
-    [HEALBOT_SHIELD_WALL]=HEALBOT_DRUID,
-    [HEALBOT_SHIELD_BLOCK]=HEALBOT_DRUID,
-    [HEALBOT_ENRAGED_REGEN]=HEALBOT_DRUID,
-    [HEALBOT_DIVINE_PROTECTION]=HEALBOT_DRUID,
-    [HEALBOT_BARKSKIN]=HEALBOT_DRUID,
-    [HEALBOT_SURVIVAL_INSTINCTS]=HEALBOT_DRUID,
-    [HEALBOT_FRENZIED_REGEN]=HEALBOT_DRUID,
-    [HEALBOT_NATURE_SWIFTNESS]=HEALBOT_DRUID,
-    [HEALBOT_ICEBOUND_FORTITUDE]=HEALBOT_DRUID,
-    [HEALBOT_ANTIMAGIC_SHELL]=HEALBOT_DRUID,
-    [HEALBOT_ARMY_OF_THE_DEAD]=HEALBOT_DRUID,
-    [HEALBOT_LICHBORNE]=HEALBOT_DRUID,
-    [HEALBOT_ANTIMAGIC_ZONE]=HEALBOT_DRUID,
-    [HEALBOT_VAMPIRIC_BLOOD]=HEALBOT_DRUID,
-    [HEALBOT_UNBREAKABLE_ARMOR]=HEALBOT_DRUID,
-    [HEALBOT_BONE_SHIELD]=HEALBOT_DRUID,
-    [HEALBOT_THORNS]=HEALBOT_DRUID,
-    [HEALBOT_ENERGIZED]=HEALBOT_DRUID,
-    [HEALBOT_CHAINHEALHOT]=HEALBOT_DRUID,
-    [HEALBOT_TIDAL_WAVES]=HEALBOT_DRUID,
+    [HEALBOT_ANCESTRAL_FORTITUDE]=HEALBOT_HERO,
+    [HEALBOT_EARTHLIVING_WEAPON]=HEALBOT_HERO,
+    [HEALBOT_EARTH_SHIELD]=HEALBOT_HERO,
+    [HEALBOT_LIGHTNING_SHIELD]=HEALBOT_HERO,
+    [HEALBOT_WATER_SHIELD]=HEALBOT_HERO,
+    [HEALBOT_LAST_STAND]=HEALBOT_HERO,
+    [HEALBOT_SHIELD_WALL]=HEALBOT_HERO,
+    [HEALBOT_SHIELD_BLOCK]=HEALBOT_HERO,
+    [HEALBOT_ENRAGED_REGEN]=HEALBOT_HERO,
+    [HEALBOT_DIVINE_PROTECTION]=HEALBOT_HERO,
+    [HEALBOT_BARKSKIN]=HEALBOT_HERO,
+    [HEALBOT_SURVIVAL_INSTINCTS]=HEALBOT_HERO,
+    [HEALBOT_FRENZIED_REGEN]=HEALBOT_HERO,
+    [HEALBOT_NATURE_SWIFTNESS]=HEALBOT_HERO,
+    [HEALBOT_ICEBOUND_FORTITUDE]=HEALBOT_HERO,
+    [HEALBOT_ANTIMAGIC_SHELL]=HEALBOT_HERO,
+    [HEALBOT_ARMY_OF_THE_DEAD]=HEALBOT_HERO,
+    [HEALBOT_LICHBORNE]=HEALBOT_HERO,
+    [HEALBOT_ANTIMAGIC_ZONE]=HEALBOT_HERO,
+    [HEALBOT_VAMPIRIC_BLOOD]=HEALBOT_HERO,
+    [HEALBOT_UNBREAKABLE_ARMOR]=HEALBOT_HERO,
+    [HEALBOT_BONE_SHIELD]=HEALBOT_HERO,
+    [HEALBOT_THORNS]=HEALBOT_HERO,
+    [HEALBOT_ENERGIZED]=HEALBOT_HERO,
+    [HEALBOT_CHAINHEALHOT]=HEALBOT_HERO,
+    [HEALBOT_TIDAL_WAVES]=HEALBOT_HERO,
     --Acension Custon
-    [HEALBOT_TIDAL_FORCE]=HEALBOT_DRUID,
-    [Fungal_Disposition]=HEALBOT_DRUID,
-    [Efflorescence]=HEALBOT_DRUID,
-    [Alter_Time]=HEALBOT_DRUID,
+    [HEALBOT_TIDAL_FORCE]=HEALBOT_HERO,
+    [Fungal_Disposition]=HEALBOT_HERO,
+    [Efflorescence]=HEALBOT_HERO,
+    [Alter_Time]=HEALBOT_HERO,
 
 
 
@@ -3468,7 +3470,7 @@ end
 
 function HealBot_Options_Class_HoTctlAction_Refresh(onselect)
     if not onselect then HealBot_Options_Class_HoTctlAction_Initialize() end  -- or wrong menu may be used !
-    local hbClass=strsub(HealBot_PlayerClassEN,1,4)
+    local hbClass=HEALBOT_HERO_EN
     UIDropDownMenu_SetSelectedID(HealBot_Options_Class_HoTctlAction,HealBot_Globals.WatchHoT[hbClass][HealBot_Globals.HoTname])
 end
 
@@ -3478,7 +3480,7 @@ function HealBot_Options_Class_HoTctlAction_OnLoad(self)
 end
 
 function HealBot_Options_Class_HoTctlAction_OnSelect(self)
-    local hbClass=strsub(HealBot_PlayerClassEN,1,4)
+    local hbClass=HEALBOT_HERO_EN
     HealBot_Globals.WatchHoT[hbClass][HealBot_Globals.HoTname]=self:GetID()
     HealBot_Options_Class_HoTctlAction_Refresh(true)
     HealBot_setOptions_Timer(170)
@@ -3487,7 +3489,7 @@ end
 --------------------------------------------------------------------------------
 
 local HealBot_Options_FilterHoTctl_List = {
-    HEALBOT_DRUID,
+    HEALBOT_HERO,
 
 }
 
@@ -3626,7 +3628,7 @@ end
 
 local HealBot_Options_EmergencyFilter_List = {
     HEALBOT_CLASSES_ALL,
-    HEALBOT_DRUID,
+    HEALBOT_HERO,
     HEALBOT_CLASSES_MELEE,
     HEALBOT_CLASSES_RANGES,
     HEALBOT_CLASSES_HEALERS,
@@ -3668,19 +3670,19 @@ end
 
 function HealBot_Options_EmergencyFilter_Reset()
   
-    HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = 0;
+    HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 0;
     if Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==1 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = 1;
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 1;
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==2 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = 1;
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 1;
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==12 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncMelee[HEALBOT_DRUID];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==13 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncRange[HEALBOT_DRUID];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncRange[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==14 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncHealers[HEALBOT_DRUID];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncHealers[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin]==15 then
-        HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncCustom[HEALBOT_DRUID];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncCustom[HEALBOT_HERO];
     end
 
     if Delay_RecalcParty==0 then 
@@ -5287,7 +5289,7 @@ end
 --------------------------------------------------------------------------------
 
 local HealBot_Options_ComboClass_List = {
-    HEALBOT_DRUID,
+    HEALBOT_HERO,
 
 }
 
@@ -5314,7 +5316,7 @@ end
 local DebuffSpells_List=nil
 local RacialDebuffSpells_List=nil
 function HealBot_Options_CDCTxt1_DropDown()
-    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(strsub(HealBot_PlayerClassEN,1,4))
+    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(HEALBOT_HERO_EN)
     RacialDebuffSpells_List = HealBot_Options_GetRacialDebuffSpells_List(strsub(HealBot_PlayerRaceEN,1,3))
     for x,_ in pairs(info) do
         info[x]=nil;
@@ -5352,7 +5354,7 @@ function HealBot_Options_CDCTxt1_DropDown()
 end
 
 function HealBot_Options_CDCTxt2_DropDown()
-    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(strsub(HealBot_PlayerClassEN,1,4))
+    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(HEALBOT_HERO_EN)
     RacialDebuffSpells_List = HealBot_Options_GetRacialDebuffSpells_List(strsub(HealBot_PlayerRaceEN,1,3))
     for x,_ in pairs(info) do
         info[x]=nil;
@@ -5390,7 +5392,7 @@ function HealBot_Options_CDCTxt2_DropDown()
 end
 
 function HealBot_Options_CDCTxt3_DropDown()
-    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(strsub(HealBot_PlayerClassEN,1,4))
+    DebuffSpells_List = HealBot_Options_GetDebuffSpells_List(HEALBOT_HERO_EN)
     RacialDebuffSpells_List = HealBot_Options_GetRacialDebuffSpells_List(strsub(HealBot_PlayerRaceEN,1,3))
     for x,_ in pairs(info) do
         info[x]=nil;
@@ -6242,7 +6244,7 @@ function HealBot_Options_Debuff_Reset()
                     end
                     HealBot_DebuffWatchTargetSpell=HealBot_DebuffWatchTarget[dName];
 
-                    HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+                    HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]]=true;
 
                     if (DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]) then
                         if DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==2 then
@@ -6327,22 +6329,22 @@ function HealBot_Options_Buff_Reset()
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==4 then
                     HealBot_BuffWatchTargetSpell["Raid"]=true;
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==5 then
-                    HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+                    HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]]=true;
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==15 then
-                    if HealBot_Config.EmergIncMelee[HEALBOT_DRUID]==1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+                    if HealBot_Config.EmergIncMelee[HEALBOT_HERO]==1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]]=true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==16 then
-                    if HealBot_Config.EmergIncRange[HEALBOT_DRUID]==1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+                    if HealBot_Config.EmergIncRange[HEALBOT_HERO]==1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]]=true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==17 then
-                    if HealBot_Config.EmergIncHealers[HEALBOT_DRUID]==1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+                    if HealBot_Config.EmergIncHealers[HEALBOT_HERO]==1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]]=true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==18 then
-                    if HealBot_Config.EmergIncCustom[HEALBOT_DRUID]==1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]]=true;
+                    if HealBot_Config.EmergIncCustom[HEALBOT_HERO]==1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]]=true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]==19 then
                     HealBot_BuffWatchTargetSpell["PvP"]=true
@@ -6751,15 +6753,22 @@ function HealBot_SpellAutoButton_OnClick(self, autoType, autoMod)
     if HealBot_ActionBarsCombo==1 then
         if autoType=="Target" then combo = HealBot_Config.EnabledSpellTarget;
         elseif autoType=="Trinket1" then combo = HealBot_Config.EnabledSpellTrinket1;
-        else combo = HealBot_Config.EnabledSpellTrinket2; end
+        else 
+            combo = HealBot_Config.EnabledSpellTrinket2;
+         end
     else
-        if autoType=="Target" then combo = HealBot_Config.DisabledSpellTarget;
-        elseif autoType=="Trinket1" then combo = HealBot_Config.DisabledSpellTrinket1;
-        else combo = HealBot_Config.DisabledSpellTrinket2; end
+        if autoType=="Target" then 
+            combo = HealBot_Config.DisabledSpellTarget;
+        elseif autoType=="Trinket1" then
+             combo = HealBot_Config.DisabledSpellTrinket1;
+        else 
+            combo = HealBot_Config.DisabledSpellTrinket2;
+         end
     end
     button = HealBot_Options_ComboClass_Button(HealBot_Options_ComboButtons_Button)
     combo[autoMod..button..HealBot_Config.CurrentSpec] = self:GetChecked() or 0;
     HealBot_setOptions_Timer(400)
+
 end
 local spellText=nil
 function HealBot_Options_Click_OnTextChanged(self)
@@ -6960,7 +6969,7 @@ function HealBot_Options_SetDefaults()
             Healbot_Config_Skins[key] = val;
         end
     end);
-    HealBot_InitNewChar(HealBot_PlayerClassEN)
+    HealBot_InitNewChar()
     HealBot_Config.CurrentSpec=1
     HealBot_Update_SpellCombos()
     HealBot_Update_BuffsForSpec()
@@ -7234,9 +7243,7 @@ function HealBot_Options_Init(tabNo)
         HealBot_Options_SelectItemsCombo_Refresh()
         HealBot_Options_SelectCmdsCombo_Refresh()
         DoInitTab[10]=nil
-    elseif tabNo == 11 and DoInitTab[11] then
-        --this is custon values from Rukstone
-        --spell wacher in here
+
     end
     if not HealBot_Options_Opened then
         HealBot_setOptions_Timer(100)
@@ -7766,6 +7773,8 @@ local ScrollViewSpellsButton = {}
 local SpellWacherSearchBox; -- the spell name in the edit box.
 local SPellWacherButtonDisplay; -- the button that control the display of the spell
 local SelectedSpellWacher; -- the current selected spell (ID) from the GLOBAL wacher
+local SelectedSpellDescription;
+
 function OnSpellButtonClickDisplayHotOption(self,frame)--this function is called on LOAD.
 
     local _,class=UnitClass("player")
@@ -7795,14 +7804,6 @@ function OnSpellButtonClickDisplayHotOption(self,frame)--this function is called
                 --reset the HUD for the new config
                 HealBot_SetResetFlag("SOFT");
         end
-        
-
-
-
-        
-        
-
-
     end
     frame:SetText("Self Cast Only");
 
@@ -7836,11 +7837,7 @@ function OnSpellWacher_Scroll_Load(self,frame)--this function is called only on 
     ScrollViewSpellList_BG.bg:SetAllPoints(true);
     frame:SetScrollChild(ScrollViewSpellList_BG)
 
-
-    local _,class=UnitClass("player")
-    class=strsub(class,1,4)
-
-    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[class]) do
+    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN]) do
         local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
         button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
         button:SetWidth(200)
@@ -7868,14 +7865,13 @@ function OnSpellWacher_Scroll_Load(self,frame)--this function is called only on 
         button:SetPushedTexture(ptex)
         indexEE = indexEE - 30
 
-        local MyFrameOnclick = function( self, button )--this function is called when player click on one of the spells / it will select the current spell and the current state of it.
+        button:HookScript("OnClick", function( self, button )--this function is called when player click on one of the spells / it will select the current spell and the current state of it.
             
             SelectedSpellWacher = k;
             if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] then
                 if HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 1 then
                      -- body
                      SPellWacherButtonDisplay:SetText("Dont Show")
-    
                 elseif HealBot_Globals.WatchHoT[class][SelectedSpellWacher] == 2 then
                     -- body
                     SPellWacherButtonDisplay:SetText("Self Cast Only")
@@ -7886,8 +7882,7 @@ function OnSpellWacher_Scroll_Load(self,frame)--this function is called only on 
             end
 
 
-        end
-        button:HookScript("OnClick", MyFrameOnclick)
+        end)
         ScrollViewSpellsButton[k] = button;
     
 
@@ -7931,10 +7926,7 @@ function AddNewSpellWach(self)
 
     print("Add New Spell: "..SpellWacherSearchBox)
 
-    local _,class=UnitClass("player")
-    class=strsub(class,1,4)
-
-    AddNewWachHOT(class,SpellWacherSearchBox,SpellWacherSearchBox)
+    AddNewWachHOT(SpellWacherSearchBox,SpellWacherSearchBox)
 
     --create new Button frame
     local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
@@ -7991,5 +7983,8 @@ function AddNewSpellWach(self)
 
 
 end
+
+
+
 
 ------------------------------------------------------------------------------------------

@@ -231,7 +231,7 @@ end
 function HealBot_Comms_OnShow(self)
     HealBot_Error_Clientx:SetText(HEALBOT_WORD_CLIENT.."="..GetLocale())
     HealBot_Error_Versionx:SetText(HEALBOT_WORD_VERSION.."="..HEALBOT_VERSION)
-    HealBot_Error_Classx:SetText(HEALBOT_SORTBY_CLASS.."="..HealBot_PlayerClassEN)
+    HealBot_Error_Classx:SetText(HEALBOT_SORTBY_CLASS.."="..HEALBOT_HERO_EN)
     if HealBot_Config.AcceptSkins==1 then
         HealBot_Info_AcceptSkinsVal:SetText("ON")
         HealBot_Info_AcceptSkinsVal:SetTextColor(0.1,1,0.1)

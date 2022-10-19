@@ -137,7 +137,7 @@ local iTexture, bCount, expirationTime, caster, spellID=nil,nil,nil,nil,nil
 local DeBuff_Count={}
 local HealBot_unitHealth={}
 local HealBot_unitHealthMax={}
-local BuffClass=nil
+--local HEALBOT_HERO=nil
 local HasWeaponBuff=false
 local CheckWeaponBuffs={[HEALBOT_ROCKBITER_WEAPON]=true, 
                         [HEALBOT_FLAMETONGUE_WEAPON]=true, 
@@ -654,6 +654,8 @@ function HealBot_SlashCmd(HBcmd)
         end
         HealBot_Options_MonitorDebuffs:SetChecked(HealBot_Config.DebuffWatch)
         HealBot_Options_MonitorDebuffs_Toggle()
+    elseif (HBcmd=="tidal") then
+    Experimental_TS()
     else
         if x then HBcmd=HBcmd.." "..x end
         if y then HBcmd=HBcmd.." "..y end
@@ -943,7 +945,6 @@ function HealBot_RecalcSpells()
 end
 
 function HealBot_OnLoad(self)
-    HealBot_PlayerClass, HealBot_PlayerClassEN=UnitClass("player")
     HealBot_PlayerRace, HealBot_PlayerRaceEN=UnitRace("player")
     HealBot_PlayerName=UnitName("player")
     HealBot:RegisterEvent("VARIABLES_LOADED");
@@ -1044,9 +1045,7 @@ function HealBot_OnUpdate(self)
                 elseif HealBot_NeedEquipUpdate then
                     HealBot_NeedEquipUpdate=false
                     HealBot_RecalcSpells();
-                    if strsub(HealBot_PlayerClassEN,1,4)=="SHAM" then
-                        HealBot_CheckAllBuffs(HealBot_PlayerGUID)
-                    end
+                    HealBot_CheckAllBuffs(HealBot_PlayerGUID)
                 elseif HealBot_CheckTalents then
                     HealBot_InitSpells()
                     HealBot_CheckTalents=false; 
@@ -1272,7 +1271,7 @@ function HealBot_OnUpdate(self)
                         HealBot_Options_SetSkinBars()
                     elseif HealBot_Options_Timer[170] then
                         HealBot_Options_Timer[170]=nil                        
-                        HealBot_configClassHoT(strsub(HealBot_PlayerClassEN,1,4), strsub(HealBot_PlayerRaceEN,1,3))
+                        HealBot_configClassHoT(strsub(HealBot_PlayerRaceEN,1,3))
                     elseif  HealBot_Options_Timer[180] then
                         HealBot_Options_Timer[180]=nil
                         if Healbot_Config_Skins.HidePartyFrames[Healbot_Config_Skins.Current_Skin]==1 then
@@ -1636,8 +1635,7 @@ function HealBot_OnEvent_VariablesLoaded(self)
         end)
     end
     HealBot_Update_Skins()    
-    HealBot_PlayerClass, HealBot_PlayerClassEN=UnitClass("player")
-    HealBot_PlayerRace, HealBot_PlayerRaceEN=UnitRace("player")
+
     HealBot_PlayerName=UnitName("player")
     HealBot_InitSpells()
     HealBot_Options_InitBuffClassList()
@@ -1756,7 +1754,7 @@ function HealBot_OnEvent_VariablesLoaded(self)
     HealBot_Action_SetHightlightAggroCols()
     HealBot_Action_SetAggroCols()
     HealBot_Panel_SetNumBars(HealBot_Config.noTestBars)
-    HealBot_Options_Class_HoTctlText:SetText(HealBot_PlayerClass.." "..HEALBOT_ACTION_OPTIONS);
+    HealBot_Options_Class_HoTctlText:SetText(HEALBOT_HERO_EN.." "..HEALBOT_ACTION_OPTIONS);
     HealBot_Action_sethbNumberFormat()
     HealBot_Panel_SethbTopRole(HealBot_Globals.TopRole)
     HealBot_CureFrameSelectWarningFrame:GetStatusBarTexture():SetHorizTile(false)
@@ -1803,7 +1801,7 @@ function HealBot_Load(hbCaller)
     HealBot_useCrashProtection()
     HealBot_Options_Set_Current_Skin()
     if not HealBot_Config.DisabledKeyCombo then 
-        HealBot_InitNewChar(HealBot_PlayerClassEN)
+        HealBot_InitNewChar()
     else
         HealBot_Options_SetSkins();
     end
@@ -1816,7 +1814,7 @@ function HealBot_Load(hbCaller)
     else
         HealBot_RecalcParty(true);
     end
-    HealBot_configClassHoT(strsub(HealBot_PlayerClassEN,1,4), strsub(HealBot_PlayerRaceEN,1,3))
+    HealBot_configClassHoT(strsub(HealBot_PlayerRaceEN,1,3))
     HealBot_CheckTalents=true
     if HealBot_AddonMsgType==2 then HealBot_Comms_SendAddonMsg("CTRA", "SR", HealBot_AddonMsgType, HealBot_PlayerName) end
     HealBot_AddChat("  "..HEALBOT_ADDON .. HEALBOT_LOADED);
@@ -1833,9 +1831,9 @@ function HealBot_Load(hbCaller)
 end
 
 local hbClassHoTwatch={}
-function HealBot_configClassHoT(class, race)
+function HealBot_configClassHoT(race)
     
-    hbClassHoTwatch=HealBot_Globals.WatchHoT[class]
+    hbClassHoTwatch=HealBot_Globals.WatchHoT[HEALBOT_HERO_EN]
     for k, v in pairs(hbClassHoTwatch) do
         if v == 3 then
             HealBot_Watch_HoT[k]="A"-- for display on all
@@ -2446,10 +2444,14 @@ function HealBot_OnEvent_UnitHealth(self,unit,health,healthMax)
         HealBot_unitHealthMax[hGUID]=-1
     end
     if HealBot_unitHealth[hGUID]~=health or HealBot_unitHealthMax[hGUID]~=healthMax then
-        if HealBot_unitHealthMax[hGUID]~=healthMax then HealBot_talentSpam(hGUID,"update",1) end
+        if HealBot_unitHealthMax[hGUID]~=healthMax then
+             HealBot_talentSpam(hGUID,"update",1)
+             end
         HealBot_unitHealth[hGUID]=health
         HealBot_unitHealthMax[hGUID]=healthMax
         HealBot_RecalcHeals(hGUID)
+
+
     end
  --   if Healbot_Config_Skins.ShowAggro[Healbot_Config_Skins.Current_Skin]==1 and UnitIsEnemy(hUnit, hUnit.."target") then HealBot_SetAggro(hUnit) end
 end
@@ -2884,7 +2886,7 @@ end
 
 local DebuffNameIn="x"
 local curDebuffs={}
-local DebuffClass=nil
+--local HEALBOT_HERO=nil
 local myhTargets={}
 local inSpellRange = 0 -- added by Diacono
 local dPrio=100
@@ -2893,9 +2895,10 @@ local trackdebuffIcon={}
 function HealBot_CheckUnitDebuffs(hbGUID)
     if not HealBot_UnitID[hbGUID] then return end
     xUnit=HealBot_UnitID[hbGUID]
-    if not xUnit or not HealBot_Unit_Button[xUnit] or not UnitExists(xUnit) then return end
-    _,DebuffClass=UnitClass(xUnit)
-    if not DebuffClass then DebuffClass=HealBot_Class_En[HEALBOT_WARRIOR] end
+    if not xUnit or not HealBot_Unit_Button[xUnit] or not UnitExists(xUnit) then 
+        return 
+    end
+
     DebuffType=nil;
     y = 1;
     if HealBot_UnitDebuff[hbGUID] then
@@ -2908,6 +2911,7 @@ function HealBot_CheckUnitDebuffs(hbGUID)
     end
     while true do
         dName,_,_,_,debuff_type,debuffDuration,_,_,_,_ = UnitDebuff(xUnit,y)
+
         if dName then
             y = y +1
             curDebuffs[dName]={}
@@ -2946,7 +2950,7 @@ function HealBot_CheckUnitDebuffs(hbGUID)
                         checkthis=true;
                     elseif WatchTarget["Self"] and hbGUID==HealBot_PlayerGUID then
                         checkthis=true
-                    elseif WatchTarget[strsub(DebuffClass,1,4)] then
+                    elseif WatchTarget[strsub(HEALBOT_HERO_EN,1,4)] then
                         checkthis=true;
                     elseif WatchTarget["PvP"] and UnitIsPVP("player") then
                         checkthis=true;
@@ -2991,7 +2995,7 @@ function HealBot_CheckUnitDebuffs(hbGUID)
                         elseif HealBot_Config.IgnoreNonHarmfulDebuffs==1 and HealBot_Ignore_NonHarmful_Debuffs[dName] then
                             checkthis=false;
                         elseif HealBot_Config.IgnoreClassDebuffs==1 then
-                            HealBot_Ignore_Debuffs_Class=HealBot_Ignore_Class_Debuffs[strsub(DebuffClass,1,4)];
+                            HealBot_Ignore_Debuffs_Class=HealBot_Ignore_Class_Debuffs[strsub(HEALBOT_HERO,1,4)];
                             if HealBot_Ignore_Debuffs_Class[dName] then
                                 checkthis=false;
                             end
@@ -3122,9 +3126,9 @@ function HealBot_CheckUnitBuffs(hbGUID)
     if not UnitName(xUnit) then return end
     if not xUnit or not HealBot_Unit_Button[xUnit] or not UnitExists(xUnit) then return end
     uName=UnitName(xUnit);
-    if not uName then return end
-    _,BuffClass=UnitClass(xUnit)
-    if not BuffClass then BuffClass=HealBot_Class_En[HEALBOT_WARRIOR] end
+    if not uName then
+        return 
+    end
     y = 1;
 
     for x,_ in pairs(PlayerBuffs) do
@@ -3190,7 +3194,7 @@ function HealBot_CheckUnitBuffs(hbGUID)
                     checkthis=true;
                 elseif WatchTarget["Self"] and uName==HealBot_PlayerName then 
                     checkthis=true
-                elseif WatchTarget[strsub(BuffClass,1,4)] then
+                elseif WatchTarget[strsub(HEALBOT_HERO,1,4)] then
                     checkthis=true
                 elseif WatchTarget["PvP"] and UnitIsPVP(xUnit) then
                     checkthis=true;
@@ -3972,7 +3976,7 @@ function HealBot_GetTalentInfo(hbGUID, unit)
     if HealBot_UnitSpec[hbGUID] then
         x,y,z=0,0,0
         if hbGUID==HealBot_PlayerGUID then
-            uClass=HealBot_PlayerClassEN
+            uClass=HEALBOT_HERO_EN
             i = GetActiveTalentGroup(false)
             _,_,x,_,_ = GetTalentTabInfo(1,false,nil,i)
             _,_,y,_,_ = GetTalentTabInfo(2,false,nil,i)
@@ -4699,7 +4703,7 @@ function HealBot_InitSpells()
         HealBot_SmartCast_Spells[x]=nil;
     end
   
-    HealBot_Init_Spells_Defaults(HealBot_PlayerClassEN);
+    HealBot_Init_Spells_Defaults(HEALBOT_HERO_EN);
   
     for x in pairs(HealBot_Spells) do
         if not HealBot_Spells[x].RealHealing then
@@ -4729,7 +4733,7 @@ function HealBot_InitSpells()
         end
         if (HealBot_Spells[iSpell]) then
             HealBot_Spells[iSpell].id = id;
-            HealBot_InitGetSpellData(iSpell, id, HealBot_PlayerClassEN, lsName);
+            HealBot_InitGetSpellData(iSpell, id, HEALBOT_HERO_EN, lsName);
             if (HealBot_Spells[iSpell].HealsMax+HealBot_Spells[iSpell].HealsExt)>lsValue then
                 HealBot_Spells[iSpell].spell=lsName
                 HealBot_Spells[lsName].Duration=HealBot_Spells[iSpell].Duration
@@ -4827,13 +4831,13 @@ function HealBot_InitSpells()
     HealBot_Init_SmartCast();
 end
 
-function HealBot_InitNewChar(PlayerClassEN)
+function HealBot_InitNewChar()
     if HealBot_Config.EnabledKeyCombo then
         HealBot_Config.DisabledKeyCombo=HealBot_Config.EnabledKeyCombo
     else
-        HealBot_DoReset_Spells(PlayerClassEN)
-        HealBot_DoReset_Cures(PlayerClassEN)
-        HealBot_DoReset_Buffs(PlayerClassEN)
+        HealBot_DoReset_Spells()
+        HealBot_DoReset_Cures()
+        HealBot_DoReset_Buffs()
         HealBot_Config.HealBotBuffColR = {[1]=1,[2]=1,[3]=1,[4]=1,[5]=1,[6]=1,[7]=1,[8]=1,[9]=1,[10]=1}
         HealBot_Config.HealBotBuffColG = {[1]=1,[2]=1,[3]=1,[4]=1,[5]=1,[6]=1,[7]=1,[8]=1,[9]=1,[10]=1}
         HealBot_Config.HealBotBuffColB = {[1]=1,[2]=1,[3]=1,[4]=1,[5]=1,[6]=1,[7]=1,[8]=1,[9]=1,[10]=1}
@@ -5254,13 +5258,11 @@ function HealBot_Update_Skins()
         HealBot_Update_SpellCombos()
         HealBot_Update_BuffsForSpec()
     end
-    
-    local _,class=UnitClass("player")
-    class=strsub(class,1,4)
-    local hbClassHoTwatchDef=HealBot_GlobalsDefaults.WatchHoT[class]
+
+    local hbClassHoTwatchDef = HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN]
 
     for sName,x  in pairs(hbClassHoTwatchDef) do
-        AddNewWachHOT(class,sName,x);
+        AddNewWachHOT(sName,x);
     end
 
     for dName, _ in pairs(HealBot_Config.HealBot_Custom_Debuffs) do
@@ -5272,9 +5274,13 @@ function HealBot_Update_Skins()
     
 
 end
-function AddNewWachHOT(class,key,value)
-    if not HealBot_Globals.WatchHoT[class][key] then
-        HealBot_Globals.WatchHoT[class][key]=value
+function AddNewWachHOT(key,value)
+    if(key == nil or value == nil) then
+        return
+    end
+
+    if not HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][key] then
+        HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][key]=value
     end
 end
 function HealBot_Copy_SpellCombos()
@@ -5303,7 +5309,7 @@ function HealBot_Copy_SpellCombos()
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMSPELLCOPY)
 end
 function HealBot_Reset_Spells()
-    HealBot_DoReset_Spells(HealBot_PlayerClassEN)
+    HealBot_DoReset_Spells()
     HealBot_Config.ProtectPvP=HealBot_ConfigDefaults.ProtectPvP
     HealBot_Config.SmartCast=HealBot_ConfigDefaults.SmartCast
     HealBot_Config.SmartCastDebuff=HealBot_ConfigDefaults.SmartCastDebuff
@@ -5318,7 +5324,7 @@ function HealBot_Reset_Spells()
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMSPELLRESET)
 end
 function HealBot_Reset_Buffs()
-    HealBot_DoReset_Buffs(HealBot_PlayerClassEN)
+    HealBot_DoReset_Buffs()
     HealBot_Config.BuffWatch=HealBot_ConfigDefaults.BuffWatch
     HealBot_Config.BuffWatchInCombat=HealBot_ConfigDefaults.BuffWatchInCombat
     HealBot_Config.ShortBuffTimer=HealBot_ConfigDefaults.ShortBuffTimer
@@ -5329,7 +5335,7 @@ function HealBot_Reset_Buffs()
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMBUFFSRESET)
 end
 function HealBot_Reset_Cures()
-    HealBot_DoReset_Cures(HealBot_PlayerClassEN)
+    HealBot_DoReset_Cures()
     HealBot_Config.SoundDebuffWarning=HealBot_ConfigDefaults.SoundDebuffWarning
     HealBot_Config.DebuffWatch=HealBot_ConfigDefaults.DebuffWatch
     HealBot_Config.IgnoreClassDebuffs=HealBot_ConfigDefaults.IgnoreClassDebuffs
@@ -5347,7 +5353,7 @@ function HealBot_Reset_Cures()
     HealBot_Options_Init(4)
     HealBot_AddChat(HEALBOT_CHAT_ADDONID..HEALBOT_CHAT_CONFIRMCURESRESET)
 end
-function HealBot_DoReset_Buffs(PlayerClassEN)
+function HealBot_DoReset_Buffs()
     HealBot_Config.HealBotBuffText = {
         [1]=HEALBOT_WORDS_NONE,
         [2]=HEALBOT_WORDS_NONE,
@@ -5386,7 +5392,7 @@ function HealBot_DoReset_Buffs(PlayerClassEN)
     }
  
 end
-function HealBot_DoReset_Cures(PlayerClassEN)
+function HealBot_DoReset_Cures()
     HealBot_Config.HealBotDebuffText = {
         [1]=HEALBOT_WORDS_NONE,
         [2]=HEALBOT_WORDS_NONE,
@@ -5397,6 +5403,7 @@ function HealBot_DoReset_Cures(PlayerClassEN)
         [7]=HEALBOT_WORDS_NONE,
         [8]=HEALBOT_WORDS_NONE,
         [9]=HEALBOT_WORDS_NONE,
+        [10]=HEALBOT_WORDS_NONE,
         
     }
     HealBot_Config.HealBotDebuffDropDown = {
@@ -5408,7 +5415,9 @@ function HealBot_DoReset_Cures(PlayerClassEN)
         [6]=4,
         [7]=4,
         [8]=4,
-        [9]=4
+        [9]=4,
+        [10]=4
+
     }
     HealBot_Config.HealBotDebuffText = {
         [1]=HEALBOT_CURE_POISON,
@@ -5420,13 +5429,14 @@ function HealBot_DoReset_Cures(PlayerClassEN)
         [7]=HEALBOT_CURE_TOXINS,
         [8]=HEALBOT_DISPEL_CURSE,
         [9]=Cleasing_Totem,
+        [10]=Cleasing_Totem,
 
 
 
       }
 
 end
-function HealBot_DoReset_Spells(PlayerClassEN)
+function HealBot_DoReset_Spells()
     HealBot_Config.EnabledKeyCombo = {}
     HealBot_Config.DisabledKeyCombo = {}
     HealBot_Config.EnabledKeyCombo = {
@@ -5533,4 +5543,28 @@ function HealBot_Update_BuffsForSpecDD(ddId,bType)
             end
         end
     end
+end
+
+
+
+
+function RukstoneFunctionality(unityID,CurrentHP,MaxHP)
+--check if entity has Rejuvenation
+
+
+end
+function Experimental_TS()
+
+    print("Start Runing [Experimental_TS]")
+
+    --start, PenanceColdown, enabled = GetSpellCooldown(HEALBOT_PENANCE);
+
+    local btn = CreateFrame("Button", "test", UIParent, "SecureActionButtonTemplate[B], ActionButtonTemplate[/B]")
+    btn:SetPoint("CENTER")
+    btn:SetWidth(100)
+    btn:SetHeight(55)
+    btn:SetText("Test")
+
+    print("End Runing [Experimental_TS]")
+
 end

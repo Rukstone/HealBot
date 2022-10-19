@@ -8,10 +8,13 @@ HealBotSkinVersion = 17;
 -------------------
 -- Compatibility --
 -------------------
+local localizedClass, englishClass, classIndex = UnitClass("player");
 
-HEALBOT_DRUID                           = "Druid";
-HEALBOT_WARRIOR                         = "Druid";
-HEALBOT_DEATHKNIGHT                     = "Druid";
+HEALBOT_HERO = localizedClass;
+HEALBOT_HERO_EN = englishClass;
+HEALBOT_HERO_INDEX = classIndex;
+
+
 
 ----------------CUSTON ASCENTION---------------
 
@@ -22,7 +25,7 @@ Alter_Time = GetItemInfo(86397) or "Alter Time";
 --ID 81514 [Fungal Disposition]
 Fungal_Disposition = GetItemInfo(81514) or "Fungal Disposition";
 --ID 8170 Cleasing Totem
-Cleasing_Totem = GetItemInfo(8170) or "Cleasing Totem";
+Cleasing_Totem = GetItemInfo(8170) or "Cleansing Totem";
 --ID 965938 [Seed of Life]
 Seed_of_Life_hot = GetItemInfo(965938) or "Seed of Life";
 --ID 31821 [Aura Mastery]
@@ -81,8 +84,16 @@ Deterrence = GetItemInfo(19263) or "Deterrence";
 Cauterizing_Fire = GetItemInfo(86514) or "Cauterizing Fire";
 --ID 888593 Preservation
 Preservation = GetItemInfo(888593) or "Preservation";
-
-
+--ID 8495 Mana Shield
+Mana_Shield = GetItemInfo(8495) or "Mana Shield";
+--ID 831842 Guiding Heal
+Guiding_Heal = GetItemInfo(831842) or "Guiding Heal";
+--ID 986001 Adorned
+Adorned = GetItemInfo(986001) or "Adorned";
+--ID 978698 Tidal Swell
+Tidal_Swell = GetItemInfo(978698) or "Tidal Swell";
+--ID 978692 Diciple of the Tides
+Diciple_of_the_Tides = GetItemInfo(978692) or "Diciple of the Tides";
 -----------------------------------------------
 
 HEALBOT_SILK_BANDAGE                    = GetItemInfo(6450) or "Silk Bandage";

@@ -809,8 +809,6 @@ function HealBot_Init_SmartCast()
             -- body
             SmartCast_Res = HEALBOT_ANCESTRALSPIRIT;
     end
-
-    print(SmartCast_Res);
     return SmartCast_Res;
     
 end
