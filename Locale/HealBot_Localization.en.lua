@@ -14,10 +14,9 @@ HEALBOT_HERO = localizedClass;
 HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
-
-
-----------------CUSTON ASCENTION---------------
-
+----------------CUSTOM ASCENTION---------------
+--ID 986113 [Overflowing]
+Overflowing = GetItemInfo(986113) or "Overflowing";
 --ID 86382  [Efflorescence]
 Efflorescence = GetItemInfo(86382) or "Efflorescence";
 --ID 86397  [Alter Time] 

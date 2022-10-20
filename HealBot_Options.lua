@@ -3441,23 +3441,23 @@ function HealBot_Options_Class_HoTctlName_OnSelect(self)
     HealBot_Globals.HoTindex = self:GetID()
     HealBot_Globals.HoTname = self:GetText()
     HealBot_Options_Class_HoTctlName_Refresh(true)
-    HealBot_Options_Class_HoTctlAction_Refresh()
+    HealBot_Options_Hero_HoTctlAction_Refresh()
 end
 
 --------------------------------------------------------------------------------
 
-local HealBot_Options_Class_HoTctlAction_List = {
+local HealBot_Options_Hero_HoTctlAction_List = {
     HEALBOT_WORD_NEVER,
     HEALBOT_OPTIONS_SELFCASTS,
     HEALBOT_WORD_ALWAYS,
 }
 
 function HealBot_Options_Class_HoTctlAction_DropDown()
-    for j=1, getn(HealBot_Options_Class_HoTctlAction_List), 1 do
+    for j=1, getn(HealBot_Options_Hero_HoTctlAction_List), 1 do
         for x,_ in pairs(info) do
             info[x]=nil;
         end
-        info.text = HealBot_Options_Class_HoTctlAction_List[j];
+        info.text = HealBot_Options_Hero_HoTctlAction_List[j];
         info.func = HealBot_Options_Class_HoTctlAction_OnSelect;
         UIDropDownMenu_AddButton(info);
     end
@@ -3466,12 +3466,13 @@ end
 function HealBot_Options_Class_HoTctlAction_Initialize()
     HealBot_Options_Class_HoTctlAction.numButtons = 0;
     UIDropDownMenu_Initialize(HealBot_Options_Class_HoTctlAction,HealBot_Options_Class_HoTctlAction_DropDown)
+  
 end
 
-function HealBot_Options_Class_HoTctlAction_Refresh(onselect)
+function HealBot_Options_Hero_HoTctlAction_Refresh(onselect)
     if not onselect then HealBot_Options_Class_HoTctlAction_Initialize() end  -- or wrong menu may be used !
-    local hbClass=HEALBOT_HERO_EN
-    UIDropDownMenu_SetSelectedID(HealBot_Options_Class_HoTctlAction,HealBot_Globals.WatchHoT[hbClass][HealBot_Globals.HoTname])
+
+    UIDropDownMenu_SetSelectedID(HealBot_Options_Class_HoTctlAction,HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][HealBot_Globals.HoTname])
 end
 
 function HealBot_Options_Class_HoTctlAction_OnLoad(self)
@@ -3480,9 +3481,8 @@ function HealBot_Options_Class_HoTctlAction_OnLoad(self)
 end
 
 function HealBot_Options_Class_HoTctlAction_OnSelect(self)
-    local hbClass=HEALBOT_HERO_EN
-    HealBot_Globals.WatchHoT[hbClass][HealBot_Globals.HoTname]=self:GetID()
-    HealBot_Options_Class_HoTctlAction_Refresh(true)
+    HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][HealBot_Globals.HoTname]=self:GetID()
+    HealBot_Options_Hero_HoTctlAction_Refresh(true)
     HealBot_setOptions_Timer(170)
 end
 
@@ -3526,7 +3526,7 @@ function HealBot_Options_FilterHoTctl_OnSelect(self)
     HealBot_Options_FilterHoTctl_Refresh(true)
     HealBot_Options_StorePrev["FilterHoTctlName"]=self.value
     HealBot_Options_Class_HoTctlName_Refresh()
-    HealBot_Options_Class_HoTctlAction_Refresh()
+    HealBot_Options_Hero_HoTctlAction_Refresh()
 end
 
 --------------------------------------------------------------------------------
@@ -6307,7 +6307,6 @@ function HealBot_Options_Buff_Reset()
         HealBot_buffbarcolb[x]=nil;
     end
     HealBot_Tooltip_Clear_CheckBuffs()
-    
     for k=1,10 do
         if BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] and BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)]>1 then
             id=HealBot_GetSpellId(BuffTextClass[HealBot_Options_getDropDownId_bySpec(k)]);
@@ -7410,7 +7409,7 @@ function HealBot_Options_SetSkins()
         HealBot_Options_SkinDefault_Refresh()  -- Healbot_Config_Skins.SkinDefault[Healbot_Config_Skins.Current_Skin]
         HealBot_Options_FilterHoTctl_Refresh()
         HealBot_Options_Class_HoTctlName_Refresh()
-        HealBot_Options_Class_HoTctlAction_Refresh()
+        HealBot_Options_Hero_HoTctlAction_Refresh()
         HealBot_Options_AggroAlertLevel_Refresh()
         HealBot_Options_ShowIncomingHeals:SetChecked(Healbot_Config_Skins.ShowIncHeals[Healbot_Config_Skins.Current_Skin])
         HealBot_Options_incHealsDirectDur:SetValue(Healbot_Config_Skins.incHealDur[Healbot_Config_Skins.Current_Skin]["D"] or 5)

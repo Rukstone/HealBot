@@ -237,9 +237,6 @@ HealBot_ConfigDefaults = {
         [HEALBOT_DEBUFF_HARVEST_SOUL]      = 10, -- Lich King - Harvest Soul 
     },
 };
-
---HealBot_Class_En = { [HEALBOT_HERO]="HERO",}
-
 HealBot_GlobalsDefaults = {
     HoTindex=1,
     HoTname=HEALBOT_GUARDIAN_SPIRIT,
