@@ -139,13 +139,15 @@ local HealBot_unitHealth = {}
 local HealBot_unitHealthMax = {}
 --local HEALBOT_HERO=nil
 local HasWeaponBuff = false
-local CheckWeaponBuffs = { [HEALBOT_ROCKBITER_WEAPON] = true,
+local CheckWeaponBuffs = { 
+    [HEALBOT_ROCKBITER_WEAPON] = true,
     [HEALBOT_FLAMETONGUE_WEAPON] = true,
     [HEALBOT_EARTHLIVING_WEAPON] = true,
     [HEALBOT_WINDFURY_WEAPON] = true,
     [HEALBOT_FROSTBRAND_WEAPON] = true, }
 
-local CooldownBuffs = { [HEALBOT_FEAR_WARD] = true,
+local CooldownBuffs = { 
+    [HEALBOT_FEAR_WARD] = true,
     [HEALBOT_PAIN_SUPPRESSION] = true,
     [HEALBOT_POWER_INFUSION] = true,
     [HEALBOT_DIVINE_PLEA] = true,
@@ -970,11 +972,13 @@ function HealBot_RecalcHeals(hbGUID)
     if HealBot_luVars["DoUpdates"] and UnitExists(HealBot_UnitID[hbGUID]) then
         HealBot_Action_Refresh(hbGUID);
     end
+ 
 end
 
 function HealBot_RecalcParty(HealBot_PreCombat)
     Delay_RecalcParty = 0;
     HealBot_Action_PartyChanged(HealBot_PreCombat);
+
 end
 
 function HealBot_RecalcSpells()
@@ -1409,9 +1413,11 @@ function HealBot_OnUpdate(self)
             HealBot_SpamCnt = 0;
             for xGUID, _ in pairs(HealBot_HealthCheck) do
                 if Ti < 3 then
-                    if HealBot_UnitID[hbGUID] and UnitExists(HealBot_UnitID[hbGUID]) then HealBot_OnEvent_UnitHealth(nil
-                        , HealBot_UnitID[hbGUID], UnitHealth(HealBot_UnitID[hbGUID]),
-                        UnitHealthMax(HealBot_UnitID[hbGUID])) end
+                    if HealBot_UnitID[hbGUID] and UnitExists(HealBot_UnitID[hbGUID]) then 
+                        HealBot_OnEvent_UnitHealth(nil, HealBot_UnitID[hbGUID],
+                        UnitHealth(HealBot_UnitID[hbGUID]),
+                        UnitHealthMax(HealBot_UnitID[hbGUID])) 
+                    end
                     HealBot_HealthCheck[xGUID] = nil
                     Ti = Ti + 1
                 end
@@ -1419,7 +1425,9 @@ function HealBot_OnUpdate(self)
             for xGUID in pairs(HealBot_Ressing) do
                 if HealBot_Ressing[xGUID] == "_NIL_" then
                     HealBot_Ressing[xGUID] = nil;
-                    if HealBot_UnitID[hbGUID] then HealBot_Action_ResetUnitStatus(HealBot_UnitID[hbGUID]) end
+                    if HealBot_UnitID[hbGUID] then 
+                        HealBot_Action_ResetUnitStatus(HealBot_UnitID[hbGUID])
+                     end
                 elseif HealBot_Ressing[xGUID] == "_RESSED3_" then
                     HealBot_Ressing[xGUID] = "_NIL_"
                 elseif HealBot_Ressing[xGUID] == "_RESSED2_" then
@@ -1547,7 +1555,9 @@ function HealBot_OnUpdate(self)
             end
             for xGUID, xTime in pairs(hbDelayResetUnitStatus) do
                 if xTime < GetTime() then
-                    if HealBot_UnitID[hbGUID] then HealBot_Action_ResetUnitStatus(HealBot_UnitID[hbGUID]) end
+                    if HealBot_UnitID[hbGUID] then 
+                        HealBot_Action_ResetUnitStatus(HealBot_UnitID[hbGUID]) 
+                    end
                     hbDelayResetUnitStatus[xGUID] = nil
                 end
             end
@@ -2749,13 +2759,17 @@ end
 function HealBot_HasBuff(buffName, unit)
     x, _, iTexture, bCount, _, _, expirationTime, caster, _ = UnitBuff(unit, buffName)
     if x then
-        if not HealBot_HoT_Texture[buffName] then HealBot_HoT_Texture[buffName] = iTexture end
+        if not HealBot_HoT_Texture[buffName] then 
+            HealBot_HoT_Texture[buffName] = iTexture 
+        end
         return true, expirationTime, caster, bCount;
     end
     return false;
 end
 
-local hbExcludeSpells = { [67358] = "Rejuvenating",
+local hbExcludeSpells = 
+{ 
+    [67358] = "Rejuvenating",
     [58597] = "Sacred Shield"
 }
 
@@ -2766,7 +2780,9 @@ function HealBot_HasUnitBuff(buffName, unit, casterUnitID)
             x, _, iTexture, bCount, _, _, expirationTime, caster, _, _, spellID = UnitAura(unit, k, "HELPFUL");
             if x then
                 if x == buffName and casterUnitID == caster and not hbExcludeSpells[spellID] then
-                    if not HealBot_HoT_Texture[buffName] then HealBot_HoT_Texture[buffName] = iTexture end
+                    if not HealBot_HoT_Texture[buffName] then 
+                        HealBot_HoT_Texture[buffName] = iTexture 
+                    end
                     return true, expirationTime, bCount
                 end
                 k = k + 1
@@ -2797,6 +2813,7 @@ function HealBot_HasMyBuffs(hbGUID)
         end
         k = 1
         HoTActive = nil
+        
 
         while true do
             --name, rank, icon, castTime, minRange, maxRange = GetSpellInfo(spellId or spellName or spellLink)
