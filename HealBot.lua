@@ -4774,6 +4774,7 @@ function HealBot_HoT_UpdateIcon(button, index, secLeft, Texture, hotID, hbGUID)
             if HealBot_HoT_Count[hotID] and HealBot_HoT_Count[hotID][hbGUID] then
                 iconTxt = HealBot_HoT_Count[hotID][hbGUID]
             elseif sName == HEALBOT_POWER_WORD_SHIELD and HealBot_TrackWS[hbGUID] then
+
                 if HealBot_TrackWS[hbGUID] == "-" and HealBot_Config.ShowWSicon == 1 then
                     Texture = HealBot_HoT_Texture[HEALBOT_DEBUFF_WEAKENED_SOUL]
                     iconTxt = nil

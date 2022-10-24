@@ -2155,7 +2155,8 @@ function HealBot_Options_ShowClassOnBarType_OnClick(self, id)
     Healbot_Config_Skins.ShowClassType[Healbot_Config_Skins.Current_Skin] = id;
     if Healbot_Config_Skins.ShowClassType[Healbot_Config_Skins.Current_Skin] > 0 then
         g = _G[
-            "HealBot_Options_ShowClassOnBarType" .. Healbot_Config_Skins.ShowClassType[Healbot_Config_Skins.Current_Skin
+            "HealBot_Options_ShowClassOnBarType" ..
+                Healbot_Config_Skins.ShowClassType[Healbot_Config_Skins.Current_Skin
                 ]]
         g:SetChecked(1);
         HealBot_Options_StorePrev["ShowClassOnBarType"] = id
@@ -2305,8 +2306,9 @@ function HealBot_Options_BarHealthNumFormatAggro_DropDown()
         for x, _ in pairs(info) do
             info[x] = nil;
         end
-        info.text = HealBot_Options_BarHealthNumFormat2_List[j] .. "77%" .. HealBot_Options_BarHealthNumFormat2_List[j +
-            1];
+        info.text = HealBot_Options_BarHealthNumFormat2_List[j] ..
+            "77%" .. HealBot_Options_BarHealthNumFormat2_List[j +
+                1];
         info.func = HealBot_Options_BarHealthNumFormatAggro_OnSelect;
         UIDropDownMenu_AddButton(info);
     end
@@ -2360,7 +2362,8 @@ end
 function HealBot_Options_BarHealthIncHeal_Refresh(onselect)
     if not onselect then HealBot_Options_BarHealthIncHeal_Initialize() end -- or wrong menu may be used !
     if Healbot_Config_Skins.BarHealthIncHeals[Healbot_Config_Skins.Current_Skin] < 1 then Healbot_Config_Skins.BarHealthIncHeals
-        [Healbot_Config_Skins.Current_Skin] = 1 end
+            [Healbot_Config_Skins.Current_Skin] = 1
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BarHealthIncHeal,
         Healbot_Config_Skins.BarHealthIncHeals[Healbot_Config_Skins.Current_Skin])
 end
@@ -2402,7 +2405,8 @@ end
 function HealBot_Options_BarHealthType_Refresh(onselect)
     if not onselect then HealBot_Options_BarHealthType_Initialize() end -- or wrong menu may be used !
     if (Healbot_Config_Skins.BarHealthType[Healbot_Config_Skins.Current_Skin] or 0) < 1 then Healbot_Config_Skins.BarHealthType
-        [Healbot_Config_Skins.Current_Skin] = 1 end
+            [Healbot_Config_Skins.Current_Skin] = 1
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BarHealthType,
         Healbot_Config_Skins.BarHealthType[Healbot_Config_Skins.Current_Skin])
 end
@@ -3453,8 +3457,10 @@ end
 --------------------------------------------------------------------------------
 HealBot_Options_StorePrev["FilterHoTctlName"] = HEALBOT_HERO
 
+
 local HealBot_Options_Class_HoTctlName_List = {
-    [HEALBOT_GIFT_OF_THE_NAARU] = "ALL",
+
+    [HEALBOT_GIFT_OF_THE_NAARU] = HEALBOT_HERO,
     [HEALBOT_LIFEBLOOM] = HEALBOT_HERO,
     [HEALBOT_MENDPET] = HEALBOT_HERO,
     [HEALBOT_PRAYER_OF_MENDING] = HEALBOT_HERO,
@@ -3496,8 +3502,8 @@ local HealBot_Options_Class_HoTctlName_List = {
     [HEALBOT_SURGE_OF_LIGHT] = HEALBOT_HERO,
     [HEALBOT_HEALING_WAY] = HEALBOT_HERO,
     [HEALBOT_INSPIRATION] = HEALBOT_HERO,
-    [HEALBOT_PROTANCIENTKINGS] = "ALL",
-    [HEALBOT_FOUNTAIN_OF_LIGHT] = "ALL",
+    [HEALBOT_PROTANCIENTKINGS] = HEALBOT_HERO,
+    [HEALBOT_FOUNTAIN_OF_LIGHT] = HEALBOT_HERO,
     [HEALBOT_ANCESTRAL_FORTITUDE] = HEALBOT_HERO,
     [HEALBOT_EARTHLIVING_WEAPON] = HEALBOT_HERO,
     [HEALBOT_EARTH_SHIELD] = HEALBOT_HERO,
@@ -3530,6 +3536,8 @@ local HealBot_Options_Class_HoTctlName_List = {
     [Efflorescence] = HEALBOT_HERO,
     [Alter_Time] = HEALBOT_HERO,
     [GrowingLight] = HEALBOT_HERO,
+    [BloomingGrowth] = HEALBOT_HERO,
+
 
 
 
@@ -3730,7 +3738,8 @@ function HealBot_Options_SkinDefault_OnSelect(self)
     if hbSkinDefaultID > 1 then
         for x in pairs(Healbot_Config_Skins.Skins) do
             if HealBot_Config.SkinDefault[Healbot_Config_Skins.Skins[x]] == hbSkinDefaultID then HealBot_Config.SkinDefault
-                [Healbot_Config_Skins.Skins[x]] = 1 end
+                    [Healbot_Config_Skins.Skins[x]] = 1
+            end
         end
     end
     HealBot_Config.SkinDefault[Healbot_Config_Skins.Current_Skin] = hbSkinDefaultID
@@ -5071,7 +5080,8 @@ function HealBot_Options_BuffTxt1_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt1_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(1)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(1)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(1)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt1, BuffTextClass[HealBot_Options_getDropDownId_bySpec(1)])
 end
 
@@ -5079,7 +5089,8 @@ function HealBot_Options_BuffTxt2_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt2_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(2)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(2)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(2)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt2, BuffTextClass[HealBot_Options_getDropDownId_bySpec(2)])
 end
 
@@ -5087,7 +5098,8 @@ function HealBot_Options_BuffTxt3_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt3_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(3)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(3)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(3)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt3, BuffTextClass[HealBot_Options_getDropDownId_bySpec(3)])
 end
 
@@ -5095,7 +5107,8 @@ function HealBot_Options_BuffTxt4_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt4_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(4)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(4)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(4)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt4, BuffTextClass[HealBot_Options_getDropDownId_bySpec(4)])
 end
 
@@ -5103,7 +5116,8 @@ function HealBot_Options_BuffTxt5_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt5_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(5)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(5)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(5)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt5, BuffTextClass[HealBot_Options_getDropDownId_bySpec(5)])
 end
 
@@ -5111,7 +5125,8 @@ function HealBot_Options_BuffTxt6_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt6_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(6)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(6)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(6)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt6, BuffTextClass[HealBot_Options_getDropDownId_bySpec(6)])
 end
 
@@ -5119,7 +5134,8 @@ function HealBot_Options_BuffTxt7_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt7_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(7)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(7)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(7)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt7, BuffTextClass[HealBot_Options_getDropDownId_bySpec(7)])
 end
 
@@ -5127,7 +5143,8 @@ function HealBot_Options_BuffTxt8_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt8_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(8)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(8)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(8)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt8, BuffTextClass[HealBot_Options_getDropDownId_bySpec(8)])
 end
 
@@ -5135,7 +5152,8 @@ function HealBot_Options_BuffTxt9_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt9_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(9)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(9)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(9)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt9, BuffTextClass[HealBot_Options_getDropDownId_bySpec(9)])
 end
 
@@ -5143,7 +5161,8 @@ function HealBot_Options_BuffTxt10_Refresh(onselect)
     if not onselect then HealBot_Options_BuffTxt10_Initialize() end -- or wrong menu may be used !
     BuffTextClass = HealBot_Config.HealBotBuffText
     if not BuffTextClass[HealBot_Options_getDropDownId_bySpec(10)] then BuffTextClass[
-        HealBot_Options_getDropDownId_bySpec(10)] = HEALBOT_WORDS_NONE end
+            HealBot_Options_getDropDownId_bySpec(10)] = HEALBOT_WORDS_NONE
+    end
     UIDropDownMenu_SetSelectedValue(HealBot_Options_BuffTxt10, BuffTextClass[HealBot_Options_getDropDownId_bySpec(10)])
 end
 
@@ -5152,7 +5171,8 @@ function HealBot_Options_BuffGroups1_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups1_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(1)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(1)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(1)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups1, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(1)])
 end
 
@@ -5160,7 +5180,8 @@ function HealBot_Options_BuffGroups2_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups2_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(2)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(2)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(2)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups2, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(2)])
 end
 
@@ -5168,7 +5189,8 @@ function HealBot_Options_BuffGroups3_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups3_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(3)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(3)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(3)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups3, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(3)])
 end
 
@@ -5176,7 +5198,8 @@ function HealBot_Options_BuffGroups4_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups4_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(4)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(4)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(4)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups4, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(4)])
 end
 
@@ -5184,7 +5207,8 @@ function HealBot_Options_BuffGroups5_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups5_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(5)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(5)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(5)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups5, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(5)])
 end
 
@@ -5192,7 +5216,8 @@ function HealBot_Options_BuffGroups6_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups6_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(6)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(6)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(6)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups6, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(6)])
 end
 
@@ -5200,7 +5225,8 @@ function HealBot_Options_BuffGroups7_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups7_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(7)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(7)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(7)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups7, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(7)])
 end
 
@@ -5208,7 +5234,8 @@ function HealBot_Options_BuffGroups8_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups8_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(8)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(8)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(8)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups8, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(8)])
 end
 
@@ -5216,7 +5243,8 @@ function HealBot_Options_BuffGroups9_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups9_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(9)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(9)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(9)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups9, BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(9)])
 end
 
@@ -5224,7 +5252,8 @@ function HealBot_Options_BuffGroups10_Refresh(onselect)
     if not onselect then HealBot_Options_BuffGroups10_Initialize() end -- or wrong menu may be used !
     BuffDropDownClass = HealBot_Config.HealBotBuffDropDown
     if not BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(10)] then BuffDropDownClass[
-        HealBot_Options_getDropDownId_bySpec(10)] = 4 end
+            HealBot_Options_getDropDownId_bySpec(10)] = 4
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_BuffGroups10,
         BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(10)])
 end
@@ -5874,28 +5903,32 @@ end
 function HealBot_Options_CDCPriority1_Refresh(onselect)
     if not onselect then HealBot_Options_CDCPriority1_Initialize() end
     if not HealBot_Config.HealBotDebuffPriority[HEALBOT_DISEASE_en] then HealBot_Config.HealBotDebuffPriority[
-        HEALBOT_DISEASE_en] = 15 end
+            HEALBOT_DISEASE_en] = 15
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_CDCPriority1, HealBot_Config.HealBotDebuffPriority[HEALBOT_DISEASE_en])
 end
 
 function HealBot_Options_CDCPriority2_Refresh(onselect)
     if not onselect then HealBot_Options_CDCPriority2_Initialize() end
     if not HealBot_Config.HealBotDebuffPriority[HEALBOT_MAGIC_en] then HealBot_Config.HealBotDebuffPriority[
-        HEALBOT_MAGIC_en] = 13 end
+            HEALBOT_MAGIC_en] = 13
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_CDCPriority2, HealBot_Config.HealBotDebuffPriority[HEALBOT_MAGIC_en])
 end
 
 function HealBot_Options_CDCPriority3_Refresh(onselect)
     if not onselect then HealBot_Options_CDCPriority3_Initialize() end
     if not HealBot_Config.HealBotDebuffPriority[HEALBOT_POISON_en] then HealBot_Config.HealBotDebuffPriority[
-        HEALBOT_POISON_en] = 16 end
+            HEALBOT_POISON_en] = 16
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_CDCPriority3, HealBot_Config.HealBotDebuffPriority[HEALBOT_POISON_en])
 end
 
 function HealBot_Options_CDCPriority4_Refresh(onselect)
     if not onselect then HealBot_Options_CDCPriority4_Initialize() end
     if not HealBot_Config.HealBotDebuffPriority[HEALBOT_CURSE_en] then HealBot_Config.HealBotDebuffPriority[
-        HEALBOT_CURSE_en] = 14 end
+            HEALBOT_CURSE_en] = 14
+    end
     UIDropDownMenu_SetSelectedID(HealBot_Options_CDCPriority4, HealBot_Config.HealBotDebuffPriority[HEALBOT_CURSE_en])
 end
 
@@ -5903,7 +5936,8 @@ function HealBot_Options_CDCPriorityC_Refresh(onselect)
     if not onselect then HealBot_Options_CDCPriorityC_Initialize() end
     if HealBot_Options_StorePrev["CDebuffcustomName"] then
         if not HealBot_Config.HealBot_Custom_Debuffs[HealBot_Options_StorePrev["CDebuffcustomName"]] then HealBot_Config
-            .HealBot_Custom_Debuffs[HealBot_Options_StorePrev["CDebuffcustomName"]] = 10 end
+                .HealBot_Custom_Debuffs[HealBot_Options_StorePrev["CDebuffcustomName"]] = 10
+        end
         UIDropDownMenu_SetSelectedID(HealBot_Options_CDCPriorityC,
             HealBot_Config.HealBot_Custom_Debuffs[HealBot_Options_StorePrev["CDebuffcustomName"]])
     end
@@ -6316,7 +6350,8 @@ function HealBot_Options_DeleteCDebuffBtn_OnClick(self)
     HealBot_Globals.Custom_Debuff_Categories[HealBot_Options_StorePrev["CDebuffcustomName"]] = nil;
     HealBot_Config.HealBot_Custom_Debuffs[HealBot_Options_StorePrev["CDebuffcustomName"]] = nil;
     if HealBot_Config.CDCBarColour[HealBot_Options_StorePrev["CDebuffcustomName"]] then HealBot_Config.CDCBarColour[
-        HealBot_Options_StorePrev["CDebuffcustomName"]] = nil end
+            HealBot_Options_StorePrev["CDebuffcustomName"]] = nil
+    end
     HealBot_Options_CDebuffTxt1_Refresh()
     HealBot_Options_CDCPriorityC_Refresh()
     HealBot_SetCDCBarColours();
@@ -6325,7 +6360,8 @@ end
 function HealBot_Options_ResetCDebuff()
     HealBot_Config.HealBot_Custom_Debuffs[HealBot_Options_StorePrev["CDebuffcustomName"]] = 10;
     if HealBot_Config.CDCBarColour[HealBot_Options_StorePrev["CDebuffcustomName"]] then HealBot_Config.CDCBarColour[
-        HealBot_Options_StorePrev["CDebuffcustomName"]] = nil end
+            HealBot_Options_StorePrev["CDebuffcustomName"]] = nil
+    end
     HealBot_Options_CDebuffTxt1_Refresh()
     HealBot_Options_CDCPriorityC_Refresh()
     HealBot_SetCDCBarColours();
@@ -6931,11 +6967,13 @@ function HealBot_UseColourPick(R, G, B, A)
         ColorPickerFrame.hasOpacity = true;
         ColorPickerFrame.opacity = 1 - A;
         ColorPickerFrame.func = function() local r, g, b = ColorPickerFrame:GetColorRGB();
-        local a = OpacitySliderFrame:GetValue()
-        HealBot_Returned_Colours(r, g, b, a); end;
+            local a = OpacitySliderFrame:GetValue()
+            HealBot_Returned_Colours(r, g, b, a);
+        end;
         ColorPickerFrame.cancelFunc = function() HealBot_Returned_Colours(HealBot_Options_StorePrev["prevR"],
-            HealBot_Options_StorePrev["prevG"], HealBot_Options_StorePrev["prevB"], 1 -
-            HealBot_Options_StorePrev["prevA"]); end; --added by Diacono
+                HealBot_Options_StorePrev["prevG"], HealBot_Options_StorePrev["prevB"], 1 -
+                HealBot_Options_StorePrev["prevA"]);
+        end; --added by Diacono
         ColorPickerFrame:ClearAllPoints();
         ColorPickerFrame:SetPoint("TOPLEFT", "HealBot_Options", "TOPRIGHT", 0, -152);
         OpacitySliderFrame:SetValue(1 - A);
@@ -6945,7 +6983,8 @@ function HealBot_UseColourPick(R, G, B, A)
         ColorPickerFrame.hasOpacity = false;
         ColorPickerFrame.func = function() HealBot_Returned_Colours(ColorPickerFrame:GetColorRGB()); end;
         ColorPickerFrame.cancelFunc = function() HealBot_Returned_Colours(HealBot_Options_StorePrev["prevR"],
-            HealBot_Options_StorePrev["prevG"], HealBot_Options_StorePrev["prevB"]); end; --added by Diacono
+                HealBot_Options_StorePrev["prevG"], HealBot_Options_StorePrev["prevB"]);
+        end; --added by Diacono
         ColorPickerFrame:ClearAllPoints();
         ColorPickerFrame:SetPoint("TOPLEFT", "HealBot_Options", "TOPRIGHT", 0, -152);
         ColorPickerFrame:SetColorRGB(R, G, B);
@@ -7815,9 +7854,11 @@ function HealBot_Options_SetSkinBars()
         Healbot_Config_Skins.headtextheight[Healbot_Config_Skins.Current_Skin], "");
     HealBot_EnTextColorpickt:SetFont(LSM:Fetch('font', Healbot_Config_Skins.btextfont[Healbot_Config_Skins.Current_Skin])
         , Healbot_Config_Skins.btextheight[Healbot_Config_Skins.Current_Skin], "");
-    HealBot_DisTextColorpickt:SetFont(LSM:Fetch('font', Healbot_Config_Skins.btextfont[Healbot_Config_Skins.Current_Skin
+    HealBot_DisTextColorpickt:SetFont(LSM:Fetch('font',
+        Healbot_Config_Skins.btextfont[Healbot_Config_Skins.Current_Skin
         ]), Healbot_Config_Skins.btextheight[Healbot_Config_Skins.Current_Skin], "");
-    HealBot_DebTextColorpickt:SetFont(LSM:Fetch('font', Healbot_Config_Skins.btextfont[Healbot_Config_Skins.Current_Skin
+    HealBot_DebTextColorpickt:SetFont(LSM:Fetch('font',
+        Healbot_Config_Skins.btextfont[Healbot_Config_Skins.Current_Skin
         ]), Healbot_Config_Skins.btextheight[Healbot_Config_Skins.Current_Skin], "");
     HealBot_BarCustomColourt:SetFont(LSM:Fetch('font', Healbot_Config_Skins.btextfont[Healbot_Config_Skins.Current_Skin])
         , Healbot_Config_Skins.btextheight[Healbot_Config_Skins.Current_Skin], "");
@@ -8257,10 +8298,10 @@ function OnSpellWacher_Scroll_Load(self, frame) --this function is called only o
     ScrollViewSpellList_BG.bg = ScrollViewSpellList_BG:CreateTexture(nil, "BACKGROUND");
     ScrollViewSpellList_BG.bg:SetAllPoints(true);
     frame:SetScrollChild(ScrollViewSpellList_BG)
-    SelectedSpellDescription = frame:CreateFontString(nil,"OVERLAY", "GameFontNormal");
-    SelectedSpellDescription:SetPoint("TOPRIGHT",170,170);
-    SelectedSpellDescription:SetSize(200,300);
-    
+    SelectedSpellDescription = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+    SelectedSpellDescription:SetPoint("TOPRIGHT", 170, 170);
+    SelectedSpellDescription:SetSize(200, 300);
+
     for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN]) do
         local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
         button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
@@ -8290,29 +8331,30 @@ function OnSpellWacher_Scroll_Load(self, frame) --this function is called only o
         button:SetPushedTexture(ptex)
         indexEE = indexEE - 30
 
-        button:HookScript("OnClick",function(self, button) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
+        button:HookScript("OnClick",
+            function(self, button) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
 
-            SelectedSpellWacher = k;
-            if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
-                if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
-                    -- body
-                    SPellWacherButtonDisplay:SetText("Dont Show")
-                    
-                elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
-                    -- body
-                    SPellWacherButtonDisplay:SetText("Self Cast Only")
-                elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 3 then
-                    -- body
-                    SPellWacherButtonDisplay:SetText("ALL")
+                SelectedSpellWacher = k;
+                if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
+                    if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
+                        -- body
+                        SPellWacherButtonDisplay:SetText("Dont Show")
+
+                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
+                        -- body
+                        SPellWacherButtonDisplay:SetText("Self Cast Only")
+                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 3 then
+                        -- body
+                        SPellWacherButtonDisplay:SetText("ALL")
+                    end
                 end
-            end
-        
-        
-        end)
+
+
+            end)
         ScrollViewSpellsButton[k] = button;
     end
 
-  
+
 
 
 
@@ -8346,7 +8388,7 @@ function StringSearch(value, StartWith)
 
 end
 
-function AddNewSpellWach(self)--work in progress (not implemented)
+function AddNewSpellWach(self) --work in progress (not implemented)
 
 
     if SpellWacherSearchBox then
