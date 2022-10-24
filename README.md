@@ -24,3 +24,5 @@ clicking on the button will change the mode.
  ###### Cauterizing Fire
  ###### Seed of Life
  ###### Efflorescence
+ ###### Growing Light
+ ###### Overflowing
