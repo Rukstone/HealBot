@@ -428,10 +428,7 @@ HealBot_GlobalsDefaults = {
             [Adorned] = 2,
             [Diciple_of_the_Tides] =1,
             [Tidal_Swell] = 1,
-            
-
-
-
+            [GrowingLight] = 2,
 
 
         },

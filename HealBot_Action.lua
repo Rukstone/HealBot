@@ -2444,14 +2444,18 @@ function HealBot_Action_ClassColour(hbGUID, unit)
 end
 
 function HealBot_Action_ShowTooltip(unit)
-    if HealBot_Config.ShowTooltip==0 then return end
+    if HealBot_Config.ShowTooltip==0 then 
+        return 
+    end
     HealBot_Action_TooltipUnit = unit;
     HealBot_Action_DisableTooltipUnit = nil;
     HealBot_Action_RefreshTooltip(unit,"Enabled");
 end
 
 function HealBot_Action_ShowDisabledTooltip(unit)
-    if HealBot_Config.ShowTooltip==0 then return end
+    if HealBot_Config.ShowTooltip==0 then
+         return 
+        end
     HealBot_Action_TooltipUnit = nil;
     HealBot_Action_DisableTooltipUnit = unit;
     HealBot_Action_RefreshTooltip(unit,"Disabled");

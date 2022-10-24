@@ -14,85 +14,88 @@ HEALBOT_HERO = localizedClass;
 HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
-----------------CUSTOM ASCENTION---------------
+----------------CUSTOM ASCENTION From RUKSTONE---------------
+
+--ID 986035 [Growing Light]
+GrowingLight = GetSpellInfo(986035) or "Growing Light";
 --ID 986113 [Overflowing]
-Overflowing = GetItemInfo(986113) or "Overflowing";
+Overflowing = GetSpellInfo(986113) or "Overflowing";
 --ID 86382  [Efflorescence]
-Efflorescence = GetItemInfo(86382) or "Efflorescence";
+Efflorescence = GetSpellInfo(86382) or "Efflorescence";
 --ID 86397  [Alter Time] 
-Alter_Time = GetItemInfo(86397) or "Alter Time";
+Alter_Time = GetSpellInfo(86397) or "Alter Time";
 --ID 81514 [Fungal Disposition]
-Fungal_Disposition = GetItemInfo(81514) or "Fungal Disposition";
+Fungal_Disposition = GetSpellInfo(81514) or "Fungal Disposition";
 --ID 8170 Cleasing Totem
-Cleasing_Totem = GetItemInfo(8170) or "Cleansing Totem";
+Cleasing_Totem = GetSpellInfo(8170) or "Cleansing Totem";
 --ID 965938 [Seed of Life]
-Seed_of_Life_hot = GetItemInfo(965938) or "Seed of Life";
+Seed_of_Life_hot = GetSpellInfo(965938) or "Seed of Life";
 --ID 31821 [Aura Mastery]
-Aura_Mastery = GetItemInfo(31821) or "Aura Mastery";
+Aura_Mastery = GetSpellInfo(31821) or "Aura Mastery";
 --ID 20216 [Divine Favor]
-Divine_Favor = GetItemInfo(20216) or "Divine Favor";
+Divine_Favor = GetSpellInfo(20216) or "Divine Favor";
 --ID 31842  [Divine Illumination]
-Divine_Illumination = GetItemInfo(31842) or "Divine Illumination";
+Divine_Illumination = GetSpellInfo(31842) or "Divine Illumination";
 --ID 64205  [Divine Sacrifice]
-Divine_Sacrifice = GetItemInfo(64205) or "Divine Sacrifice";
+Divine_Sacrifice = GetSpellInfo(64205) or "Divine Sacrifice";
 --ID 6940  [Hand of Sacrifice]
-Hand_of_Sacrifice = GetItemInfo(6940) or "Hand of Sacrifice";
+Hand_of_Sacrifice = GetSpellInfo(6940) or "Hand of Sacrifice";
 --ID 31884  [Avenging Wrath]
-Avenging_Wrath = GetItemInfo(31884) or "Avenging Wrath";
+Avenging_Wrath = GetSpellInfo(31884) or "Avenging Wrath";
 --ID 47788  [Guardian Spirit]
-Guardian_Spirit = GetItemInfo(47788) or "Guardian Spirit";
+Guardian_Spirit = GetSpellInfo(47788) or "Guardian Spirit";
 --ID 47585  [Dispersion]
-Dispersion = GetItemInfo(47585) or "Dispersion";
+Dispersion = GetSpellInfo(47585) or "Dispersion";
 --ID 15286  [Vampiric Embrace]
-Vampiric_Embrace = GetItemInfo(15286) or "Vampiric Embrace";
+Vampiric_Embrace = GetSpellInfo(15286) or "Vampiric Embrace";
 --ID 15473  [Shadowform]
-Shadowform = GetItemInfo(15473) or "Shadowform";
+Shadowform = GetSpellInfo(15473) or "Shadowform";
 --ID 5277  [Evasion]
-Evasion = GetItemInfo(5277) or "Evasion";
+Evasion = GetSpellInfo(5277) or "Evasion";
 --ID 2983  [Sprint]
-Sprint = GetItemInfo(2983) or "Sprint";
+Sprint = GetSpellInfo(2983) or "Sprint";
 --ID 13877  [Blade Flurry]
-Blade_Flurry = GetItemInfo(13877) or "Blade Flurry";
+Blade_Flurry = GetSpellInfo(13877) or "Blade Flurry";
 --ID 13750  [Adrenaline Rush]
-Adrenaline_Rush = GetItemInfo(13750) or "Adrenaline Rush";
+Adrenaline_Rush = GetSpellInfo(13750) or "Adrenaline Rush";
 --ID 1784  [Stealth]
-Stealth = GetItemInfo(1784) or "Stealth";
+Stealth = GetSpellInfo(1784) or "Stealth";
 --ID 954514  [Skull Banner]
-Skull_Banner = GetItemInfo(954514) or "Skull Banner";
+Skull_Banner = GetSpellInfo(954514) or "Skull Banner";
 --ID 86358  [Heroic Leap]
-Heroic_Leap = GetItemInfo(86358) or "Heroic Leap";
+Heroic_Leap = GetSpellInfo(86358) or "Heroic Leap";
 --ID 86380  [Avatar]
-Avatar = GetItemInfo(86380) or "Avatar";
+Avatar = GetSpellInfo(86380) or "Avatar";
 --ID 46924  [Bladestorm]
-Bladestorm = GetItemInfo(46924) or "Bladestorm";
+Bladestorm = GetSpellInfo(46924) or "Bladestorm";
 --ID 23920  [Spell Reflection]
-Spell_Reflection = GetItemInfo(23920) or "Spell Reflection";
+Spell_Reflection = GetSpellInfo(23920) or "Spell Reflection";
 --ID 12975  [Last Stand]
-Last_Stand = GetItemInfo(12975) or "Last Stand";
+Last_Stand = GetSpellInfo(12975) or "Last Stand";
 --ID 50720  [Vigilance]
-Vigilance = GetItemInfo(50720) or "Vigilance";
+Vigilance = GetSpellInfo(50720) or "Vigilance";
 --ID 48505  [Starfall]
-Starfall = GetItemInfo(48505) or "Starfall";
+Starfall = GetSpellInfo(48505) or "Starfall";
 --ID 24858  [Moonkin Form]
-Moonkin_Form = GetItemInfo(24858) or "Moonkin Form";
+Moonkin_Form = GetSpellInfo(24858) or "Moonkin Form";
 --ID 22842  [Frenzied Regeneration]
-Frenzied_Regeneration = GetItemInfo(22842) or "Frenzied Regeneration";
+Frenzied_Regeneration = GetSpellInfo(22842) or "Frenzied Regeneration";
 --ID 19263  [Deterrence]
-Deterrence = GetItemInfo(19263) or "Deterrence";
+Deterrence = GetSpellInfo(19263) or "Deterrence";
 --ID 86514  [Cauterizing Fire]
-Cauterizing_Fire = GetItemInfo(86514) or "Cauterizing Fire";
+Cauterizing_Fire = GetSpellInfo(86514) or "Cauterizing Fire";
 --ID 888593 Preservation
-Preservation = GetItemInfo(888593) or "Preservation";
+Preservation = GetSpellInfo(888593) or "Preservation";
 --ID 8495 Mana Shield
-Mana_Shield = GetItemInfo(8495) or "Mana Shield";
+Mana_Shield = GetSpellInfo(8495) or "Mana Shield";
 --ID 831842 Guiding Heal
-Guiding_Heal = GetItemInfo(831842) or "Guiding Heal";
+Guiding_Heal = GetSpellInfo(831842) or "Guiding Heal";
 --ID 986001 Adorned
-Adorned = GetItemInfo(986001) or "Adorned";
+Adorned = GetSpellInfo(986001) or "Adorned";
 --ID 978698 Tidal Swell
-Tidal_Swell = GetItemInfo(978698) or "Tidal Swell";
+Tidal_Swell = GetSpellInfo(978698) or "Tidal Swell";
 --ID 978692 Diciple of the Tides
-Diciple_of_the_Tides = GetItemInfo(978692) or "Diciple of the Tides";
+Diciple_of_the_Tides = GetSpellInfo(978692) or "Diciple of the Tides";
 -----------------------------------------------
 
 HEALBOT_SILK_BANDAGE                    = GetItemInfo(6450) or "Silk Bandage";
