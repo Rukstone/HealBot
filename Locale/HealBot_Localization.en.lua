@@ -15,6 +15,7 @@ HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+
 --965281  [Blooming Growth] 
 BloomingGrowth = GetSpellInfo(965281) or "Blooming Growth";
 --2127120  [Tidecaller's Gift] this make part on the same stack of Tidecaller

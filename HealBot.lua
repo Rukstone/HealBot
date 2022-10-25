@@ -2813,23 +2813,84 @@ function HealBot_HasMyBuffs(hbGUID)
         end
         k = 1
         HoTActive = nil
-        
+        local dName 
+        local dTexture
+        local dCount
+        local dExpirationTime
+        local Dcaster
+        local DSpellID
+        local dXt
+
 
         while true do
             --name, rank, icon, castTime, minRange, maxRange = GetSpellInfo(spellId or spellName or spellLink)
             bName, _, iTexture, bCount, _, _, expirationTime, caster, _, _, spellID = UnitAura(xUnit, k, "HELPFUL");
+            dName, _, dTexture, dCount, _, _, dExpirationTime, Dcaster, _, _, DSpellID = UnitDebuff(xUnit,k,"HELPFUL");
+            if(dName and Dcaster) then
 
+                dXt = HealBot_Watch_HoT[dName] or "nil"
+                if (dXt == "A" or (dXt == "C" and caster == "player")) and not hbExcludeSpells[DSpellID] then
+                    hbHoTcaster = UnitGUID(Dcaster) .. "!"
+                    if not HealBot_Player_HoT[hbGUID] then
+                        HealBot_Player_HoT[hbGUID] = {} 
+                    end
+                    if not HealBot_Player_HoT_Icons[hbGUID] then 
+                        HealBot_Player_HoT_Icons[hbGUID] = {}
+                    end
+                    if not HealBot_Player_HoT_Icons[hbGUID][hbHoTcaster .. dName] then 
+                        HealBot_Player_HoT_Icons[hbGUID][
+                        hbHoTcaster .. dName] = 0
+                     end
+                    if HealBot_Player_HoT[hbGUID][hbHoTcaster .. dName] ~= dExpirationTime then
+                        HealBot_Player_HoT[hbGUID][hbHoTcaster .. dName] = dExpirationTime
+                        HealBot_HoT_Update(hbGUID, hbHoTcaster .. dName)
+                    end
+                    if not HealBot_HoT_Texture[dName] then
+                        HealBot_HoT_Texture[dName] = dTexture
+                    end
+
+
+                    hbFoundHoT[hbHoTcaster .. dName] = true
+                    if (dCount and dCount > 1) or HealBot_HoT_Count[hbHoTcaster .. dName] then
+                        if (
+                            Healbot_Config_Skins.ShowIconTextCountSelfCast[Healbot_Config_Skins.Current_Skin] == 1 and caster ~= "player") or
+                            Healbot_Config_Skins.ShowIconTextCount[Healbot_Config_Skins.Current_Skin] == 0 then
+                            if HealBot_HoT_Count[hbHoTcaster .. dName] then 
+                                HealBot_HoT_Count[hbHoTcaster .. dName] = nil 
+
+                            end
+                        else
+                            if not HealBot_HoT_Count[hbHoTcaster .. dName] then HealBot_HoT_Count[hbHoTcaster .. dName] = {} end
+                            if dCount ~= (HealBot_HoT_Count[hbHoTcaster .. dName][hbGUID] or 0) then
+                                HealBot_HoT_Count[hbHoTcaster .. dName][hbGUID] = dCount
+                                HealBot_Player_HoT[hbGUID][hbHoTcaster .. dName] = dExpirationTime + 1
+                            end
+                        end
+                    end
+                end
+            end
             if bName and caster then
+                
                 y = HealBot_Watch_HoT[bName] or "nil"
                 if (y == "A" or (y == "C" and caster == "player")) and not hbExcludeSpells[spellID] then
                     hbHoTcaster = UnitGUID(caster) .. "!"
-                    if bName == HEALBOT_INNER_FOCUS or bName == HEALBOT_NATURE_SWIFTNESS or (expirationTime or 0) == 0 then expirationTime = hbNoEndTime end
-                    if not HealBot_Player_HoT[hbGUID] then HealBot_Player_HoT[hbGUID] = {} end
-                    if not HealBot_Player_HoT_Icons[hbGUID] then HealBot_Player_HoT_Icons[hbGUID] = {} end
-                    if not HealBot_Player_HoT_Icons[hbGUID][hbHoTcaster .. bName] then HealBot_Player_HoT_Icons[hbGUID][
-                        hbHoTcaster .. bName] = 0 end
-                    if not HealBot_Player_HoT[hbGUID][hbHoTcaster .. bName] then HealBot_Player_HoT[hbGUID][
-                        hbHoTcaster .. bName] = expirationTime + 1 end
+                    if bName == HEALBOT_INNER_FOCUS or bName == HEALBOT_NATURE_SWIFTNESS or (expirationTime or 0) == 0 then 
+                        expirationTime = hbNoEndTime 
+                    end
+                    if not HealBot_Player_HoT[hbGUID] then
+                         HealBot_Player_HoT[hbGUID] = {} 
+                    end
+                    if not HealBot_Player_HoT_Icons[hbGUID] then 
+                        HealBot_Player_HoT_Icons[hbGUID] = {}
+                     end
+                    if not HealBot_Player_HoT_Icons[hbGUID][hbHoTcaster .. bName] then 
+                        HealBot_Player_HoT_Icons[hbGUID][
+                        hbHoTcaster .. bName] = 0
+                     end
+                    if not HealBot_Player_HoT[hbGUID][hbHoTcaster .. bName] then
+                         HealBot_Player_HoT[hbGUID][
+                        hbHoTcaster .. bName] = expirationTime + 1
+                     end
                     hbFoundHoT[hbHoTcaster .. bName] = true
                     if (bCount and bCount > 1) or HealBot_HoT_Count[hbHoTcaster .. bName] then
                         if (
@@ -2855,6 +2916,7 @@ function HealBot_HasMyBuffs(hbGUID)
                             HealBot_Player_HoT[hbGUID][hbHoTcaster .. bName] = expirationTime + 1
                         end
                     end
+
                     if not HealBot_HoT_Texture[bName] then
                         HealBot_HoT_Texture[bName] = iTexture
                     end

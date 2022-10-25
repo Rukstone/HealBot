@@ -3537,7 +3537,8 @@ local HealBot_Options_Class_HoTctlName_List = {
     [Alter_Time] = HEALBOT_HERO,
     [GrowingLight] = HEALBOT_HERO,
     [BloomingGrowth] = HEALBOT_HERO,
-
+    [TidecallersGift] = HEALBOT_HERO,
+    [TidecallerBoon] = HEALBOT_HERO,
 
 
 
@@ -4043,6 +4044,7 @@ function HealBot_Options_rethbTempUnitNames()
     local hbTempShareUnitNames = {}
     hbTempNumUnitNames = 0
     x = GetNumFriends()
+
     if x > 0 then
         for y = 1, x do
             uName, _, _, _, z = GetFriendInfo(y)
