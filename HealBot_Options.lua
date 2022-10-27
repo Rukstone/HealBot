@@ -239,23 +239,66 @@ local HealBot_Racial_Debuff_Spells = {
 }
 
 local HealBot_Debuff_Types = {
-    [HEALBOT_PURIFY] = { HEALBOT_DISEASE_en, HEALBOT_POISON_en },
-    [HEALBOT_CLEANSE] = { HEALBOT_DISEASE_en, HEALBOT_POISON_en, HEALBOT_MAGIC_en },
-    [HEALBOT_CURE_POISON] = { HEALBOT_POISON_en },
-    [HEALBOT_REMOVE_CURSE] = { HEALBOT_CURSE_en },
-    [HEALBOT_ABOLISH_POISON] = { HEALBOT_POISON_en },
-    [HEALBOT_CURE_DISEASE] = { HEALBOT_DISEASE_en },
-    [HEALBOT_ABOLISH_DISEASE] = { HEALBOT_DISEASE_en },
-    [HEALBOT_DISPEL_MAGIC] = { HEALBOT_MAGIC_en },
-    [HEALBOT_PURIFICATION_POTION] = { HEALBOT_CURSE_en, HEALBOT_DISEASE_en, HEALBOT_POISON_en },
-    [HEALBOT_ANTI_VENOM] = { HEALBOT_POISON_en },
-    [HEALBOT_POWERFUL_ANTI_VENOM] = { HEALBOT_POISON_en },
-    [HEALBOT_ELIXIR_OF_POISON_RES] = { HEALBOT_POISON_en },
-    [HEALBOT_STONEFORM] = { HEALBOT_DISEASE_en, HEALBOT_POISON_en },
-    [HEALBOT_CLEANSE_SPIRIT] = { HEALBOT_DISEASE_en, HEALBOT_POISON_en, HEALBOT_CURSE_en },
-    [HEALBOT_CURE_TOXINS] = { HEALBOT_DISEASE_en, HEALBOT_POISON_en },
-    [HEALBOT_DISPEL_CURSE] = { HEALBOT_CURSE_en },
-    [Cleasing_Totem] = { HEALBOT_DISEASE_en, HEALBOT_POISON_en },
+    [HEALBOT_PURIFY] = {
+        HEALBOT_DISEASE_en,
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_CLEANSE] = {
+        HEALBOT_DISEASE_en,
+        HEALBOT_POISON_en,
+        HEALBOT_MAGIC_en
+    },
+    [HEALBOT_CURE_POISON] = {
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_REMOVE_CURSE] = {
+        HEALBOT_CURSE_en
+    },
+    [HEALBOT_ABOLISH_POISON] = {
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_CURE_DISEASE] = {
+        HEALBOT_DISEASE_en
+    },
+    [HEALBOT_ABOLISH_DISEASE] = {
+        HEALBOT_DISEASE_en
+    },
+    [HEALBOT_DISPEL_MAGIC] = {
+        HEALBOT_MAGIC_en
+    },
+    [HEALBOT_PURIFICATION_POTION] = {
+        HEALBOT_CURSE_en,
+        HEALBOT_DISEASE_en,
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_ANTI_VENOM] = {
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_POWERFUL_ANTI_VENOM] = {
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_ELIXIR_OF_POISON_RES] = {
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_STONEFORM] = {
+        HEALBOT_DISEASE_en,
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_CLEANSE_SPIRIT] = {
+        HEALBOT_DISEASE_en,
+        HEALBOT_POISON_en,
+        HEALBOT_CURSE_en
+    },
+    [HEALBOT_CURE_TOXINS] = {
+        HEALBOT_DISEASE_en,
+        HEALBOT_POISON_en
+    },
+    [HEALBOT_DISPEL_CURSE] = {
+        HEALBOT_CURSE_en
+    },
+    [Cleasing_Totem] = {
+        HEALBOT_DISEASE_en, HEALBOT_POISON_en
+    },
 
 }
 
@@ -3539,7 +3582,7 @@ local HealBot_Options_Class_HoTctlName_List = {
     [BloomingGrowth] = HEALBOT_HERO,
     [TidecallersGift] = HEALBOT_HERO,
     [TidecallerBoon] = HEALBOT_HERO,
-
+    [HEALBOT_DEBUFF_WEAKENED_SOUL] = HEALBOT_HERO,
 
 
 
@@ -8244,13 +8287,14 @@ function OnSpellButtonClickDisplayHotOption(self, frame) --this function is call
 
         if (SelectedSpellWacher) then
 
+      
+
             if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
 
                 if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
                     -- body
                     HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 2;
                     SPellWacherButtonDisplay:SetText("Self Cast Only")
-
                 elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
                     -- body
                     HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 3;
@@ -8337,6 +8381,11 @@ function OnSpellWacher_Scroll_Load(self, frame) --this function is called only o
             function(self, button) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
 
                 SelectedSpellWacher = k;
+                local spID = HealBot_GetSpellId(SelectedSpellWacher);
+                local desX = GetSpellDescription(spID);
+                SelectedSpellDescription:SetText(desX);
+                print(desX);
+                
                 if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
                     if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
                         -- body

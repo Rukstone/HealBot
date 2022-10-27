@@ -5705,6 +5705,31 @@ function AddNewWachHOT(key, value)
         HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][key] = value
     end
 end
+function HealBot_Update_SpellCombos()
+    local combo=nil
+    local button=nil
+
+    for x=1,2 do
+        if x==1 then
+            combo = HealBot_Config.EnabledKeyCombo;
+        else
+            combo = HealBot_Config.DisabledKeyCombo;
+        end
+        for y=1,15 do
+            button = HealBot_Options_ComboClass_Button(y)
+            for z=1,3 do
+                if combo then
+                    combo[button..z] = combo[button]
+                    combo["Shift"..button..z] = combo["Shift"..button]
+                    combo["Ctrl"..button..z] = combo["Ctrl"..button]
+                    combo["Alt"..button..z] = combo["Alt"..button]
+                    combo["Ctrl-Shift"..button..z] = combo["Ctrl-Shift"..button]
+                    combo["Alt-Shift"..button..z] = combo["Alt-Shift"..button]
+                end
+            end
+        end
+    end
+end
 
 function HealBot_Copy_SpellCombos()
     local combo = nil

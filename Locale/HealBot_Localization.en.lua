@@ -8,6 +8,10 @@ HealBotSkinVersion = 17;
 -------------------
 -- Compatibility --
 -------------------
+
+--GetLocale() = enUS
+
+
 local localizedClass, englishClass, classIndex = UnitClass("player");
 
 HEALBOT_HERO = localizedClass;
