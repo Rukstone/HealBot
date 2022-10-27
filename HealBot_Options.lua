@@ -26,9 +26,6 @@ local val = nil
 local text = nil
 local unique = nil
 local g, x, y, z, k, j = nil, nil, nil, nil, nil, nil
-
-local Tab_Test = nil ------------- Testing UI ---------
-
 local textures = nil
 local texturesIndex = {}
 local fonts = nil
@@ -7355,8 +7352,18 @@ function HealBot_Options_SetDefaults()
     HealBot_Action_SetAllAttribs()
     HideUIPanel(HealBot_Options)
     HealBot_Config.ActionVisible = HealBot_Action:IsVisible();
-    DoInitTab = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true, [6] = true, [7] = true, [9] = true,
-        [10] = true, }
+    DoInitTab =
+    {
+        [1] = true,
+        [2] = true,
+        [3] = true,
+        [4] = true,
+        [5] = true,
+        [6] = true,
+        [7] = true,
+        [9] = true,
+        [10] = true,
+    }
 end
 
 function HealBot_Options_OnLoad(self)
@@ -7364,14 +7371,24 @@ function HealBot_Options_OnLoad(self)
     table.insert(UISpecialFrames, self:GetName());
 
     -- Tabs
-    PanelTemplates_SetNumTabs(self, 7);
+    PanelTemplates_SetNumTabs(self, 8);
     self.selectedTab = 1;
     PanelTemplates_UpdateTabs(self);
 
 
 
-    DoInitTab = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true, [6] = true, [7] = true, [9] = true,
-        [10] = true, [11] = true }
+    DoInitTab = {
+        [1] = true,
+        [2] = true,
+        [3] = true,
+        [4] = true,
+        [5] = true,
+        [6] = true,
+        [7] = true,
+        [9] = true,
+        [10] = true,
+        [11] = true
+    }
 
     g = _G["HealBot_Options_HeadersSkinsFrame"]
     g:Hide()
@@ -8278,6 +8295,105 @@ local SPellWacherButtonDisplay; -- the button that control the display of the sp
 local SelectedSpellWacher; -- the current selected spell (ID) from the GLOBAL wacher
 local SelectedSpellDescription;
 
+
+function OnSpellWacher_Scroll_Load(self, frame) --this function is called only on "OnLoad"
+
+    ScrollViewSpellList_BG = CreateFrame("Frame", nil, frame);
+    ScrollViewSpellList_BG:SetSize(200, 300);
+    ScrollViewSpellList_BG.bg = ScrollViewSpellList_BG:CreateTexture(nil, "BACKGROUND");
+    ScrollViewSpellList_BG.bg:SetAllPoints(true);
+    frame:SetScrollChild(ScrollViewSpellList_BG)
+    SelectedSpellDescription = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+    SelectedSpellDescription:SetPoint("TOPLEFT", 250, 170);
+    SelectedSpellDescription:SetSize(200, 300);
+    SelectedSpellDescription:SetText("Select the spell in the list at your right and change the display mode using the button below");
+    SelectedSpellDescription:SetTextHeight(18);
+
+
+    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN]) do
+        local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
+        button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+        button:SetWidth(200)
+        button:SetHeight(25)
+
+        button:SetText(k)
+        button:SetNormalFontObject("GameFontNormal")
+
+        local ntex = button:CreateTexture()
+        ntex:SetTexture("Interface/Buttons/UI-Panel-Button-Up")
+
+        ntex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ntex:SetAllPoints()
+        button:SetNormalTexture(ntex)
+
+        local htex = button:CreateTexture()
+        htex:SetTexture("Interface/Buttons/UI-Panel-Button-Highlight")
+        htex:SetTexCoord(0, 0.625, 0, 0.6875)
+        htex:SetAllPoints()
+        button:SetHighlightTexture(htex)
+
+        local ptex = button:CreateTexture()
+        ptex:SetTexture("Interface/Buttons/UI-Panel-Button-Down")
+        ptex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ptex:SetAllPoints()
+        button:SetPushedTexture(ptex)
+        indexEE = indexEE - 30
+
+        button:HookScript("OnClick",
+            function(self, button) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
+
+                SelectedSpellWacher = k;
+                if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
+                    if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
+                        -- body
+                        SPellWacherButtonDisplay:SetText("Dont Show")
+                        SelectedSpellDescription:SetText("["..SelectedSpellWacher.."]" .. " Will never be displayed in the UI.")
+                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
+                        -- body
+                        SPellWacherButtonDisplay:SetText("Self Cast Only")
+                        SelectedSpellDescription:SetText("["..SelectedSpellWacher.."]" .. " Will only be displayed if casted by yourself.")
+
+                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 3 then
+                        -- body
+                        SPellWacherButtonDisplay:SetText("ALL")
+                        SelectedSpellDescription:SetText("["..SelectedSpellWacher.."]" .. " Will be displayed if enyone cast it.")
+                    end
+                end
+
+
+            end)
+        ScrollViewSpellsButton[k] = button;
+    end
+
+end
+
+function SpellWacherOnTextChange(value)
+
+    SpellWacherSearchBox = value:GetText()
+    indexEE = 0;
+    for Key_, value in pairs(ScrollViewSpellsButton) do
+        if StringSearch(Key_, SpellWacherSearchBox) then
+
+            value:Show();
+            value:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+            indexEE = indexEE - 30;
+
+        elseif not StringSearch(Key_, SpellWacherSearchBox) then
+            value:Hide();
+        else
+            value:Show();
+        end
+    end
+end
+
+function StringSearch(value, StartWith)
+
+    StartWith = string.lower(StartWith);
+    value = string.lower(value);
+
+    return value:sub(0, #StartWith) == StartWith;
+
+end
 function OnSpellButtonClickDisplayHotOption(self, frame) --this function is called on LOAD.
 
 
@@ -8287,7 +8403,7 @@ function OnSpellButtonClickDisplayHotOption(self, frame) --this function is call
 
         if (SelectedSpellWacher) then
 
-      
+
 
             if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
 
@@ -8335,108 +8451,6 @@ end
 
 function OnLeave(self, motion)
     GameTooltip:Hide()
-end
-
-function OnSpellWacher_Scroll_Load(self, frame) --this function is called only on "OnLoad"
-
-    ScrollViewSpellList_BG = CreateFrame("Frame", nil, frame);
-    ScrollViewSpellList_BG:SetSize(200, 300);
-    ScrollViewSpellList_BG.bg = ScrollViewSpellList_BG:CreateTexture(nil, "BACKGROUND");
-    ScrollViewSpellList_BG.bg:SetAllPoints(true);
-    frame:SetScrollChild(ScrollViewSpellList_BG)
-    SelectedSpellDescription = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal");
-    SelectedSpellDescription:SetPoint("TOPRIGHT", 170, 170);
-    SelectedSpellDescription:SetSize(200, 300);
-
-    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN]) do
-        local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
-        button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
-        button:SetWidth(200)
-        button:SetHeight(25)
-
-        button:SetText(k)
-        button:SetNormalFontObject("GameFontNormal")
-
-        local ntex = button:CreateTexture()
-        ntex:SetTexture("Interface/Buttons/UI-Panel-Button-Up")
-
-        ntex:SetTexCoord(0, 0.625, 0, 0.6875)
-        ntex:SetAllPoints()
-        button:SetNormalTexture(ntex)
-
-        local htex = button:CreateTexture()
-        htex:SetTexture("Interface/Buttons/UI-Panel-Button-Highlight")
-        htex:SetTexCoord(0, 0.625, 0, 0.6875)
-        htex:SetAllPoints()
-        button:SetHighlightTexture(htex)
-
-        local ptex = button:CreateTexture()
-        ptex:SetTexture("Interface/Buttons/UI-Panel-Button-Down")
-        ptex:SetTexCoord(0, 0.625, 0, 0.6875)
-        ptex:SetAllPoints()
-        button:SetPushedTexture(ptex)
-        indexEE = indexEE - 30
-
-        button:HookScript("OnClick",
-            function(self, button) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
-
-                SelectedSpellWacher = k;
-                local spID = HealBot_GetSpellId(SelectedSpellWacher);
-                local desX = GetSpellDescription(spID);
-                SelectedSpellDescription:SetText(desX);
-                print(desX);
-                
-                if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
-                    if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
-                        -- body
-                        SPellWacherButtonDisplay:SetText("Dont Show")
-
-                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
-                        -- body
-                        SPellWacherButtonDisplay:SetText("Self Cast Only")
-                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 3 then
-                        -- body
-                        SPellWacherButtonDisplay:SetText("ALL")
-                    end
-                end
-
-
-            end)
-        ScrollViewSpellsButton[k] = button;
-    end
-
-
-
-
-
-end
-
-function SpellWacherOnTextChange(value)
-
-    SpellWacherSearchBox = value:GetText()
-    indexEE = 0;
-    for Key_, value in pairs(ScrollViewSpellsButton) do
-        if StringSearch(Key_, SpellWacherSearchBox) then
-
-            value:Show();
-            value:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
-            indexEE = indexEE - 30;
-
-        elseif not StringSearch(Key_, SpellWacherSearchBox) then
-            value:Hide();
-        else
-            value:Show();
-        end
-    end
-end
-
-function StringSearch(value, StartWith)
-
-    StartWith = string.lower(StartWith);
-    value = string.lower(value);
-
-    return value:sub(0, #StartWith) == StartWith;
-
 end
 
 function AddNewSpellWach(self) --work in progress (not implemented)
