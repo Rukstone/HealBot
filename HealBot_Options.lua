@@ -216,6 +216,7 @@ local HealBot_Debuff_Spells = {
         HEALBOT_CURE_TOXINS,
         HEALBOT_CLEANSE_SPIRIT,
         Cleasing_Totem,
+        Mass_Dispell,
 
 
     },
@@ -236,6 +237,9 @@ local HealBot_Racial_Debuff_Spells = {
 }
 
 local HealBot_Debuff_Types = {
+    [Mass_Dispell] = {
+        HEALBOT_MAGIC_en,
+    },
     [HEALBOT_PURIFY] = {
         HEALBOT_DISEASE_en,
         HEALBOT_POISON_en
@@ -480,6 +484,7 @@ function HealBot_Options_NewSkinb_OnClick(self)
 end
 
 function HealBot_Options_setNewSkin(newSkinName)
+
     Healbot_Config_Skins.numcols[newSkinName] = Healbot_Config_Skins.numcols[Healbot_Config_Skins.Current_Skin]
     Healbot_Config_Skins.btexture[newSkinName] = Healbot_Config_Skins.btexture[Healbot_Config_Skins.Current_Skin]
     Healbot_Config_Skins.bcspace[newSkinName] = Healbot_Config_Skins.bcspace[Healbot_Config_Skins.Current_Skin]
@@ -709,14 +714,28 @@ function HealBot_Options_setNewSkin(newSkinName)
     Healbot_Config_Skins.Panel_Anchor[newSkinName] = Healbot_Config_Skins.Panel_Anchor[Healbot_Config_Skins.Current_Skin
         ]
     Healbot_Config_Skins.Bars_Anchor[newSkinName] = Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]
-    if not HealBot_Config.SkinDefault[newSkinName] then HealBot_Config.SkinDefault[newSkinName] = 1 end
+    if not HealBot_Config.SkinDefault[newSkinName] then
+        HealBot_Config.SkinDefault[newSkinName] = 1
+    end
     Healbot_Config_Skins.AggroAlertLevel[newSkinName] = Healbot_Config_Skins.AggroAlertLevel[
         Healbot_Config_Skins.Current_Skin]
     Healbot_Config_Skins.ShowIncHeals[newSkinName] = Healbot_Config_Skins.ShowIncHeals[Healbot_Config_Skins.Current_Skin
         ]
-    Healbot_Config_Skins.incHealDur[newSkinName] = { D = 5, H = 3, C = 3 }
-    Healbot_Config_Skins.ExtraIncGroup[newSkinName] = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true,
-        [6] = true, [7] = true, [8] = true }
+    Healbot_Config_Skins.incHealDur[newSkinName] = {
+        D = 5,
+        H = 3,
+        C = 3
+    }
+    Healbot_Config_Skins.ExtraIncGroup[newSkinName] = {
+        [1] = true,
+        [2] = true,
+        [3] = true,
+        [4] = true,
+        [5] = true,
+        [6] = true,
+        [7] = true,
+        [8] = true
+    }
     Healbot_Config_Skins.ActionLocked[newSkinName] = Healbot_Config_Skins.ActionLocked[Healbot_Config_Skins.Current_Skin
         ]
     Healbot_Config_Skins.AutoClose[newSkinName] = Healbot_Config_Skins.AutoClose[Healbot_Config_Skins.Current_Skin]
@@ -740,7 +759,9 @@ function HealBot_Options_setNewSkin(newSkinName)
 
     unique = true;
     table.foreach(HealBot_Skins, function(index, skin)
-        if skin == newSkinName then unique = false; end
+        if skin == newSkinName then
+            unique = false;
+        end
     end)
     if unique then
         table.insert(HealBot_Skins, 2, newSkinName)
@@ -943,7 +964,9 @@ end
 
 function HealBot_Options_CombatProt_OnClick(self)
     Healbot_Config_Skins.CombatProt[HealBot_Options_CurCPSkins["Combat"]] = self:GetChecked() or 0
-    if Delay_RecalcParty < 2 then Delay_RecalcParty = 2; end
+    if Delay_RecalcParty < 2 then
+        Delay_RecalcParty = 2;
+    end
 end
 
 function HealBot_Options_CrashProt_OnTextChanged(self)
@@ -3464,7 +3487,9 @@ function HealBot_Options_ActionAnchor_Refresh(onselect)
 end
 
 function HealBot_Options_ActionBarsAnchor_Refresh(onselect)
-    if not onselect then HealBot_Options_ActionBarsAnchor_Initialize() end -- or wrong menu may be used !
+    if not onselect then
+        HealBot_Options_ActionBarsAnchor_Initialize()
+    end -- or wrong menu may be used !
     UIDropDownMenu_SetSelectedID(HealBot_Options_ActionBarsAnchor,
         Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin])
 end
@@ -5951,7 +5976,9 @@ function HealBot_Options_CDCPriority1_Refresh(onselect)
 end
 
 function HealBot_Options_CDCPriority2_Refresh(onselect)
-    if not onselect then HealBot_Options_CDCPriority2_Initialize() end
+    if not onselect then
+        HealBot_Options_CDCPriority2_Initialize()
+    end
     if not HealBot_Config.HealBotDebuffPriority[HEALBOT_MAGIC_en] then HealBot_Config.HealBotDebuffPriority[
             HEALBOT_MAGIC_en] = 13
     end
@@ -8287,31 +8314,85 @@ function HealBot_UpdateUsedMedia(event, mediatype, key)
 end
 
 ----------------------------------------RUKSTONE----------------------------------------
-local indexEE = 0
+
+local indexEE = 0;
 local ScrollViewSpellList_BG;
-local ScrollViewSpellsButton = {}
+local ScrollViewSpellsButton = {
+    ["Helpful"] = {},
+    ["Harmful"] = {}
+
+};
 local SpellWacherSearchBox; -- the spell name in the edit box.
 local SPellWacherButtonDisplay; -- the button that control the display of the spell
 local SelectedSpellWacher; -- the current selected spell (ID) from the GLOBAL wacher
 local SelectedSpellDescription;
 
+local SelectedSpellType = "Helpful";
 
-function OnSpellWacher_Scroll_Load(self, frame) --this function is called only on "OnLoad"
 
-    ScrollViewSpellList_BG = CreateFrame("Frame", nil, frame);
+function OnSpellWacher_TabChange(key)
+
+    if key ~= SelectedSpellType then
+        SelectedSpellDescription:SetText("Select Spell");
+        SelectedSpellWacher = nil;
+        
+    end
+    SelectedSpellType = key;
+
+    if key == "Helpful" then
+
+        for k,x in pairs(ScrollViewSpellsButton["Helpful"]) do
+
+            x:Show();
+        end
+        for k, x in pairs(ScrollViewSpellsButton["Harmful"]) do
+
+            x:Hide();
+        end
+
+
+    else
+        for k, x in pairs(ScrollViewSpellsButton["Helpful"]) do
+
+            x:Hide();
+        end
+
+        for k, x in pairs(ScrollViewSpellsButton["Harmful"]) do
+
+            x:Show();
+        end
+    end
+
+    SPellWacherButtonDisplay:Hide();
+
+
+
+
+
+end
+
+function OnSpellWacherScroll_Load(self, ScrollView) --this function is called only on "OnLoad"
+
+
+
+
+    ScrollViewSpellList_BG = CreateFrame("Frame", nil, ScrollView);
     ScrollViewSpellList_BG:SetSize(200, 300);
     ScrollViewSpellList_BG.bg = ScrollViewSpellList_BG:CreateTexture(nil, "BACKGROUND");
     ScrollViewSpellList_BG.bg:SetAllPoints(true);
-    frame:SetScrollChild(ScrollViewSpellList_BG)
-    SelectedSpellDescription = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+    ScrollView:SetScrollChild(ScrollViewSpellList_BG)
+    SelectedSpellDescription = ScrollView:CreateFontString(nil, "OVERLAY", "GameFontNormal");
     SelectedSpellDescription:SetPoint("TOPLEFT", 250, 170);
     SelectedSpellDescription:SetSize(200, 300);
-    SelectedSpellDescription:SetText("Select the spell in the list at your right and change the display mode using the button below");
+    SelectedSpellDescription:SetText("Select the spell in the list at your left and change the display mode using the button below");
     SelectedSpellDescription:SetTextHeight(18);
 
 
     for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN]) do
+
         local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
+        ScrollViewSpellsButton["Helpful"][k] = button;
+
         button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
         button:SetWidth(200)
         button:SetHeight(25)
@@ -8342,48 +8423,121 @@ function OnSpellWacher_Scroll_Load(self, frame) --this function is called only o
         button:HookScript("OnClick",
             function(self, button) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
 
+                SPellWacherButtonDisplay:Show();
+
                 SelectedSpellWacher = k;
                 if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
                     if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
                         -- body
                         SPellWacherButtonDisplay:SetText("Dont Show")
-                        SelectedSpellDescription:SetText("["..SelectedSpellWacher.."]" .. " Will never be displayed in the UI.")
+                        SelectedSpellDescription:SetText("[" ..
+                            SelectedSpellWacher .. "]" .. " Will be hidden in the UI.")
                     elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
                         -- body
                         SPellWacherButtonDisplay:SetText("Self Cast Only")
-                        SelectedSpellDescription:SetText("["..SelectedSpellWacher.."]" .. " Will only be displayed if casted by yourself.")
+                        SelectedSpellDescription:SetText("[" ..
+                            SelectedSpellWacher .. "]" .. " Will only be displayed if casted by yourself.")
 
                     elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 3 then
                         -- body
                         SPellWacherButtonDisplay:SetText("ALL")
-                        SelectedSpellDescription:SetText("["..SelectedSpellWacher.."]" .. " Will be displayed if enyone cast it.")
+                        SelectedSpellDescription:SetText("[" ..
+                            SelectedSpellWacher .. "]" .. " Will be displayed if enyone cast it.")
                     end
                 end
+                
+            end)
 
+    end
+
+
+    indexEE = 0;
+    for k, v in pairs(HealBot_GlobalsDefaults.Debuff_IgnoreList_R) do
+
+        local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
+        ScrollViewSpellsButton["Harmful"][k] = button;
+
+        button:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+        button:SetWidth(200)
+        button:SetHeight(25)
+
+        button:SetText(k)
+        button:SetNormalFontObject("GameFontNormal")
+
+        local ntex = button:CreateTexture()
+        ntex:SetTexture("Interface/Buttons/UI-Panel-Button-Up")
+
+        ntex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ntex:SetAllPoints()
+        button:SetNormalTexture(ntex)
+
+        local htex = button:CreateTexture()
+        htex:SetTexture("Interface/Buttons/UI-Panel-Button-Highlight")
+        htex:SetTexCoord(0, 0.625, 0, 0.6875)
+        htex:SetAllPoints()
+        button:SetHighlightTexture(htex)
+
+        local ptex = button:CreateTexture()
+        ptex:SetTexture("Interface/Buttons/UI-Panel-Button-Down")
+        ptex:SetTexCoord(0, 0.625, 0, 0.6875)
+        ptex:SetAllPoints()
+        button:SetPushedTexture(ptex)
+        indexEE = indexEE - 30
+
+        button:HookScript("OnClick",
+            function(self, button) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
+
+                SPellWacherButtonDisplay:Show();
+
+                SelectedSpellWacher = k;
+                if HealBot_Globals.Debuff_IgnoreList_R[SelectedSpellWacher] == true then
+                    -- body
+                    SPellWacherButtonDisplay:SetText("Show");
+                    SelectedSpellDescription:SetText("[" ..
+                    SelectedSpellWacher .. "]" .. " Will be hidden on the UI")
+                    
+                    
+
+
+                elseif HealBot_Globals.Debuff_IgnoreList_R[SelectedSpellWacher] == false then
+                    -- body
+                    SPellWacherButtonDisplay:SetText("Hide");
+                    SelectedSpellDescription:SetText("[" ..
+                    SelectedSpellWacher .. "]" .. " Will be Displayed on the UI")
+               
+
+                end
 
             end)
-        ScrollViewSpellsButton[k] = button;
     end
+
+    OnSpellWacher_TabChange("Helpful");
+
 
 end
 
-function SpellWacherOnTextChange(value)
+function SpellWacherOnTextChange(button)
 
-    SpellWacherSearchBox = value:GetText()
-    indexEE = 0;
-    for Key_, value in pairs(ScrollViewSpellsButton) do
-        if StringSearch(Key_, SpellWacherSearchBox) then
+    if ScrollViewSpellsButton[SelectedSpellType] then
+        SpellWacherSearchBox = button:GetText()
+        indexEE = 0;
+        for k, value in pairs(ScrollViewSpellsButton[SelectedSpellType]) do
+            if StringSearch(k, SpellWacherSearchBox) then
 
-            value:Show();
-            value:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
-            indexEE = indexEE - 30;
+                value:Show();
+                value:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
+                indexEE = indexEE - 30;
 
-        elseif not StringSearch(Key_, SpellWacherSearchBox) then
-            value:Hide();
-        else
-            value:Show();
+            elseif not StringSearch(k, SpellWacherSearchBox) then
+                value:Hide();
+            else
+                value:Show();
+            end
+
         end
     end
+
+
 end
 
 function StringSearch(value, StartWith)
@@ -8394,6 +8548,7 @@ function StringSearch(value, StartWith)
     return value:sub(0, #StartWith) == StartWith;
 
 end
+
 function OnSpellButtonClickDisplayHotOption(self, frame) --this function is called on LOAD.
 
 
@@ -8401,36 +8556,60 @@ function OnSpellButtonClickDisplayHotOption(self, frame) --this function is call
 
     local MyFrameOnclick = function(self, button) --this function is caled when player click on the button to set hide/show spell
 
-        if (SelectedSpellWacher) then
+
+         if SelectedSpellType == "Helpful" then
+            if (SelectedSpellWacher) then
 
 
 
-            if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
-
-                if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
-                    -- body
-                    HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 2;
-                    SPellWacherButtonDisplay:SetText("Self Cast Only")
-                elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
-                    -- body
-                    HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 3;
-                    SPellWacherButtonDisplay:SetText("ALL")
-                elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 3 then
-                    -- body
-                    HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 1;
-                    SPellWacherButtonDisplay:SetText("Dont Show")
+                if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] then
+    
+                    if HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 1 then
+                        -- body
+                        HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 2;
+                        SPellWacherButtonDisplay:SetText("Self Cast Only")
+                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 2 then
+                        -- body
+                        HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 3;
+                        SPellWacherButtonDisplay:SetText("ALL")
+                    elseif HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] == 3 then
+                        -- body
+                        HealBot_Globals.WatchHoT[HEALBOT_HERO_EN][SelectedSpellWacher] = 1;
+                        SPellWacherButtonDisplay:SetText("Dont Show")
+                    end
                 end
+                --reset the HUD for the new config
+                HealBot_SetResetFlag("SOFT");
             end
-            --reset the HUD for the new config
-            HealBot_SetResetFlag("SOFT");
+        else
+
+            if HealBot_Globals.Debuff_IgnoreList_R[SelectedSpellWacher] == true then
+                HealBot_Globals.Debuff_IgnoreList_R[SelectedSpellWacher] = false;
+                SPellWacherButtonDisplay:SetText("Hide")
+                SelectedSpellDescription:SetText("[" ..
+                SelectedSpellWacher .. "]" .. " Will be Displayed on the UI")
+                
+
+            else
+                HealBot_Globals.Debuff_IgnoreList_R[SelectedSpellWacher] = true;
+                SPellWacherButtonDisplay:SetText("Show")
+                SelectedSpellDescription:SetText("[" ..
+                SelectedSpellWacher .. "]" .. " Will be hidden on the UI")
+
+            end
+
+            
         end
+
+
+    
     end
 
     SPellWacherButtonDisplay = frame;
     SPellWacherButtonDisplay:HookScript("OnClick", MyFrameOnclick)
     SPellWacherButtonDisplay:HookScript("OnEnter", OnEnter)
     SPellWacherButtonDisplay:HookScript("OnLeave", OnLeave)
-    SPellWacherButtonDisplay:SetText("Self Cast Only");
+    --SPellWacherButtonDisplay:SetText("Self Cast Only");
     --MyFrameOnclick(self,SPellWacherButtonDisplay)
 
 

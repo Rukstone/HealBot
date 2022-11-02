@@ -308,7 +308,9 @@ local HealBot_ClassIconCoord = {
     WARLOCK = {2,4},
     PALADIN = {3,1},
     DEATHKNIGHT = {3,2},
-    DEFAULT = {4,4}};
+    DEFAULT = {4,4}
+
+};
     
 local ciCol,ciRow=nil,nil
 function HealBot_Action_SetClassIconTexture(button, unit)
@@ -321,7 +323,6 @@ function HealBot_Action_SetClassIconTexture(button, unit)
     iconName:SetTexture([[Interface\AddOns\HealBot\Images\icon_class.tga]]);
     iconName:SetTexCoord(left,left+0.25,top,top+0.25);
 end
-
 local thisX=nil
 local HealBot_ResetHeaderSkinDone={}
 function HealBot_Panel_clearResetHeaderSkinDone()
@@ -329,7 +330,6 @@ function HealBot_Panel_clearResetHeaderSkinDone()
         HealBot_ResetHeaderSkinDone[x]=nil;
     end
 end
-
 function HealBot_Action_PositionButton(button,OsetX,OsetY,bWidth,bHeight,xHeader)
     brspace=Healbot_Config_Skins.brspace[Healbot_Config_Skins.Current_Skin];
     if xHeader then
@@ -386,7 +386,6 @@ function HealBot_Action_PositionButton(button,OsetX,OsetY,bWidth,bHeight,xHeader
     end
     return OsetY;
 end
-
 local HealBot_AggroBarSize=0
 function HealBot_Action_SetAddHeight()
     if Healbot_Config_Skins.ShowAggro[Healbot_Config_Skins.Current_Skin]==0 and 
@@ -413,12 +412,12 @@ function HealBot_Action_SetAddHeight()
     end
     HealBot_AddHeight=HealBot_AddHeight+HealBot_MultiRowHoToffset;
 end
-
-
-
 function HealBot_Action_SetHeightWidth(width,height,bWidth, numBars)
+
     HealBot_Action:SetHeight(height);
-    if (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]<3 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==2) or (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]>2 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==1) then curcol=curcol+1; end;
+    if (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin] < 3 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==2) or (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]>2 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==1) then 
+        curcol=curcol+1; 
+    end;
     HealBot_Action:SetWidth(width+bWidth+7+(HealBot_MultiColHoToffset*curcol))
     HealBot_Action_setPoint()
 end
@@ -1884,11 +1883,14 @@ function HealBot_Panel_SetupBars(showHeaders)
     bcspace=Healbot_Config_Skins.bcspace[Healbot_Config_Skins.Current_Skin];
     cols=Healbot_Config_Skins.numcols[Healbot_Config_Skins.Current_Skin];
     i=0
-    if Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]<3 then
-        curcol=2-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]
-    else
-        curcol=2-(3-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin])
+    if Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin] then
+        if Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin] < 3 then
+            curcol = 2-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]
+        else
+            curcol = 2-(3-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin])
+        end
     end
+  
     z=1;
     OffsetY = 4 + HealBot_AggroBarSize;
     OffsetX = 7;

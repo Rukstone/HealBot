@@ -106,6 +106,9 @@ Adorned = GetSpellInfo(986001) or "Adorned";
 Tidal_Swell = GetSpellInfo(978698) or "Tidal Swell";
 --ID 978692 Diciple of the Tides
 Diciple_of_the_Tides = GetSpellInfo(978692) or "Diciple of the Tides";
+--ID 32374 [Mass Dispel]
+Mass_Dispell = GetSpellInfo(32374) or "Mass Dispel";
+
 -----------------------------------------------
 
 HEALBOT_SILK_BANDAGE                    = GetItemInfo(6450) or "Silk Bandage";

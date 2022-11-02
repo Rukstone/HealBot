@@ -197,7 +197,10 @@ function HealBot_Clear_BuffWatch()
     end
 end
 
+
 function HealBot_Set_BuffWatch(buffName)
+
+
     table.insert(HealBot_BuffWatch, buffName);
 end
 
@@ -3050,12 +3053,25 @@ end
 
 local DebuffNameIn = "x"
 local curDebuffs = {}
---local HEALBOT_HERO=nil
 local myhTargets = {}
 local inSpellRange = 0 -- added by Diacono
 local dPrio = 100
 local debuffDuration = nil
 local trackdebuffIcon = {}
+--RUKSTONE -------------------------------------------------
+
+Debuff_ignoreList = {};-- Added by Rukstone
+
+function Debuff_IgnoreListSetDefaut()
+
+    Debuff_ignoreList = HealBot_GlobalsDefaults.Debuff_IgnoreList_R;
+
+
+
+end
+Debuff_IgnoreListSetDefaut();
+-------------------------------------------------
+
 function HealBot_CheckUnitDebuffs(hbGUID)
     if not HealBot_UnitID[hbGUID] then return end
     xUnit = HealBot_UnitID[hbGUID]
@@ -3076,10 +3092,16 @@ function HealBot_CheckUnitDebuffs(hbGUID)
     while true do
         dName, _, _, _, debuff_type, debuffDuration, _, _, _, _ = UnitDebuff(xUnit, y)
 
+
         if dName then
+            if Debuff_ignoreList[dName] and Debuff_ignoreList[dName] == true then
+                do break end
+            end
             y = y + 1
             curDebuffs[dName] = {}
-            if HealBot_Config.HealBot_Custom_Debuffs[dName] then debuff_type = HEALBOT_CUSTOM_en end
+            if HealBot_Config.HealBot_Custom_Debuffs[dName] then 
+                debuff_type = HEALBOT_CUSTOM_en 
+            end
             curDebuffs[dName]["priority"] = HealBot_Options_retDebuffPriority(dName, debuff_type)
             curDebuffs[dName]["type"] = debuff_type
             curDebuffs[dName]["duration"] = debuffDuration
@@ -3774,9 +3796,13 @@ function HealBot_GetUnitID(hbGUID)
 end
 
 function HealBot_OnEvent_PartyMembersChanged(self)
-    if HealBot_IsFighting then HealBot_InCombatUpdate = true end
+    if HealBot_IsFighting then 
+        HealBot_InCombatUpdate = true 
+    end
     HealBot_luVars["CheckSkin"] = true
-    if Delay_RecalcParty < 3 then Delay_RecalcParty = 3; end
+    if Delay_RecalcParty < 3 then 
+        Delay_RecalcParty = 3; 
+    end
     HealBot_IncHeals_PartyChange()
     if Healbot_Config_Skins.CombatProt[Healbot_Config_Skins.Current_Skin] == 1 then
         for xUnit, _ in pairs(HealBot_Unit_Button) do
@@ -5881,7 +5907,7 @@ function HealBot_DoReset_Cures()
         [6] = HEALBOT_DISPEL_MAGIC,
         [7] = HEALBOT_CURE_TOXINS,
         [8] = HEALBOT_DISPEL_CURSE,
-        [9] = Cleasing_Totem,
+        [9] = Mass_Dispell,
         [10] = Cleasing_Totem,
 
 
@@ -6001,24 +6027,3 @@ function HealBot_Update_BuffsForSpecDD(ddId, bType)
     end
 end
 
-function RukstoneFunctionality(unityID, CurrentHP, MaxHP)
-    --check if entity has Rejuvenation
-
-
-end
-
-function Experimental_TS()
-
-    print("Start Runing [Experimental_TS]")
-
-    --start, PenanceColdown, enabled = GetSpellCooldown(HEALBOT_PENANCE);
-
-    local btn = CreateFrame("Button", "test", UIParent, "SecureActionButtonTemplate[B], ActionButtonTemplate[/B]")
-    btn:SetPoint("CENTER")
-    btn:SetWidth(100)
-    btn:SetHeight(55)
-    btn:SetText("Test")
-
-    print("End Runing [Experimental_TS]")
-
-end

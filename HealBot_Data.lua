@@ -119,10 +119,17 @@ HealBot_ConfigDefaults = {
   EmergIncCustom = {
     [HEALBOT_HERO] = 1,
   },
-  SkinDefault = { [HEALBOT_SKINS_STD] = 1, [HEALBOT_OPTIONS_GROUPHEALS] = 1, [HEALBOT_OPTIONS_EMERGENCYHEALS] = 1,
+  SkinDefault = { 
+    [HEALBOT_SKINS_STD] = 1, 
+    [HEALBOT_OPTIONS_GROUPHEALS] = 1, 
+    [HEALBOT_OPTIONS_EMERGENCYHEALS] = 1,
     [HEALBOT_ZONE_AV] = 1,
-    [HEALBOT_SKIN_FLUID] = 1, [HEALBOT_SKIN_VIVID] = 1, [HEALBOT_SKIN_LIGHT] = 1, [HEALBOT_SKIN_SQUARE] = 1,
-    [HEALBOT_MAGIC] = 1, },
+    [HEALBOT_SKIN_FLUID] = 1, 
+    [HEALBOT_SKIN_VIVID] = 1, 
+    [HEALBOT_SKIN_LIGHT] = 1, 
+    [HEALBOT_SKIN_SQUARE] = 1,
+    [HEALBOT_MAGIC] = 1, 
+  },
   EnabledKeyCombo = nil,
   EnabledSpellTarget = {},
   EnabledSpellTrinket1 = {},
@@ -137,7 +144,9 @@ HealBot_ConfigDefaults = {
   HealBotBuffText = {},
   HealBotBuffDropDown = {},
   HealBotDebuffDropDown = {},
-  HealBotDebuffPriority = { [HEALBOT_DISEASE_en] = 15,
+  HealBotDebuffPriority = { 
+
+    [HEALBOT_DISEASE_en] = 15,
     [HEALBOT_MAGIC_en] = 13,
     [HEALBOT_POISON_en] = 16,
     [HEALBOT_CURSE_en] = 14,
@@ -327,6 +336,17 @@ HealBot_GlobalsDefaults = {
       [3] = 1,
       [4] = 1
     },
+
+  },
+  Debuff_IgnoreList_R ={
+  ["Corruption"] = false,
+  ["Curse of Agony"] = false,
+  ["Venom Sting"] = false,
+
+
+
+
+
 
   },
   WatchHoT = {
