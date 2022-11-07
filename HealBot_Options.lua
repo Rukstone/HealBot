@@ -3597,7 +3597,7 @@ local HealBot_Options_Class_HoTctlName_List = {
     --Acension Custon from Rukstone
     [HEALBOT_TIDAL_WAVES] = HEALBOT_HERO,
     [HEALBOT_TIDAL_FORCE] = HEALBOT_HERO,
-    [Fungal_Disposition] = HEALBOT_HERO,
+    [Frugal_Disposition] = HEALBOT_HERO,
     [Efflorescence] = HEALBOT_HERO,
     [Alter_Time] = HEALBOT_HERO,
     [GrowingLight] = HEALBOT_HERO,
@@ -8371,7 +8371,7 @@ function OnSpellWacher_TabChange(key)
 
 end
 
-function OnSpellWacherScroll_Load(self, ScrollView) --this function is called only on "OnLoad"
+function OnSpellWacherScroll_Load(MainWindow, ScrollView) --this function is called only on "OnLoad"
 
 
 

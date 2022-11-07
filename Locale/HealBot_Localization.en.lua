@@ -19,7 +19,8 @@ HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
-
+--954801  [Light's Hammer]
+Lights_Hammer =  GetSpellInfo(954801) or "Light's Hammer";
 --965281  [Blooming Growth] 
 BloomingGrowth = GetSpellInfo(965281) or "Blooming Growth";
 --2127120  [Tidecaller's Gift] this make part on the same stack of Tidecaller
@@ -35,7 +36,7 @@ Efflorescence = GetSpellInfo(86382) or "Efflorescence";
 --ID 86397  [Alter Time] 
 Alter_Time = GetSpellInfo(86397) or "Alter Time";
 --ID 81514 [Fungal Disposition]
-Fungal_Disposition = GetSpellInfo(81514) or "Fungal Disposition";
+Frugal_Disposition = GetSpellInfo(81514) or "Frugal Disposition";
 --ID 8170 Cleasing Totem
 Cleasing_Totem = GetSpellInfo(8170) or "Cleansing Totem";
 --ID 965938 [Seed of Life]

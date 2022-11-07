@@ -930,7 +930,9 @@ function HealBot_IncHeals_parseLHC4(htGUID, casterName, endTime, casterGUID, spe
         if utGUID then
             if (type(utGUID) == "table") then
                 table.foreach(utGUID, function (index,uGUID)
-                    if HealBot_retPetGUID(uGUID) then uGUID=HealBot_retPetGUID(uGUID) end
+                    if HealBot_retPetGUID(uGUID) then 
+                        uGUID=HealBot_retPetGUID(uGUID) 
+                    end
                     if HealBot_UnitID[uGUID] then
                         if spellType==HealComm.DIRECT_HEALS and endTime then 
                             HealBot_setHealsIncEndTime(uGUID, casterName, endTime) 
@@ -942,10 +944,13 @@ function HealBot_IncHeals_parseLHC4(htGUID, casterName, endTime, casterGUID, spe
                             HealBot_addHealBotAddonIncHeals(hbCommsID)
                         end
                         HealBot_IncHeals_HealsInUpdate(uGUID, HealComm.DIRECT_HEALS)
+
                     end
                 end)
             else
-                if HealBot_retPetGUID(utGUID) then utGUID=HealBot_retPetGUID(utGUID) end
+                if HealBot_retPetGUID(utGUID) then 
+                    utGUID=HealBot_retPetGUID(utGUID) 
+                end
                 if HealBot_UnitID[utGUID] then
                     if spellType==HealComm.DIRECT_HEALS and endTime then 
                         HealBot_setHealsIncEndTime(utGUID, casterName, endTime) 

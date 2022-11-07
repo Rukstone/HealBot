@@ -8186,12 +8186,7 @@
 			<!--RUKSTONE-->
 			<!-- SPELL WACHER WINDOW -->
 			<Frame name="HealBot_Options_Panel8" hidden="true" setAllPoints="true">
-
-
-
 				<frames name="Healbot_options_Helpful_SpellTracker_Window" hidden="true" setAllPoints="true">
-					
-
 					<EditBox name="SpellWacherEditBox" inherits="HealBot_Options_EditBoxTemplate" autoFocus="false" historyLines="32" justifyH="LEFT" virtual="true">
 						<Size>
 							<AbsDimension x="170" y="25" />
@@ -8224,8 +8219,6 @@
 							</OnLoad>
 						</Scripts>
 					</Button>
-
-		
 					<ScrollFrame name="SpellWacherScrollFrame_Helpful" inherits="UIPanelScrollFrameTemplate">
 						<Size>
 							<AbsDimension x="200" y="350" />
@@ -8239,12 +8232,10 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								OnSpellWacherScroll_Load(Helpful_SpellTrack_ScrollView_Window,SpellWacherScrollFrame_Helpful)
+								OnSpellWacherScroll_Load(Healbot_options_Helpful_SpellTracker_Window,SpellWacherScrollFrame_Helpful)
 							</OnLoad>
 						</Scripts>
 					</ScrollFrame>
-	
-
 					<Button name="Button_HealBot_Track_FrameSelect_Helpful_Frameb" inherits="UIPanelButtonTemplate" text="Helpful">
 						<Size>
 							<AbsDimension x="82" y="18" />

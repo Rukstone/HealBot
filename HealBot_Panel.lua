@@ -382,7 +382,9 @@ function HealBot_Action_PositionButton(button,OsetX,OsetY,bWidth,bHeight,xHeader
             end
         end
         OsetY = OsetY+bHeight+brspace+HealBot_AddHeight
-        if showCI and not HealBot_retdebuffTargetIcon(button.unit) then HealBot_Action_SetClassIconTexture(button, button.unit) end
+        if showCI and not HealBot_retdebuffTargetIcon(button.unit) then 
+            HealBot_Action_SetClassIconTexture(button, button.unit) 
+        end
     end
     return OsetY;
 end
