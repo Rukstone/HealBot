@@ -14,8 +14,17 @@ local tonumber = tonumber
 local floor = floor
 local HealBot_Action_SetAllAttribs_flag = false
 local mins, secs = 0, 0
-local DoInitTab = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true, [6] = true, [7] = true, [9] = true,
-    [10] = true, }
+local DoInitTab = { 
+    [1] = true, 
+    [2] = true, 
+    [3] = true, 
+    [4] = true, 
+    [5] = true, 
+    [6] = true, 
+    [7] = true, 
+    [9] = true,
+    [10] = true, 
+}
 local bar = nil
 local sName = nil
 local sRank = nil
@@ -7399,14 +7408,10 @@ end
 function HealBot_Options_OnLoad(self)
 
     table.insert(UISpecialFrames, self:GetName());
-
     -- Tabs
     PanelTemplates_SetNumTabs(self, 8);
     self.selectedTab = 1;
     PanelTemplates_UpdateTabs(self);
-
-
-
     DoInitTab = {
         [1] = true,
         [2] = true,
@@ -7419,7 +7424,6 @@ function HealBot_Options_OnLoad(self)
         [10] = true,
         [11] = true
     }
-
     g = _G["HealBot_Options_HeadersSkinsFrame"]
     g:Hide()
     g = _G["HealBot_Options_IconsSkinsFrame"]
@@ -7478,10 +7482,6 @@ function HealBot_Options_OnLoad(self)
     g:SetTextColor(1, 1, 0, 0.92)
     g = _G["HealBot_SkinsSubFrameSelectHealSortFramef"]
     g:SetTextColor(1, 1, 0, 0.92)
-
-
-
-
 end
 
 function HealBot_Options_OnShow(self)
@@ -7725,8 +7725,7 @@ function HealBot_Options_SetSkins()
             HealBot_Options_CombatProtSkins_Refresh()
         end
         HealBot_Options_BarAlpha:SetValue(Healbot_Config_Skins.Barcola[Healbot_Config_Skins.Current_Skin] or 95);
-        HealBot_Options_BarAlphaInHeal:SetValue(Healbot_Config_Skins.BarcolaInHeal[Healbot_Config_Skins.Current_Skin] or
-            35);
+        HealBot_Options_BarAlphaInHeal:SetValue(Healbot_Config_Skins.BarcolaInHeal[Healbot_Config_Skins.Current_Skin] or 35);
         HealBot_Options_BarTextureS:SetValue(texturesIndex[
             Healbot_Config_Skins.btexture[Healbot_Config_Skins.Current_Skin]] or 1)
         HealBot_Options_BarHeightS:SetValue(Healbot_Config_Skins.bheight[Healbot_Config_Skins.Current_Skin] or 22)

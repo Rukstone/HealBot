@@ -686,8 +686,6 @@ function HealBot_SlashCmd(HBcmd)
         end
         HealBot_Options_MonitorDebuffs:SetChecked(HealBot_Config.DebuffWatch)
         HealBot_Options_MonitorDebuffs_Toggle()
-    elseif (HBcmd == "tidal") then
-        Experimental_TS()
     else
         if x then HBcmd = HBcmd .. " " .. x end
         if y then HBcmd = HBcmd .. " " .. y end
@@ -1015,12 +1013,10 @@ function HealBot_Set_Timers()
         HB_Timer3 = 5
     end
 end
-
 local HealBot_Options_Timer = {}
 function HealBot_setOptions_Timer(value)
     HealBot_Options_Timer[value] = true
 end
-
 local HealBot_ErrorNum = 0
 local HealBot_testBarInit = {}
 local HealBot_trackPartyFrames = false
@@ -1028,12 +1024,10 @@ local hbRequestTime = 0
 function HealBot_initTestBar(b)
     table.insert(HealBot_testBarInit, b)
 end
-
 local hbDelayResetUnitStatus = {}
 function HealBot_setDelayResetUnitStatus(hbGUID)
     hbDelayResetUnitStatus[hbGUID] = GetTime() + 0.3
 end
-
 local lTimer, eTimer = 0, GetTime()
 function HealBot_OnUpdate(self)
     lTimer = GetTime() - eTimer
@@ -1338,7 +1332,7 @@ function HealBot_OnUpdate(self)
                         HealBot_Options_SetSkinBars()
                     elseif HealBot_Options_Timer[170] then
                         HealBot_Options_Timer[170] = nil
-                        HealBot_configClassHoT(strsub(HealBot_PlayerRaceEN, 1, 3))
+                        HealBot_configClassHoT()
                     elseif HealBot_Options_Timer[180] then
                         HealBot_Options_Timer[180] = nil
                         if Healbot_Config_Skins.HidePartyFrames[Healbot_Config_Skins.Current_Skin] == 1 then
@@ -1567,7 +1561,6 @@ function HealBot_OnUpdate(self)
         end
     end
 end
-
 function HealBot_doClearAggro()
     for xUnit, xGUID in pairs(HealBot_endAggro) do
         HealBot_ClearUnitAggro(xUnit, xGUID)
@@ -1575,7 +1568,6 @@ function HealBot_doClearAggro()
     end
     HealBot_luVars["DelayClearAggro"] = nil
 end
-
 function HealBot_doDebuff()
     for xGUID, xType in pairs(HealBot_DelayDebuffCheck) do
         if xType == "F" then
@@ -1585,7 +1577,6 @@ function HealBot_doDebuff()
     end
     HealBot_luVars["DelayDebuffCheck"] = nil
 end
-
 function HealBot_doBuff()
     for xGUID, xType in pairs(HealBot_DelayBuffCheck) do
         if xType == "F" then
@@ -1595,7 +1586,6 @@ function HealBot_doBuff()
     end
     HealBot_luVars["DelayBuffCheck"] = nil
 end
-
 function HealBot_doAura()
     for xGUID, xUnit in pairs(HealBot_DelayAuraCheck) do
         if UnitIsVisible(xUnit) then
@@ -1605,11 +1595,9 @@ function HealBot_doAura()
     end
     HealBot_luVars["DelayAuraCheck"] = nil
 end
-
 function HealBot_RetVersion()
     return HEALBOT_VERSION
 end
-
 function HealBot_OnEvent(self, event, ...)
     local arg1, arg2, arg3, arg4 = ...;
     if (event == "CHAT_MSG_ADDON") then
@@ -1691,7 +1679,6 @@ function HealBot_OnEvent(self, event, ...)
         HealBot_AddDebug("OnEvent (" .. event .. ")");
     end
 end
-
 function HealBot_OnEvent_VariablesLoaded(self)
     table.foreach(HealBot_ConfigDefaults, function(key, val)
         if not HealBot_Config[key] then
@@ -1857,7 +1844,6 @@ function HealBot_OnEvent_VariablesLoaded(self)
     HealBot_setOptions_Timer(200)
     HealBot_luVars["UseCrashProtection"] = GetTime() + HealBot_Config.CrashProtStartTime
 end
-
 function HealBot_useCrashProtection()
     _, z = GetNumMacros()
     x = 18 - z
@@ -1876,8 +1862,10 @@ function HealBot_useCrashProtection()
         HealBot_Options_CrashProt:Disable();
     end
 end
-
 function HealBot_Load(hbCaller)
+
+    P_Fill_Data_Need_it();--RUKSTONE
+
     HealBot_useCrashProtection()
     HealBot_Options_Set_Current_Skin()
     if not HealBot_Config.DisabledKeyCombo then
@@ -1894,7 +1882,7 @@ function HealBot_Load(hbCaller)
     else
         HealBot_RecalcParty(true);
     end
-    HealBot_configClassHoT(strsub(HealBot_PlayerRaceEN, 1, 3))
+    HealBot_configClassHoT()
     HealBot_CheckTalents = true
     if HealBot_AddonMsgType == 2 then HealBot_Comms_SendAddonMsg("CTRA", "SR", HealBot_AddonMsgType, HealBot_PlayerName) end
     HealBot_AddChat("  " .. HEALBOT_ADDON .. HEALBOT_LOADED);
@@ -1909,10 +1897,10 @@ function HealBot_Load(hbCaller)
     HealBot_setOptions_Timer(140)
     HealBot_Set_Timers()
 end
-
 local hbClassHoTwatch = {}
-function HealBot_configClassHoT(race)
+function HealBot_configClassHoT()
 
+    
     hbClassHoTwatch = HealBot_Globals.WatchHoT[HEALBOT_HERO_EN]
     for k, v in pairs(hbClassHoTwatch) do
         if v == 3 then
@@ -1928,7 +1916,32 @@ function HealBot_configClassHoT(race)
 
 
 end
+--fix a problem that users with old setings was not loading the data making the UI Frame not showing only the setings Panel.
+function P_Fill_Data_Need_it()
 
+    if not HealBot_Globals.WatchHoT then
+        HealBot_Globals.WatchHoT = HealBot_GlobalsDefaults.WatchHoT;
+    end
+    if not HealBot_Globals.WatchHoT[HEALBOT_HERO_EN] then
+        HealBot_Globals.WatchHoT[HEALBOT_HERO_EN] = HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN];
+    end
+    if not HealBot_Globals.Custom_Debuff_Categories then
+        HealBot_Globals.Custom_Debuff_Categories = HealBot_GlobalsDefaults.Custom_Debuff_Categories;
+    end
+    if not HealBot_Globals.HoTindex then
+        HealBot_Globals.HoTindex = HealBot_GlobalsDefaults.HoTindex;
+    end
+    if not HealBot_Globals.HoTname then
+        HealBot_Globals.HoTname = HealBot_GlobalsDefaults.HoTname;
+    end
+    if not HealBot_Globals.TopRole then
+        HealBot_Globals.HoTname = HealBot_GlobalsDefaults.TopRole;
+    end
+    if not HealBot_Globals.Debuff_IgnoreList_R then
+        HealBot_Globals.Debuff_IgnoreList_R = HealBot_GlobalsDefaults.Debuff_IgnoreList_R;
+    end
+
+end
 function HealBot_Register_Events()
     if HealBot_Config.DisableHealBot == 0 then
         HealBot:RegisterEvent("PLAYER_REGEN_DISABLED");
@@ -1972,31 +1985,26 @@ function HealBot_Register_Events()
     HealBot_setOptions_Timer(125)
     HealBot_setOptions_Timer(5000)
 end
-
 function HealBot_Register_Aggro()
     HealBot:RegisterEvent("UNIT_COMBAT")
     HealBot:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE")
 end
-
 function HealBot_UnRegister_Aggro()
     HealBot:UnregisterEvent("UNIT_COMBAT")
     HealBot:UnregisterEvent("UNIT_THREAT_SITUATION_UPDATE")
     HealBot_ClearAggro(true)
 end
-
 function HealBot_Register_ReadyCheck()
     HealBot:RegisterEvent("READY_CHECK")
     HealBot:RegisterEvent("READY_CHECK_CONFIRM")
     HealBot:RegisterEvent("READY_CHECK_FINISHED")
 end
-
 function HealBot_UnRegister_ReadyCheck()
     HealBot:UnregisterEvent("READY_CHECK")
     HealBot:UnregisterEvent("READY_CHECK_CONFIRM")
     HealBot:UnregisterEvent("READY_CHECK_FINISHED")
     HealBot_OnEvent_ReadyCheckFinished(nil);
 end
-
 function HealBot_Register_Mana()
     HealBot:RegisterEvent("UNIT_MANA")
     HealBot:RegisterEvent("UNIT_RAGE")
@@ -2006,7 +2014,6 @@ function HealBot_Register_Mana()
     HealBot:RegisterEvent("UNIT_MAXENERGY")
     HealBot:RegisterEvent("UNIT_MAXRUNIC_POWER")
 end
-
 function HealBot_UnRegister_Mana()
     HealBot:UnregisterEvent("UNIT_MANA")
     HealBot:UnregisterEvent("UNIT_RAGE")
@@ -2017,7 +2024,6 @@ function HealBot_UnRegister_Mana()
     HealBot:UnregisterEvent("UNIT_MAXENERGY")
     HealBot:UnregisterEvent("UNIT_MAXRUNIC_POWER")
 end
-
 function HealBot_UnRegister_Events()
 
     HB_Timer1 = 0.5
@@ -2026,7 +2032,6 @@ function HealBot_UnRegister_Events()
     HealBot_Action_Set_Timers(true)
 
 end
-
 local aUnit, oUnit, eUnit = nil, nil, nil
 local aGUID = nil
 local HealBot_nonAggro = {}
@@ -2064,7 +2069,6 @@ function HealBot_CheckAggro()
         end
     end
 end
-
 function HealBot_CheckUnitAggro(aUnit, oUnit)
     y = UnitThreatSituation(aUnit)
     xGUID = HealBot_UnitGUID(aUnit)
@@ -2089,7 +2093,6 @@ function HealBot_CheckUnitAggro(aUnit, oUnit)
             , true, y, xGUID, z) end
     end
 end
-
 function HealBot_CalcThreat(unit)
     z = nil
     if UnitIsEnemy(unit, unit .. "target") then
@@ -2105,12 +2108,10 @@ function HealBot_CalcThreat(unit)
     end
     return z
 end
-
 function HealBot_qClearUnitAggro(unit, hbGUID)
     HealBot_endAggro[unit] = hbGUID
     HealBot_luVars["DelayClearAggro"] = true
 end
-
 function HealBot_ClearUnitAggro(unit, hbGUID)
     if UnitExists(unit) and eUnit and hbGUID then
         z = HealBot_CalcThreat(unit)
@@ -2131,7 +2132,6 @@ function HealBot_ClearUnitAggro(unit, hbGUID)
         if unit then HealBot_Action_UpdateAggro(unit, false, nil, hbGUID) end
     end
 end
-
 function HealBot_SetAggro(unit)
     uName = UnitName(unit .. "targettarget")
     aGUID = HealBot_Derive_GUID_fuName(uName)
@@ -2175,19 +2175,16 @@ function HealBot_SetAggro(unit)
         end
     end
 end
-
 function HealBot_nileUnit()
     eUnit = nil
     HealBot_unitHealth["eUnit"] = 0
     HealBot_unitHealthMax["eUnit"] = 0
 end
-
 function HealBot_Update_nonAggro()
     for xGUID, xUnit in pairs(HealBot_UnitID) do
         HealBot_nonAggro[xGUID] = xUnit
     end
 end
-
 function HealBot_RetSetAggroSize()
     z = 0
     for _, _ in pairs(HealBot_Aggro1) do
@@ -2199,7 +2196,6 @@ function HealBot_RetSetAggroSize()
     end
     return z, y
 end
-
 function HealBot_ClearAggro(force, unit)
     if unit then
         xGUID = HealBot_UnitGUID(unit)
@@ -2235,7 +2231,6 @@ function HealBot_ClearAggro(force, unit)
         end
     end
 end
-
 local HealBotAddonSummary = {}
 local HealBotAddonIncHeals = {}
 local hbExtra1, hbExtra2 = nil, nil
@@ -2337,7 +2332,6 @@ function HealBot_OnEvent_AddonMsg(self, addon_id, msg, distribution, sender_id)
         end
     end
 end
-
 function HealBot_addHealBotAddonIncHeals(id)
     if not HealBotAddonIncHeals[id] then
         HealBotAddonIncHeals[id] = 1
@@ -2345,19 +2339,15 @@ function HealBot_addHealBotAddonIncHeals(id)
         HealBotAddonIncHeals[id] = HealBotAddonIncHeals[id] + 1
     end
 end
-
 function HealBot_RetHealBotAddonSummary()
     return HealBotAddonSummary
 end
-
 function HealBot_RetHealBotAddonIncHeals()
     return HealBotAddonIncHeals
 end
-
 function HealBot_GetInfo()
     return HealBot_Vers
 end
-
 function HealBot_Split(msg, char)
     for x, _ in pairs(arrg) do
         arrg[x] = nil;
@@ -2372,7 +2362,6 @@ function HealBot_Split(msg, char)
     end
     return arrg;
 end
-
 function HealBot_ParseCTRAMsg(sender_id, inc_msg)
     if (strsub(inc_msg, 1, 3) == "RES") then
         if (inc_msg == "RESNO") then
@@ -2421,7 +2410,6 @@ function HealBot_ParseCTRAMsg(sender_id, inc_msg)
         HealBot_addPrivateTanks()
     end
 end
-
 local dGUID, uGUID = nil, nil
 local hbTempUnitNames = {}
 function HealBot_Derive_GUID_fuName(unitName)
@@ -2436,7 +2424,6 @@ function HealBot_Derive_GUID_fuName(unitName)
     end
     return dGUID
 end
-
 function HealBot_OnEvent_RaidRosterUpdate(self)
     for x, _ in pairs(HealBot_MainTanks) do
         HealBot_MainTanks[x] = nil;
@@ -2462,7 +2449,6 @@ function HealBot_OnEvent_RaidRosterUpdate(self)
     end
     HealBot_addPrivateTanks()
 end
-
 function HealBot_addPrivateTanks()
     local PrivTanks = HealBot_Panel_retPrivateTanks()
     table.foreach(PrivTanks, function(i, xGUID)
@@ -2470,7 +2456,6 @@ function HealBot_addPrivateTanks()
     end)
     if Delay_RecalcParty < 2 then Delay_RecalcParty = 2; end
 end
-
 function HealBot_addExtraTank(hbGUID)
     z = true
     for i = 1, #HealBot_MainTanks do
@@ -2483,7 +2468,6 @@ function HealBot_addExtraTank(hbGUID)
         HealBot_MainTanks[#HealBot_MainTanks + 1] = hbGUID
     end
 end
-
 function HealBot_removePrivateTanks(hbGUID)
     for i = 1, #HealBot_MainTanks do
         if hbGUID == HealBot_MainTanks[i] then
@@ -2500,7 +2484,6 @@ function HealBot_removePrivateTanks(hbGUID)
         end
     end
 end
-
 function HealBot_OnEvent_UnitHealth(self, unit, health, healthMax)
     hGUID = HealBot_UnitGUID(unit)
     if not hGUID then return end
@@ -2543,7 +2526,6 @@ function HealBot_OnEvent_UnitHealth(self, unit, health, healthMax)
     end
     --   if Healbot_Config_Skins.ShowAggro[Healbot_Config_Skins.Current_Skin]==1 and UnitIsEnemy(hUnit, hUnit.."target") then HealBot_SetAggro(hUnit) end
 end
-
 function HealBot_Reset_UnitHealth(hbGUID)
     if hbGUID and HealBot_UnitID[hbGUID] then
         HealBot_OnEvent_UnitHealth(nil, HealBot_UnitID[hbGUID], UnitHealth(HealBot_UnitID[hbGUID]),
@@ -2554,7 +2536,6 @@ function HealBot_Reset_UnitHealth(hbGUID)
         end
     end
 end
-
 function HealBot_VehicleHealth(unit)
     vGUID = HealBot_UnitGUID(unit)
     if not vGUID then
@@ -2567,7 +2548,6 @@ function HealBot_VehicleHealth(unit)
     end
     return HealBot_unitHealth[vGUID], HealBot_unitHealthMax[vGUID]
 end
-
 function HealBot_NoVehicle(unit)
     HBvUnits = HealBot_VehicleUnit[unit]
     if not HBvUnits then
@@ -2589,7 +2569,6 @@ function HealBot_NoVehicle(unit)
         end
     end
 end
-
 function HealBot_VehicleSetHealth(unit, health, healthMax)
     vGUID = HealBot_UnitGUID(unit)
     if not vGUID then
@@ -2599,7 +2578,6 @@ function HealBot_VehicleSetHealth(unit, health, healthMax)
         HealBot_unitHealthMax[vGUID] = healthMax
     end
 end
-
 function HealBot_OnEvent_VehicleChange(self, unit, enterVehicle)
     xGUID = HealBot_UnitGUID(unit)
     if not xGUID then return end
@@ -2627,7 +2605,6 @@ function HealBot_OnEvent_VehicleChange(self, unit, enterVehicle)
     HealBot_Action_ResetUnitStatus(xUnit)
     Delay_RecalcParty = 1
 end
-
 function HealBot_OnEvent_LeavingVehicle(self, unit)
     xGUID = HealBot_UnitGUID(unit)
     if not xGUID then return end
@@ -2638,11 +2615,9 @@ function HealBot_OnEvent_LeavingVehicle(self, unit)
         HealBot_Action_SetVAggro(HealBot_UnitGUID(vUnit), nil)
     end
 end
-
 function HealBot_retIsInVehicle(unit)
     return HealBot_UnitInVehicle[unit]
 end
-
 function HealBot_CheckAllUnitVehicle(unit)
     if unit then
         HealBot_OnEvent_VehicleChange(nil, unit, true)
@@ -2652,7 +2627,6 @@ function HealBot_CheckAllUnitVehicle(unit)
         end
     end
 end
-
 function HealBot_OnEvent_UnitMana(self, unit)
     xGUID = HealBot_UnitGUID(unit)
     if not xGUID then return end
@@ -2660,13 +2634,11 @@ function HealBot_OnEvent_UnitMana(self, unit)
     if not xUnit or not HealBot_UnitName[xGUID] or HealBot_Config.DisableHealBot == 1 then return end
     HealBot_Action_SetBar3Value(HealBot_Unit_Button[xUnit])
 end
-
 function HealBot_OnEvent_UnitMaxMana(self, unit)
     xGUID = HealBot_UnitGUID(unit)
     if not xGUID then return end
     HealBot_talentSpam(xGUID, "update", 1)
 end
-
 function HealBot_OnEvent_UnitCombat(self, unit)
     xGUID = HealBot_UnitGUID(unit)
     if not xGUID then return end

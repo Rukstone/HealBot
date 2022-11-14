@@ -24,8 +24,6 @@ HealBot_Default_Sounds = {
   [3] = { name = "Elf Bell Toll", file = "Sound\\Doodad\\BellTollNightElf.wav" },
 };
 HealBot_Default_Font = "Friz Quadrata TT";
-
-
 HealBot_ConfigDefaults = {
   Version = HEALBOT_VERSION,
   FastAttrib = 1,
@@ -462,7 +460,6 @@ HealBot_GlobalsDefaults = {
     },
   },
 };
-
 HealBot_Config_SkinsDefaults = {
   Skin_ID                      = 1,
   Skin_Version                 = HealBotSkinVersion,
@@ -1573,7 +1570,6 @@ HealBot_Config_SkinsDefaults = {
     [HEALBOT_CLASSES_RANGES] = 0,
   },
 };
-
 HealBot_Config = {};
 HealBot_Globals = {};
 Healbot_Config_Skins = {};
