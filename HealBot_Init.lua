@@ -33,7 +33,7 @@ end
 
 function HealBot_Init_SetSpec()
 HealBot_Spec = {
-    ["DRUI"] = {
+    [HEALBOT_HERO_EN] = {
 
         [1] = HEALBOT_BALANCE,
         [2] = HEALBOT_FERAL,

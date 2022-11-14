@@ -342,12 +342,7 @@ HealBot_GlobalsDefaults = {
   ["Corruption"] = false,
   ["Curse of Agony"] = false,
   ["Venom Sting"] = false,
-
-
-
-
-
-
+  
   },
   WatchHoT = {
     [HEALBOT_HERO_EN] = { --1 for not displaying 2 for self only 3 for all

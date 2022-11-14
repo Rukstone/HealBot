@@ -3063,11 +3063,7 @@ local trackdebuffIcon = {}
 Debuff_ignoreList = {};-- Added by Rukstone
 
 function Debuff_IgnoreListSetDefaut()
-
     Debuff_ignoreList = HealBot_GlobalsDefaults.Debuff_IgnoreList_R;
-
-
-
 end
 Debuff_IgnoreListSetDefaut();
 -------------------------------------------------
@@ -3123,8 +3119,7 @@ function HealBot_CheckUnitDebuffs(hbGUID)
                     WatchTarget, WatchGUID = HealBot_Options_retDebuffWatchTarget(debuff_type, hbGUID);
                 end
 
-                if (debuff_type == HEALBOT_POISON_en) and
-                    (HealBot_DebuffSpell[HEALBOT_DISEASE_en] == HEALBOT_ABOLISH_DISEASE) then
+                if (debuff_type == HEALBOT_POISON_en) and (HealBot_DebuffSpell[HEALBOT_DISEASE_en] == HEALBOT_ABOLISH_DISEASE) then
                     if (not HealBot_DebuffSpell[HEALBOT_POISON_en]) and (HealBot_Talents[HEALBOT_BODY_AND_SOUL] > 0) then
                         WatchTarget = { ["Self"] = true, };
                     end
@@ -4220,7 +4215,9 @@ function HealBot_GetTalentInfo(hbGUID, unit)
             uClass = strsub(uClass, 1, 4)
             s = HealBot_Init_retSpec(uClass, w)
             if s then
-                if hbGUID == HealBot_PlayerGUID then HealBot_Config.CurrentSpec = w end
+                if hbGUID == HealBot_PlayerGUID then 
+                    HealBot_Config.CurrentSpec = w 
+                end
                 HealBot_UnitSpec[hbGUID] = " " .. s .. " "
                 HealBot_talentSpam(hbGUID, "update", 0)
             end

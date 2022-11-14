@@ -608,13 +608,17 @@ if (playerClass == "HERO") then
 
 		hotData[HEALBOT_REJUVENATION] = {
 			interval = 3,
-			levels = { 4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69, 75, 80 },
-			averages = { 32, 56, 116, 180, 244, 304, 388, 488, 608, 756, 888, 932, 1060, 1192, 1690 }
+			levels = { 1, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69, 75, 80 },
+			averages = { 30, 55, 105, 170, 225, 280,360,445,555,655,745,775,880, 0, 0 }
 		}
 		-- Regrowth
-		hotData[HEALBOT_REGROWTH] = { interval = 3, ticks = 7, coeff = 1.316,
-			levels = { 12, 18, 24, 30, 36, 42, 48, 54, 60, 65, 71, 77 },
-			averages = { 98, 175, 259, 343, 427, 546, 686, 861, 1064, 1274, 1792, 2345 }
+		hotData[HEALBOT_REGROWTH] = { 
+			interval = 3,
+			ticks = 7,
+			coeff = 1.316,
+			levels = { 12, 18, 24, 30, 36, 42, 48, 54, 60, 65, 70, 77 },
+			averages = { 77, 140, 210, 273, 343, 441, 553, 693, 854,1022,1255,}
+			--averages = { 98, 175, 259, 343, 427, 546, 686, 861, 1064, 1274, 1792, 2345 }
 		}
 		-- Lifebloom
 		hotData[HEALBOT_LIFEBLOOM] = {
@@ -622,9 +626,9 @@ if (playerClass == "HERO") then
 			ticks = 7,
 			coeff = 0.66626,
 			dhCoeff = 0.34324 * 0.8,
-			levels = { 64, 72, 80 },
-			averages = { 224, 287, 371 },
-			bomb = { 480, 616, 776 }
+			levels = { 60, 72, 80 },
+			averages = { 126, 287, 371 },
+			bomb = { 402, 616, 776 }
 		}
 		-- Wild Growth
 		hotData[HEALBOT_WILD_GROWTH] = {
@@ -632,7 +636,7 @@ if (playerClass == "HERO") then
 			ticks = 7,
 			coeff = 0.8056,
 			levels = { 60, 70, 75, 80 },
-			averages = { 686, 861, 1239, 1442 }
+			averages = { 553, 693, 1239, 1442 }
 
 		}
 		-- Regrowth
@@ -640,16 +644,16 @@ if (playerClass == "HERO") then
 			coeff = 0.2867,
 			levels = hotData[HEALBOT_REGROWTH].levels,
 			averages = {
-				avg(84, 98),
-				avg(164, 188),
-				avg(240, 274),
-				avg(318, 360),
-				avg(405, 457),
-				avg(511, 575),
-				avg(646, 724),
-				avg(809, 905),
-				avg(1003, 1119),
-				avg(1215, 1355),
+				avg(64,74),
+				avg(109,125),
+				avg(157,179),
+				avg(206,232),
+				avg(274,310),
+				avg(362,409),
+				avg(478,538),
+				avg(507,569),
+				avg(625,699),
+				avg(932,1045),--RANK 10
 				avg(1710, 1908),
 				avg(2234, 2494)
 			},
@@ -660,19 +664,19 @@ if (playerClass == "HERO") then
 		spellData[HEALBOT_HEALING_TOUCH] = {
 			levels = { 1, 8, 14, 20, 26, 32, 38, 44, 50, 56, 60, 62, 69, 74, 79 },
 			averages = {
-				avg(37, 51),
-				avg(88, 112),
-				avg(195, 243),
-				avg(363, 445),
-				avg(490, 594),
-				avg(636, 766),
-				avg(802, 960),
-				avg(1199, 1427),
-				avg(1299, 1539),
-				avg(1620, 1912),
-				avg(1944, 2294),
-				avg(2026, 2392),
-				avg(2321, 2739),
+				avg(31,43),
+				avg(68,88),
+				avg(132,167),
+				avg(216,269),
+				avg(288,354),
+				avg(393,481),
+				avg(522,636),
+				avg(1013,1231),
+				avg(1155,1396),
+				avg(1244,1478),
+				avg(1385,1665),
+				avg(1441,1735 ),
+				avg(1753,2087),--FINAL RANK LVL 70
 				avg(3223, 3805),
 				avg(3750, 4428)
 			}
@@ -685,6 +689,154 @@ if (playerClass == "HERO") then
 			ticks = 4,
 			levels = { 30, 40, 50, 60, 70, 75, 80 },
 			averages = { 351, 515, 765, 1097, 1518, 2598, 3035 }
+		}
+		--Paladins
+		spellData[HEALBOT_HOLY_LIGHT] = { 
+			coeff = 2.5 / 3.5 * 1.25,
+			levels = { 1, 6, 14, 22, 30, 38, 46, 54, 60, 62, 70, 75, 80 },
+			averages = {
+				avg(34, 44),
+				avg(65,83),
+				avg(121,149),
+				avg(208,246),
+				avg(324,377),
+				avg(515,592),
+				avg(730,839),
+				avg(1007,1156),
+				avg(1281,1470),
+				avg(1404,1612),
+				avg(1655,1917),
+				avg(4199, 4677),
+				avg(4888, 5444)
+			},
+			increase = { 63, 81, 112, 139, 155, 159, 156, 135, 116, 115, 70, 52, 0 }
+		}
+		-- Flash of Light
+		spellData[HEALBOT_FLASH_OF_LIGHT] = { 
+			coeff = 1.5 / 3.5 * 1.25,
+			levels = { 20, 26, 34, 42, 50, 58, 66, 74, 79 },
+			averages = {
+				avg(83,97),
+				avg(126,149),
+				avg(190,215),
+				avg(257,293),
+				avg(341,389),
+				avg(444,503),
+				avg(582,658),
+				avg(682, 764),
+				avg(785, 879)
+			},
+			increase = { 60, 70, 73, 72, 66, 57, 42, 20, 3 } 
+		}
+		-- Talent data
+		-- Need to figure out a way of supporting +6% healing from imp devo aura, might not be able to
+		-- Healing Light (Add)
+		talentData[HEALBOT_HEALING_LIGHT] = { mod = 0.04, current = 0 }
+		-- Divinity (Add)
+		talentData[HEALBOT_DIVINITY] = { mod = 0.01, current = 0 }
+		-- Touched by the Light (Add?)
+		talentData[HEALBOT_TOUCHED_BY_THE_LIGHT] = { mod = 0.10, current = 0 }
+
+		hotData[HEALBOT_RENEW] = {
+			coeff = 1,
+			interval = 3,
+			ticks = 5,
+			levels = { 1, 14, 26, 32, 38, 44, 50, 56, 60, 65, 70,},
+			averages = { 35, 70, 120, 160, 210,275 , 345, 430, 540, 645, 670, 735, 1235, 1400 }
+		}
+		spellData[HEALBOT_GREATER_HEAL] ={  
+			coeff = 0.9,
+			levels = { 1,4,10,16,22,28,34,40,46,52,58,60.63,68},
+			increase = { 204, 197, 184, 165, 162, 142, 111, 92, 30 },
+			averages = {
+				avg(41, 50),
+				avg(67, 79),
+				avg(112, 129),
+				avg(205, 234),
+				avg(310, 352),
+				avg(409,462),
+				avg(542,608),
+				avg(635,723),
+				avg(852,965),
+				avg(1117,1263),
+				avg(1392,1569),
+				avg(1521,1715),
+				avg(1595,1882),
+				avg(1916,2245),
+
+			}
+		}
+		-- Prayer of Healing
+		spellData[HEALBOT_PRAYER_OF_HEALING] = { 
+			coeff = 0.2798, levels = { 30, 40, 50, 60, 60, 68, 76 },
+			increase = { 65, 64, 60, 48, 50, 33, 18 },
+			averages = {
+				avg(301, 321),
+				avg(444, 472),
+				avg(657, 695),
+				avg(939, 991),
+				avg(997, 1053),
+				avg(1246, 1316),
+				avg(2091, 2209)
+			}
+		}
+		-- Flash Heal
+		spellData[HEALBOT_FLASH_HEAL] = { 
+			coeff = 1.5 / 3.5,
+			levels = { 20, 26, 32, 38, 44, 52, 58, 61, 67, 73, 79 },
+			increase = { 114, 118, 120, 117, 118, 111, 100, 89, 67, 56, 9 },
+			averages = {
+				avg(133,162),
+				avg(177,213),
+				avg(235,281),
+				avg(302,358),
+				avg(410,485),
+				avg(533,630),
+				avg(671,788),
+				avg(749,867),
+				avg(896,1039),--lvl 70 max
+				avg(1578, 1832),
+				avg(1887, 2198)
+			}
+		}
+		-- Binding Heal
+		spellData[HEALBOT_BINDING_HEAL] = { 
+			coeff = 1.5 / 3.5, levels = { 64, 72, 78 },
+			averages = {
+				avg(1042, 1338),
+				avg(1619, 2081),
+				avg(1952, 2508)
+			},
+			increase = { 30, 24, 7 }
+		}
+		-- Penance
+		spellData[HEALBOT_PENANCE] = {
+			coeff = 0.857,
+			ticks = 3,
+			levels = { 60, 70, 75, 80 },
+			averages = {
+				avg(670, 756),
+				avg(805, 909),
+				avg(1278, 1442),
+				avg(1484, 1676)
+			}
+		}
+		-- Heal
+		spellData[HEALBOT_HEAL] = { 
+			coeff = 3 / 3.5, levels = { 16, 22, 28, 34 },
+			averages = {
+				avg(295, 341),
+				avg(429, 491),
+				avg(566, 642),
+				avg(712, 804)
+			},
+			increase = { 153, 185, 208, 207 }
+		}
+		-- Lesser Heal
+		spellData[HEALBOT_LESSER_HEAL] = {
+			levels = { 1, 4, 10 },
+			averages = { avg(46, 56), avg(71, 85), avg(135, 157) },
+			increase = { 71, 83, 112 }
 		}
 
 		-- Talent data, these are filled in later and modified on talent changes
@@ -708,10 +860,8 @@ if (playerClass == "HERO") then
 		--And your Insect Swarm,Lifebloom and Efflorecense spell by 2 sec.
 		local NaturesSplendor = GetSpellInfo(57865)
 		talentData[NaturesSplendor] = { mod = 1, current = 0 }
-
 		local TreeofLife = GetSpellInfo(33891) or "Tree of Life"
 		local Innervate = GetSpellInfo(29166) or "Innervate"
-
 		local bloomBombIdols = {
 			[28355] = 87,
 			[33076] = 105,
@@ -724,153 +874,7 @@ if (playerClass == "HERO") then
 			[42580] = 376,
 			[51423] = 448
 		}
-
-		--Paladins
-
-		spellData[HEALBOT_HOLY_LIGHT] = { coeff = 2.5 / 3.5 * 1.25,
-			levels = { 1, 6, 14, 22, 30, 38, 46, 54, 60, 62, 70, 75, 80 },
-			averages = {
-				avg(50, 60),
-				avg(96, 116),
-				avg(203, 239),
-				avg(397, 455),
-				avg(628, 708),
-				avg(894, 998),
-				avg(1209, 1349),
-				avg(1595, 1777),
-				avg(2034, 2266),
-				avg(2232, 2486),
-				avg(2818, 3138),
-				avg(4199, 4677),
-				avg(4888, 5444)
-			},
-			increase = { 63, 81, 112, 139, 155, 159, 156, 135, 116, 115, 70, 52, 0 }
-		}
-		-- Flash of Light
-		spellData[HEALBOT_FLASH_OF_LIGHT] = { coeff = 1.5 / 3.5 * 1.25,
-			levels = { 20, 26, 34, 42, 50, 58, 66, 74, 79 },
-			averages = {
-				avg(81, 93),
-				avg(124, 144),
-				avg(189, 211),
-				avg(256, 288),
-				avg(346, 390),
-				avg(445, 499),
-				avg(588, 658),
-				avg(682, 764),
-				avg(785, 879)
-			},
-			increase = { 60, 70, 73, 72, 66, 57, 42, 20, 3 } }
-
-		-- Talent data
-		-- Need to figure out a way of supporting +6% healing from imp devo aura, might not be able to
-		-- Healing Light (Add)
-		talentData[HEALBOT_HEALING_LIGHT] = { mod = 0.04, current = 0 }
-		-- Divinity (Add)
-
-		talentData[HEALBOT_DIVINITY] = { mod = 0.01, current = 0 }
-		-- Touched by the Light (Add?)
-		talentData[HEALBOT_TOUCHED_BY_THE_LIGHT] = { mod = 0.10, current = 0 }
-
-		hotData[HEALBOT_RENEW] = {
-			coeff = 1,
-			interval = 3,
-			ticks = 5,
-			levels = { 8, 14, 20, 26, 32, 38, 44, 50, 56, 60, 65, 70, 75, 80 },
-			averages = { 45, 100, 175, 245, 315, 400, 510, 650, 810, 970, 1010, 1110, 1235, 1400 }
-		}
-
-		spellData[HEALBOT_GREATER_HEAL] =
-		{ coeff = 3 / 3.5,
-			levels = { 40, 46, 52, 58, 60, 63, 68, 73, 78 },
-			increase = { 204, 197, 184, 165, 162, 142, 111, 92, 30 },
-			averages = {
-				avg(899, 1013),
-				avg(1149, 1289),
-				avg(1437, 1609),
-				avg(1798, 2006),
-				avg(1966, 2194),
-				avg(2074, 2410),
-				avg(2394, 2784),
-				avg(3395, 3945),
-				avg(3950, 4590)
-			}
-		}
-		-- Prayer of Healing
-		spellData[HEALBOT_PRAYER_OF_HEALING] = { coeff = 0.2798, levels = { 30, 40, 50, 60, 60, 68, 76 },
-			increase = { 65, 64, 60, 48, 50, 33, 18 },
-			averages = {
-				avg(301, 321),
-				avg(444, 472),
-				avg(657, 695),
-				avg(939, 991),
-				avg(997, 1053),
-				avg(1246, 1316),
-				avg(2091, 2209)
-			}
-		}
-		-- Flash Heal
-		spellData[HEALBOT_FLASH_HEAL] = { coeff = 1.5 / 3.5,
-			levels = { 20, 26, 32, 38, 44, 52, 58, 61, 67, 73, 79 },
-			increase = { 114, 118, 120, 117, 118, 111, 100, 89, 67, 56, 9 },
-			averages = {
-				avg(193, 237),
-				avg(258, 314),
-				avg(327, 393),
-				avg(400, 478),
-				avg(518, 616),
-				avg(644, 764),
-				avg(812, 958),
-				avg(913, 1059),
-				avg(1101, 1279),
-				avg(1578, 1832),
-				avg(1887, 2198)
-			}
-		}
-
-		-- Binding Heal
-		spellData[HEALBOT_BINDING_HEAL] = { coeff = 1.5 / 3.5, levels = { 64, 72, 78 },
-			averages = {
-				avg(1042, 1338),
-				avg(1619, 2081),
-				avg(1952, 2508)
-			},
-			increase = { 30, 24, 7 }
-		}
-		-- Penance
-
-		spellData[HEALBOT_PENANCE] = {
-			coeff = 0.857,
-			ticks = 3,
-			levels = { 60, 70, 75, 80 },
-			averages = {
-				avg(670, 756),
-				avg(805, 909),
-				avg(1278, 1442),
-				avg(1484, 1676)
-			}
-		}
-		-- Heal
-
-		spellData[HEALBOT_HEAL] = { coeff = 3 / 3.5, levels = { 16, 22, 28, 34 },
-			averages = {
-				avg(295, 341),
-				avg(429, 491),
-				avg(566, 642),
-				avg(712, 804)
-			},
-			increase = { 153, 185, 208, 207 }
-		}
-		-- Lesser Heal
-
-		spellData[HEALBOT_LESSER_HEAL] = {
-			levels = { 1, 4, 10 },
-			averages = { avg(46, 56), avg(71, 85), avg(135, 157) },
-			increase = { 71, 83, 112 }
-		}
-
 		-- Spiritual Healing (Add)
-
 		local SpiritualHealing = GetSpellInfo(14898)
 		talentData[SpiritualHealing] = { mod = 0.02, current = 0 }
 		-- Empowered Healing (Add, also 0.04 for FH/BH)
@@ -911,7 +915,6 @@ if (playerClass == "HERO") then
 			levels = { 30, 40, 50, 60, 70, 80 },
 			averages = { 116, 160, 220, 348, 456, 652 }
 		}
-
 		local ChainHeal = GetSpellInfo(1064)
 		spellData[ChainHeal] = {
 			coeff = 2.5 / 3.5,
@@ -955,15 +958,14 @@ if (playerClass == "HERO") then
 			coeff = 1.5 / 3.5,
 			levels = { 20, 28, 36, 44, 52, 60, 66, 72, 77 },
 			increase = { 102, 109, 110, 108, 100, 84, 58, 40, 18 },
-			averages = { avg(162, 186), 
-			avg(247, 281), avg(337, 381), 
-			avg(458, 514), avg(631, 705), 
-			avg(832, 928), avg(1039, 1185),
-			avg(1382, 1578), 
-			avg(1606, 1834) 
+			averages = { avg(162, 186),
+				avg(247, 281), avg(337, 381),
+				avg(458, 514), avg(631, 705),
+				avg(832, 928), avg(1039, 1185),
+				avg(1382, 1578),
+				avg(1606, 1834)
+			}
 		}
-		}
-
 		-- Talent data
 		local EarthShield = GetSpellInfo(49284)
 		-- Improved Chain Heal (Multi)
@@ -978,10 +980,7 @@ if (playerClass == "HERO") then
 		-- Purification (Add)
 		local Purification = GetSpellInfo(16178)
 		talentData[Purification] = { mod = 0.02, current = 0 }
-
 		local Tapped = GetSpellInfo(85059);
-
-
 		-- Set bonuses
 		-- T7 Resto 4 piece, +5% healing on Chain Heal and Healing Wave
 		itemSetsData["T7 Resto"] = { 40508, 40509, 40510, 40512, 40513, 39583, 39588, 39589, 39590, 39591 }
@@ -990,7 +989,6 @@ if (playerClass == "HERO") then
 			48280, 48281, 48282, 48283, 48284, 48295, 48296, 48297, 48298, 48299, 48301, 48302, 48303,
 			48304, 48300, 48306, 48307, 48308, 48309, 48305, 48286, 48287, 48288, 48289, 48285, 48293, 48292, 48291, 48290, 48294
 		}
-
 		-- Totems
 		local lhwTotems = {
 			[42598] = 320,
@@ -1006,8 +1004,6 @@ if (playerClass == "HERO") then
 			[38368] = 102,
 			[28523] = 87
 		}
-
-
 		local wgTicks = {}
 		local ActiveFrugal = {}
 		-- Keep track of who has riptide on them
@@ -1032,6 +1028,20 @@ if (playerClass == "HERO") then
 		}
 		local flashSPLibrams = {
 			[51472] = 510
+		}
+		spellData[Cauterizing_Fire] = {
+			levels = { 1, 3, 6, 9, 12, 15, 19, 22, 25, 29, 32, 35, 38, 41 },
+			averages = {
+				avg(13, 21),
+				avg(37, 52),
+				avg(58, 78),
+				avg(58, 78),
+				avg(58, 78),
+				avg(58, 78),
+				avg(58, 78),
+
+			},coeff = 1.5 / 3.5,
+			increase = { 55, 74, 102, 142, 151, 158, 156, 150, 132, 110, 107, 71, 40, 0 }
 		}
 		local activeBeaconGUID, hasDivineFavor
 		local hotTotals, hasRegrowth = {}, {}
@@ -1072,6 +1082,8 @@ if (playerClass == "HERO") then
 				HEALBOT_FLASH_HEAL,
 				HEALBOT_FLASH_OF_LIGHT,
 				HEALBOT_PENANCE,
+				Cauterizing_Fire,
+
 
 			}
 		}
@@ -1239,6 +1251,8 @@ if (playerClass == "HERO") then
 					-- 22398 - Idol of Rejuvenation, +50 SP to Rejuv
 				elseif (playerCurrentRelic == 22398) then
 					spellPower = spellPower + 50
+				elseif (playerCurrentRelic == 261018) then
+					spellPower = spellPower + 53
 				end
 
 				local duration, ticks
@@ -1251,29 +1265,24 @@ if (playerClass == "HERO") then
 					ticks = duration / hotData[spellName].interval
 					totalTicks = ticks
 				end
-
 				spellPower = spellPower * (((duration / 15) * 1.88) * (1 + talentData[HEALBOT_EMPOWERED_REJUVENATION].current))
 				spellPower = spellPower / ticks
 				healAmount = healAmount / ticks
-
 				--38366 - Idol of Pure Thoughts, +33 SP base per tick
 				if (playerCurrentRelic == 38366) then
 					spellPower = spellPower + 33
 				end
-
 				-- Nature's Splendor, +6 seconds
-				if (talentData[NaturesSplendor].mod >= 1) then totalTicks = totalTicks + 1 end
-
+				if (talentData[NaturesSplendor].mod >= 1) then
+					totalTicks = totalTicks + 1
+				end
 				-- Regrowth
 			elseif (spellName == HEALBOT_REGROWTH) then
-
 				--spellPower = spellPower * (hotData[spellName].coeff * (1 + talentData[EmpoweredRejuv].current))
 				spellPower = spellPower * hotData[spellName].coeff
 				spellPower = spellPower / hotData[spellName].ticks
 				healAmount = healAmount / hotData[spellName].ticks
 				healAmount = healAmount + talentData[NaturesSplendor].current * 5
-
-
 				totalTicks = 7
 				-- Nature's Splendor, +6 seconds
 				if (talentData[NaturesSplendor].mod >= 1) then
@@ -1285,7 +1294,6 @@ if (playerClass == "HERO") then
 						totalTicks = totalTicks + 2
 					end
 				end
-
 				-- Lifebloom
 			elseif (spellName == HEALBOT_LIFEBLOOM) then
 				-- Figure out the bomb heal, apparently Gift of Nature double dips and will heal 10% for the HOT + 10% again for the direct heal
@@ -1297,7 +1305,6 @@ if (playerClass == "HERO") then
 				local bombSpell = bombSpellPower * (hotData[spellName].dhCoeff * 1.88)
 				bombAmount = math.ceil(calculateGeneralAmount(hotData[spellName].levels[rank], hotData[spellName].bomb[rank],
 					bombSpell, spModifier, healModifier + talentData[HEALBOT_GIFT_OF_NATURE].current))
-
 				-- Figure out the hot tick healing
 				spellPower = spellPower * (hotData[spellName].coeff * (1 + talentData[HEALBOT_EMPOWERED_REJUVENATION].current))
 				spellPower = spellPower / hotData[spellName].ticks
@@ -1391,8 +1398,6 @@ if (playerClass == "HERO") then
 				spellPower = spellPower / hotData[spellName].ticks
 				healAmount = healAmount / hotData[spellName].ticks
 				healAmount = healAmount + talentData[NaturesSplendor].current * 5
-
-
 				totalTicks = 7
 				-- Nature's Splendor, +6 seconds
 				if (talentData[NaturesSplendor].mod >= 1) then
@@ -1425,15 +1430,12 @@ if (playerClass == "HERO") then
 			if talentData[BlessedResilience] then
 				healModifier = healModifier + talentData[BlessedResilience].current
 			end
-
 			if talentData[SpiritualHealing] then
 				healModifier = healModifier + talentData[SpiritualHealing].current
 			end
 			if talentData[Purification] then
 				healModifier = healModifier + talentData[Purification].current
 			end
-
-
 			-- Add grace if it's active on them
 			if (activeGraceGUID == guid) then
 				healModifier = healModifier + activeGraceModifier
@@ -1455,236 +1457,202 @@ if (playerClass == "HERO") then
 					spellPower = spellPower + 44
 				end
 			end
+			if spellData[spellName] then
 
-			-- Regrowth
-			if (spellName == HEALBOT_REGROWTH) then
-				-- Glyph of Regrowth - +20% if target has Regrowth
-				if (glyphCache[54743] and hasRegrowth[guid]) then
-					healModifier = healModifier * 1.20
+				if spellData[spellName].coeff then
+					spellPower = spellPower * (spellData[spellName].coeff * 1.88)
 				end
+			
+				-- Regrowth
+				if (spellName == HEALBOT_REGROWTH) then
+					-- Glyph of Regrowth - +20% if target has Regrowth
+					if (glyphCache[54743] and hasRegrowth[guid]) then
+						healModifier = healModifier * 1.20
+					end
+					-- Nourish
+				elseif (spellName == HEALBOT_NOURISH) then
+					-- 46138 - Idol of Flourishing Life, +187 Nourish SP
+					if (playerCurrentRelic == 46138) then
+						spellPower = spellPower + 187
+					end
 
-				if talentData[HEALBOT_EMPOWERED_REJUVENATION] then
-					spellPower = spellPower *
-						((spellData[spellName].coeff * 1.88) * (1 + talentData[HEALBOT_EMPOWERED_REJUVENATION].current))
-				else
-					spellPower = spellPower * ((spellData[spellName].coeff * 1.88))
-				end
-				-- Nourish
-			elseif (spellName == HEALBOT_NOURISH) then
-				-- 46138 - Idol of Flourishing Life, +187 Nourish SP
-				if (playerCurrentRelic == 46138) then
-					spellPower = spellPower + 187
-				end
+					-- Apply any hot specific bonuses
+					local hots = hotTotals[guid]
+					if (hots and hots > 0) then
+						local bonus = 1.20
 
-				-- Apply any hot specific bonuses
-				local hots = hotTotals[guid]
-				if (hots and hots > 0) then
-					local bonus = 1.20
+						-- T7 Resto, +5% healing per each of the players hot on their target
+						if equippedSetCache["T7 Resto"] then
+							if (equippedSetCache["T7 Resto"] >= 2) then
+								bonus = bonus + 0.05 * hots
+							end
+						end
 
-					-- T7 Resto, +5% healing per each of the players hot on their target
+
+						-- Glyph of Nourish - 6% per HoT
+						if (glyphCache[62971]) then
+							bonus = bonus + 0.06 * hots
+						end
+
+						healModifier = healModifier * bonus
+					end
+
+					if talentData[EmpoweredTouch] then
+						spellPower = spellPower * talentData[EmpoweredTouch].spent * 0.10
+
+					end
+					-- Healing Touch
+				elseif (spellName == HEALBOT_HEALING_TOUCH) then
+					-- Glyph of Healing Touch, -50% healing
+					if (glyphCache[54825]) then
+						healModifier = healModifier - 0.50
+					end
+
+					-- Idol of the Avian Heart, +136 baseh ealing
+					if (playerCurrentRelic == 28568) then
+						healAmount = healAmount + 136
+						-- Idol of Health, +100 base healing
+					elseif (playerCurrentRelic == 22399) then
+						healAmount = healAmount + 100
+					end
+
+					-- Rank 1 - 3: 1.5/2/2.5 cast time, Rank 4+: 3 cast time
+					local castTime = rank > 3 and 3 or rank == 3 and 2.5 or rank == 2 and 2 or 1.5
+					if talentData[EmpoweredTouch] then
+						spellPower = spellPower * (((castTime / 3.5) * 1.88) + talentData[EmpoweredTouch].current)
+					else
+						spellPower = spellPower * (((castTime / 3.5) * 1.88))
+					end
+
+					-- Tranquility
+				elseif (spellName == HEALBOT_TRANQUILITY) then
+					if talentData[HEALBOT_GENESIS] then
+						healModifier = healModifier + talentData[HEALBOT_GENESIS].current
+					end
+					spellPower = spellPower / spellData[spellName].ticks
+				elseif (spellName == HEALBOT_HOLY_LIGHT) then
+					if talentData[HEALBOT_HEALING_LIGHT] then
+						healModifier = healModifier + talentData[HEALBOT_HEALING_LIGHT].current
+					end
+					if talentData[HEALBOT_DIVINITY] then
+						healModifier = healModifier * (1 + talentData[HEALBOT_DIVINITY].current)
+					end
+					-- Apply extra spell power based on libram
+					if (playerCurrentRelic) then
+						if (spellName == HEALBOT_HOLY_LIGHT and holyLibrams[playerCurrentRelic]) then
+							healAmount = healAmount + (holyLibrams[playerCurrentRelic] * 0.805)
+						elseif (spellName == HEALBOT_FLASH_OF_LIGHT and flashLibrams[playerCurrentRelic]) then
+							healAmount = healAmount + (flashLibrams[playerCurrentRelic] * 0.805)
+						elseif (spellName == HEALBOT_FLASH_OF_LIGHT and flashSPLibrams[playerCurrentRelic]) then
+							spellPower = spellPower + flashSPLibrams[playerCurrentRelic]
+						end
+					end
+					-- Greater Heal
+				elseif (spellName == HEALBOT_GREATER_HEAL) then
+					if talentData[EmpoweredHealing] then
+						spellPower = spellPower * (1 + talentData[EmpoweredHealing].current)
+					end
+					-- Flash Heal
+				elseif (spellName == HEALBOT_FLASH_HEAL) then
+
+					if talentData[EmpoweredHealing] then
+						spellPower = spellPower  * (1 + talentData[EmpoweredHealing].spent * 0.04)
+					end
+					-- Binding Heal
+				elseif (spellName == HEALBOT_BINDING_HEAL) then
+
+					if talentData[DivineProvidence] then
+						healModifier = healModifier + talentData[DivineProvidence].current
+
+					end
+					spellPower = spellPower  * (1 + talentData[EmpoweredHealing].spent * 0.04)
+					-- Penance
+				elseif (spellName == HEALBOT_PENANCE) then
+					spellPower = spellPower / spellData[spellName].ticks
+					-- Prayer of Heaing
+				elseif (spellName == HEALBOT_PRAYER_OF_HEALING) then
+					if talentData[DivineProvidence] then
+						healModifier = healModifier + talentData[DivineProvidence].current
+					end
+					-- Heal
+				elseif (spellName == HEALBOT_HEAL) then
+					-- Lesser Heal
+				elseif (spellName == HEALBOT_LESSER_HEAL) then
+					local castTime = rank > 3 and 2.5 or rank == 2 and 2 or 1.5
+					spellPower = spellPower * ((castTime / 3.5) * 1.88)
+					-- Chain Heal
+				elseif (spellName == ChainHeal) then
+
+					if talentData[ImpChainHeal] then
+						healModifier = healModifier * (1 + talentData[ImpChainHeal].current)
+
+					end
+					healAmount = healAmount + (playerCurrentRelic and chTotems[playerCurrentRelic] or 0)
+
 					if equippedSetCache["T7 Resto"] then
-						if (equippedSetCache["T7 Resto"] >= 2) then
-							bonus = bonus + 0.05 * hots
+						if (equippedSetCache["T7 Resto"] >= 4) then
+							healModifier = healModifier * 1.05
 						end
 					end
 
 
-					-- Glyph of Nourish - 6% per HoT
-					if (glyphCache[62971]) then
-						bonus = bonus + 0.06 * hots
+					-- Add +25% from Riptide being up and reset the flag
+					if (riptideData[guid]) then
+						healModifier = healModifier * 1.25
+						riptideData[guid] = nil
+					end
+					-- Heaing Wave
+				elseif (spellName == HealingWave) then
+
+
+					if talentData[HealingWay] then
+
+						healModifier = healModifier *
+							(
+							talentData[HealingWay].spent == 3 and 1.25 or talentData[HealingWay].spent == 2 and 1.16 or
+								talentData[HealingWay].spent == 1 and 1.08 or 1)
+
+					end
+					if equippedSetCache["T7 Resto"] then
+						if (equippedSetCache["T7 Resto"] >= 4) then
+							healModifier = healModifier * 1.05
+						end
 					end
 
-					healModifier = healModifier * bonus
-				end
 
-				if talentData[EmpoweredTouch] then
-					spellPower = spellPower * ((spellData[spellName].coeff * 1.88) + talentData[EmpoweredTouch].spent * 0.10)
-				else
-					spellPower = spellPower * (spellData[spellName].coeff * 1.88)
-				end
-				-- Healing Touch
-			elseif (spellName == HEALBOT_HEALING_TOUCH) then
-				-- Glyph of Healing Touch, -50% healing
-				if (glyphCache[54825]) then
-					healModifier = healModifier - 0.50
-				end
-
-				-- Idol of the Avian Heart, +136 baseh ealing
-				if (playerCurrentRelic == 28568) then
-					healAmount = healAmount + 136
-					-- Idol of Health, +100 base healing
-				elseif (playerCurrentRelic == 22399) then
-					healAmount = healAmount + 100
-				end
-
-				-- Rank 1 - 3: 1.5/2/2.5 cast time, Rank 4+: 3 cast time
-				local castTime = rank > 3 and 3 or rank == 3 and 2.5 or rank == 2 and 2 or 1.5
-				if talentData[EmpoweredTouch] then
-					spellPower = spellPower * (((castTime / 3.5) * 1.88) + talentData[EmpoweredTouch].current)
-				else
-					spellPower = spellPower * (((castTime / 3.5) * 1.88))
-				end
-
-				-- Tranquility
-			elseif (spellName == HEALBOT_TRANQUILITY) then
-				if talentData[HEALBOT_GENESIS] then
-					healModifier = healModifier + talentData[HEALBOT_GENESIS].current
-				end
-
-				if talentData[HEALBOT_EMPOWERED_REJUVENATION] then
-					spellPower = spellPower *
-						((spellData[spellName].coeff * 1.88) * (1 + talentData[HEALBOT_EMPOWERED_REJUVENATION].current))
-				else
-					spellPower = spellPower * ((spellData[spellName].coeff * 1.88))
-				end
-				spellPower = spellPower / spellData[spellName].ticks
-			elseif (spellName == HEALBOT_HOLY_LIGHT) then
-
-
-				if talentData[HEALBOT_HEALING_LIGHT] then
-					healModifier = healModifier + talentData[HEALBOT_HEALING_LIGHT].current
-				end
-				if talentData[HEALBOT_DIVINITY] then
-					healModifier = healModifier * (1 + talentData[HEALBOT_DIVINITY].current)
-				end
-
-
-				-- Apply extra spell power based on libram
-				if (playerCurrentRelic) then
-					if (spellName == HEALBOT_HOLY_LIGHT and holyLibrams[playerCurrentRelic]) then
-						healAmount = healAmount + (holyLibrams[playerCurrentRelic] * 0.805)
-					elseif (spellName == HEALBOT_FLASH_OF_LIGHT and flashLibrams[playerCurrentRelic]) then
-						healAmount = healAmount + (flashLibrams[playerCurrentRelic] * 0.805)
-					elseif (spellName == HEALBOT_FLASH_OF_LIGHT and flashSPLibrams[playerCurrentRelic]) then
-						spellPower = spellPower + flashSPLibrams[playerCurrentRelic]
+					-- Totem of Spontaneous Regrowth, +88 Spell Power to Healing Wave
+					if (playerCurrentRelic == 27544) then
+						spellPower = spellPower + 88
 					end
-				end
-				spellPower = spellPower * (spellData[spellName].coeff * 1.88)
-				-- Greater Heal
-			elseif (spellName == HEALBOT_GREATER_HEAL) then
-				if talentData[EmpoweredHealing] then
-					spellPower = spellPower * ((spellData[spellName].coeff * 1.88) * (1 + talentData[EmpoweredHealing].current))
 
-				else
-					spellPower = spellPower * ((spellData[spellName].coeff * 1.88))
-				end
-				-- Flash Heal
-			elseif (spellName == HEALBOT_FLASH_HEAL) then
-
-				if talentData[EmpoweredHealing] then
-					spellPower = spellPower * ((spellData[spellName].coeff * 1.88) * (1 + talentData[EmpoweredHealing].spent * 0.04))
-				else
-					spellPower = spellPower * ((spellData[spellName].coeff * 1.88))
-
-				end
-
-
-				-- Binding Heal
-			elseif (spellName == HEALBOT_BINDING_HEAL) then
-
-				if talentData[DivineProvidence] then
-					healModifier = healModifier + talentData[DivineProvidence].current
-
-				end
-				spellPower = spellPower * ((spellData[spellName].coeff * 1.88) * (1 + talentData[EmpoweredHealing].spent * 0.04))
-				-- Penance
-			elseif (spellName == HEALBOT_PENANCE) then
-				spellPower = spellPower * (spellData[spellName].coeff * 1.88)
-				spellPower = spellPower / spellData[spellName].ticks
-				-- Prayer of Heaing
-			elseif (spellName == HEALBOT_PRAYER_OF_HEALING) then
-				if talentData[DivineProvidence] then
-					healModifier = healModifier + talentData[DivineProvidence].current
-
-				end
-				spellPower = spellPower * (spellData[spellName].coeff * 1.88)
-				-- Heal
-			elseif (spellName == HEALBOT_HEAL) then
-				spellPower = spellPower * (spellData[spellName].coeff * 1.88)
-				-- Lesser Heal
-			elseif (spellName == HEALBOT_LESSER_HEAL) then
-				local castTime = rank > 3 and 2.5 or rank == 2 and 2 or 1.5
-				spellPower = spellPower * ((castTime / 3.5) * 1.88)
-
-				-- Chain Heal
-			elseif (spellName == ChainHeal) then
-
-				if talentData[ImpChainHeal] then
-					healModifier = healModifier * (1 + talentData[ImpChainHeal].current)
-
-				end
-				healAmount = healAmount + (playerCurrentRelic and chTotems[playerCurrentRelic] or 0)
-
-				if equippedSetCache["T7 Resto"] then
-					if (equippedSetCache["T7 Resto"] >= 4) then
-						healModifier = healModifier * 1.05
+					local castTime = rank > 3 and 3 or rank == 3 and 2.5 or rank == 2 and 2 or 1.5
+					if talentData[TidalWaves] then
+						spellPower = spellPower + talentData[TidalWaves].current
 					end
-				end
+					spellPower = spellPower * ((castTime / 3.5) * 1.88)
+					--spellPower = spellPower * (((castTime / 3.5) * 1.88) + talentData[TidalWaves].current)
 
-
-				-- Add +25% from Riptide being up and reset the flag
-				if (riptideData[guid]) then
-					healModifier = healModifier * 1.25
-					riptideData[guid] = nil
-				end
-
-				spellPower = spellPower * (spellData[spellName].coeff * 1.88)
-				-- Heaing Wave
-			elseif (spellName == HealingWave) then
-
-
-				if talentData[HealingWay] then
-
-					healModifier = healModifier *
-						(
-						talentData[HealingWay].spent == 3 and 1.25 or talentData[HealingWay].spent == 2 and 1.16 or
-							talentData[HealingWay].spent == 1 and 1.08 or 1)
-
-				end
-				if equippedSetCache["T7 Resto"] then
-					if (equippedSetCache["T7 Resto"] >= 4) then
-						healModifier = healModifier * 1.05
+					-- Lesser Healing Wave
+				elseif (spellName == LesserHealingWave) then
+					-- Glyph of Lesser Healing Wave, +20% healing on LHW if target has ES up
+					if (glyphCache[55438] and earthshieldList[guid]) then
+						healModifier = healModifier * 1.20
 					end
+
+					spellPower = spellPower + (playerCurrentRelic and lhwTotems[playerCurrentRelic] or 0)
+
+					if talentData[TidalWaves] then
+						spellPower = spellPower + talentData[TidalWaves].current * 0.02
+					end
+					--spellPower = spellPower * ((spellData[spellName].coeff * 1.88) + talentData[TidalWaves].spent * 0.02)
+
+					if (ActiveFrugal[guid]) then
+						healModifier = healModifier * 1.50
+					end
+				elseif (spellName == Cauterizing_Fire) then
+
 				end
-
-
-				-- Totem of Spontaneous Regrowth, +88 Spell Power to Healing Wave
-				if (playerCurrentRelic == 27544) then
-					spellPower = spellPower + 88
-				end
-
-				local castTime = rank > 3 and 3 or rank == 3 and 2.5 or rank == 2 and 2 or 1.5
-				if talentData[TidalWaves] then
-					spellPower = spellPower + talentData[TidalWaves].current
-				end
-				spellPower = spellPower * ((castTime / 3.5) * 1.88)
-				--spellPower = spellPower * (((castTime / 3.5) * 1.88) + talentData[TidalWaves].current)
-
-				-- Lesser Healing Wave
-			elseif (spellName == LesserHealingWave) then
-				-- Glyph of Lesser Healing Wave, +20% healing on LHW if target has ES up
-				if (glyphCache[55438] and earthshieldList[guid]) then
-					healModifier = healModifier * 1.20
-				end
-
-				spellPower = spellPower + (playerCurrentRelic and lhwTotems[playerCurrentRelic] or 0)
-
-				if talentData[TidalWaves] then
-					spellPower = spellPower + talentData[TidalWaves].current * 0.02
-				end
-
-				spellPower = spellPower * ((spellData[spellName].coeff * 1.88))
-
-				--spellPower = spellPower * ((spellData[spellName].coeff * 1.88) + talentData[TidalWaves].spent * 0.02)
-
-				if (ActiveFrugal[guid]) then
-					healModifier = healModifier * 1.50
-				end
-
-
-
 			end
-
 			healAmount = calculateGeneralAmount(spellData[spellName].levels[rank], healAmount, spellPower, spModifier,
 				healModifier)
 

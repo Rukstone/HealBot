@@ -19,6 +19,8 @@ HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+--86491 [Cauterizing Fire]
+Cauterizing_Fire_HOT =  GetSpellInfo(954801) or "Cauterizing Fire";
 --954801  [Light's Hammer]
 Lights_Hammer =  GetSpellInfo(954801) or "Light's Hammer";
 --965281  [Blooming Growth] 
@@ -147,7 +149,7 @@ HEALBOT_GIFT_OF_THE_NAARU               = GetSpellInfo(59547) or "Gift of the Na
 
 HEALBOT_FLASH_HEAL                      = GetSpellInfo(2061) or "Flash Heal";
 HEALBOT_FLASH_OF_LIGHT                  = GetSpellInfo(19750) or "Flash of Light";
-HEALBOT_GREATER_HEAL                    = GetSpellInfo(2060) or "Greater Heal";
+HEALBOT_GREATER_HEAL                    = GetSpellInfo(2050) or "Greater Heal";
 HEALBOT_BINDING_HEAL                    = GetSpellInfo(32546) or "Binding Heal"
 HEALBOT_PENANCE                         = GetSpellInfo(47540) or "Penance"
 HEALBOT_PRAYER_OF_MENDING               = GetSpellInfo(33076) or "Prayer of Mending";

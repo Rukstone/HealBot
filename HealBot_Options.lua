@@ -300,6 +300,9 @@ local HealBot_Debuff_Types = {
     [Cleasing_Totem] = {
         HEALBOT_DISEASE_en, HEALBOT_POISON_en
     },
+    [HEALBOT_ABOLISH_DISEASE] ={
+        HEALBOT_DISEASE_en,
+    }
 
 }
 
@@ -331,8 +334,8 @@ StaticPopupDialogs["HEALBOT_OPTIONS_ACCEPTSKIN"] = {
 };
 function HealBot_Options_retDebuffWatchTarget(debuffType, hbGUID)
     if HealBot_DebuffSpell[debuffType] and HealBot_Config.HealBot_BuffWatchGUID[HealBot_DebuffSpell[debuffType]] then
-        return HealBot_DebuffWatchTarget[debuffType],
-            HealBot_Config.HealBot_BuffWatchGUID[HealBot_DebuffSpell[debuffType]][hbGUID]
+        
+        return HealBot_DebuffWatchTarget[debuffType],HealBot_Config.HealBot_BuffWatchGUID[HealBot_DebuffSpell[debuffType]][hbGUID]
     else
         return HealBot_DebuffWatchTarget[debuffType], nil
     end

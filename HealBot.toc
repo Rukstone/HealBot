@@ -7,10 +7,9 @@
 ## OptionalDeps: LibSharedMedia-3.0, LibHealComm-4.0, LibQuickHealth-2.0, LibTalentQuery-1.0
 ## Version: 3.3.5.3
 
-embeds.xml
 
 Locale\HealBot_Localization.en.lua
-
+embeds.xml
 HealBot_Comms.xml
 HealBot.xml
 HealBot_Action.xml
