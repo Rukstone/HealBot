@@ -3619,6 +3619,7 @@ local HealBot_Options_Class_HoTctlName_List = {
     [TidecallersGift] = HEALBOT_HERO,
     [TidecallerBoon] = HEALBOT_HERO,
     [HEALBOT_DEBUFF_WEAKENED_SOUL] = HEALBOT_HERO,
+    [TidalShield_Absorve] = HEALBOT_HERO,
 
 
 

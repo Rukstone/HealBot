@@ -19,6 +19,8 @@ HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+--ID 847753 Tidal Shield
+TidalShield_Absorve =  GetSpellInfo(847753) or "Tidal Shield";
 --86491 [Cauterizing Fire]
 Cauterizing_Fire_HOT =  GetSpellInfo(954801) or "Cauterizing Fire";
 --954801  [Light's Hammer]
