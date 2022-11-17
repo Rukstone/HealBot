@@ -874,6 +874,9 @@ if (playerClass == "HERO") then
 			[42580] = 376,
 			[51423] = 448
 		}
+		-- 20359 [Sanctified Light] 
+		local SanctifiedLight = GetSpellInfo(20359) or "Sanctified Light"
+		talentData[SanctifiedLight] = { mod = 0.02, current = 0 }
 		-- Spiritual Healing (Add)
 		local SpiritualHealing = GetSpellInfo(14898)
 		talentData[SpiritualHealing] = { mod = 0.02, current = 0 }
@@ -1005,7 +1008,7 @@ if (playerClass == "HERO") then
 			[28523] = 87
 		}
 		local wgTicks = {}
-		local ActiveFrugal = {}
+		local ActiveFrugal_Indulgent = {} -- 954349 Indulgent Disposition
 		-- Keep track of who has riptide on them
 		local riptideData, earthshieldList = {}, {}
 		-- Keep track of who has grace on them
@@ -1144,10 +1147,10 @@ if (playerClass == "HERO") then
 			elseif (earthshieldList[guid]) then
 				earthshieldList[guid] = nil
 			end
-			if (UnitBuff(unit, Frugal_Disposition)) then
-				ActiveFrugal[guid] = true
-			elseif (ActiveFrugal[guid]) then
-				ActiveFrugal[guid] = nil
+			if (UnitBuff(unit, Indulgent_Disposition)) then
+				ActiveFrugal_Indulgent[guid] = true
+			elseif (ActiveFrugal_Indulgent[guid]) then
+				ActiveFrugal_Indulgent[guid] = nil
 			end
 			if (unitHasAura(unit, Frugal_Disposition)) then
 				hotTotals[guid] = hotTotals[guid] + 1
@@ -1203,7 +1206,6 @@ if (playerClass == "HERO") then
 			local spellPower = GetSpellBonusHealing()
 			local healModifier, spModifier = playerHealModifier, 1
 			local bombAmount, totalTicks
-
 			if GetSpellSchool(spellName) == "Natury" then
 				if talentData[HEALBOT_GIFT_OF_NATURE] then
 					healModifier = healModifier + talentData[HEALBOT_GIFT_OF_NATURE].current
@@ -1228,7 +1230,6 @@ if (playerClass == "HERO") then
 					healModifier = healModifier + talentData[SpiritualHealing].current
 				end
 			end
-
 			-- Add grace if it's active on them
 			if (activeGraceGUID == guid and activeGraceModifier) then
 				healModifier = healModifier + activeGraceModifier
@@ -1244,7 +1245,6 @@ if (playerClass == "HERO") then
 			-- Rejuvenation
 			if (spellName == HEALBOT_REJUVENATION) then
 				healModifier = healModifier + talentData[HEALBOT_IMPROVED_REJUVENATION].current
-
 				-- 25643 - Harold's Rejuvenation Broach, +86 Rejuv SP
 				if (playerCurrentRelic == 25643) then
 					spellPower = spellPower + 86
@@ -1254,7 +1254,6 @@ if (playerClass == "HERO") then
 				elseif (playerCurrentRelic == 261018) then
 					spellPower = spellPower + 53
 				end
-
 				local duration, ticks
 				if (IS_BUILD30300) then
 					duration = 15
@@ -1422,10 +1421,8 @@ if (playerClass == "HERO") then
 			local spellPower = GetSpellBonusHealing()
 			local healModifier, spModifier = playerHealModifier, 1
 			local rank = HealComm.rankNumbers[spellRank]
-
 			if talentData[FocusedPower] then
 				healModifier = healModifier + talentData[FocusedPower].current
-
 			end
 			if talentData[BlessedResilience] then
 				healModifier = healModifier + talentData[BlessedResilience].current
@@ -1443,7 +1440,6 @@ if (playerClass == "HERO") then
 			-- Gift of Nature
 			if talentData[HEALBOT_GIFT_OF_NATURE] then
 				healModifier = healModifier + talentData[HEALBOT_GIFT_OF_NATURE].current
-
 			end
 			-- Master Shapeshifter does not apply directly when using Lifebloom
 			if (unitHasAura("player", TreeofLife)) then
@@ -1462,7 +1458,6 @@ if (playerClass == "HERO") then
 				if spellData[spellName].coeff then
 					spellPower = spellPower * (spellData[spellName].coeff * 1.88)
 				end
-			
 				-- Regrowth
 				if (spellName == HEALBOT_REGROWTH) then
 					-- Glyph of Regrowth - +20% if target has Regrowth
@@ -1537,17 +1532,13 @@ if (playerClass == "HERO") then
 					if talentData[HEALBOT_DIVINITY] then
 						healModifier = healModifier * (1 + talentData[HEALBOT_DIVINITY].current)
 					end
-					-- Apply extra spell power based on libram
-					if (playerCurrentRelic) then
-						if (spellName == HEALBOT_HOLY_LIGHT and holyLibrams[playerCurrentRelic]) then
-							healAmount = healAmount + (holyLibrams[playerCurrentRelic] * 0.805)
-						elseif (spellName == HEALBOT_FLASH_OF_LIGHT and flashLibrams[playerCurrentRelic]) then
-							healAmount = healAmount + (flashLibrams[playerCurrentRelic] * 0.805)
-						elseif (spellName == HEALBOT_FLASH_OF_LIGHT and flashSPLibrams[playerCurrentRelic]) then
-							spellPower = spellPower + flashSPLibrams[playerCurrentRelic]
-						end
+				elseif (spellName == HEALBOT_FLASH_OF_LIGHT) then
+					if playerCurrentRelic == 262920 then
+						spellPower = spellPower + 30;
+					elseif playerCurrentRelic == 23201 then
+						spellPower = spellPower + 28;
 					end
-					-- Greater Heal
+				-- Greater Heal
 				elseif (spellName == HEALBOT_GREATER_HEAL) then
 					if talentData[EmpoweredHealing] then
 						spellPower = spellPower * (1 + talentData[EmpoweredHealing].current)
@@ -1585,17 +1576,13 @@ if (playerClass == "HERO") then
 
 					if talentData[ImpChainHeal] then
 						healModifier = healModifier * (1 + talentData[ImpChainHeal].current)
-
 					end
 					healAmount = healAmount + (playerCurrentRelic and chTotems[playerCurrentRelic] or 0)
-
 					if equippedSetCache["T7 Resto"] then
 						if (equippedSetCache["T7 Resto"] >= 4) then
 							healModifier = healModifier * 1.05
 						end
 					end
-
-
 					-- Add +25% from Riptide being up and reset the flag
 					if (riptideData[guid]) then
 						healModifier = healModifier * 1.25
@@ -1634,55 +1621,47 @@ if (playerClass == "HERO") then
 
 					-- Lesser Healing Wave
 				elseif (spellName == LesserHealingWave) then
+					if (playerCurrentRelic == 23200) then
+						spellPower = spellPower + 53;
+					elseif (playerCurrentRelic == 262908) then
+						spellPower = spellPower + 56;
+					end
 					-- Glyph of Lesser Healing Wave, +20% healing on LHW if target has ES up
 					if (glyphCache[55438] and earthshieldList[guid]) then
 						healModifier = healModifier * 1.20
 					end
-
 					spellPower = spellPower + (playerCurrentRelic and lhwTotems[playerCurrentRelic] or 0)
-
 					if talentData[TidalWaves] then
 						spellPower = spellPower + talentData[TidalWaves].current * 0.02
 					end
-					--spellPower = spellPower * ((spellData[spellName].coeff * 1.88) + talentData[TidalWaves].spent * 0.02)
-
-					if (ActiveFrugal[guid]) then
+					if (ActiveFrugal_Indulgent[guid]) then
 						healModifier = healModifier * 1.50
 					end
 				elseif (spellName == Cauterizing_Fire) then
-
 				end
 			end
-			healAmount = calculateGeneralAmount(spellData[spellName].levels[rank], healAmount, spellPower, spModifier,
-				healModifier)
-
-
-			-- Player has over a 100% chance to crit with Nature spells
-			if (GetSpellCritChance(4) >= 100) then
-				healAmount = healAmount * 1.50
+			if GetSpellSchool(spellName) == "Nature" then
+				-- Player has over a 100% chance to crit with Nature spells
+				if (GetSpellCritChance(4) >= 100) then
+					healAmount = healAmount * 1.50
+				end
+			elseif GetSpellSchool(spellName) == "Holy" then
+				if (GetSpellCritChance(2) >= 100) then
+					healAmount = healAmount * 1.50
+				end
+				-- Divine Favor, 100% chance to crit
+				if hasDivineFavor then
+					hasDivineFavor = nil
+					healAmount = healAmount * (1 + talentData[HEALBOT_TOUCHED_BY_THE_LIGHT].current)
+				end
 			end
-
-			-- Divine Favor, 100% chance to crit
-			-- ... or the player has over a 100% chance to crit with Holy spells
-			if hasDivineFavor then
-				hasDivineFavor = nil
-				healAmount = healAmount * (1 + talentData[HEALBOT_TOUCHED_BY_THE_LIGHT].current)
-
-			end
-			if (GetSpellCritChance(2) >= 100) then
-				healAmount = healAmount * 1.50
-
-			end
-			-- Penance ticks 3 times, the player will see all 3 ticks, everyone else should only see the last 2
-			if (spellName == HEALBOT_PENANCE) then
+			if (spellName == HEALBOT_PENANCE) then--Penance ticks 3 times, the player will see all 3 ticks, everyone else should only see the last 2
 				return CHANNEL_HEALS, math.ceil(healAmount), 2, 3
 			end
-
-
 			if (spellData[spellName].ticks) then
 				return CHANNEL_HEALS, math.ceil(healAmount), spellData[spellName].ticks, spellData[spellName].ticks
 			end
-
+			healAmount = calculateGeneralAmount(spellData[spellName].levels[rank], healAmount, spellPower, spModifier, healModifier)
 			return DIRECT_HEALS, math.ceil(healAmount)
 		end
 		ResetChargeData = function(guid)
