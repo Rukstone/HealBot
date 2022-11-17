@@ -1941,6 +1941,19 @@ function P_Fill_Data_Need_it()
         HealBot_Globals.Debuff_IgnoreList_R = HealBot_GlobalsDefaults.Debuff_IgnoreList_R;
     end
 
+    if not Healbot_Config_Skins then
+        Healbot_Config_Skins = HealBot_ConfigDefaults;
+    else
+        for k,v in pairs(Healbot_Config_Skins) do
+            if not v then
+                Healbot_Config_Skins[k] = HealBot_ConfigDefaults[k];
+            end
+        end
+    end
+   
+    
+
+
 end
 function HealBot_Register_Events()
     if HealBot_Config.DisableHealBot == 0 then
@@ -3453,8 +3466,7 @@ function HealBot_OnEvent_PlayerRegenDisabled(self)
     if not HealBot_PlayerGUID then
         HealBot_Load("playerRD")
         needReset = true
-    elseif (
-        Healbot_Config_Skins.TargetHeals[Healbot_Config_Skins.Current_Skin] == 1 and UnitExists("target") and
+    elseif (Healbot_Config_Skins.TargetHeals[Healbot_Config_Skins.Current_Skin] == 1 and UnitExists("target") and
             not UnitIsEnemy("target", "player")) or HealBot_Panel_retTestBars() or HealBot_Loaded < 9 then
         HealBot_RecalcParty(true);
     else
@@ -4060,7 +4072,9 @@ function HealBot_OnEvent_RaidTargetUpdate(self)
             if x then
                 if HealBot_RaidTargetChecked(x) then
                     HealBot_TargetIcons[xUnit] = x
-                    if HealBot_debuffTargetIcon[xUnit] then HealBot_debuffTargetIcon[xUnit] = x end
+                    if HealBot_debuffTargetIcon[xUnit] then 
+                        HealBot_debuffTargetIcon[xUnit] = x 
+                    end
                     HealBot_RaidTargetUpdate(HealBot_Unit_Button[xUnit], x, xUnit)
                 end
             else
@@ -4080,33 +4094,51 @@ end
 function HealBot_RaidTargetChecked(iconID)
     z = nil
     if iconID == 1 then
-        if Healbot_Config_Skins.ShowRaidIconStar[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconStar[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     elseif iconID == 2 then
-        if Healbot_Config_Skins.ShowRaidIconCircle[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconCircle[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     elseif iconID == 3 then
-        if Healbot_Config_Skins.ShowRaidIconDiamond[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconDiamond[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     elseif iconID == 4 then
-        if Healbot_Config_Skins.ShowRaidIconTriangle[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconTriangle[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     elseif iconID == 5 then
-        if Healbot_Config_Skins.ShowRaidIconMoon[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconMoon[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     elseif iconID == 6 then
-        if Healbot_Config_Skins.ShowRaidIconSquare[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconSquare[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     elseif iconID == 7 then
-        if Healbot_Config_Skins.ShowRaidIconCross[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconCross[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     elseif iconID == 8 then
-        if Healbot_Config_Skins.ShowRaidIconSkull[Healbot_Config_Skins.Current_Skin] == 1 then z = true end
+        if Healbot_Config_Skins.ShowRaidIconSkull[Healbot_Config_Skins.Current_Skin] == 1 then 
+            z = true 
+        end
     end
     return z
 end
 
-local HealBot_TargetIconsTextures = { [1] = [[Interface\Addons\HealBot\Images\Star.tga]],
+local HealBot_TargetIconsTextures = { 
+    [1] = [[Interface\Addons\HealBot\Images\Star.tga]],
     [2] = [[Interface\Addons\HealBot\Images\Circle.tga]],
     [3] = [[Interface\Addons\HealBot\Images\Diamond.tga]],
     [4] = [[Interface\Addons\HealBot\Images\Triangle.tga]],
     [5] = [[Interface\Addons\HealBot\Images\Moon.tga]],
     [6] = [[Interface\Addons\HealBot\Images\Square.tga]],
     [7] = [[Interface\Addons\HealBot\Images\Cross.tga]],
-    [8] = [[Interface\Addons\HealBot\Images\Skull.tga]], }
+    [8] = [[Interface\Addons\HealBot\Images\Skull.tga]], 
+}
 
 function HealBot_RaidTargetUpdate(button, iconID, unit)
     bar = HealBot_Action_HealthBar(button);
