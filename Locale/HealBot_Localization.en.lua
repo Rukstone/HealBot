@@ -39,6 +39,8 @@ Efflorescence = GetSpellInfo(86382) or "Efflorescence";
 Alter_Time = GetSpellInfo(86397) or "Alter Time";
 --ID 81514 [Fungal Disposition]
 Frugal_Disposition = GetSpellInfo(81514) or "Frugal Disposition";
+--954349 Indulgent Disposition
+Indulgent_Disposition = GetSpellInfo(954349) or "Indulgent Disposition";
 --ID 8170 Cleasing Totem
 Cleasing_Totem = GetSpellInfo(8170) or "Cleansing Totem";
 --ID 965938 [Seed of Life]
@@ -111,6 +113,8 @@ Tidal_Swell = GetSpellInfo(978698) or "Tidal Swell";
 Diciple_of_the_Tides = GetSpellInfo(978692) or "Diciple of the Tides";
 --ID 32374 [Mass Dispel]
 Mass_Dispell = GetSpellInfo(32374) or "Mass Dispel";
+
+Tidal_Shield = GetSpellInfo(978690) or "Tidal Shield";
 
 -----------------------------------------------
 
