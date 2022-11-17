@@ -3003,6 +3003,8 @@ local HealBot_Options_SelectHealSpellsCombo_List = {
     Alter_Time,
     HEALBOT_POWER_WORD_SHIELD,
     Cauterizing_Fire,
+    Tidal_Shield,
+    
 
 
 
