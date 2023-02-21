@@ -2352,7 +2352,7 @@ function HealBot_Action_PartyChanged(HealBot_PreCombat)
         end
   
         if Healbot_Config_Skins.ShowHeader[Healbot_Config_Skins.Current_Skin]==1 then
-            HealBot_Panel_PartyChanged(true)
+            HealBot_Panel_PartyChanged(true) 
         else
             HealBot_Panel_PartyChanged(false)
         end
@@ -2369,7 +2369,9 @@ function HealBot_Action_PartyChanged(HealBot_PreCombat)
             uCnt=uCnt+1
             if HealBot_ButtonArray==1 then
                 HealBot_ButtonArray1[xUnit]=xButton
-                if uCnt==1 then HealBot_ButtonArray2[xUnit]=xButton end
+                if uCnt==1 then 
+                    HealBot_ButtonArray2[xUnit]=xButton 
+                end
                 HealBot_ButtonArray=2
             else
                 HealBot_ButtonArray2[xUnit]=xButton

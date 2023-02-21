@@ -1916,7 +1916,6 @@ function HealBot_configClassHoT()
 
 
 end
---fix a problem that users with old setings was not loading the data making the UI Frame not showing only the setings Panel.
 function P_Fill_Data_Need_it()
 
     if not HealBot_Globals.WatchHoT then
@@ -2754,13 +2753,14 @@ function HealBot_HasBuff(buffName, unit)
     end
     return false;
 end
-
-local hbExcludeSpells = 
-{ 
-    [67358] = "Rejuvenating",
-    [58597] = "Sacred Shield"
-}
-
+----------------------------------------Rukstone-------------------------
+local hbExcludeSpells = {}
+function Hb_WachHotBlock()
+    hbExcludeSpells[67358] = "Rejuvenating"
+    hbExcludeSpells[58597] = "Sacred Shield"
+    hbExcludeSpells[888591] = "Preservation"
+end
+Hb_WachHotBlock()
 function HealBot_HasUnitBuff(buffName, unit, casterUnitID)
     if UnitExists(unit) then
         k = 1
@@ -2781,7 +2781,6 @@ function HealBot_HasUnitBuff(buffName, unit, casterUnitID)
     end
     return false;
 end
-
 function HealBot_HasDebuff(debuffName, unit)
     x, _, _, _, _, _, _, _, _ = UnitDebuff(unit, debuffName)
     if x then
@@ -2789,7 +2788,6 @@ function HealBot_HasDebuff(debuffName, unit)
     end
     return false;
 end
-
 local hbHoTcaster = "!";
 local hbFoundHoT = {}
 local hbNoEndTime = GetTime() + 604800
@@ -2965,7 +2963,6 @@ function HealBot_HasMyBuffs(hbGUID)
         end
     end
 end
-
 function HealBot_CheckMyBuffs(hbGUID)
     xUnit = HealBot_UnitID[hbGUID]
     if not xUnit then return end
@@ -2983,7 +2980,6 @@ function HealBot_CheckMyBuffs(hbGUID)
         end
     end
 end
-
 function HealBot_CheckAllBuffs(hbGUID)
     if HealBot_Config.BuffWatch == 1 then
         if hbGUID then
@@ -2995,7 +2991,6 @@ function HealBot_CheckAllBuffs(hbGUID)
         end
     end
 end
-
 function HealBot_ClearAllBuffs(hbGUID)
     if hbGUID then
         if HealBot_DelayBuffCheck[hbGUID] then
@@ -3009,7 +3004,6 @@ function HealBot_ClearAllBuffs(hbGUID)
         end
     end
 end
-
 function HealBot_CheckAllDebuffs(hbGUID)
     if HealBot_Config.DebuffWatch == 1 then
         if hbGUID then
@@ -3021,7 +3015,6 @@ function HealBot_CheckAllDebuffs(hbGUID)
         end
     end
 end
-
 function HealBot_ClearAllDebuffs(hbGUID)
     if hbGUID then
         if HealBot_DelayDebuffCheck[hbGUID] then
@@ -3035,7 +3028,6 @@ function HealBot_ClearAllDebuffs(hbGUID)
         end
     end
 end
-
 local DebuffNameIn = "x"
 local curDebuffs = {}
 local myhTargets = {}
@@ -3044,22 +3036,18 @@ local dPrio = 100
 local debuffDuration = nil
 local trackdebuffIcon = {}
 --RUKSTONE -------------------------------------------------
-
 Debuff_ignoreList = {};-- Added by Rukstone
-
 function Debuff_IgnoreListSetDefaut()
     Debuff_ignoreList = HealBot_GlobalsDefaults.Debuff_IgnoreList_R;
 end
 Debuff_IgnoreListSetDefaut();
 -------------------------------------------------
-
 function HealBot_CheckUnitDebuffs(hbGUID)
     if not HealBot_UnitID[hbGUID] then return end
     xUnit = HealBot_UnitID[hbGUID]
     if not xUnit or not HealBot_Unit_Button[xUnit] or not UnitExists(xUnit) then
         return
     end
-
     DebuffType = nil;
     y = 1;
     if HealBot_UnitDebuff[hbGUID] then
@@ -3295,7 +3283,6 @@ function HealBot_CheckUnitDebuffs(hbGUID)
         end
     end
 end
-
 function HealBot_CheckUnitBuffs(hbGUID)
     if not HealBot_UnitID[hbGUID] then return end
     xUnit = HealBot_UnitID[hbGUID]
@@ -3459,7 +3446,6 @@ function HealBot_CheckUnitBuffs(hbGUID)
         end
     end
 end
-
 local needReset = nil
 function HealBot_OnEvent_PlayerRegenDisabled(self)
     if not HealBot_Loaded then return end
@@ -3506,7 +3492,6 @@ function HealBot_OnEvent_PlayerRegenDisabled(self)
         end
     end
 end
-
 function HealBot_OnEvent_PlayerRegenEnabled(self)
     if InCombatLockdown() then
         HealBot_luVars["IsReallyFighting"] = true
@@ -3534,14 +3519,12 @@ function HealBot_OnEvent_PlayerRegenEnabled(self)
     end
     HealBot_ClearAggro(true)
 end
-
 function HealBot_EnteringCombat()
     if HealBot_Config.DisableToolTipInCombat == 1 and (HealBot_Action_TooltipUnit or HealBot_Action_DisableTooltipUnit) then
         HealBot_Action_HideTooltipFrame()
     end
     HealBot_IsFighting = true;
 end
-
 function HealBot_OnEvent_UnitNameUpdate(self, unit)
     xGUID = HealBot_UnitGUID(unit)
     if HealBot_UnitID[xGUID] then
@@ -3554,7 +3537,6 @@ function HealBot_OnEvent_UnitNameUpdate(self, unit)
         end
     end
 end
-
 function HealBot_UnitNameUpdate(unUnit, unGUID)
     if unGUID and unGUID == HealBot_PlayerGUID then unUnit = "player" end
     if HealBot_Unit_Button[unUnit] then
@@ -3580,16 +3562,13 @@ function HealBot_UnitNameUpdate(unUnit, unGUID)
     end
     if Delay_RecalcParty < 2 then Delay_RecalcParty = 2; end
 end
-
 function HealBot_UnitNameOnly(unitName)
     uName = string.match(unitName, "^[^-]*") or "noName"
     return uName
 end
-
 function HealBot_CheckHealth(hbGUID)
     HealBot_HealthCheck[hbGUID] = true
 end
-
 function HealBot_IDs(unit, hbGUID)
     xUnit = HealBot_UnitID[hbGUID]
     if xUnit and not UnitIsUnit(unit, xUnit) then
@@ -3598,7 +3577,6 @@ function HealBot_IDs(unit, hbGUID)
     end
     return xUnit
 end
-
 function HealBot_RaidUnit(unit, hbGUID, unitName)
     if unitName then
         if not unit or UnitName(unit) ~= unitName then
@@ -3684,7 +3662,6 @@ function HealBot_RaidUnit(unit, hbGUID, unitName)
     end
     return unit
 end
-
 function HealBot_UnitGUID(unit)
     if not unit or not UnitExists(unit) then
         xGUID = nil

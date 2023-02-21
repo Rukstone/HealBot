@@ -40,6 +40,8 @@ HealBot_Spec = {
         [3] = HEALBOT_RESTORATION,
     },
     }
+
+
 end
 
 function HealBot_Init_retSpec(class,tab)

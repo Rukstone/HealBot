@@ -117,16 +117,16 @@ HealBot_ConfigDefaults = {
   EmergIncCustom = {
     [HEALBOT_HERO] = 1,
   },
-  SkinDefault = { 
-    [HEALBOT_SKINS_STD] = 1, 
-    [HEALBOT_OPTIONS_GROUPHEALS] = 1, 
+  SkinDefault = {
+    [HEALBOT_SKINS_STD] = 1,
+    [HEALBOT_OPTIONS_GROUPHEALS] = 1,
     [HEALBOT_OPTIONS_EMERGENCYHEALS] = 1,
     [HEALBOT_ZONE_AV] = 1,
-    [HEALBOT_SKIN_FLUID] = 1, 
-    [HEALBOT_SKIN_VIVID] = 1, 
-    [HEALBOT_SKIN_LIGHT] = 1, 
+    [HEALBOT_SKIN_FLUID] = 1,
+    [HEALBOT_SKIN_VIVID] = 1,
+    [HEALBOT_SKIN_LIGHT] = 1,
     [HEALBOT_SKIN_SQUARE] = 1,
-    [HEALBOT_MAGIC] = 1, 
+    [HEALBOT_MAGIC] = 1,
   },
   EnabledKeyCombo = nil,
   EnabledSpellTarget = {},
@@ -142,7 +142,7 @@ HealBot_ConfigDefaults = {
   HealBotBuffText = {},
   HealBotBuffDropDown = {},
   HealBotDebuffDropDown = {},
-  HealBotDebuffPriority = { 
+  HealBotDebuffPriority = {
 
     [HEALBOT_DISEASE_en] = 15,
     [HEALBOT_MAGIC_en] = 13,
@@ -336,11 +336,11 @@ HealBot_GlobalsDefaults = {
     },
 
   },
-  Debuff_IgnoreList_R ={
-  ["Corruption"] = false,
-  ["Curse of Agony"] = false,
-  ["Venom Sting"] = false,
-  
+  Debuff_IgnoreList_R = {
+    ["Corruption"] = false,
+    ["Curse of Agony"] = false,
+    ["Venom Sting"] = false,
+
   },
   WatchHoT = {
     [HEALBOT_HERO_EN] = { --1 for not displaying 2 for self only 3 for all
@@ -453,8 +453,7 @@ HealBot_GlobalsDefaults = {
       [TidecallersGift] = 1,
       [TidecallerBoon] = 2,
       [HEALBOT_DEBUFF_WEAKENED_SOUL] = 2,
-
-
+      [TidalShield_Absorve] = 2,
 
 
     },
@@ -1120,13 +1119,46 @@ HealBot_Config_SkinsDefaults = {
     [HEALBOT_SKIN_FLUID] = 1, [HEALBOT_SKIN_VIVID] = 1, [HEALBOT_SKIN_LIGHT] = 1, [HEALBOT_SKIN_SQUARE] = 1,
     [HEALBOT_MAGIC] = 1, [HEALBOT_CLASSES_RANGES] = 1, },
   Bars_Anchor                  = {},
-  ExtraIncGroup                = { [HEALBOT_SKINS_STD] = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true,
-    [6] = true, [7] = true, [8] = true },
-    [HEALBOT_OPTIONS_GROUPHEALS] = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true, [6] = true, [7] = true,
+  ExtraIncGroup                = {
+    [HEALBOT_SKINS_STD] = {
+      [1] = true,
+      [2] = true,
+      [3] = true,
+      [4] = true,
+      [5] = true,
+      [6] = true,
+      [7] = true,
+      [8] = true
+    },
+    [HEALBOT_OPTIONS_GROUPHEALS] = {
+      [1] = true,
+      [2] = true,
+      [3] = true,
+      [4] = true,
+      [5] = true,
+      [6] = true,
+      [7] = true,
+      [8] = true
+    },
+    [HEALBOT_OPTIONS_EMERGENCYHEALS] = { 
+      [1] = true, 
+      [2] = true, 
+      [3] = true, 
+      [4] = true, 
+      [5] = true, 
+      [6] = true,
+      [7] = true, 
+      [8] = true 
+    },
+    [HEALBOT_ZONE_AV] = { 
+      [1] = true, 
+      [2] = true, 
+      [3] = true, 
+      [4] = true, 
+      [5] = true, 
+      [6] = true, 
+      [7] = true, 
       [8] = true },
-    [HEALBOT_OPTIONS_EMERGENCYHEALS] = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true, [6] = true,
-      [7] = true, [8] = true },
-    [HEALBOT_ZONE_AV] = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true, [6] = true, [7] = true, [8] = true },
     [HEALBOT_SKIN_FLUID] =
     {
       [1] = true,
@@ -1188,8 +1220,9 @@ HealBot_Config_SkinsDefaults = {
       [6] = true,
       [7] = true,
       [8] = true
-    }, },
-  ActionLocked                 = {
+    },
+  },
+  ActionLocked = {
     [HEALBOT_SKINS_STD] = 0,
     [HEALBOT_OPTIONS_GROUPHEALS] = 0,
     [HEALBOT_OPTIONS_EMERGENCYHEALS] = 0,
@@ -1558,7 +1591,8 @@ HealBot_Config_SkinsDefaults = {
     [HEALBOT_MAGIC] = 0,
     [HEALBOT_CLASSES_RANGES] = 0,
   },
-  CombatProtRaid               = { [HEALBOT_SKINS_STD] = 0,
+  CombatProtRaid               = {
+    [HEALBOT_SKINS_STD] = 0,
     [HEALBOT_OPTIONS_GROUPHEALS] = 0,
     [HEALBOT_OPTIONS_EMERGENCYHEALS] = 1,
     [HEALBOT_ZONE_AV] = 1,

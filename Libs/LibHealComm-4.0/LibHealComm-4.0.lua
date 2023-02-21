@@ -183,7 +183,9 @@ HealComm.averageHealMT = HealComm.averageHealMT or {
 		local rank = HealComm.rankNumbers[index]
 		local spellData = HealComm.spellData[rawget(tbl, "spell")]
 		local spellLevel = spellData.levels[rank]
-
+		if not spellLevel then
+			spellLevel = 1
+		end
 		-- No increase, it doesn't scale with levely
 		if (not spellData.increase or UnitLevel("player") <= spellLevel) then
 			rawset(tbl, index, spellData.averages[rank])
@@ -191,13 +193,33 @@ HealComm.averageHealMT = HealComm.averageHealMT or {
 		end
 
 		local average = spellData.averages[rank]
+		if not average then
+			spellData.averages[rank] = 1
+			average = 1
+		end
 		if (UnitLevel("level") >= MAX_PLAYER_LEVEL) then
-			average = average + spellData.increase[rank]
+			if spellData.increase then
+				average = average + spellData.increase[rank]
+			end
 			-- Here's how this works: If a spell increases 1,000 between 70 and 80, the player is level 75 the spell is 70
 			-- it's 1000 / (80 - 70) so 100, the player learned the spell 5 levels ago which means that the spell average increases by 500
 			-- This figures out how much it increases per level and how ahead of the spells level they are to figure out how much to add
 		else
-			average = average + (UnitLevel("player") - spellLevel) * (spellData.increase[rank] / (MAX_PLAYER_LEVEL - spellLevel))
+			local af = (UnitLevel("player") - spellLevel)
+			if spellData.increase then
+				if spellData.increase[rank] then
+				local az = (spellData.increase[rank] / (MAX_PLAYER_LEVEL - spellLevel))
+				average = average + af * az
+				else
+					local az = 1 / (MAX_PLAYER_LEVEL - spellLevel)
+					average = average + af * az
+				end
+			else
+				local az = 1 / (MAX_PLAYER_LEVEL - spellLevel)
+				average = average + af * az
+			end
+		
+
 		end
 
 		rawset(tbl, index, average)
@@ -456,7 +478,11 @@ local function filterData(spells, filterGUID, bitFlag, time, ignoreGUID)
 						local ticksLeft = pending[i + 4]
 						if (not time or time >= endTime) then
 							if (not pending.hasVariableTicks) then
+								if ticksLeft then
 								healAmount = healAmount + (amount * stack) * ticksLeft
+								else
+									healAmount = healAmount + (amount * stack)
+								end
 							else
 								for _, heal in pairs(amount) do
 									healAmount = healAmount + (heal * stack)
@@ -540,6 +566,9 @@ end
 -- Any other modifiers such as Mortal Strike or Avenging Wrath are applied after everything else
 local function calculateGeneralAmount(level, amount, spellPower, spModifier, healModifier)
 	-- Apply downranking penalities for spells below 20
+	if not level then
+		level = UnitLevel("player")
+	end
 	local penalty = level > 20 and 1 or (1 - ((20 - level) * 0.0375))
 
 	-- Apply further downranking penalities
@@ -1547,7 +1576,7 @@ if (playerClass == "HERO") then
 				elseif (spellName == HEALBOT_FLASH_HEAL) then
 
 					if talentData[EmpoweredHealing] then
-						spellPower = spellPower  * (1 + talentData[EmpoweredHealing].spent * 0.04)
+						spellPower = spellPower  * (1 + talentData[EmpoweredHealing].current * 0.04)
 					end
 					-- Binding Heal
 				elseif (spellName == HEALBOT_BINDING_HEAL) then
@@ -2681,7 +2710,6 @@ function HealComm:PLAYER_TARGET_CHANGED()
 	lastName = UnitName("target")
 	lastIsFriend = UnitCanAssist("player", "target")
 end
-
 -- Unit was targeted through a function
 function HealComm:Target(unit)
 	if (self.resetFrame:IsShown() and UnitCanAssist("player", unit)) then
@@ -2691,14 +2719,12 @@ function HealComm:Target(unit)
 	self.resetFrame:Hide()
 	hadTargetingCursor = nil
 end
-
 -- This is only needed when auto self cast is off, in which case this is called right after UNIT_SPELLCAST_SENT
 -- because the player got a waiting-for-cast icon up and they pressed a key binding to target someone
 HealComm.TargetUnit = HealComm.Target
 
 -- Works the same as the above except it's called when you have a cursor icon and you click on a secure frame with a target attribute set
 HealComm.SpellTargetUnit = HealComm.Target
-
 -- Used in /assist macros
 function HealComm:AssistUnit(unit)
 	if (self.resetFrame:IsShown() and UnitCanAssist("player", unit .. "target")) then
@@ -2708,7 +2734,6 @@ function HealComm:AssistUnit(unit)
 	self.resetFrame:Hide()
 	hadTargetingCursor = nil
 end
-
 -- Target last was used, the only reason this is called with reset frame being shown is we're casting on a valid unit
 -- don't have to worry about the GUID no longer being invalid etc
 function HealComm:TargetLast(guid, name)
@@ -2719,15 +2744,12 @@ function HealComm:TargetLast(guid, name)
 	self.resetFrame:Hide()
 	hadTargetingCursor = nil
 end
-
 function HealComm:TargetLastFriend()
 	self:TargetLast(lastFriendlyGUID, lastFriendlyName)
 end
-
 function HealComm:TargetLastTarget()
 	self:TargetLast(lastTargetGUID, lastTargetName)
 end
-
 -- Spell was cast somehow
 function HealComm:CastSpell(arg, unit)
 	-- If the spell is waiting for a target and it's a spell action button then we know that the GUID has to be mouseover or a key binding cast.
@@ -2746,11 +2768,9 @@ function HealComm:CastSpell(arg, unit)
 		hadTargetingCursor = true
 	end
 end
-
 HealComm.CastSpellByName = HealComm.CastSpell
 HealComm.CastSpellByID = HealComm.CastSpell
 HealComm.UseAction = HealComm.CastSpell
-
 -- Make sure we don't have invalid units in this
 local function sanityCheckMapping()
 	for guid, unit in pairs(guidToUnit) do
@@ -2775,7 +2795,6 @@ local function sanityCheckMapping()
 		end
 	end
 end
-
 -- 5s poll that tries to solve the problem of X running out of range while a HoT is ticking
 -- this is not really perfect far from it in fact. If I can find a better solution I will switch to that.
 if (not HealComm.hotMonitor) then
@@ -2803,7 +2822,6 @@ if (not HealComm.hotMonitor) then
 		end
 	end)
 end
-
 -- After the player leaves a group, tables are wiped out or released for GC
 local wasInParty, wasInRaid
 local function clearGUIDData()
@@ -2831,7 +2849,6 @@ local function clearGUIDData()
 
 	wasInParty, wasInRaid = nil, nil
 end
-
 -- Keeps track of pet GUIDs, as pets are considered vehicles this will also map vehicle GUIDs to unit
 function HealComm:UNIT_PET(unit)
 	local pet = self.unitToPet[unit]
@@ -2854,7 +2871,6 @@ function HealComm:UNIT_PET(unit)
 		activePets[unit] = guid
 	end
 end
-
 -- Keep track of party GUIDs, ignored in raids as RRU will handle that mapping
 function HealComm:PARTY_MEMBERS_CHANGED()
 	if (GetNumRaidMembers() > 0) then return end
@@ -2888,7 +2904,6 @@ function HealComm:PARTY_MEMBERS_CHANGED()
 	sanityCheckMapping()
 	wasInParty = true
 end
-
 -- Keep track of raid GUIDs
 function HealComm:RAID_ROSTER_UPDATE()
 	updateDistributionChannel()
@@ -2920,13 +2935,11 @@ function HealComm:RAID_ROSTER_UPDATE()
 	sanityCheckMapping()
 	wasInRaid = true
 end
-
 -- PLAYER_ALIVE = got talent data
 function HealComm:PLAYER_ALIVE()
 	self:PLAYER_TALENT_UPDATE()
 	self.eventFrame:UnregisterEvent("PLAYER_ALIVE")
 end
-
 -- Initialize the library
 function HealComm:OnInitialize()
 	-- If another instance already loaded then the tables should be wiped to prevent old data from persisting
@@ -3012,19 +3025,16 @@ function HealComm:OnInitialize()
 		hooksecurefunc("CastSpellByID", function(...) HealComm:CastSpellByID(...) end)
 	end
 end
-
 -- General event handler
 local function OnEvent(self, event, ...)
 	HealComm[event](HealComm, ...)
 end
-
 -- Event handler
 HealComm.eventFrame = HealComm.frame or HealComm.eventFrame or CreateFrame("Frame")
 HealComm.eventFrame:UnregisterAllEvents()
 HealComm.eventFrame:RegisterEvent("UNIT_PET")
 HealComm.eventFrame:SetScript("OnEvent", OnEvent)
 HealComm.frame = nil
-
 -- At PLAYER_LEAVING_WORLD (Actually more like MIRROR_TIMER_STOP but anyway) UnitGUID("player") returns nil, delay registering
 -- events and set a playerGUID/playerName combo for all players on PLAYER_LOGIN not just the healers.
 function HealComm:PLAYER_LOGIN()
@@ -3049,7 +3059,6 @@ function HealComm:PLAYER_LOGIN()
 	self:RAID_ROSTER_UPDATE()
 	self:PARTY_MEMBERS_CHANGED()
 end
-
 if (not IsLoggedIn()) then
 	HealComm.eventFrame:RegisterEvent("PLAYER_LOGIN")
 else

@@ -3065,7 +3065,9 @@ function HealBot_Options_SelectHealSpellsCombo_DropDown()
             info.text = hbHealDDlist[j];
             info.func = HealBot_Options_SelectHealSpellsCombo_OnSelect;
             UIDropDownMenu_AddButton(info);
-            if not hbHelpHealSelect then hbHelpHealSelect = hbHealDDlist[j] end
+            if not hbHelpHealSelect then 
+                hbHelpHealSelect = hbHealDDlist[j] 
+            end
         end
     else
         for x, _ in pairs(info) do
@@ -3089,7 +3091,9 @@ function HealBot_Options_SelectHealSpellsCombo_DDlist()
 end
 
 function HealBot_Options_SelectHealSpellsCombo_Initialize()
-    if not hbHealDDlist then HealBot_Options_SelectHealSpellsCombo_DDlist() end
+    if not hbHealDDlist then 
+        HealBot_Options_SelectHealSpellsCombo_DDlist() 
+    end
     HealBot_Options_SelectHealSpellsCombo.numButtons = 0;
     UIDropDownMenu_Initialize(HealBot_Options_SelectHealSpellsCombo, HealBot_Options_SelectHealSpellsCombo_DropDown)
 end
@@ -3110,11 +3114,36 @@ function HealBot_Options_SelectHealSpellsCombo_OnSelect(self)
     hbHelpHealSelect = self:GetText()
     HealBot_SelectHealSpellsCombo = self:GetID()
     HealBot_Options_SelectHealSpellsCombo_Refresh(true)
+
 end
 
 --------------------------------------------------------------------------------
+---experimental --- testing use of diferent combo box for fast set up for diferent specs
+HealBot_SpecializationComboSet = {
+    [1] =  HealBot_Config.EnabledKeyCombo,
+}
+function Init_ComboBOx_SetSpecialization(spec)
+    HealBot_SpecializationComboSet = {}
+    if not HealBot_SpecializationComboSet[spec] then
+        HealBot_SpecializationComboSet[spec] ={}
+    end
+end
+function Load_ComboBox_Set_Specialization(spec)
+    if not HealBot_SpecializationComboSet then
+        Init_ComboBOx_SetSpecialization(spec)
+    end
+    hbHealDDlist = {}
+    for i,v in ipairs(HealBot_SpecializationComboSet[spec]) do
+        if HealBot_GetSpellId(v) then
+            table.insert(hbHealDDlist, v)
+        end
+    end
+    table.sort(hbHealDDlist)
 
+    HealBot_Options_SelectHealSpellsCombo_DropDown()
 
+end
+-------------------------------------------------------------------------------------------------
 
 function HealBot_Options_SelectOtherSpellsCombo_DropDown()
     if getn(hbOtherDDlist) > 0 then
@@ -8369,17 +8398,8 @@ function OnSpellWacher_TabChange(key)
     end
 
     SPellWacherButtonDisplay:Hide();
-
-
-
-
-
 end
-
 function OnSpellWacherScroll_Load(MainWindow, ScrollView) --this function is called only on "OnLoad"
-
-
-
 
     ScrollViewSpellList_BG = CreateFrame("Frame", nil, ScrollView);
     ScrollViewSpellList_BG:SetSize(200, 300);
@@ -8391,8 +8411,6 @@ function OnSpellWacherScroll_Load(MainWindow, ScrollView) --this function is cal
     SelectedSpellDescription:SetSize(200, 300);
     SelectedSpellDescription:SetText("Select the spell in the list at your left and change the display mode using the button below");
     SelectedSpellDescription:SetTextHeight(18);
-
-
     for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HEALBOT_HERO_EN]) do
 
         local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
@@ -8454,8 +8472,6 @@ function OnSpellWacherScroll_Load(MainWindow, ScrollView) --this function is cal
             end)
 
     end
-
-
     indexEE = 0;
     for k, v in pairs(HealBot_GlobalsDefaults.Debuff_IgnoreList_R) do
 
@@ -8515,7 +8531,6 @@ function OnSpellWacherScroll_Load(MainWindow, ScrollView) --this function is cal
 
             end)
     end
-
     OnSpellWacher_TabChange("Helpful");
 
 
@@ -8704,3 +8719,4 @@ function AddNewSpellWach(self) --work in progress (not implemented)
 end
 
 ------------------------------------------------------------------------------------------
+
