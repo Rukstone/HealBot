@@ -1629,3 +1629,4 @@ HealBot_UnitTime = {}
 HealBot_Unit_Button = {};
 HealBot_HoT_Active_Button = {};
 HealBot_InspectUnit = false
+HealBot_SpecializationComboSet = {};

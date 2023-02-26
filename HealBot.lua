@@ -686,6 +686,10 @@ function HealBot_SlashCmd(HBcmd)
         end
         HealBot_Options_MonitorDebuffs:SetChecked(HealBot_Config.DebuffWatch)
         HealBot_Options_MonitorDebuffs_Toggle()
+    elseif (HBcmd == "combo-set") then
+
+        Load_ComboBox_Set()
+        
     else
         if x then HBcmd = HBcmd .. " " .. x end
         if y then HBcmd = HBcmd .. " " .. y end
