@@ -1407,7 +1407,11 @@ if( playerClass == "DRUID" or playerClass == "HERO" ) then
 				spModifier = spModifier * (1 + talentData[EmpoweredHealing].current)
 			-- Flash Heal
 			elseif( spellName == FlashHeal ) then
+				if talentData[EmpoweredHealing].spent then
 				spModifier = spModifier * (1 + talentData[EmpoweredHealing].spent * 0.04)
+				else
+					spModifier = spModifier * (1 * 0.04)
+				end
 			-- Binding Heal
 			elseif( spellName == BindingHeal ) then
 				healModifier = healModifier + talentData[DivineProvidence].current
@@ -1475,7 +1479,11 @@ if( playerClass == "DRUID" or playerClass == "HERO" ) then
 				healModifier = healModifier + talentData[Purification].current
 				
 				spellPower = spellPower + (playerCurrentRelic and lhwTotems[playerCurrentRelic] or 0)
-				spModifier = spModifier * ((spellData[spellName].coeff * 1.88) + talentData[TidalWaves].spent * 0.02)
+				if talentData[TidalWaves].spent then
+					spModifier = spModifier * ((spellData[spellName].coeff * 1.88) + talentData[TidalWaves].spent * 0.02)
+				else
+					spModifier = spModifier * ((spellData[spellName].coeff * 1.88))
+				end
 			end
 
 			------------------------------------------------------------------------------------------------------------------------------------
