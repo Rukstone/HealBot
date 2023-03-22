@@ -340,6 +340,8 @@ HealBot_GlobalsDefaults = {
     ["Corruption"] = false,
     ["Curse of Agony"] = false,
     ["Venom Sting"] = false,
+    ["Impale"] = false,--ID 16001
+
 
   },
   WatchHoT = {
@@ -454,6 +456,10 @@ HealBot_GlobalsDefaults = {
       [TidecallerBoon] = 2,
       [HEALBOT_DEBUFF_WEAKENED_SOUL] = 2,
       [TidalShield_Absorve] = 2,
+      [Time_Bind] = 2,
+      [Align] = 2,
+      
+
 
 
     },

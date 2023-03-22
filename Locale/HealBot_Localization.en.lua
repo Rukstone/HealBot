@@ -19,6 +19,12 @@ HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+--ID 986165 [Synchronize]
+Synchronize = GetSpellInfo(986165) or "Synchronize";
+--ID 986164 Time-Bind
+Time_Bind = GetSpellInfo(986164) or "Time-Bind";
+--ID 986163 Align
+Align = GetSpellInfo(986163) or "Align";
 --ID 847753 Tidal Shield
 TidalShield_Absorve =  GetSpellInfo(847753) or "Tidal Shield";
 --86491 [Cauterizing Fire]
