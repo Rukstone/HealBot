@@ -19,6 +19,12 @@ HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+--997000 Flames of the Apostate
+Flames_of_the_Apostate = GetSpellInfo(997000) or "Flames of the Apostate";
+--2128020 Focus of Auslese
+Focus_of_Auslese = GetSpellInfo(2128020) or "Focus of Auslese";
+--2128021 Swiftness of Aulese
+Swiftness_of_Aulese = GetSpellInfo(2128021) or "Swiftness of Aulese";
 --ID 986165 [Synchronize]
 Synchronize = GetSpellInfo(986165) or "Synchronize";
 --ID 986164 Time-Bind
@@ -27,8 +33,8 @@ Time_Bind = GetSpellInfo(986164) or "Time-Bind";
 Align = GetSpellInfo(986163) or "Align";
 --ID 847753 Tidal Shield
 TidalShield_Absorve =  GetSpellInfo(847753) or "Tidal Shield";
---86491 [Cauterizing Fire]
-Cauterizing_Fire_HOT =  GetSpellInfo(954801) or "Cauterizing Fire";
+--86536 [Cauterizing Fire]
+Cauterizing_Fire_HOT =  GetSpellInfo(86536) or "Cauterizing Fire";
 --954801  [Light's Hammer]
 Lights_Hammer =  GetSpellInfo(954801) or "Light's Hammer";
 --965281  [Blooming Growth] 

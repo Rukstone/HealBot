@@ -4570,6 +4570,7 @@ local hbHoTinterval = {
     [HEALBOT_WILD_GROWTH] = 1,
     [HEALBOT_RIPTIDE] = 3,
     [Efflorescence] = 1,
+    [Cauterizing_Fire_HOT] = 1
     
 }
 
@@ -4865,8 +4866,7 @@ function HealBot_HoT_UpdateIcon(button, index, secLeft, Texture, hotID, hbGUID)
             iconTxt > Healbot_Config_Skins.IconTextDurationShow[Healbot_Config_Skins.Current_Skin] then
             hbiconcount:SetTextColor(1, 1, 1, 0);
         elseif iconTxt <= Healbot_Config_Skins.IconTextDurationWarn[Healbot_Config_Skins.Current_Skin] then
-            if (Texture == HealBot_HoT_Texture[HEALBOT_REJUVENATION] or Texture == HealBot_HoT_Texture[HEALBOT_REGROWTH]
-                ) then
+            if (Texture == HealBot_HoT_Texture[HEALBOT_REJUVENATION] or Texture == HealBot_HoT_Texture[HEALBOT_REGROWTH]) then
                 y, k_Aura_Name, _ = GetSpellCooldown(HEALBOT_SWIFTMEND);
                 if k_Aura_Name and y and (k_Aura_Name + y) == 0 then
                     hbiconcount:SetTextColor(0, 1, 0, 1);

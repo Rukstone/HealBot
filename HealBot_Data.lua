@@ -458,9 +458,10 @@ HealBot_GlobalsDefaults = {
       [TidalShield_Absorve] = 2,
       [Time_Bind] = 2,
       [Align] = 2,
-      
-
-
+      [Cauterizing_Fire_HOT] = 2,
+      [Focus_of_Auslese] = 1,
+      [Swiftness_of_Aulese] = 1,
+      [Flames_of_the_Apostate] = 1,
 
     },
   },

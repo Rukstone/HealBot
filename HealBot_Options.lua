@@ -3004,9 +3004,11 @@ local HealBot_Options_SelectHealSpellsCombo_List = {
     Tidal_Shield,
     Time_Bind,
     Align,
-    Synchronize
-    
-
+    Synchronize,
+    Cauterizing_Fire_HOT,
+    Focus_of_Auslese,
+    Swiftness_of_Aulese,
+    Flames_of_the_Apostate,
 
 
 
@@ -3624,6 +3626,9 @@ local HealBot_Options_Class_HoTctlName_List = {
     [TidecallerBoon] = HEALBOT_HERO,
     [HEALBOT_DEBUFF_WEAKENED_SOUL] = HEALBOT_HERO,
     [TidalShield_Absorve] = HEALBOT_HERO,
+    [Cauterizing_Fire_HOT] = HEALBOT_HERO,
+    [Focus_of_Auslese] = HEALBOT_HERO,
+
 }
 
 local HoTctlName_List = {}
