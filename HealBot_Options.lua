@@ -3009,6 +3009,8 @@ local HealBot_Options_SelectHealSpellsCombo_List = {
     Focus_of_Auslese,
     Swiftness_of_Aulese,
     Flames_of_the_Apostate,
+    Radiant_Flames,
+
 
 
 
@@ -3628,6 +3630,7 @@ local HealBot_Options_Class_HoTctlName_List = {
     [TidalShield_Absorve] = HEALBOT_HERO,
     [Cauterizing_Fire_HOT] = HEALBOT_HERO,
     [Focus_of_Auslese] = HEALBOT_HERO,
+
 
 }
 

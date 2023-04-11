@@ -19,6 +19,9 @@ HEALBOT_HERO_EN = englishClass;
 HEALBOT_HERO_INDEX = classIndex;
 
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+
+--997007 Radiant Flame
+Radiant_Flames = GetSpellInfo(997007) or "Radiant Flames";
 --997000 Flames of the Apostate
 Flames_of_the_Apostate = GetSpellInfo(997000) or "Flames of the Apostate";
 --2128020 Focus of Auslese
