@@ -17,12 +17,19 @@ if (GetLocale() == "esES") then
 -------------------
 -- Compatibility --
 -------------------
-
-local localizedClass, englishClass, classIndex = UnitClass("player");
-
-HEALBOT_HERO = localizedClass;
-HEALBOT_HERO_EN = englishClass;
-HEALBOT_HERO_INDEX = classIndex;
+_, HealBot_PlayerClassEN                       = UnitClass("player")
+HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
+HealBot_PlayerName                             = UnitName("player")
+HEALBOT_DRUID   = "Druida";
+HEALBOT_HUNTER  = "Cazador";
+HEALBOT_MAGE    = "Mago";
+HEALBOT_PALADIN = "Palad\195\173n";
+HEALBOT_PRIEST  = "Sacerdote";
+HEALBOT_ROGUE   = "P\195\173caro";
+HEALBOT_SHAMAN  = "Cham\195\161n";
+HEALBOT_WARLOCK = "Brujo";
+HEALBOT_WARRIOR = "Guerrero";
+HEALBOT_DEATHKNIGHT = "Caballero de la Muerte";
 
 HEALBOT_HEAVY_NETHERWEAVE_BANDAGE = GetItemInfo(21991);
 HEALBOT_HEAVY_RUNECLOTH_BANDAGE = "Venda de pa\195\177o r\195\186nico gruesa";

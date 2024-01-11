@@ -16,12 +16,19 @@ if (GetLocale() == "deDE") then
 -------------------
 -- Compatibility --
 -------------------
-
-local localizedClass, englishClass, classIndex = UnitClass("player");
-
-HEALBOT_HERO = localizedClass;
-HEALBOT_HERO_EN = englishClass;
-HEALBOT_HERO_INDEX = classIndex;
+_, HealBot_PlayerClassEN                       = UnitClass("player")
+HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
+HealBot_PlayerName                             = UnitName("player")
+HEALBOT_DRUID   = "Druide";
+HEALBOT_HUNTER  = "J\195\164ger";
+HEALBOT_MAGE    = "Magier";
+HEALBOT_PALADIN = "Paladin";
+HEALBOT_PRIEST  = "Priester";
+HEALBOT_ROGUE   = "Schurke";
+HEALBOT_SHAMAN  = "Schamane";
+HEALBOT_WARLOCK = "Hexenmeister";
+HEALBOT_WARRIOR = "Krieger";
+HEALBOT_DEATHKNIGHT = "Todesritter";
 
 HEALBOT_HEAVY_NETHERWEAVE_BANDAGE = GetItemInfo(21991) or "Schwerer Netherstoffverband";
 HEALBOT_HEAVY_RUNECLOTH_BANDAGE   = GetItemInfo(14530) or "Schwerer Runenstoffverband";

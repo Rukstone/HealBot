@@ -153,28 +153,18 @@ function HealBot_IncHeals_CommHealsInCheck(sGUID, value, spellName, casterName, 
 end
 
 function HealBot_IncHeals_CommHealsInUpdate(hbGUID, value, spellName, casterName, unit)
-    if not hbHealsIn[hbGUID] then 
-        hbHealsIn[hbGUID]=0 
-    end
+    if not hbHealsIn[hbGUID] then hbHealsIn[hbGUID]=0 end
     hbHealsIn[hbGUID]=hbHealsIn[hbGUID]+value
  --   HealBot_AddDebug("IncHeals Value="..value.."  hbHealsIn="..hbHealsIn[hbGUID])
-    if hbHealsIn[hbGUID]<0 then
-         hbHealsIn[hbGUID]=0 
-        end
-    if HealBot_TitanID then 
-        TitanPanelButton_UpdateButton(HealBot_TitanID) 
-    end
+    if hbHealsIn[hbGUID]<0 then hbHealsIn[hbGUID]=0 end
+    if HealBot_TitanID then TitanPanelButton_UpdateButton(HealBot_TitanID) end
     if value>0 then
         HealBot_IncHeals_CommCastingEndTime(spellName, unit, hbGUID, casterName)
         HealBot_RecalcHeals(hbGUID)
     else
-        if hbHealsIn[hbGUID]==0 then
-             hbHealsIn[hbGUID]=nil 
-            end
+        if hbHealsIn[hbGUID]==0 then hbHealsIn[hbGUID]=nil end
         if HealBot_Config.EnLibQuickHealth==1 then
-            if HealBot_UnitID[hbGUID] then 
-                HealBot_Action_ResetUnitStatus(HealBot_UnitID[hbGUID]) 
-            end
+            if HealBot_UnitID[hbGUID] then HealBot_Action_ResetUnitStatus(HealBot_UnitID[hbGUID]) end
         else
             HealBot_setDelayResetUnitStatus(hbGUID)
         end
@@ -182,12 +172,8 @@ function HealBot_IncHeals_CommHealsInUpdate(hbGUID, value, spellName, casterName
 end
 
 function HealBot_IncHeals_ExtraHealsInUpdate(hbGUID, casterGUID, spellType)
-    if not HealBot_UnitID[hbGUID]then 
-        return 
-    end
-    if not hbHealsIn[hbGUID] then
-         hbHealsIn[hbGUID]=0
-         end
+    if not HealBot_UnitID[hbGUID] then return end
+    if not hbHealsIn[hbGUID] then hbHealsIn[hbGUID]=0 end
     i=hbHealsIn[hbGUID]
     if Healbot_Config_Skins.incHealDur[Healbot_Config_Skins.Current_Skin]["C"]>0 then 
         hbCin=HealComm:GetHealAmount(hbGUID, HealComm.CHANNEL_HEALS, GetTime() + Healbot_Config_Skins.incHealDur[Healbot_Config_Skins.Current_Skin]["C"], casterGUID) or 0
@@ -234,9 +220,7 @@ function HealBot_IncHeals_ExtraHealsInUpdate(hbGUID, casterGUID, spellType)
 end
 
 function HealBot_IncHeals_HealsInUpdate(hbGUID, spellType)
-    if not HealBot_UnitID[hbGUID] then
-         return 
-    end
+    if not HealBot_UnitID[hbGUID] then return end
     i=hbHealsIn[hbGUID] or 0
     if Healbot_Config_Skins.incHealDur[Healbot_Config_Skins.Current_Skin]["C"]>0 then 
         hbCin=HealComm:GetHealAmount(hbGUID, HealComm.CHANNEL_HEALS, GetTime() + Healbot_Config_Skins.incHealDur[Healbot_Config_Skins.Current_Skin]["C"]) or 0
@@ -284,9 +268,7 @@ end
 
 function HealBot_IncHeals_CommCastingEndTime(spellName, unit, hbGUID, casterName)
     sName, _, _, _, _, endTime, _, _, _ = UnitCastingInfo(unit)
-    if sName~=spellName then 
-        endTime=HealBot_spellEndTimes(spellName) 
-    end
+    if sName~=spellName then endTime=HealBot_spellEndTimes(spellName) end
     HealBot_setHealsIncEndTime(hbGUID, casterName, endTime)
     hbLastCast[hbGUID]=endTime
 end
@@ -930,9 +912,7 @@ function HealBot_IncHeals_parseLHC4(htGUID, casterName, endTime, casterGUID, spe
         if utGUID then
             if (type(utGUID) == "table") then
                 table.foreach(utGUID, function (index,uGUID)
-                    if HealBot_retPetGUID(uGUID) then 
-                        uGUID=HealBot_retPetGUID(uGUID) 
-                    end
+                    if HealBot_retPetGUID(uGUID) then uGUID=HealBot_retPetGUID(uGUID) end
                     if HealBot_UnitID[uGUID] then
                         if spellType==HealComm.DIRECT_HEALS and endTime then 
                             HealBot_setHealsIncEndTime(uGUID, casterName, endTime) 
@@ -944,13 +924,10 @@ function HealBot_IncHeals_parseLHC4(htGUID, casterName, endTime, casterGUID, spe
                             HealBot_addHealBotAddonIncHeals(hbCommsID)
                         end
                         HealBot_IncHeals_HealsInUpdate(uGUID, HealComm.DIRECT_HEALS)
-
                     end
                 end)
             else
-                if HealBot_retPetGUID(utGUID) then 
-                    utGUID=HealBot_retPetGUID(utGUID) 
-                end
+                if HealBot_retPetGUID(utGUID) then utGUID=HealBot_retPetGUID(utGUID) end
                 if HealBot_UnitID[utGUID] then
                     if spellType==HealComm.DIRECT_HEALS and endTime then 
                         HealBot_setHealsIncEndTime(utGUID, casterName, endTime) 

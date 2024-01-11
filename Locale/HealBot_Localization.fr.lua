@@ -15,12 +15,20 @@ if (GetLocale() == "frFR") then
 
 -------------------
 -- Compatibility --
--------------------
-local localizedClass, englishClass, classIndex = UnitClass("player");
-
-HEALBOT_HERO = localizedClass;
-HEALBOT_HERO_EN = englishClass;
-HEALBOT_HERO_INDEX = classIndex;
+    -------------------
+    _, HealBot_PlayerClassEN                       = UnitClass("player")
+    HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
+    HealBot_PlayerName                             = UnitName("player")
+HEALBOT_DRUID   = "Druide";
+HEALBOT_HUNTER  = "Chasseur";
+HEALBOT_MAGE    = "Mage";
+HEALBOT_PALADIN = "Paladin";
+HEALBOT_PRIEST  = "Pr\195\170tre";
+HEALBOT_ROGUE   = "Voleur";
+HEALBOT_SHAMAN  = "Chaman";
+HEALBOT_WARLOCK = "D\195\169moniste";
+HEALBOT_WARRIOR = "Guerrier";
+HEALBOT_DEATHKNIGHT = "Chevalier de la mort";
 
 HEALBOT_HEAVY_RUNECLOTH_BANDAGE  = GetItemInfo(14530) or "Bandage en \195\169toffe runique \195\169pais";
 HEALBOT_MAJOR_HEALING_POTION     = GetItemInfo(13446) or "Potion de Soins majeure";

@@ -9,12 +9,20 @@ if (GetLocale() == "zhCN") then
 
 -------------------
 -- Compatibility --
--------------------
-local localizedClass, englishClass, classIndex = UnitClass("player");
-
-HEALBOT_HERO = localizedClass;
-HEALBOT_HERO_EN = englishClass;
-HEALBOT_HERO_INDEX = classIndex;
+    -------------------
+    _, HealBot_PlayerClassEN                       = UnitClass("player")
+    HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
+    HealBot_PlayerName                             = UnitName("player")
+HEALBOT_DRUID   = "德鲁伊";
+HEALBOT_HUNTER  = "猎人";
+HEALBOT_MAGE    = "法师";
+HEALBOT_PALADIN = "圣骑士";
+HEALBOT_PRIEST  = "牧师";
+HEALBOT_ROGUE   = "潜行者";
+HEALBOT_SHAMAN  = "萨满祭司";
+HEALBOT_WARLOCK = "术士";
+HEALBOT_WARRIOR = "战士";
+HEALBOT_DEATHKNIGHT = "死亡骑士";
 
 HEALBOT_HEAVY_NETHERWEAVE_BANDAGE = GetItemInfo(21991) or "厚灵纹布绷带";
 HEALBOT_HEAVY_RUNECLOTH_BANDAGE   = GetItemInfo(14530) or "厚符文布绷带";

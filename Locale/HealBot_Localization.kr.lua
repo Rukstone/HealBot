@@ -3,11 +3,19 @@
 -- Translation by SayClub
 
 if (GetLocale() == "koKR") then
-	local localizedClass, englishClass, classIndex = UnitClass("player");
-
-	HEALBOT_HERO = localizedClass;
-	HEALBOT_HERO_EN = englishClass;
-	HEALBOT_HERO_INDEX = classIndex;
+	_, HealBot_PlayerClassEN                       = UnitClass("player")
+	HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
+	HealBot_PlayerName                             = UnitName("player")
+	HEALBOT_DRUID = "드루이드";
+	HEALBOT_HUNTER = "사냥꾼";
+	HEALBOT_MAGE = "마법사";
+	HEALBOT_PALADIN = "성기사";
+	HEALBOT_PRIEST = "사제";
+	HEALBOT_ROGUE = "도적";
+	HEALBOT_SHAMAN = "주술사";
+	HEALBOT_WARLOCK = "흑마법사";
+	HEALBOT_WARRIOR = "전사";
+	HEALBOT_DEATHKNIGHT = "죽음의 기사";
 
 	HEALBOT_HEAVY_NETHERWEAVE_BANDAGE = GetItemInfo(21991);
 	HEALBOT_HEAVY_RUNECLOTH_BANDAGE   = GetItemInfo(14530) or "두꺼운 룬매듭 붕대";

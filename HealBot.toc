@@ -1,11 +1,11 @@
 ## Interface: 30300
 ## Title: HealBot
-## Author: StrifeCUK
+## Author: Strife , (Modded by Rukstone and Pirne)
 ## Notes: Adds a panel with skinable bars for healing, decursive, buffing, ressing, range checking and aggro tracking
-## SavedVariablesPerCharacter:  HealBot_Config , HealBot_SpecializationComboSet
+## SavedVariablesPerCharacter:  HealBot_Config , HealBot_ComboSetProfiles
 ## SavedVariables: Healbot_Config_Skins, HealBot_Globals
 ## OptionalDeps: LibSharedMedia-3.0, LibHealComm-4.0, LibQuickHealth-2.0, LibTalentQuery-1.0
-## Version: 3.3.5.3
+## Version: Ascension
 
 
 Locale\HealBot_Localization.en.lua
@@ -15,4 +15,4 @@ HealBot.xml
 HealBot_Action.xml
 HealBot_Options.xml
 libs\UTF8\utf8.lua
-Specialization_ComboSet.lua
+

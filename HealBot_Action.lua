@@ -300,33 +300,43 @@ function HealBot_Action_SetrSpell()
     HealBot_hSpell=HealBot_GetBandageType()
     HealBot_bSpell=HealBot_GetBandageType()
     HealBot_dSpell=HealBot_GetBandageType()
-    HealBot_rSpell=HealBot_GetBandageType()
-    HealBot_hSpell=HEALBOT_REJUVENATION
-    HealBot_bSpell=HEALBOT_MARK_OF_THE_WILD
-    HealBot_dSpell=HEALBOT_CURE_POISON
-    HealBot_rSpell=HEALBOT_REVIVE
-    HealBot_hSpell=HEALBOT_MENDPET
-    HealBot_bSpell=HEALBOT_ARCANE_INTELLECT
-    HealBot_dSpell=HEALBOT_REMOVE_CURSE
-    HealBot_hSpell=HEALBOT_HOLY_LIGHT
-    HealBot_bSpell=HEALBOT_BLESSING_OF_MIGHT
-    HealBot_dSpell=HEALBOT_PURIFY
-    HealBot_rSpell=HEALBOT_REDEMPTION
-    HealBot_hSpell=HEALBOT_LESSER_HEAL
-    HealBot_bSpell=HEALBOT_POWER_WORD_FORTITUDE
-    HealBot_dSpell=HEALBOT_CURE_DISEASE
-    HealBot_rSpell=HEALBOT_RESURRECTION
-    HealBot_hSpell=HEALBOT_HEALING_WAVE
-    HealBot_bSpell=HEALBOT_WATER_SHIELD
-    HealBot_dSpell=HEALBOT_CURE_DISEASE
-    HealBot_rSpell=HEALBOT_ANCESTRALSPIRIT
-    HealBot_bSpell=HEALBOT_UNENDING_BREATH
-    HealBot_hSpell=HEALBOT_HEALTH_FUNNEL
-    if HealBot_GetSpellId(HEALBOT_VIGILANCE) then
-        HealBot_hSpell=HEALBOT_VIGILANCE
-        HealBot_bSpell=HEALBOT_VIGILANCE
+    HealBot_rSpell = HealBot_GetBandageType()
+    if HealBot_PlayerClassEN ==HEALBOT_DRUID then
+        HealBot_hSpell=HEALBOT_REJUVENATION
+        HealBot_bSpell=HEALBOT_MARK_OF_THE_WILD
+        HealBot_dSpell=HEALBOT_CURE_POISON
+        HealBot_rSpell=HEALBOT_REVIVE
+    elseif HealBot_PlayerClassEN ==HEALBOT_HUNTER then
+        HealBot_hSpell=HEALBOT_MENDPET
+    elseif HealBot_PlayerClassEN ==HEALBOT_MAGE then
+        HealBot_bSpell=HEALBOT_ARCANE_INTELLECT
+        HealBot_dSpell=HEALBOT_REMOVE_CURSE
+    elseif HealBot_PlayerClassEN ==HEALBOT_PALADIN then
+        HealBot_hSpell=HEALBOT_HOLY_LIGHT
+        HealBot_bSpell=HEALBOT_BLESSING_OF_MIGHT
+        HealBot_dSpell=HEALBOT_PURIFY
+        HealBot_rSpell=HEALBOT_REDEMPTION
+    elseif HealBot_PlayerClassEN ==HEALBOT_PRIEST then
+        HealBot_hSpell=HEALBOT_LESSER_HEAL
+        HealBot_bSpell=HEALBOT_POWER_WORD_FORTITUDE
+        HealBot_dSpell=HEALBOT_CURE_DISEASE
+        HealBot_rSpell=HEALBOT_RESURRECTION
+    elseif HealBot_PlayerClassEN ==HEALBOT_SHAMAN then
+        HealBot_hSpell=HEALBOT_HEALING_WAVE
+        HealBot_bSpell=HEALBOT_WATER_SHIELD
+        HealBot_dSpell=HEALBOT_CURE_DISEASE
+        HealBot_rSpell=HEALBOT_ANCESTRALSPIRIT
+    elseif HealBot_PlayerClassEN ==HEALBOT_WARLOCK then
+        HealBot_bSpell=HEALBOT_UNENDING_BREATH
+        HealBot_hSpell=HEALBOT_HEALTH_FUNNEL
+    elseif HealBot_PlayerClassEN ==HEALBOT_WARRIOR then
+        if HealBot_GetSpellId(HEALBOT_VIGILANCE) then
+            HealBot_hSpell=HEALBOT_VIGILANCE
+            HealBot_bSpell=HEALBOT_VIGILANCE
+        end
+    else
+
     end
-    
     HealBot_Set_debuffSpell(HealBot_dSpell)
 --    HealBot_SetrSpells(HealBot_hSpell,HealBot_bSpell,HealBot_dSpell,HealBot_rSpell)
 end
@@ -1903,8 +1913,7 @@ local HealBot_Keys_List = {"","Shift","Ctrl","Alt","Alt-Shift","Ctrl-Shift"}
 local hbAttribsMinReset = {}
 function HealBot_Action_SetAllButtonAttribs(button,status)
     for x=1,15 do
-  --      HB_button=HealBot_Options_ComboClass_Button(x) ' Cannot use this as 2 returns Middle and 3 returns Right,
-  --      this function is older than Blizzards secure templates.
+  --      HB_button=HealBot_Options_ComboClass_Button(x) ' Cannot use this as 2 returns Middle and 3 returns Right, this function is older than Blizzards secure templates.
         if x==1 then 
             HB_button="Left";
         elseif x==2 then 
@@ -1959,7 +1968,7 @@ local setDropdown=nil
 local partyNo=nil
 local sTar, sTrin1, sTrin2=0, 0, 0
 local curGUID=nil
-function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,index_b)
+function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
  
     if strlen(bkey)>1 then
         HB_prefix = strlower(bkey).."-"
@@ -1977,36 +1986,36 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,index_b)
     end
     if sName then
         if strlower(sName)==strlower(HEALBOT_DISABLED_TARGET) then
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, "target"..index_b);
-            button:SetAttribute(HB_prefix.."type"..index_b, "target")
-            button:SetAttribute(HB_prefix.."type-target"..index_b, "target")
-            hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+            button:SetAttribute(HB_prefix.."helpbutton"..j, "target"..j);
+            button:SetAttribute(HB_prefix.."type"..j, "target")
+            button:SetAttribute(HB_prefix.."type-target"..j, "target")
+            hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         elseif strlower(sName)==strlower(HEALBOT_FOCUS) then
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, "focus"..index_b);
-            button:SetAttribute(HB_prefix.."type"..index_b, "focus")
-            button:SetAttribute(HB_prefix.."type-focus"..index_b, "focus")
-            hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+            button:SetAttribute(HB_prefix.."helpbutton"..j, "focus"..j);
+            button:SetAttribute(HB_prefix.."type"..j, "focus")
+            button:SetAttribute(HB_prefix.."type-focus"..j, "focus")
+            hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         elseif strlower(sName)==strlower(HEALBOT_ASSIST) then
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, "assist"..index_b);
-            button:SetAttribute(HB_prefix.."type"..index_b, "assist")
-            button:SetAttribute(HB_prefix.."type-assist"..index_b, "assist")
-            hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+            button:SetAttribute(HB_prefix.."helpbutton"..j, "assist"..j);
+            button:SetAttribute(HB_prefix.."type"..j, "assist")
+            button:SetAttribute(HB_prefix.."type-assist"..j, "assist")
+            hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         elseif strlower(sName)==strlower(HEALBOT_STOP) then
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-            button:SetAttribute(HB_prefix.."type"..index_b, "macro")
-            button:SetAttribute(HB_prefix.."macrotext"..index_b, "/stopcasting")
-            hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+            button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+            button:SetAttribute(HB_prefix.."type"..j, "macro")
+            button:SetAttribute(HB_prefix.."macrotext"..j, "/stopcasting")
+            hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         elseif strsub(strlower(sName),1,4)==strlower(HEALBOT_TELL) then
             mText='/script local n=UnitName("hbtarget");SendChatMessage("hbMSG","WHISPER",nil,n)'
             mText=string.gsub(mText,"hbtarget",button.unit)
             mText=string.gsub(mText,"hbMSG", strtrim(strsub(sName,5)))
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-            button:SetAttribute(HB_prefix.."type"..index_b, "macro")
-            button:SetAttribute(HB_prefix.."macrotext"..index_b, mText)
-            hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+            button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+            button:SetAttribute(HB_prefix.."type"..j, "macro")
+            button:SetAttribute(HB_prefix.."macrotext"..j, mText)
+            hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         elseif strlower(sName)==strlower(HEALBOT_MENU) then
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-            button:SetAttribute(HB_prefix.."type"..index_b, "showmenu")
+            button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+            button:SetAttribute(HB_prefix.."type"..j, "showmenu")
             showmenu = function()
                 if button.unit=="player" then
                     setDropdown=PlayerFrameDropDown
@@ -2037,8 +2046,8 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,index_b)
             button.showmenu = showmenu 
         elseif strlower(sName)==strlower(HEALBOT_HBMENU) and HealBot_UnitGUID(button.unit) then
             curGUID=HealBot_UnitGUID(button.unit)
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-            button:SetAttribute(HB_prefix.."type"..index_b, "showhbmenu")
+            button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+            button:SetAttribute(HB_prefix.."type"..j, "showhbmenu")
             showHBmenu = function()
                 local HBFriendsDropDown = CreateFrame("Frame", "HealBot_Action_hbmenuFrame_DropDown", UIParent, "UIDropDownMenuTemplate");
                 HBFriendsDropDown.unit = button.unit
@@ -2049,28 +2058,28 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,index_b)
             end
             button.showhbmenu = showHBmenu
         elseif strlower(sName)==strlower(HEALBOT_MAINTANK) then
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-            button:SetAttribute(HB_prefix.."type"..index_b, "maintank")
-            button:SetAttribute(HB_prefix.."type-maintank"..index_b, "toggle")
-            hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+            button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+            button:SetAttribute(HB_prefix.."type"..j, "maintank")
+            button:SetAttribute(HB_prefix.."type-maintank"..j, "toggle")
+            hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         elseif strlower(sName)==strlower(HEALBOT_MAINASSIST) then
-            button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-            button:SetAttribute(HB_prefix.."type"..index_b, "mainassist")
-            button:SetAttribute(HB_prefix.."type-mainassist"..index_b, "toggle")
-            hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+            button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+            button:SetAttribute(HB_prefix.."type"..j, "mainassist")
+            button:SetAttribute(HB_prefix.."type-mainassist"..j, "toggle")
+            hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         else
             sID=HealBot_GetSpellId(sName)
             if sID then
                 if sTar==1 or sTrin1==1 or sTrin2==1 then
                     mText = HealBot_Action_AlterSpell2Macro(sName, sTar, sTrin1, sTrin2, button.unit, HB_combo_prefix)
-                    button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-                    button:SetAttribute(HB_prefix.."type"..index_b,"macro")
-                    button:SetAttribute(HB_prefix.."macrotext"..index_b, mText)
+                    button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+                    button:SetAttribute(HB_prefix.."type"..j,"macro")
+                    button:SetAttribute(HB_prefix.."macrotext"..j, mText)
                 else
-                    button:SetAttribute(HB_prefix.."helpbutton"..index_b, "heal"..index_b);
-                    button:SetAttribute(HB_prefix.."type-heal"..index_b, "spell");
-                    button:SetAttribute(HB_prefix.."spell-heal"..index_b, sName);
-                    hbAttribsMinReset[button.id..HB_prefix..status..index_b]=true
+                    button:SetAttribute(HB_prefix.."helpbutton"..j, "heal"..j);
+                    button:SetAttribute(HB_prefix.."type-heal"..j, "spell");
+                    button:SetAttribute(HB_prefix.."spell-heal"..j, sName);
+                    hbAttribsMinReset[button.id..HB_prefix..status..j]=true
                 end
             else
                 mId=GetMacroIndexByName(sName)
@@ -2083,21 +2092,21 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,index_b)
                     mText=string.gsub(mText,"hbtargettargettarget",button.unit.."targettarget")
                     mText=string.gsub(mText,"hbtargettarget",button.unit.."target")
                     mText=string.gsub(mText,"hbtarget",button.unit)
-                    button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
-                    button:SetAttribute(HB_prefix.."type"..index_b,"macro")
-                    button:SetAttribute(HB_prefix.."macrotext"..index_b, mText)
+                    button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+                    button:SetAttribute(HB_prefix.."type"..j,"macro")
+                    button:SetAttribute(HB_prefix.."macrotext"..j, mText)
                     if status=="Enabled" then
-                        HealBotButtonMacroAttribs[HB_prefix..index_b]=sName
+                        HealBotButtonMacroAttribs[HB_prefix..j]=sName
                     end
                 else
-                    button:SetAttribute(HB_prefix.."helpbutton"..index_b, "item"..index_b);
-                    button:SetAttribute(HB_prefix.."type-item"..index_b, "item");
-                    button:SetAttribute(HB_prefix.."item-item"..index_b, sName);
+                    button:SetAttribute(HB_prefix.."helpbutton"..j, "item"..j);
+                    button:SetAttribute(HB_prefix.."type-item"..j, "item");
+                    button:SetAttribute(HB_prefix.."item-item"..j, sName);
                 end
             end
         end
     else
-        button:SetAttribute(HB_prefix.."helpbutton"..index_b, nil);
+        button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
     end
 end
 
@@ -2352,7 +2361,7 @@ function HealBot_Action_PartyChanged(HealBot_PreCombat)
         end
   
         if Healbot_Config_Skins.ShowHeader[Healbot_Config_Skins.Current_Skin]==1 then
-            HealBot_Panel_PartyChanged(true) 
+            HealBot_Panel_PartyChanged(true)
         else
             HealBot_Panel_PartyChanged(false)
         end
@@ -2369,9 +2378,7 @@ function HealBot_Action_PartyChanged(HealBot_PreCombat)
             uCnt=uCnt+1
             if HealBot_ButtonArray==1 then
                 HealBot_ButtonArray1[xUnit]=xButton
-                if uCnt==1 then 
-                    HealBot_ButtonArray2[xUnit]=xButton 
-                end
+                if uCnt==1 then HealBot_ButtonArray2[xUnit]=xButton end
                 HealBot_ButtonArray=2
             else
                 HealBot_ButtonArray2[xUnit]=xButton
@@ -2441,23 +2448,44 @@ function HealBot_Action_setPoint()
         HealBot_Action:SetPoint("BOTTOM","UIParent","BOTTOMLEFT",Healbot_Config_Skins.PanelAnchorX[Healbot_Config_Skins.Current_Skin],Healbot_Config_Skins.PanelAnchorY[Healbot_Config_Skins.Current_Skin]);
     end
 end
+
+local hbClassCols = {
+          [HEALBOT_DRUID] = {r=1.0,  g=0.49, b=0.04, },
+          [HEALBOT_HUNTER] = {r=0.67, g=0.83, b=0.45, },
+          [HEALBOT_MAGE] = {r=0.41, g=0.8,  b=0.94, },
+          [HEALBOT_PALADIN] = {r=0.96, g=0.55, b=0.73, },
+          [HEALBOT_PRIEST] = {r=1.0,  g=1.0,  b=1.0,  },
+          [HEALBOT_ROGUE] = {r=1.0,  g=0.96, b=0.41, },
+          [HEALBOT_SHAMAN] = {r=0.14, g=0.35, b=1.0,  },
+          [HEALBOT_WARLOCK] = {r=0.58, g=0.51, b=0.79, },
+          [HEALBOT_DEATHKNIGHT] = {r=0.78, g=0.04, b=0.04, },
+          [HEALBOT_WARRIOR] = {r=0.78, g=0.61, b=0.43, },
+          [HealBot_PlayerClassEN] = { r = 1.0, g = 0.843, b = 0.0 }
+          
+      }
+      
 function HealBot_Action_ClassColour(hbGUID, unit)
-  return 1.0,0.49,0.04;
+    class=nil
+    if unit and UnitClass(unit) then
+        _,class=UnitClass(unit)
+    elseif hbGUID and HealBot_UnitID[hbGUID] and UnitClass(HealBot_UnitID[hbGUID]) then
+        _,class=UnitClass(HealBot_UnitID[hbGUID])        
+    end
+    if not class then
+        class = HEALBOT_DRUID
+    end
+    return hbClassCols[class].r, hbClassCols[class].g, hbClassCols[class].b
 end
 
 function HealBot_Action_ShowTooltip(unit)
-    if HealBot_Config.ShowTooltip==0 then 
-        return 
-    end
+    if HealBot_Config.ShowTooltip==0 then return end
     HealBot_Action_TooltipUnit = unit;
     HealBot_Action_DisableTooltipUnit = nil;
     HealBot_Action_RefreshTooltip(unit,"Enabled");
 end
 
 function HealBot_Action_ShowDisabledTooltip(unit)
-    if HealBot_Config.ShowTooltip==0 then
-         return 
-        end
+    if HealBot_Config.ShowTooltip==0 then return end
     HealBot_Action_TooltipUnit = nil;
     HealBot_Action_DisableTooltipUnit = unit;
     HealBot_Action_RefreshTooltip(unit,"Disabled");
@@ -3006,9 +3034,7 @@ local scuHlth, scuMaxHlth, scuHealsIn = nil,nil,nil
 function HealBot_Action_SmartCast(hbGUID)
     sName=nil
     rangeSpell=HealBot_hSpell
-    if HealBot_PlayerDead or not HealBot_UnitID[hbGUID] then 
-        return nil;
-     end
+    if HealBot_PlayerDead or not HealBot_UnitID[hbGUID] then return nil; end
   
     if HealBot_Config.SmartCastRes==1 and UnitIsDead(HealBot_UnitID[hbGUID]) and not UnitIsGhost(HealBot_UnitID[hbGUID]) then
         sName=HealBot_Init_retSmartCast_Res();
@@ -3023,7 +3049,7 @@ function HealBot_Action_SmartCast(hbGUID)
         scuHealsIn = HealBot_IncHeals_retHealsIn(hbGUID);
         scuHlth, scuMaxHlth = HealBot_UnitHealth(hbGUID, HealBot_UnitID[hbGUID]);
         x = scuMaxHlth-(scuHlth+scuHealsIn);
-        if x > 200 then
+        if x>200 then
             sName=HealBot_SmartCast(hbGUID,x)
         end
     end

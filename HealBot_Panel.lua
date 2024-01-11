@@ -308,9 +308,7 @@ local HealBot_ClassIconCoord = {
     WARLOCK = {2,4},
     PALADIN = {3,1},
     DEATHKNIGHT = {3,2},
-    DEFAULT = {4,4}
-
-};
+    DEFAULT = {4,4}};
     
 local ciCol,ciRow=nil,nil
 function HealBot_Action_SetClassIconTexture(button, unit)
@@ -323,6 +321,7 @@ function HealBot_Action_SetClassIconTexture(button, unit)
     iconName:SetTexture([[Interface\AddOns\HealBot\Images\icon_class.tga]]);
     iconName:SetTexCoord(left,left+0.25,top,top+0.25);
 end
+
 local thisX=nil
 local HealBot_ResetHeaderSkinDone={}
 function HealBot_Panel_clearResetHeaderSkinDone()
@@ -330,6 +329,7 @@ function HealBot_Panel_clearResetHeaderSkinDone()
         HealBot_ResetHeaderSkinDone[x]=nil;
     end
 end
+
 function HealBot_Action_PositionButton(button,OsetX,OsetY,bWidth,bHeight,xHeader)
     brspace=Healbot_Config_Skins.brspace[Healbot_Config_Skins.Current_Skin];
     if xHeader then
@@ -382,12 +382,11 @@ function HealBot_Action_PositionButton(button,OsetX,OsetY,bWidth,bHeight,xHeader
             end
         end
         OsetY = OsetY+bHeight+brspace+HealBot_AddHeight
-        if showCI and not HealBot_retdebuffTargetIcon(button.unit) then 
-            HealBot_Action_SetClassIconTexture(button, button.unit) 
-        end
+        if showCI and not HealBot_retdebuffTargetIcon(button.unit) then HealBot_Action_SetClassIconTexture(button, button.unit) end
     end
     return OsetY;
 end
+
 local HealBot_AggroBarSize=0
 function HealBot_Action_SetAddHeight()
     if Healbot_Config_Skins.ShowAggro[Healbot_Config_Skins.Current_Skin]==0 and 
@@ -414,12 +413,12 @@ function HealBot_Action_SetAddHeight()
     end
     HealBot_AddHeight=HealBot_AddHeight+HealBot_MultiRowHoToffset;
 end
-function HealBot_Action_SetHeightWidth(width,height,bWidth, numBars)
 
+
+
+function HealBot_Action_SetHeightWidth(width,height,bWidth, numBars)
     HealBot_Action:SetHeight(height);
-    if (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin] < 3 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==2) or (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]>2 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==1) then 
-        curcol=curcol+1; 
-    end;
+    if (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]<3 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==2) or (Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]>2 and Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]==1) then curcol=curcol+1; end;
     HealBot_Action:SetWidth(width+bWidth+7+(HealBot_MultiColHoToffset*curcol))
     HealBot_Action_setPoint()
 end
@@ -1166,7 +1165,7 @@ function HealBot_Panel_PanelChanged(showHeaders)
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = "ZZZZ"..uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
-                                        order[xUnit] = string.upper(HEALBOT_HERO);
+                                        order[xUnit] = string.upper(HEALBOT_WARRIOR);
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==3 then
                                         order[xUnit] = 8;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==4 then
@@ -1216,7 +1215,7 @@ function HealBot_Panel_PanelChanged(showHeaders)
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = "ZZZZ"..uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
-                                        order[xUnit] = string.upper(HEALBOT_HERO);
+                                        order[xUnit] = string.upper(HEALBOT_WARRIOR);
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==3 then
                                         order[xUnit] = subgroup;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==4 then
@@ -1249,12 +1248,12 @@ function HealBot_Panel_PanelChanged(showHeaders)
                         end
                         if UnitExists(xUnit) and xGUID then
                             if HealBot_TrackNames[xGUID] then
-
-                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and HEALBOT_HERO and HealBot_EmergInc[HEALBOT_HERO_EN]==1 then
+                                class,classEN=UnitClass(xUnit)
+                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and class and HealBot_EmergInc[strsub(classEN,1,4)]==1 then
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
-                                        order[xUnit] = HEALBOT_HERO_EN;
+                                        order[xUnit] = classEN;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==3 then
                                         order[xUnit] = subgroup;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==4 then
@@ -1278,7 +1277,7 @@ function HealBot_Panel_PanelChanged(showHeaders)
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = "ZZZZ"..uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
-                                        order[xUnit] = string.upper(HEALBOT_HERO);
+                                        order[xUnit] = string.upper(HEALBOT_WARRIOR);
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==3 then
                                         order[xUnit] = 8;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==4 then
@@ -1295,14 +1294,12 @@ function HealBot_Panel_PanelChanged(showHeaders)
                 else
                     z=0
                     for _,xUnit in ipairs(HealBot_Action_HealGroup) do
-                        
-                        class = HEALBOT_HERO;
-                        classEN = HEALBOT_HERO_EN;
+                        class,classEN = UnitClass(xUnit);
                         xGUID=HealBot_UnitGUID(xUnit)
                         uName=UnitName(xUnit);
                         if UnitExists(xUnit) then
                             if not HealBot_TrackNames[xGUID] then
-                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and HealBot_EmergInc[HEALBOT_HERO_EN]==1 then
+                                if Healbot_Config_Skins.ExtraIncGroup[Healbot_Config_Skins.Current_Skin][subgroup] and HealBot_EmergInc[strsub(classEN,1,4)]==1 then
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
@@ -1330,7 +1327,7 @@ function HealBot_Panel_PanelChanged(showHeaders)
                                     if Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==1 then
                                         order[xUnit] = "ZZZZ"..uName;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==2 then
-                                        order[xUnit] = string.upper(HEALBOT_HERO);
+                                        order[xUnit] = string.upper(HEALBOT_WARRIOR);
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==3 then
                                         order[xUnit] = subgroup;
                                     elseif Healbot_Config_Skins.ExtraOrder[Healbot_Config_Skins.Current_Skin]==4 then
@@ -1372,7 +1369,7 @@ function HealBot_Panel_PanelChanged(showHeaders)
                         xGUID=UnitGUID(xUnit)
                         TempUnitMaxH=UnitHealthMax(xUnit)
                     else
-                        classEN = string.upper(HEALBOT_HERO);
+                        classEN = string.upper(HEALBOT_WARRIOR);
                         xGUID = xUnit
                         TempUnitMaxH = maxHealDiv
                     end
@@ -1885,14 +1882,11 @@ function HealBot_Panel_SetupBars(showHeaders)
     bcspace=Healbot_Config_Skins.bcspace[Healbot_Config_Skins.Current_Skin];
     cols=Healbot_Config_Skins.numcols[Healbot_Config_Skins.Current_Skin];
     i=0
-    if Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin] then
-        if Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin] < 3 then
-            curcol = 2-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]
-        else
-            curcol = 2-(3-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin])
-        end
+    if Healbot_Config_Skins.Bars_Anchor[Healbot_Config_Skins.Current_Skin]<3 then
+        curcol=2-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin]
+    else
+        curcol=2-(3-Healbot_Config_Skins.HoTposBar[Healbot_Config_Skins.Current_Skin])
     end
-  
     z=1;
     OffsetY = 4 + HealBot_AggroBarSize;
     OffsetX = 7;

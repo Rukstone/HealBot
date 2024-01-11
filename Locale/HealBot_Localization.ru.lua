@@ -8,12 +8,19 @@ if (GetLocale() == "ruRU") then
 -------------------
 -- Compatibility --
 -------------------
-
-local localizedClass, englishClass, classIndex = UnitClass("player");
-
-HEALBOT_HERO = localizedClass;
-HEALBOT_HERO_EN = englishClass;
-HEALBOT_HERO_INDEX = classIndex;
+_, HealBot_PlayerClassEN                       = UnitClass("player")
+HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
+HealBot_PlayerName                             = UnitName("player")
+HEALBOT_DRUID   = "Друид";
+HEALBOT_HUNTER  = "Охотник";
+HEALBOT_MAGE    = "Маг";
+HEALBOT_PALADIN = "Паладин";
+HEALBOT_PRIEST  = "Жрец";
+HEALBOT_ROGUE   = "Разбойник";
+HEALBOT_SHAMAN  = "Шаман";
+HEALBOT_WARLOCK = "Чернокнижник";
+HEALBOT_WARRIOR = "Воин";
+HEALBOT_DEATHKNIGHT = "Рыцарь cмерти";
 
 HEALBOT_SILK_BANDAGE                 = GetItemInfo(6450) or "Шелковые бинты";
 HEALBOT_HEAVY_SILK_BANDAGE           = GetItemInfo(6451) or "Плотные шелковые бинты";
