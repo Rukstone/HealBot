@@ -301,35 +301,35 @@ function HealBot_Action_SetrSpell()
     HealBot_bSpell=HealBot_GetBandageType()
     HealBot_dSpell=HealBot_GetBandageType()
     HealBot_rSpell = HealBot_GetBandageType()
-    if HealBot_PlayerClassEN ==HEALBOT_DRUID then
+    if HealBot_PlayerClass_ER ==HEALBOT_DRUID then
         HealBot_hSpell=HEALBOT_REJUVENATION
         HealBot_bSpell=HEALBOT_MARK_OF_THE_WILD
         HealBot_dSpell=HEALBOT_CURE_POISON
         HealBot_rSpell=HEALBOT_REVIVE
-    elseif HealBot_PlayerClassEN ==HEALBOT_HUNTER then
+    elseif HealBot_PlayerClass_ER ==HEALBOT_HUNTER then
         HealBot_hSpell=HEALBOT_MENDPET
-    elseif HealBot_PlayerClassEN ==HEALBOT_MAGE then
+    elseif HealBot_PlayerClass_ER ==HEALBOT_MAGE then
         HealBot_bSpell=HEALBOT_ARCANE_INTELLECT
         HealBot_dSpell=HEALBOT_REMOVE_CURSE
-    elseif HealBot_PlayerClassEN ==HEALBOT_PALADIN then
+    elseif HealBot_PlayerClass_ER ==HEALBOT_PALADIN then
         HealBot_hSpell=HEALBOT_HOLY_LIGHT
         HealBot_bSpell=HEALBOT_BLESSING_OF_MIGHT
         HealBot_dSpell=HEALBOT_PURIFY
         HealBot_rSpell=HEALBOT_REDEMPTION
-    elseif HealBot_PlayerClassEN ==HEALBOT_PRIEST then
+    elseif HealBot_PlayerClass_ER ==HEALBOT_PRIEST then
         HealBot_hSpell=HEALBOT_LESSER_HEAL
         HealBot_bSpell=HEALBOT_POWER_WORD_FORTITUDE
         HealBot_dSpell=HEALBOT_CURE_DISEASE
         HealBot_rSpell=HEALBOT_RESURRECTION
-    elseif HealBot_PlayerClassEN ==HEALBOT_SHAMAN then
+    elseif HealBot_PlayerClass_ER ==HEALBOT_SHAMAN then
         HealBot_hSpell=HEALBOT_HEALING_WAVE
         HealBot_bSpell=HEALBOT_WATER_SHIELD
         HealBot_dSpell=HEALBOT_CURE_DISEASE
         HealBot_rSpell=HEALBOT_ANCESTRALSPIRIT
-    elseif HealBot_PlayerClassEN ==HEALBOT_WARLOCK then
+    elseif HealBot_PlayerClass_ER ==HEALBOT_WARLOCK then
         HealBot_bSpell=HEALBOT_UNENDING_BREATH
         HealBot_hSpell=HEALBOT_HEALTH_FUNNEL
-    elseif HealBot_PlayerClassEN ==HEALBOT_WARRIOR then
+    elseif HealBot_PlayerClass_ER ==HEALBOT_WARRIOR then
         if HealBot_GetSpellId(HEALBOT_VIGILANCE) then
             HealBot_hSpell=HEALBOT_VIGILANCE
             HealBot_bSpell=HEALBOT_VIGILANCE
@@ -2460,7 +2460,7 @@ local hbClassCols = {
           [HEALBOT_WARLOCK] = {r=0.58, g=0.51, b=0.79, },
           [HEALBOT_DEATHKNIGHT] = {r=0.78, g=0.04, b=0.04, },
           [HEALBOT_WARRIOR] = {r=0.78, g=0.61, b=0.43, },
-          [HealBot_PlayerClassEN] = { r = 1.0, g = 0.843, b = 0.0 }
+          [HealBot_PlayerClass_ER] = { r = 1.0, g = 0.843, b = 0.0 }
           
       }
       

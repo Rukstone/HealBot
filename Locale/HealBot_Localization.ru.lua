@@ -8,7 +8,7 @@ if (GetLocale() == "ruRU") then
 -------------------
 -- Compatibility --
 -------------------
-_, HealBot_PlayerClassEN                       = UnitClass("player")
+_, HealBot_PlayerClass_ER                       = UnitClass("player")
 HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
 HealBot_PlayerName                             = UnitName("player")
 HEALBOT_DRUID   = "Друид";

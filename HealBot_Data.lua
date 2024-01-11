@@ -36,7 +36,7 @@ HealBot_Class_En = {
     [HEALBOT_WARLOCK] = HEALBOT_WARLOCK,
     [HEALBOT_WARRIOR] = HEALBOT_WARRIOR,
     [HEALBOT_DEATHKNIGHT] = HEALBOT_DEATHKNIGHT,
-    [HealBot_PlayerClassEN] = HealBot_PlayerClassEN,
+    [HealBot_PlayerClass_ER] = HealBot_PlayerClass_ER,
 }
 HealBot_ConfigDefaults = {
     CombotSetProfileSelected = "Default",
@@ -130,7 +130,7 @@ HealBot_ConfigDefaults = {
         [HEALBOT_WARLOCK] = 1,
         [HEALBOT_WARRIOR] = 0,
         [HEALBOT_DEATHKNIGHT] = 0,
-        [HealBot_PlayerClassEN] = 0,
+        [HealBot_PlayerClass_ER] = 0,
     },
     EmergIncMelee = {
         [HEALBOT_DRUID] = 0,
@@ -143,7 +143,7 @@ HealBot_ConfigDefaults = {
         [HEALBOT_WARLOCK] = 0,
         [HEALBOT_WARRIOR] = 1,
         [HEALBOT_DEATHKNIGHT] = 1,
-        [HealBot_PlayerClassEN] = 0,
+        [HealBot_PlayerClass_ER] = 0,
     },
     EmergIncHealers = {
         [HEALBOT_DRUID] = 1,
@@ -156,7 +156,7 @@ HealBot_ConfigDefaults = {
         [HEALBOT_WARLOCK] = 0,
         [HEALBOT_WARRIOR] = 0,
         [HEALBOT_DEATHKNIGHT] = 0,
-        [HealBot_PlayerClassEN] = 0,
+        [HealBot_PlayerClass_ER] = 0,
     },
     EmergIncCustom = {
         [HEALBOT_DRUID] = 1,
@@ -169,7 +169,7 @@ HealBot_ConfigDefaults = {
         [HEALBOT_WARLOCK] = 1,
         [HEALBOT_WARRIOR] = 0,
         [HEALBOT_DEATHKNIGHT] = 0,
-        [HealBot_PlayerClassEN] = 0,
+        [HealBot_PlayerClass_ER] = 0,
     },
     SkinDefault = {
         [HEALBOT_SKINS_STD] = 1,
@@ -399,10 +399,10 @@ HealBot_GlobalsDefaults = {
         [HEALBOT_WARLOCK] = { [1] = 1, [2] = 1, [3] = 1, [4] = 1 },
         [HEALBOT_WARRIOR] = { [1] = 1, [2] = 1, [3] = 1, [4] = 1 },
         [HEALBOT_DEATHKNIGHT] = { [1] = 1, [2] = 1, [3] = 1, [4] = 1 },
-        [HealBot_PlayerClassEN] = { [1] = 1, [2] = 1, [3] = 1, [4] = 1 },
+        [HealBot_PlayerClass_ER] = { [1] = 1, [2] = 1, [3] = 1, [4] = 1 },
     },
     WatchHoT = {
-        [HealBot_PlayerClassEN] = { --1 for not displaying 2 for self only 3 for all
+        [HealBot_PlayerClass_ER] = { --1 for not displaying 2 for self only 3 for all
         [HEALBOT_GUARDIAN_SPIRIT] = 2,
         [HEALBOT_PAIN_SUPPRESSION] = 2,
         [HEALBOT_POWER_INFUSION] = 2,

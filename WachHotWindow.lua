@@ -48,7 +48,7 @@ function OnSpellWacherScroll_Load(ScrollView) --this function is called only on 
     SelectedSpellDescription:SetText(
         "Select the spell in the list at your left and change the display mode using the button below");
     SelectedSpellDescription:SetTextHeight(18);
-    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HealBot_PlayerClassEN]) do
+    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HealBot_PlayerClass_ER]) do
         Create_Spell_Button(k, "Helpful")
     end
     indexEE = 0;
@@ -84,17 +84,17 @@ end
 local function MyFrameOnclick(self)
     local r = false;
     if SelectedSpellType == "Helpful" then
-        if HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] then
-            if HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] == 1 then
-                HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] = 2;
+        if HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] then
+            if HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 1 then
+                HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] = 2;
                 SPellWacherButtonDisplay:SetText("Self Cast Only")
                 r = true;
-            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] == 2 then
-                HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] = 3;
+            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 2 then
+                HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] = 3;
                 SPellWacherButtonDisplay:SetText("ALL")
                 r = true;
-            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] == 3 then
-                HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] = 1;
+            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 3 then
+                HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] = 1;
                 SPellWacherButtonDisplay:SetText("Dont Show")
                 r = true;
             else
@@ -151,21 +151,21 @@ local function Btt_click_ed(self, ...) --this function is called when player cli
     SPellWacherButtonDisplay:Show();
 
     SelectedSpellWacher = self:GetText();
-    print(SelectedSpellType,SelectedSpellWacher,HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher])
+    print(SelectedSpellType,SelectedSpellWacher,HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher])
 
     if SelectedSpellType == "Helpful" then
-        if HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] then
-            if HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] == 1 then
+        if HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] then
+            if HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 1 then
                 -- body
                 SPellWacherButtonDisplay:SetText("Dont Show")
                 SelectedSpellDescription:SetText("[" ..
                     SelectedSpellWacher .. "]" .. " Will be hidden in the UI.")
-            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] == 2 then
+            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 2 then
                 -- body
                 SPellWacherButtonDisplay:SetText("Self Cast Only")
                 SelectedSpellDescription:SetText("[" ..
                     SelectedSpellWacher .. "]" .. " Will only be displayed if casted by yourself.")
-            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClassEN][SelectedSpellWacher] == 3 then
+            elseif HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 3 then
                 -- body
                 SPellWacherButtonDisplay:SetText("ALL")
                 SelectedSpellDescription:SetText("[" ..
