@@ -11,7 +11,7 @@ With the new window, it's easy to track the spells you want to display or hide. 
 ###### ALL: It will display the icon no matter who cast it.
 ###### Don't show: It will not allow that icon to be shown on the HUD.
 
-<img src="https://github.com/Rukstone/Healbot_Updateds/blob/Rukstone/Features_Updates/Images/Old_HealBotTab_SpellTracker.png?raw=true" alt="Image Alt Text" style="width: 250px;">
+<img src="https://github.com/Rukstone/Healbot_Updateds/blob/Rukstone/Features_Updates/Images/New_HealBotTab_SpellTracker?raw=true" alt="Image Alt Text" style="width: 250px;">
 
 
 ### New Profile
