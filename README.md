@@ -1,9 +1,5 @@
 # HealBot
-###### IMPORTANT
-:warning: Make sure when extracting this file, rename it to "HealBolt" not "HealBot-main"; otherwise, the addon won't load.
 
- ## About
-This is a modified version of Healbot for Ascension. I am not a Lua coder; I simply open the files in a text editor and start examining them to figure things out.
 ###### Buffs and Debuffs
 Spells like "Power Word Shield," "Beacon Of Light," and "Renew" can now be displayed on the HUD.
 
