@@ -21,11 +21,14 @@ local function Load_ComboBox_Set(profile)
     HealBot_Config.DisabledSpellTarget = HealBot_ComboSetProfiles[profile]["DisabledSpellTarget"]
     HealBot_Options_ComboClass_Text();
     --HealBot_Update_SpellCombos();
+
 end
 local function SelectDropDownProfile(profile)
     HealBot_Config.CombotSetProfileSelected = profile
+    --UIDropDownMenu_SetSelectedValue(ProfileDropDown, profile, profile)
+    UIDropDownMenu_SetSelectedID(ProfileDropDown,profile);
     UIDropDownMenu_SetText(ProfileDropDown, profile)
-    UIDropDownMenu_SetSelectedValue(ProfileDropDown, profile, profile)
+
     Load_ComboBox_Set(profile);
 end
 local function CreateCombotSetProfile(profile)
@@ -55,47 +58,58 @@ function Save_ComboBox_Set(profile)
         ["EnabledSpellTarget"] = HealBot_Config.EnabledSpellTarget,
         ["DisabledSpellTarget"] = HealBot_Config.DisabledSpellTarget,
     }
-end
 
+end
 function HealBot_Options_ActionBarsCombo_Profile_OnLoad(self)
+    -- Set the global variable ProfileDropDown to reference the dropdown menu
     ProfileDropDown = self;
 
-    UIDropDownMenu_Initialize(ProfileDropDown, function ()
+    -- Initialize the dropdown menu
+    UIDropDownMenu_Initialize(ProfileDropDown, function()
         for key, val in pairs(HealBot_ComboSetProfiles) do
+            -- Create a new dropdown menu item
             local info = UIDropDownMenu_CreateInfo()
             info.text = key;
             info.value = key;
+
+            -- Check if the profile is selected and set the 'checked' property accordingly
             if HealBot_Config.CombotSetProfileSelected == key then
                 info.checked = true
             else
                 info.checked = false
             end
-            info.func = SelectDropDownProfile(key)
-            --[[
-                info.func = function(self)
-                SelectDropDownProfile(self.value)
-            end
-            ]]
+
+            -- Set the function to be called when the menu item is clicked
+            info.func = function(self) SelectDropDownProfile(key) end
+
+            -- Add the menu item to the dropdown menu
             UIDropDownMenu_AddButton(info);
         end
     end);
+
+    -- Create and select the default profile
+   -- Use C_Timer.After to delay the selection of the default profile
+   C_Timer.After(0.5, function()
     CreateCombotSetProfile(HealBot_Config.CombotSetProfileSelected);
     SelectDropDownProfile(HealBot_Config.CombotSetProfileSelected)
-
-
+end);
 end
-
 function HealBot_Options_ActionBarsComboProfile_Create(self)
     CreateCombotSetProfile(TextBoxFrame:GetText())
     TextBoxFrame:SetText("");
 end
-
 function HealBot_Options_ActionBarsComboProfile_Delete(self)
     if HealBot_ComboSetProfiles[HealBot_Config.CombotSetProfileSelected] then
         HealBot_ComboSetProfiles[HealBot_Config.CombotSetProfileSelected] = nil
+            -- Select the first profile from the updated list
+            local firstProfile = next(HealBot_ComboSetProfiles)
+            if firstProfile then
+                SelectDropDownProfile(firstProfile)
+            else
+                CreateCombotSetProfile(HealBot_ConfigDefaults.CombotSetProfileSelected);
+            end
     end
 end
-
 function HealBot_Options_ActionBarsCombo_ProfileTextBox_OnLoad(self)
     TextBoxFrame = self;
 end

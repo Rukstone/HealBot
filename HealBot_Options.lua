@@ -448,7 +448,6 @@ local HealBot_Debuff_Types = {
         HEALBOT_DISEASE_en,
         HEALBOT_POISON_en
     },
-
     [HEALBOT_CLEANSE_SPIRIT] = {
         HEALBOT_DISEASE_en,
         HEALBOT_POISON_en,
@@ -458,6 +457,10 @@ local HealBot_Debuff_Types = {
         HEALBOT_DISEASE_en,
         HEALBOT_POISON_en
     },
+    [HEALBOT_DISPEL_CURSE] = {
+        HEALBOT_CURSE_en,
+    },
+
 }
 
 local CPUProfiler = 0
@@ -7091,140 +7094,100 @@ function HealBot_Options_Debuff_Reset()
                         HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 14 then
                         HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 15 then
+                    elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 15 then --HERO class Fits in here.
                         if HealBot_Config.EmergIncMelee[HEALBOT_DRUID] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_HUNTER] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_HUNTER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HUNTER]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_MAGE] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_MAGE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_MAGE]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_PALADIN] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_PALADIN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PALADIN]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_PRIEST] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_PRIEST] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PRIEST]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_ROGUE] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_ROGUE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_ROGUE]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_SHAMAN] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_SHAMAN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_SHAMAN]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_WARLOCK] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_WARLOCK] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARLOCK]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_WARRIOR] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_WARRIOR] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HEALBOT_DEATHKNIGHT] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        end
-                        if HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] == 1 then
+                        elseif HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 16 then
                         if HealBot_Config.EmergIncRange[HEALBOT_DRUID] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_HUNTER] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_HUNTER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HUNTER]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_MAGE] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_MAGE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_MAGE]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_PALADIN] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_PALADIN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PALADIN]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_PRIEST] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_PRIEST] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PRIEST]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_ROGUE] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_ROGUE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_ROGUE]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_SHAMAN] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_SHAMAN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_SHAMAN]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_WARLOCK] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_WARLOCK] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARLOCK]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_WARRIOR] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_WARRIOR] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HEALBOT_DEATHKNIGHT] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        end
-                        if HealBot_Config.EmergIncRange[HealBot_PlayerClass_ER] == 1 then
+                        elseif HealBot_Config.EmergIncRange[HealBot_PlayerClass_ER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 17 then
                         if HealBot_Config.EmergIncHealers[HEALBOT_DRUID] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_HUNTER] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_HUNTER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HUNTER]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_MAGE] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_MAGE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_MAGE]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_PALADIN] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_PALADIN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PALADIN]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_PRIEST] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_PRIEST] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PRIEST]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_ROGUE] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_ROGUE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_ROGUE]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_SHAMAN] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_SHAMAN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_SHAMAN]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_WARLOCK] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_WARLOCK] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARLOCK]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_WARRIOR] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_WARRIOR] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HEALBOT_DEATHKNIGHT] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        end
-                        if HealBot_Config.EmergIncHealers[HealBot_PlayerClass_ER] == 1 then
+                        elseif HealBot_Config.EmergIncHealers[HealBot_PlayerClass_ER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 18 then
                         if HealBot_Config.EmergIncCustom[HEALBOT_DRUID] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DRUID]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_HUNTER] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_HUNTER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HUNTER]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_MAGE] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_MAGE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_MAGE]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_PALADIN] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_PALADIN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PALADIN]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_PRIEST] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_PRIEST] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_PRIEST]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_ROGUE] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_ROGUE] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_ROGUE]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_SHAMAN] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_SHAMAN] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_SHAMAN]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_WARLOCK] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_WARLOCK] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARLOCK]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_WARRIOR] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_WARRIOR] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        end
-                        if HealBot_Config.EmergIncCustom[HealBot_PlayerClass_ER] == 1 then
+                        elseif HealBot_Config.EmergIncCustom[HealBot_PlayerClass_ER] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 19 then
@@ -7237,9 +7200,9 @@ function HealBot_Options_Debuff_Reset()
                         HealBot_DebuffWatchTargetSpell["Focus"] = true
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 23 then
                         HealBot_DebuffWatchTargetSpell["Name"] = true
-                        if not FirstDebuffLoad then HealBot_Options_Get_deBuffWatchGUID(sName, "Debuff", k) end
-                    else
-                        print("HealBot_Options_Debuff_Reset")
+                        if not FirstDebuffLoad then
+                            HealBot_Options_Get_deBuffWatchGUID(sName, "Debuff", k)
+                        end
                     end
                 end)
             end

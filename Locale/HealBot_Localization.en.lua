@@ -45,8 +45,6 @@ Healing_Rain = GetSpellInfo(954836) or "Healing Rain";
 Seed_of_life_Bloom = GetSpellInfo(944828) or "Bloom";
 --ID: 7600179 Flourish
 Flourish = GetSpellInfo(7600179) or "Flourish";
---ID: 760174 Flourish_Hot
-Flourish_HOT = GetSpellInfo(7600179) or "Flourish";
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
 --86577 Cryotherapist
 Cryotherapist                                  = GetSpellInfo(86577) or "Cryotherapist";

@@ -1905,6 +1905,7 @@ function HealBot_Action_SetAllAttribs()
  --   HealBot_AddDebug("In HealBot_Action_SetAllAttribs")
     HealBot_ResetAttribs=true
     Delay_RecalcParty=1
+    Save_ComboBox_Set(HealBot_Config.CombotSetProfileSelected)--Add by Pirne
 end
 
 local HB_button,HB_prefix=nil

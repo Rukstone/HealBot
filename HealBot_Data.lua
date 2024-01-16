@@ -520,7 +520,7 @@ HealBot_GlobalsDefaults = {
         [Flames_of_the_Apostate] = 2,
         [Radiant_Flames] = 2,
         [Cryotherapist] = 2,
-        [Flourish_HOT] = 2,
+        [Flourish] = 2,
         [Potion_Toss] = 2,
         [Mending_Tide] = 2
 
