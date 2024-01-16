@@ -3218,7 +3218,6 @@ function HealBot_CheckUnitDebuffs(hbGUID)
                         checkthis=true;
                     elseif WatchTarget["Focus"] and UnitIsUnit(xUnit, "focus") then
                         checkthis=true;
-                        print("FOCUS")
                     elseif WatchTarget["MainTanks"] then
                         for i=1, #HealBot_MainTanks do
                             if hbGUID==HealBot_MainTanks[i] then

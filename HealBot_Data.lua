@@ -515,15 +515,14 @@ HealBot_GlobalsDefaults = {
         [Time_Bind] = 2,
         [Align] = 2,
         [Cauterizing_Fire_HOT] = 2,
-        [Focus_of_Auslese] = 2,
-        [Swiftness_of_Aulese] = 2,
+        [Focus_of_Auslese] = 1,
+        [Swiftness_of_Aulese] = 1,
         [Flames_of_the_Apostate] = 2,
         [Radiant_Flames] = 2,
         [Cryotherapist] = 2,
         [Flourish] = 2,
         [Potion_Toss] = 2,
-        [Mending_Tide] = 2
-
+        [Mending_Tide] = 2,
 
         },
         [HEALBOT_DRUID] = {

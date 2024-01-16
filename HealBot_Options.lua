@@ -3243,14 +3243,11 @@ local HealBot_Options_SelectHealSpellsCombo_List_V2 = {
         Swiftness_of_Aulese,
         Flames_of_the_Apostate,
         Radiant_Flames,
-        Cryotherapist,
         Flourish,
         Seed_of_life_Bloom,
         Healing_Rain,
         Leap_of_Faith,
         Potion_Toss,
-        Mending_Tide,
-        
 
     },
     [HEALBOT_DRUID] = {

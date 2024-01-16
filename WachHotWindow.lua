@@ -97,8 +97,7 @@ local function MyFrameOnclick(self)
                 HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] = 1;
                 SPellWacherButtonDisplay:SetText("Dont Show")
                 r = true;
-            else
-                print("OnSpellButtonClickDisplayHotOption" , SelectedSpellWacher)
+
             end
         end
     else
@@ -151,7 +150,7 @@ local function Btt_click_ed(self, ...) --this function is called when player cli
     SPellWacherButtonDisplay:Show();
 
     SelectedSpellWacher = self:GetText();
-    print(SelectedSpellType,SelectedSpellWacher,HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher])
+
 
     if SelectedSpellType == "Helpful" then
         if HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] then
@@ -170,8 +169,7 @@ local function Btt_click_ed(self, ...) --this function is called when player cli
                 SPellWacherButtonDisplay:SetText("ALL")
                 SelectedSpellDescription:SetText("[" ..
                     SelectedSpellWacher .. "]" .. " Will be displayed if enyone cast it.")
-            else
-                print("[Create_Spell_Button] button click")
+
             end
         end
     else
@@ -183,14 +181,12 @@ local function Btt_click_ed(self, ...) --this function is called when player cli
             SPellWacherButtonDisplay:SetText("Show")
             SelectedSpellDescription:SetText("[" ..
                 SelectedSpellWacher .. "]" .. " Will be displayed In the UI.")
-        else
-            print("erro" .. "WachHotWindow.lua " .. "No option for: " .. SelectedSpellWacher)
+
         end
     end
 end
 function Create_Spell_Button(spell, tab)
     if not spell or not tab then
-        print("WachHotWindow.lua: " .. "Create_Spell_Button" .. " ExceptionArgument: " .. spell " | " .. tab)
         return
     end
 
