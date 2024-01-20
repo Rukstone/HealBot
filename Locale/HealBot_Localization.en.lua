@@ -46,6 +46,8 @@ Seed_of_life_Bloom = GetSpellInfo(944828) or "Bloom";
 --ID: 7600179 Flourish
 Flourish = GetSpellInfo(7600179) or "Flourish";
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+--270187 Holy Supernova
+Holy_Supernova                                  = GetSpellInfo(270187) or "Holy Supernova";
 --86577 Cryotherapist
 Cryotherapist                                  = GetSpellInfo(86577) or "Cryotherapist";
 --997007 Radiant Flame

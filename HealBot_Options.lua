@@ -374,6 +374,8 @@ local HealBot_Debuff_Spells = {
         Cleasing_Totem,
         Mass_Dispell,
         Abolish_Curse,
+        Holy_Supernova,
+        
 
     },
 }
@@ -460,6 +462,12 @@ local HealBot_Debuff_Types = {
     [HEALBOT_DISPEL_CURSE] = {
         HEALBOT_CURSE_en,
     },
+    [Holy_Supernova] = {
+        HEALBOT_CURSE_en,
+        HEALBOT_POISON_en,
+        HEALBOT_DISEASE_en,
+        HEALBOT_MAGIC_en,
+    }
 
 }
 
@@ -3248,6 +3256,8 @@ local HealBot_Options_SelectHealSpellsCombo_List_V2 = {
         Healing_Rain,
         Leap_of_Faith,
         Potion_Toss,
+        Holy_Supernova,
+
 
     },
     [HEALBOT_DRUID] = {
