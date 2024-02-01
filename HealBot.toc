@@ -5,7 +5,7 @@
 ## SavedVariablesPerCharacter:  HealBot_Config , HealBot_ComboSetProfiles
 ## SavedVariables: Healbot_Config_Skins, HealBot_Globals
 ## OptionalDeps: LibSharedMedia-3.0, LibHealComm-4.0, LibQuickHealth-2.0, LibTalentQuery-1.0
-## Version: Ascension
+## Version: Ascension v1.0.1
 
 
 Locale\HealBot_Localization.en.lua

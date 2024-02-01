@@ -71,7 +71,7 @@ local HealBot_Options_BuffTxt_List = {
     HEALBOT_WARLOCK,
     HEALBOT_WARRIOR,
     HEALBOT_DEATHKNIGHT,
-    HealBot_PlayerClass_ER,
+    HEALBOT_HERO,
     HEALBOT_CLASSES_MELEE,
     HEALBOT_CLASSES_RANGES,
     HEALBOT_CLASSES_HEALERS,
@@ -198,7 +198,7 @@ local HealBot_Buff_Spells_Total_List = {
         HEALBOT_HORN_OF_WINTER,
         HEALBOT_BONE_SHIELD,
     },
-    [HealBot_PlayerClass_ER] = {
+    [HEALBOT_HERO] = {
         HEALBOT_MARK_OF_THE_WILD,
         HEALBOT_GIFT_OF_THE_WILD,
         HEALBOT_THORNS,
@@ -359,7 +359,7 @@ local HealBot_Debuff_Spells = {
     [HEALBOT_WARLOCK] = {},
     [HEALBOT_WARRIOR] = {},
     [HEALBOT_DEATHKNIGHT] = {},
-    [HealBot_PlayerClass_ER] = {
+    [HEALBOT_HERO] = {
         HEALBOT_PURIFY,
         HEALBOT_CLEANSE,
         HEALBOT_CURE_POISON,
@@ -2092,7 +2092,7 @@ function HealBot_Options_EFClass_OnClick(self)
         HealBot_Config.EmergIncMelee[HEALBOT_WARLOCK] = HealBot_Options_EFClassWarlock:GetChecked() or 0;
         HealBot_Config.EmergIncMelee[HEALBOT_WARRIOR] = HealBot_Options_EFClassWarrior:GetChecked() or 0;
         HealBot_Config.EmergIncMelee[HEALBOT_DEATHKNIGHT] = HealBot_Options_EFClassDeathKnight:GetChecked() or 0;
-        HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] = HealBot_Options_EFClassHero:GetChecked() or 0;
+        HealBot_Config.EmergIncMelee[HEALBOT_HERO] = HealBot_Options_EFClassHero:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass == 2 then
         HealBot_Config.EmergIncRange[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
         HealBot_Config.EmergIncRange[HEALBOT_HUNTER] = HealBot_Options_EFClassHunter:GetChecked() or 0;
@@ -2104,7 +2104,7 @@ function HealBot_Options_EFClass_OnClick(self)
         HealBot_Config.EmergIncRange[HEALBOT_WARLOCK] = HealBot_Options_EFClassWarlock:GetChecked() or 0;
         HealBot_Config.EmergIncRange[HEALBOT_WARRIOR] = HealBot_Options_EFClassWarrior:GetChecked() or 0;
         HealBot_Config.EmergIncRange[HEALBOT_DEATHKNIGHT] = HealBot_Options_EFClassDeathKnight:GetChecked() or 0;
-        HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] = HealBot_Options_EFClassHero:GetChecked() or 0;
+        HealBot_Config.EmergIncMelee[HEALBOT_HERO] = HealBot_Options_EFClassHero:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass == 3 then
         HealBot_Config.EmergIncHealers[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
         HealBot_Config.EmergIncHealers[HEALBOT_HUNTER] = HealBot_Options_EFClassHunter:GetChecked() or 0;
@@ -2116,7 +2116,7 @@ function HealBot_Options_EFClass_OnClick(self)
         HealBot_Config.EmergIncHealers[HEALBOT_WARLOCK] = HealBot_Options_EFClassWarlock:GetChecked() or 0;
         HealBot_Config.EmergIncHealers[HEALBOT_WARRIOR] = HealBot_Options_EFClassWarrior:GetChecked() or 0
         HealBot_Config.EmergIncHealers[HEALBOT_DEATHKNIGHT] = HealBot_Options_EFClassDeathKnight:GetChecked() or 0;
-        HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] = HealBot_Options_EFClassHero:GetChecked() or 0;
+        HealBot_Config.EmergIncMelee[HEALBOT_HERO] = HealBot_Options_EFClassHero:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass == 4 then
         HealBot_Config.EmergIncCustom[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_HUNTER] = HealBot_Options_EFClassHunter:GetChecked() or 0;
@@ -2128,7 +2128,7 @@ function HealBot_Options_EFClass_OnClick(self)
         HealBot_Config.EmergIncCustom[HEALBOT_WARLOCK] = HealBot_Options_EFClassWarlock:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_WARRIOR] = HealBot_Options_EFClassWarrior:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT] = HealBot_Options_EFClassDeathKnight:GetChecked() or 0;
-        HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] = HealBot_Options_EFClassHero:GetChecked() or 0;
+        HealBot_Config.EmergIncMelee[HEALBOT_HERO] = HealBot_Options_EFClassHero:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass == 5 then
         HealBot_Config.EmergIncCustom[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_HUNTER] = HealBot_Options_EFClassHunter:GetChecked() or 0;
@@ -2140,7 +2140,7 @@ function HealBot_Options_EFClass_OnClick(self)
         HealBot_Config.EmergIncCustom[HEALBOT_WARLOCK] = HealBot_Options_EFClassWarlock:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_WARRIOR] = HealBot_Options_EFClassWarrior:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT] = HealBot_Options_EFClassDeathKnight:GetChecked() or 0;
-        HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] = HealBot_Options_EFClassHero:GetChecked() or 0;
+        HealBot_Config.EmergIncMelee[HEALBOT_HERO] = HealBot_Options_EFClassHero:GetChecked() or 0;
     elseif HealBot_Config.EmergencyFClass == 6 then
         HealBot_Config.EmergIncCustom[HEALBOT_DRUID] = HealBot_Options_EFClassDruid:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_HUNTER] = HealBot_Options_EFClassHunter:GetChecked() or 0;
@@ -2152,7 +2152,7 @@ function HealBot_Options_EFClass_OnClick(self)
         HealBot_Config.EmergIncCustom[HEALBOT_WARLOCK] = HealBot_Options_EFClassWarlock:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_WARRIOR] = HealBot_Options_EFClassWarrior:GetChecked() or 0;
         HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT] = HealBot_Options_EFClassDeathKnight:GetChecked() or 0;
-        HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] = HealBot_Options_EFClassHero:GetChecked() or 0;
+        HealBot_Config.EmergIncMelee[HEALBOT_HERO] = HealBot_Options_EFClassHero:GetChecked() or 0;
     end
     if Delay_RecalcParty == 0 then
         Delay_RecalcParty = 1;
@@ -3205,7 +3205,7 @@ end
 
 local HealBot_SelectHealSpellsCombo = 1;
 local HealBot_Options_SelectHealSpellsCombo_List_V2 = {
-    [HealBot_PlayerClass_ER] = {
+    [HEALBOT_HERO] = {
 
         HEALBOT_BINDING_HEAL,
         HEALBOT_CIRCLE_OF_HEALING,
@@ -3915,77 +3915,82 @@ local HealBot_Options_Class_HoTctlName_List = {
     [HEALBOT_UNBREAKABLE_ARMOR] = HEALBOT_DEATHKNIGHT,
     [HEALBOT_BONE_SHIELD] = HEALBOT_DEATHKNIGHT,
     [HEALBOT_MENDPET] = HEALBOT_HUNTER,
-    -----------------------------------------------------------
-    [HEALBOT_LIFEBLOOM] = HealBot_PlayerClass_ER,
-    [HEALBOT_REGROWTH] = HealBot_PlayerClass_ER,
-    [HEALBOT_REJUVENATION] = HealBot_PlayerClass_ER,
-    [HEALBOT_LIVING_SEED] = HealBot_PlayerClass_ER,
-    [HEALBOT_TRANQUILITY] = HealBot_PlayerClass_ER,
-    [HEALBOT_WILD_GROWTH] = HealBot_PlayerClass_ER,
-    [HEALBOT_ABOLISH_POISON] = HealBot_PlayerClass_ER,
-    [HEALBOT_BARKSKIN] = HealBot_PlayerClass_ER,
-    [HEALBOT_SURVIVAL_INSTINCTS] = HealBot_PlayerClass_ER,
-    [HEALBOT_FRENZIED_REGEN] = HealBot_PlayerClass_ER,
-    [HEALBOT_NATURE_SWIFTNESS] = HealBot_PlayerClass_ER,
-    [HEALBOT_THORNS] = HealBot_PlayerClass_ER,
-    [HEALBOT_ENERGIZED] = HealBot_PlayerClass_ER,
-    [HEALBOT_CHAINHEALHOT] = HealBot_PlayerClass_ER,
-    [HEALBOT_TIDAL_WAVES] = HealBot_PlayerClass_ER,
-    [HEALBOT_TIDAL_FORCE] = HealBot_PlayerClass_ER,
-    [HEALBOT_RIPTIDE] = HealBot_PlayerClass_ER,
-    [HEALBOT_EARTHLIVING] = HealBot_PlayerClass_ER,
-    [HEALBOT_ANCESTRAL_FORTITUDE] = HealBot_PlayerClass_ER,
-    [HEALBOT_EARTHLIVING_WEAPON] = HealBot_PlayerClass_ER,
-    [HEALBOT_EARTH_SHIELD] = HealBot_PlayerClass_ER,
-    [HEALBOT_LIGHTNING_SHIELD] = HealBot_PlayerClass_ER,
-    [HEALBOT_WATER_SHIELD] = HealBot_PlayerClass_ER,
-    [HEALBOT_HEALING_WAY] = HealBot_PlayerClass_ER,
-    [HEALBOT_PRAYER_OF_MENDING] = HealBot_PlayerClass_ER,
-    [HEALBOT_RENEW] = HealBot_PlayerClass_ER,
-    [HEALBOT_INNER_FOCUS] = HealBot_PlayerClass_ER,
-    [HEALBOT_SERENDIPITY] = HealBot_PlayerClass_ER,
-    [HEALBOT_ABOLISH_DISEASE] = HealBot_PlayerClass_ER,
-    [HEALBOT_GUARDIAN_SPIRIT] = HealBot_PlayerClass_ER,
-    [HEALBOT_DIVINE_AEGIS] = HealBot_PlayerClass_ER,
-    [HEALBOT_GRACE] = HealBot_PlayerClass_ER,
-    [HEALBOT_LIGHTWELL_RENEW] = HealBot_PlayerClass_ER,
-    [HEALBOT_INSPIRATION] = HealBot_PlayerClass_ER,
-    [HEALBOT_FEAR_WARD] = HealBot_PlayerClass_ER,
-    [HEALBOT_PAIN_SUPPRESSION] = HealBot_PlayerClass_ER,
-    [HEALBOT_POWER_INFUSION] = HealBot_PlayerClass_ER,
-    [HEALBOT_POWER_WORD_SHIELD] = HealBot_PlayerClass_ER,
-    [HEALBOT_BLESSED_HEALING] = HealBot_PlayerClass_ER,
-    [HEALBOT_IMPROVED_LAY_ON_HANDS] = HealBot_PlayerClass_ER,
-    [HEALBOT_HAND_OF_SALVATION] = HealBot_PlayerClass_ER,
-    [HEALBOT_DIVINE_SHIELD] = HealBot_PlayerClass_ER,
-    [HEALBOT_HAND_OF_SACRIFICE] = HealBot_PlayerClass_ER,
-    [HEALBOT_BLESSED] = HealBot_PlayerClass_ER,
-    [HEALBOT_INFUSION_OF_LIGHT] = HealBot_PlayerClass_ER,
-    [HEALBOT_BEACON_OF_LIGHT] = HealBot_PlayerClass_ER,
-    [HEALBOT_HANDOFPROTECTION] = HealBot_PlayerClass_ER,
-    [HEALBOT_FLASH_OF_LIGHT] = HealBot_PlayerClass_ER,
-    [HEALBOT_LIGHT_BEACON] = HealBot_PlayerClass_ER,
-    [HEALBOT_SACRED_SHIELD] = HealBot_PlayerClass_ER,
-    [HEALBOT_HAND_OF_FREEDOM] = HealBot_PlayerClass_ER,
-    [HEALBOT_SACRED_CLEANSING] = HealBot_PlayerClass_ER,
-    [HEALBOT_SURGE_OF_LIGHT] = HealBot_PlayerClass_ER,
-    [HEALBOT_DIVINE_PROTECTION] = HealBot_PlayerClass_ER,
-    [HEALBOT_LAST_STAND] = HealBot_PlayerClass_ER,
-    [HEALBOT_SHIELD_WALL] = HealBot_PlayerClass_ER,
-    [HEALBOT_SHIELD_BLOCK] = HealBot_PlayerClass_ER,
-    [HEALBOT_ENRAGED_REGEN] = HealBot_PlayerClass_ER,
-    [HEALBOT_VIGILANCE] = HealBot_PlayerClass_ER,
-    [HEALBOT_ICEBOUND_FORTITUDE] = HealBot_PlayerClass_ER,
-    [HEALBOT_ANTIMAGIC_SHELL] = HealBot_PlayerClass_ER,
-    [HEALBOT_ARMY_OF_THE_DEAD] = HealBot_PlayerClass_ER,
-    [HEALBOT_LICHBORNE] = HealBot_PlayerClass_ER,
-    [HEALBOT_ANTIMAGIC_ZONE] = HealBot_PlayerClass_ER,
-    [HEALBOT_VAMPIRIC_BLOOD] = HealBot_PlayerClass_ER,
-    [HEALBOT_UNBREAKABLE_ARMOR] = HealBot_PlayerClass_ER,
-    [HEALBOT_BONE_SHIELD] = HealBot_PlayerClass_ER,
-    [HEALBOT_MENDPET] = HealBot_PlayerClass_ER,
+   
 
 
+}
+local HealBot_Options_Classless_HoTctlName_List = {
+    [HEALBOT_GIFT_OF_THE_NAARU] = "ALL",
+    [HEALBOT_PROTANCIENTKINGS] = "ALL",
+    [HEALBOT_FOUNTAIN_OF_LIGHT] = "ALL",
+    [HEALBOT_LIFEBLOOM] = HEALBOT_HERO,
+    [HEALBOT_REGROWTH] = HEALBOT_HERO,
+    [HEALBOT_REJUVENATION] = HEALBOT_HERO,
+    [HEALBOT_LIVING_SEED] = HEALBOT_HERO,
+    [HEALBOT_TRANQUILITY] = HEALBOT_HERO,
+    [HEALBOT_WILD_GROWTH] = HEALBOT_HERO,
+    [HEALBOT_ABOLISH_POISON] = HEALBOT_HERO,
+    [HEALBOT_BARKSKIN] = HEALBOT_HERO,
+    [HEALBOT_SURVIVAL_INSTINCTS] = HEALBOT_HERO,
+    [HEALBOT_FRENZIED_REGEN] = HEALBOT_HERO,
+    [HEALBOT_NATURE_SWIFTNESS] = HEALBOT_HERO,
+    [HEALBOT_THORNS] = HEALBOT_HERO,
+    [HEALBOT_ENERGIZED] = HEALBOT_HERO,
+    [HEALBOT_CHAINHEALHOT] = HEALBOT_HERO,
+    [HEALBOT_TIDAL_WAVES] = HEALBOT_HERO,
+    [HEALBOT_TIDAL_FORCE] = HEALBOT_HERO,
+    [HEALBOT_RIPTIDE] = HEALBOT_HERO,
+    [HEALBOT_EARTHLIVING] = HEALBOT_HERO,
+    [HEALBOT_ANCESTRAL_FORTITUDE] = HEALBOT_HERO,
+    [HEALBOT_EARTHLIVING_WEAPON] = HEALBOT_HERO,
+    [HEALBOT_EARTH_SHIELD] = HEALBOT_HERO,
+    [HEALBOT_LIGHTNING_SHIELD] = HEALBOT_HERO,
+    [HEALBOT_WATER_SHIELD] = HEALBOT_HERO,
+    [HEALBOT_HEALING_WAY] = HEALBOT_HERO,
+    [HEALBOT_PRAYER_OF_MENDING] = HEALBOT_HERO,
+    [HEALBOT_RENEW] = HEALBOT_HERO,
+    [HEALBOT_INNER_FOCUS] = HEALBOT_HERO,
+    [HEALBOT_SERENDIPITY] = HEALBOT_HERO,
+    [HEALBOT_ABOLISH_DISEASE] = HEALBOT_HERO,
+    [HEALBOT_GUARDIAN_SPIRIT] = HEALBOT_HERO,
+    [HEALBOT_DIVINE_AEGIS] = HEALBOT_HERO,
+    [HEALBOT_GRACE] = HEALBOT_HERO,
+    [HEALBOT_LIGHTWELL_RENEW] = HEALBOT_HERO,
+    [HEALBOT_INSPIRATION] = HEALBOT_HERO,
+    [HEALBOT_FEAR_WARD] = HEALBOT_HERO,
+    [HEALBOT_PAIN_SUPPRESSION] = HEALBOT_HERO,
+    [HEALBOT_POWER_INFUSION] = HEALBOT_HERO,
+    [HEALBOT_POWER_WORD_SHIELD] = HEALBOT_HERO,
+    [HEALBOT_BLESSED_HEALING] = HEALBOT_HERO,
+    [HEALBOT_IMPROVED_LAY_ON_HANDS] = HEALBOT_HERO,
+    [HEALBOT_HAND_OF_SALVATION] = HEALBOT_HERO,
+    [HEALBOT_DIVINE_SHIELD] = HEALBOT_HERO,
+    [HEALBOT_HAND_OF_SACRIFICE] = HEALBOT_HERO,
+    [HEALBOT_BLESSED] = HEALBOT_HERO,
+    [HEALBOT_INFUSION_OF_LIGHT] = HEALBOT_HERO,
+    [HEALBOT_BEACON_OF_LIGHT] = HEALBOT_HERO,
+    [HEALBOT_HANDOFPROTECTION] = HEALBOT_HERO,
+    [HEALBOT_FLASH_OF_LIGHT] = HEALBOT_HERO,
+    [HEALBOT_LIGHT_BEACON] = HEALBOT_HERO,
+    [HEALBOT_SACRED_SHIELD] = HEALBOT_HERO,
+    [HEALBOT_HAND_OF_FREEDOM] = HEALBOT_HERO,
+    [HEALBOT_SACRED_CLEANSING] = HEALBOT_HERO,
+    [HEALBOT_SURGE_OF_LIGHT] = HEALBOT_HERO,
+    [HEALBOT_DIVINE_PROTECTION] = HEALBOT_HERO,
+    [HEALBOT_LAST_STAND] = HEALBOT_HERO,
+    [HEALBOT_SHIELD_WALL] = HEALBOT_HERO,
+    [HEALBOT_SHIELD_BLOCK] = HEALBOT_HERO,
+    [HEALBOT_ENRAGED_REGEN] = HEALBOT_HERO,
+    [HEALBOT_VIGILANCE] = HEALBOT_HERO,
+    [HEALBOT_ICEBOUND_FORTITUDE] = HEALBOT_HERO,
+    [HEALBOT_ANTIMAGIC_SHELL] = HEALBOT_HERO,
+    [HEALBOT_ARMY_OF_THE_DEAD] = HEALBOT_HERO,
+    [HEALBOT_LICHBORNE] = HEALBOT_HERO,
+    [HEALBOT_ANTIMAGIC_ZONE] = HEALBOT_HERO,
+    [HEALBOT_VAMPIRIC_BLOOD] = HEALBOT_HERO,
+    [HEALBOT_UNBREAKABLE_ARMOR] = HEALBOT_HERO,
+    [HEALBOT_BONE_SHIELD] = HEALBOT_HERO,
+    [HEALBOT_MENDPET] = HEALBOT_HERO,
 
 
 }
@@ -3995,11 +4000,21 @@ function HealBot_Options_Class_HoTctlName_genList()
     for x, _ in pairs(HoTctlName_List) do
         HoTctlName_List[x] = nil;
     end
-    for bName, class in pairs(HealBot_Options_Class_HoTctlName_List) do
-        if class == "ALL" or HealBot_Options_StorePrev["FilterHoTctlName"] == class then
-            table.insert(HoTctlName_List, bName)
-        elseif bName == HEALBOT_NATURE_SWIFTNESS and HealBot_Options_StorePrev["FilterHoTctlName"] == HEALBOT_SHAMAN then -- patch in the Shaman
-            table.insert(HoTctlName_List, bName)
+    if HealBot_PlayerClass_ER == HEALBOT_HERO then
+        for bName, class in pairs(HealBot_Options_Classless_HoTctlName_List) do
+            if class == "ALL" or HealBot_Options_StorePrev["FilterHoTctlName"] == class then
+                table.insert(HoTctlName_List, bName)
+            elseif bName == HEALBOT_NATURE_SWIFTNESS and HealBot_Options_StorePrev["FilterHoTctlName"] == class then -- patch in the Shaman
+                table.insert(HoTctlName_List, bName)
+            end
+        end
+    else
+        for bName, class in pairs(HealBot_Options_Class_HoTctlName_List) do
+            if class == "ALL" or HealBot_Options_StorePrev["FilterHoTctlName"] == class then
+                table.insert(HoTctlName_List, bName)
+            elseif bName == HEALBOT_NATURE_SWIFTNESS and HealBot_Options_StorePrev["FilterHoTctlName"] == HEALBOT_SHAMAN then -- patch in the Shaman
+                table.insert(HoTctlName_List, bName)
+            end
         end
     end
     table.sort(HoTctlName_List)
@@ -4108,7 +4123,7 @@ local HealBot_Options_FilterHoTctl_List = {
     HEALBOT_MAGE,
     HEALBOT_ROGUE,
     HEALBOT_WARLOCK,
-    HealBot_PlayerClass_ER,
+    HEALBOT_HERO,
 }
 
 HealBot_Options_StorePrev["FilterHoTctlID"] = 1
@@ -4258,7 +4273,7 @@ local HealBot_Options_EmergencyFilter_List = {
     HEALBOT_WARLOCK,
     HEALBOT_WARRIOR,
     HEALBOT_DEATHKNIGHT,
-    HealBot_PlayerClass_ER,
+    HEALBOT_HERO,
     HEALBOT_CLASSES_MELEE,
     HEALBOT_CLASSES_RANGES,
     HEALBOT_CLASSES_HEALERS,
@@ -4310,7 +4325,7 @@ function HealBot_Options_EmergencyFilter_Reset()
     HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARLOCK]] = 0;
     HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARRIOR]] = 0;
     HealBot_EmergInc[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = 0;
-    HealBot_EmergInc[HealBot_Class_En[HealBot_PlayerClass_ER]] = 0;
+    HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 0;
     if Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin] == 1 then
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = 1;
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_HUNTER]] = 1;
@@ -4322,7 +4337,7 @@ function HealBot_Options_EmergencyFilter_Reset()
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARLOCK]] = 1;
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARRIOR]] = 1;
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = 1;
-        HealBot_EmergInc[HealBot_Class_En[HealBot_PlayerClass_ER]] = 1;
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = 1;
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin] == 2 then
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = 1;
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin] == 3 then
@@ -4354,7 +4369,7 @@ function HealBot_Options_EmergencyFilter_Reset()
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARLOCK]] = HealBot_Config.EmergIncMelee[HEALBOT_WARLOCK];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARRIOR]] = HealBot_Config.EmergIncMelee[HEALBOT_WARRIOR];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = HealBot_Config.EmergIncMelee[HEALBOT_DEATHKNIGHT];
-        HealBot_EmergInc[HealBot_Class_En[HealBot_PlayerClass_ER]] = HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin] == 13 then
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncRange[HEALBOT_DRUID];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_HUNTER]] = HealBot_Config.EmergIncRange[HEALBOT_HUNTER];
@@ -4366,7 +4381,7 @@ function HealBot_Options_EmergencyFilter_Reset()
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARLOCK]] = HealBot_Config.EmergIncRange[HEALBOT_WARLOCK];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARRIOR]] = HealBot_Config.EmergIncRange[HEALBOT_WARRIOR];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = HealBot_Config.EmergIncRange[HEALBOT_DEATHKNIGHT];
-        HealBot_EmergInc[HealBot_Class_En[HealBot_PlayerClass_ER]] = HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin] == 14 then
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncHealers[HEALBOT_DRUID];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_HUNTER]] = HealBot_Config.EmergIncHealers[HEALBOT_HUNTER];
@@ -4378,7 +4393,7 @@ function HealBot_Options_EmergencyFilter_Reset()
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARLOCK]] = HealBot_Config.EmergIncHealers[HEALBOT_WARLOCK];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARRIOR]] = HealBot_Config.EmergIncHealers[HEALBOT_WARRIOR];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = HealBot_Config.EmergIncHealers[HEALBOT_DEATHKNIGHT];
-        HealBot_EmergInc[HealBot_Class_En[HealBot_PlayerClass_ER]] = HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin] == 15 then
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncCustom[HEALBOT_DRUID];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_HUNTER]] = HealBot_Config.EmergIncCustom[HEALBOT_HUNTER];
@@ -4390,7 +4405,7 @@ function HealBot_Options_EmergencyFilter_Reset()
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARLOCK]] = HealBot_Config.EmergIncCustom[HEALBOT_WARLOCK];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARRIOR]] = HealBot_Config.EmergIncCustom[HEALBOT_WARRIOR];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT];
-        HealBot_EmergInc[HealBot_Class_En[HealBot_PlayerClass_ER]] = HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
     elseif Healbot_Config_Skins.EmergIncMonitor[Healbot_Config_Skins.Current_Skin] == 16 then --a
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DRUID]] = HealBot_Config.EmergIncCustom[HEALBOT_DRUID];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_HUNTER]] = HealBot_Config.EmergIncCustom[HEALBOT_HUNTER];
@@ -4402,7 +4417,7 @@ function HealBot_Options_EmergencyFilter_Reset()
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARLOCK]] = HealBot_Config.EmergIncCustom[HEALBOT_WARLOCK];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_WARRIOR]] = HealBot_Config.EmergIncCustom[HEALBOT_WARRIOR];
         HealBot_EmergInc[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT];
-        HealBot_EmergInc[HealBot_Class_En[HealBot_PlayerClass_ER]] = HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER];
+        HealBot_EmergInc[HealBot_Class_En[HEALBOT_HERO]] = HealBot_Config.EmergIncMelee[HEALBOT_HERO];
     end
 
     if Delay_RecalcParty == 0 then
@@ -6071,7 +6086,7 @@ local HealBot_Options_ComboClass_List = {
     HEALBOT_PALADIN,
     HEALBOT_PRIEST,
     HEALBOT_SHAMAN,
-    HealBot_PlayerClass_ER,
+    HEALBOT_HERO,
 }
 
 local HealBot_Debuff_Item_List = {
@@ -7122,8 +7137,8 @@ function HealBot_Options_Debuff_Reset()
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
                         elseif HealBot_Config.EmergIncMelee[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        elseif HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] == 1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                        elseif HealBot_Config.EmergIncMelee[HEALBOT_HERO] == 1 then
+                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 16 then
                         if HealBot_Config.EmergIncRange[HEALBOT_DRUID] == 1 then
@@ -7146,8 +7161,8 @@ function HealBot_Options_Debuff_Reset()
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
                         elseif HealBot_Config.EmergIncRange[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        elseif HealBot_Config.EmergIncRange[HealBot_PlayerClass_ER] == 1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                        elseif HealBot_Config.EmergIncRange[HEALBOT_HERO] == 1 then
+                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 17 then
                         if HealBot_Config.EmergIncHealers[HEALBOT_DRUID] == 1 then
@@ -7170,8 +7185,8 @@ function HealBot_Options_Debuff_Reset()
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
                         elseif HealBot_Config.EmergIncHealers[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        elseif HealBot_Config.EmergIncHealers[HealBot_PlayerClass_ER] == 1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                        elseif HealBot_Config.EmergIncHealers[HEALBOT_HERO] == 1 then
+                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 18 then
                         if HealBot_Config.EmergIncCustom[HEALBOT_DRUID] == 1 then
@@ -7194,8 +7209,8 @@ function HealBot_Options_Debuff_Reset()
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_WARRIOR]] = true;
                         elseif HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT] == 1 then
                             HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
-                        elseif HealBot_Config.EmergIncCustom[HealBot_PlayerClass_ER] == 1 then
-                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                        elseif HealBot_Config.EmergIncCustom[HEALBOT_HERO] == 1 then
+                            HealBot_DebuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                         end
                     elseif DebuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 19 then
                         HealBot_DebuffWatchTargetSpell["PvP"] = true
@@ -7321,8 +7336,8 @@ function HealBot_Options_Buff_Reset()
                     if HealBot_Config.EmergIncMelee[HEALBOT_DEATHKNIGHT] == 1 then
                         HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
                     end
-                    if HealBot_Config.EmergIncMelee[HealBot_PlayerClass_ER] == 1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                    if HealBot_Config.EmergIncMelee[HEALBOT_HERO] == 1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 16 then
                     if HealBot_Config.EmergIncRange[HEALBOT_DRUID] == 1 then
@@ -7355,8 +7370,8 @@ function HealBot_Options_Buff_Reset()
                     if HealBot_Config.EmergIncRange[HEALBOT_DEATHKNIGHT] == 1 then
                         HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
                     end
-                    if HealBot_Config.EmergIncRange[HealBot_PlayerClass_ER] == 1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                    if HealBot_Config.EmergIncRange[HEALBOT_HERO] == 1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 17 then
                     if HealBot_Config.EmergIncHealers[HEALBOT_DRUID] == 1 then
@@ -7389,8 +7404,8 @@ function HealBot_Options_Buff_Reset()
                     if HealBot_Config.EmergIncHealers[HEALBOT_DEATHKNIGHT] == 1 then
                         HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
                     end
-                    if HealBot_Config.EmergIncHealers[HealBot_PlayerClass_ER] == 1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                    if HealBot_Config.EmergIncHealers[HEALBOT_HERO] == 1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 18 then
                     if HealBot_Config.EmergIncCustom[HEALBOT_DRUID] == 1 then
@@ -7423,8 +7438,8 @@ function HealBot_Options_Buff_Reset()
                     if HealBot_Config.EmergIncCustom[HEALBOT_DEATHKNIGHT] == 1 then
                         HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_DEATHKNIGHT]] = true;
                     end
-                    if HealBot_Config.EmergIncCustom[HealBot_PlayerClass_ER] == 1 then
-                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HealBot_PlayerClass_ER]] = true;
+                    if HealBot_Config.EmergIncCustom[HEALBOT_HERO] == 1 then
+                        HealBot_BuffWatchTargetSpell[HealBot_Class_En[HEALBOT_HERO]] = true;
                     end
                 elseif BuffDropDownClass[HealBot_Options_getDropDownId_bySpec(k)] == 19 then
                     HealBot_BuffWatchTargetSpell["PvP"] = true

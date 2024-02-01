@@ -1549,10 +1549,9 @@ if (playerClass == "HERO") then
 		end
 	end
 	end
-end
 -- DRUIDS
 -- All data is accurate as of 3.2.2 (build 10392)
-if (playerClass == "DRUID") then
+elseif playerClass == "DRUID" then
 	LoadClassData = function()
 		-- Rejuvenation
 		local Rejuvenation = GetSpellInfo(774)
@@ -1901,10 +1900,9 @@ if (playerClass == "DRUID") then
 			return DIRECT_HEALS, math.ceil(healAmount)
 		end
 	end
-end
--- PALADINS
+	-- PALADINS
 -- All data is accurate as of 3.2.2 (build 10392)
-if (playerClass == "PALADIN") then
+elseif (playerClass == "PALADIN") then
 	LoadClassData = function()
 		-- Hot data, this is just so it realizes that FoL can be a hot so it will call the calculator
 		--local FlashofLight = GetSpellInfo(19750)
@@ -2039,10 +2037,9 @@ if (playerClass == "PALADIN") then
 			return DIRECT_HEALS, math.ceil(healAmount)
 		end
 	end
-end
--- PRIESTS
+	-- PRIESTS
 -- Accurate as of 3.2.2 (build 10392)
-if (playerClass == "PRIEST") then
+elseif (playerClass == "PRIEST") then
 	LoadClassData = function()
 		-- Hot data
 		local Renew = GetSpellInfo(139)
@@ -2271,10 +2268,9 @@ if (playerClass == "PRIEST") then
 			return DIRECT_HEALS, math.ceil(healAmount)
 		end
 	end
-end
--- SHAMANS
+	-- SHAMANS
 -- All spells accurate as of 3.2.2 (build 10392)
-if (playerClass == "SHAMAN") then
+elseif (playerClass == "SHAMAN") then
 	LoadClassData = function()
 		-- Hot data
 		-- Riptide

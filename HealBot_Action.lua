@@ -2461,7 +2461,7 @@ local hbClassCols = {
           [HEALBOT_WARLOCK] = {r=0.58, g=0.51, b=0.79, },
           [HEALBOT_DEATHKNIGHT] = {r=0.78, g=0.04, b=0.04, },
           [HEALBOT_WARRIOR] = {r=0.78, g=0.61, b=0.43, },
-          [HealBot_PlayerClass_ER] = { r = 1.0, g = 0.843, b = 0.0 }
+          [HEALBOT_HERO] = { r = 1.0, g = 0.843, b = 0.0 }
           
       }
       
@@ -2474,6 +2474,9 @@ function HealBot_Action_ClassColour(hbGUID, unit)
     end
     if not class then
         class = HEALBOT_DRUID
+    end
+    if not hbClassCols[class] then
+        class = HEALBOT_DRUID;
     end
     return hbClassCols[class].r, hbClassCols[class].g, hbClassCols[class].b
 end

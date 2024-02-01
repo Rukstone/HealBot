@@ -115,7 +115,7 @@ local HealBot_Ignore_Class_Debuffs = {
     [HEALBOT_DEATHKNIGHT] = {
         [HEALBOT_DEBUFF_UNSTABLE_AFFL] = true,
     },
-    [HealBot_PlayerClass_ER] = {
+    [HEALBOT_HERO] = {
 
     },
 };
@@ -1131,9 +1131,7 @@ function HealBot_OnUpdate(self)
                 elseif HealBot_NeedEquipUpdate then
                     HealBot_NeedEquipUpdate = false
                     HealBot_RecalcSpells();
-                    if HealBot_PlayerClass_ER == HEALBOT_SHAMAN then
-                        HealBot_CheckAllBuffs(HealBot_PlayerGUID)
-                    end
+                    HealBot_CheckAllBuffs(HealBot_PlayerGUID)
                 elseif HealBot_CheckTalents then
                     HealBot_InitSpells()
                     HealBot_CheckTalents = false;
@@ -1840,7 +1838,7 @@ function HealBot_OnEvent_VariablesLoaded(self)
         HealBot_HoT_Texture[HEALBOT_VIGILANCE] = "Interface\\Icons\\Ability_Warrior_Vigilance";
         HealBot_ShortBuffs[HEALBOT_BATTLE_SHOUT] = true
         HealBot_ShortBuffs[HEALBOT_COMMANDING_SHOUT] = true
-    else
+    elseif HealBot_PlayerClass_ER == HEALBOT_HERO then
         HealBot_BuffNameSwap = {
             [HEALBOT_MARK_OF_THE_WILD] = HEALBOT_GIFT_OF_THE_WILD,
             [HEALBOT_GIFT_OF_THE_WILD] = HEALBOT_MARK_OF_THE_WILD,
@@ -1862,6 +1860,8 @@ function HealBot_OnEvent_VariablesLoaded(self)
             [HEALBOT_GREATER_BLESSING_OF_SANCTUARY] = HEALBOT_BLESSING_OF_SANCTUARY,
 
         }
+    else
+        HealBot_BuffNameSwap = {}
     end
     if HealBot_Config.EnLibQuickHealth == 1 then
         QuickHealth.RegisterCallback(self, "UnitHealthUpdated", function(event, unitID, health, healthMax)
@@ -4636,10 +4636,14 @@ local hbHoTinterval = {
     [HEALBOT_LIFEBLOOM] = 1,
     [HEALBOT_WILD_GROWTH] = 1,
     [HEALBOT_RIPTIDE] = 3,
+    [Efflorescence] = 2,
+    [Flourish] = 3,
 }
 
 function HealBot_HoT_incHealsStart(hbGUID, hbUID, spellName, casterUnitID, healValue)
-    if spellName == "H" .. HEALBOT_REGROWTH then spellName = HEALBOT_REGROWTH end
+    if spellName == "H" .. HEALBOT_REGROWTH then
+        spellName = HEALBOT_REGROWTH
+    end
     HealBot_HoTincData[hbUID] = {}
     HealBot_HoTincData[hbUID].Spell = spellName
     HealBot_HoTincData[hbUID].tickHealValue = floor(healValue /
@@ -5975,6 +5979,32 @@ function HealBot_DoReset_Buffs(PlayerClassEN)
             [9] = HEALBOT_WORDS_NONE,
             [10] = HEALBOT_WORDS_NONE
         }
+    elseif strsub(PlayerClassEN, 1, 4) == "HERO" then
+        HealBot_Config.HealBotBuffText = {
+            [1] = HEALBOT_WORDS_NONE,
+            [2] = HEALBOT_WORDS_NONE,
+            [3] = HEALBOT_WORDS_NONE,
+            [4] = HEALBOT_WORDS_NONE,
+            [5] = HEALBOT_WORDS_NONE,
+            [6] = HEALBOT_WORDS_NONE,
+            [7] = HEALBOT_WORDS_NONE,
+            [8] = HEALBOT_WORDS_NONE,
+            [9] = HEALBOT_WORDS_NONE,
+            [10] = HEALBOT_WORDS_NONE
+        }
+    else
+        HealBot_Config.HealBotBuffText = {
+            [1] = HEALBOT_WORDS_NONE,
+            [2] = HEALBOT_WORDS_NONE,
+            [3] = HEALBOT_WORDS_NONE,
+            [4] = HEALBOT_WORDS_NONE,
+            [5] = HEALBOT_WORDS_NONE,
+            [6] = HEALBOT_WORDS_NONE,
+            [7] = HEALBOT_WORDS_NONE,
+            [8] = HEALBOT_WORDS_NONE,
+            [9] = HEALBOT_WORDS_NONE,
+            [10] = HEALBOT_WORDS_NONE
+        }
     end
 end
 
@@ -6001,6 +6031,18 @@ function HealBot_DoReset_Cures(PlayerClassEN)
     elseif strsub(PlayerClassEN, 1, 4) == "MAGE" then
         HealBot_Config.HealBotDebuffText = { [1] = HEALBOT_REMOVE_CURSE, [2] = HEALBOT_WORDS_NONE, [3] =
         HEALBOT_WORDS_NONE }
+    elseif strsub(PlayerClassEN, 1, 4) == "HERO" then
+        HealBot_Config.HealBotDebuffText = {
+            [1] = HEALBOT_WORDS_NONE,
+            [2] = HEALBOT_WORDS_NONE,
+            [3] = HEALBOT_WORDS_NONE
+        }
+    else
+        HealBot_Config.HealBotDebuffText = {
+            [1] = HEALBOT_WORDS_NONE,
+            [2] = HEALBOT_WORDS_NONE,
+            [3] = HEALBOT_WORDS_NONE
+        }
     end
 end
 
@@ -6114,6 +6156,25 @@ function HealBot_DoReset_Spells(PlayerClassEN)
         HealBot_Config.EnabledKeyCombo = {
             ["Left"] = HEALBOT_REMOVE_CURSE,
             ["ShiftLeft"] = bandage,
+            ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
+            ["Alt-ShiftRight"] = HEALBOT_ASSIST,
+            ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
+            ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
+            ["Button4"] = HEALBOT_MAINTANK,
+            ["Button5"] = HEALBOT_MAINASSIST,
+        }
+        HealBot_Config.DisabledKeyCombo = {
+            ["Left"] = HEALBOT_DISABLED_TARGET,
+            ["ShiftLeft"] = bandage,
+            ["Right"] = HEALBOT_ASSIST,
+            ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
+            ["Ctrl-ShiftRight"] = HEALBOT_HBMENU,
+            ["Button4"] = HEALBOT_MAINTANK,
+            ["Button5"] = HEALBOT_MAINASSIST,
+        }
+    elseif strsub(PlayerClassEN, 1, 4) == "HERO" then
+        HealBot_Config.EnabledKeyCombo = {
+            ["Left"] = bandage,
             ["Alt-ShiftLeft"] = HEALBOT_DISABLED_TARGET,
             ["Alt-ShiftRight"] = HEALBOT_ASSIST,
             ["Ctrl-ShiftLeft"] = HEALBOT_MENU,
