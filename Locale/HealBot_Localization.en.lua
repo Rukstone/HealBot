@@ -46,8 +46,27 @@ Seed_of_life_Bloom = GetSpellInfo(944828) or "Bloom";
 --ID: 7600179 Flourish
 Flourish = GetSpellInfo(7600179) or "Flourish";
 ----------------CUSTOM ASCENTION From RUKSTONE---------------
+--[[
+Orb_of_Power_Blue                              = GetSpellInfo(844536) or "Orb of Power: Blue";
+Orb_of_Power_Green                             = GetSpellInfo(844540) or "Orb of Power: Green";
+Orb_of_Power_Orange                            = GetSpellInfo(844542) or "Orb of Power: Orange";
+Orb_of_Power_Purple                            = GetSpellInfo(844538) or "Orb of Power: Purple";
+
+Horde_Flag                                     = GetSpellInfo(23333) or "Horde Flag";
+Alliance_Flag                                  = GetSpellInfo(23335) or "Alliance Flag";
+--954687 Primary Stat: Strength  
+PrimaryStat_Strenght                           = GetSpellInfo(954687) or "Primary Stat: Strength";
+--954689 Primary Stat: Intellect
+PrimaryStat_Intellect                          = GetSpellInfo(954689) or "Primary Stat: Intellect";
+--954690 Primary Stat: Spirit
+PrimaryStat_Spirit                             = GetSpellInfo(954690) or "Primary Stat: Spirit";
+]]
+--301001 Halo (Circle of Life)
+Halo_Circle_of_Life                            = GetSpellInfo(301001) or "Halo (Circle of Life)";
+--954803 Halo
+Halo                                           = GetSpellInfo(954803) or "Halo";
 --270187 Holy Supernova
-Holy_Supernova                                  = GetSpellInfo(270187) or "Holy Supernova";
+Holy_Supernova                                 = GetSpellInfo(270187) or "Holy Supernova";
 --86577 Cryotherapist
 Cryotherapist                                  = GetSpellInfo(86577) or "Cryotherapist";
 --997007 Radiant Flame

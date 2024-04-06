@@ -112,4 +112,7 @@ function HealBot_Options_ActionBarsComboProfile_Delete(self)
 end
 function HealBot_Options_ActionBarsCombo_ProfileTextBox_OnLoad(self)
     TextBoxFrame = self;
+    if HealBot_ComboSetProfiles == nil then
+        HealBot_ComboSetProfiles = {}
+    end
 end

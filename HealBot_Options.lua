@@ -3257,8 +3257,8 @@ local HealBot_Options_SelectHealSpellsCombo_List_V2 = {
         Leap_of_Faith,
         Potion_Toss,
         Holy_Supernova,
-
-
+        Halo,
+        Halo_Circle_of_Life,
     },
     [HEALBOT_DRUID] = {
 
