@@ -1,10 +1,10 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
-	<Script file="Specialization_ComboSet.lua"/>
-	<Script file="HealBot_Options.lua"/>
-	<Script file="WachHotWindow.lua"/>
-	
+	<Script file="Specialization_ComboSet.lua" />
+	<Script file="HealBot_Options.lua" />
+	<Script file="WachHotWindow.lua" />
+
 	<Button name="HealBot_Options_Tab" inherits="CharacterFrameTabButtonTemplate" virtual="true">
 		<Scripts>
 			<OnClick>PlaySound("igMainMenuOpen");
@@ -85,9 +85,9 @@
 			<OnEditFocusGained>self:HighlightText();</OnEditFocusGained>
 		</Scripts>
 	</EditBox>
-	<Frame name="HealBot_Options" toplevel="true" frameStrata="DIALOG" movable="true" parent="UIParent" enableMouse="true" hidden="true">
+	<Frame name="HealBot_Options" toplevel="true" frameStrata="DIALOG" movable="true"
+		parent="UIParent" enableMouse="true" hidden="true">
 		<Size>
-			<!--<AbsDimensionx="495" y="555" />-->
 			<AbsDimension x="555" y="600" />
 		</Size>
 		<Anchors>
@@ -358,7 +358,8 @@
 							<OnClick>HealBot_Options_CommandsButton_OnClick(self)</OnClick>
 						</Scripts>
 					</Button>
-					<Frame name="HealBot_Options_EmergLFrame">
+					<!-- DISABLED by RUKSTONE.-->
+					<Frame name="HealBot_Options_EmergLFrame" hidden="true">
 						<Size>
 							<AbsDimension y="92" />
 						</Size>
@@ -575,21 +576,21 @@
 							</CheckButton>
 
 							<CheckButton name="HealBot_Options_EFClassHero"
-							inherits="SendMailRadioButtonTemplate" id="11">
-							<Anchors>
-								<Anchor point="TOPLEFT"
-									relativeTo="HealBot_Options_EFClassDeathKnight"
-									relativePoint="TOPRIGHT">
-									<Offset>
-										<AbsDimension x="100" y="0" />
-									</Offset>
-								</Anchor>
-							</Anchors>
-							<Scripts>
-								<OnLoad>HealBot_Options_SetText(self,HealBot_PlayerClassEN)</OnLoad>
-								<OnClick>HealBot_Options_EFClass_OnClick(self)</OnClick>
-							</Scripts>
-						</CheckButton>
+								inherits="SendMailRadioButtonTemplate" id="11">
+								<Anchors>
+									<Anchor point="TOPLEFT"
+										relativeTo="HealBot_Options_EFClassDeathKnight"
+										relativePoint="TOPRIGHT">
+										<Offset>
+											<AbsDimension x="100" y="0" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>HealBot_Options_SetText(self,HealBot_PlayerClassEN)</OnLoad>
+									<OnClick>HealBot_Options_EFClass_OnClick(self)</OnClick>
+								</Scripts>
+							</CheckButton>
 
 						</Frames>
 					</Frame>
@@ -626,7 +627,8 @@
 							</BackgroundInsets>
 						</Backdrop>
 						<Frames>
-							<Frame name="HealBot_Options_ActionBarsComboProfile" inherits="UIDropDownMenuTemplate" id="123">
+							<Frame name="HealBot_Options_ActionBarsComboProfile"
+								inherits="UIDropDownMenuTemplate" id="123">
 								<Anchors>
 									<Anchor point="TOPLEFT">
 										<Offset>
@@ -642,7 +644,8 @@
 								</Scripts>
 							</Frame>
 
-							<EditBox name="HealBot_Options_ActionBarsComboProfile_NameBoxt" inherits="HealBot_Options_EditBoxTemplate">
+							<EditBox name="HealBot_Options_ActionBarsComboProfile_NameBoxt"
+								inherits="HealBot_Options_EditBoxTemplate">
 								<Anchors>
 									<Anchor point="TOPLEFT">
 										<Offset>
@@ -654,10 +657,15 @@
 									<AbsDimension x="70" y="20" />
 								</Size>
 								<Scripts>
-									<OnLoad>HealBot_Options_ActionBarsCombo_ProfileTextBox_OnLoad(self)</OnLoad>
+									<OnEscapePressed>self:ClearFocus();</OnEscapePressed>
+									<OnEditFocusLost>self:HighlightText(0, 0);</OnEditFocusLost>
+									<OnEditFocusGained>self:HighlightText();</OnEditFocusGained>
+									<OnLoad>
+										HealBot_Options_ActionBarsCombo_ProfileTextBox_OnLoad(self)</OnLoad>
 								</Scripts>
 							</EditBox>
-							<Button name="HealBot_Options_ActionBarsComboProfile_CreateButton" inherits="UIPanelButtonTemplate" text="Create">
+							<Button name="HealBot_Options_ActionBarsComboProfile_CreateButton"
+								inherits="UIPanelButtonTemplate" text="Create">
 								<Anchors>
 									<Anchor point="TOPLEFT">
 										<Offset>
@@ -688,7 +696,25 @@
 									<OnClick>HealBot_Options_ActionBarsComboProfile_Delete(self)</OnClick>
 								</Scripts>
 							</Button>
-							<Frame name="HealBot_Options_ActionBarsCombo" inherits="UIDropDownMenuTemplate" id="1">
+							<Button name="HealBot_Options_ManageSpells_Button"
+								inherits="UIPanelButtonTemplate" text="Manage Spells">
+								<Anchors>
+									<Anchor point="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="375" y="15" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Size>
+									<AbsDimension x="125" y="35" />
+								</Size>
+								<Scripts>
+									<OnClick>HealBot_Options_ManageSpells(self)</OnClick>
+								</Scripts>
+							</Button>
+
+							<Frame name="HealBot_Options_ActionBarsCombo"
+								inherits="UIDropDownMenuTemplate" id="1">
 								<Anchors>
 									<Anchor point="TOPLEFT">
 										<Offset>
@@ -701,7 +727,8 @@
 								</Size>
 								<Layers>
 									<Layer level="OVERLAY">
-										<FontString inherits="GameFontNormalSmall" text="HEALBOT_OPTIONS_SETSPELLS">
+										<FontString inherits="GameFontNormalSmall"
+											text="HEALBOT_OPTIONS_SETSPELLS">
 											<Anchors>
 												<Anchor point="TOPLEFT">
 													<Offset>
@@ -829,7 +856,8 @@
 									<OnTextChanged>HealBot_Options_Click_OnTextChanged(self)</OnTextChanged>
 								</Scripts>
 							</EditBox>
-							<Button name="HealBot_Options_ClickHelpSelectButton" inherits="UIPanelButtonTemplate" text="HEALBOT_OPTIONS_QUESTION">
+							<Button name="HealBot_Options_ClickHelpSelectButton"
+								inherits="UIPanelButtonTemplate" text="HEALBOT_OPTIONS_QUESTION">
 								<Size>
 									<AbsDimension x="18" y="18" />
 								</Size>
@@ -891,7 +919,8 @@
 										"")</OnClick>
 								</Scripts>
 							</CheckButton>
-							<EditBox name="HealBot_Options_Shift" inherits="HealBot_Options_EditBoxTemplate">
+							<EditBox name="HealBot_Options_Shift"
+								inherits="HealBot_Options_EditBoxTemplate">
 								<Size>
 									<AbsDimension x="230" y="20" />
 								</Size>
@@ -5527,8 +5556,7 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>HealBot_Options_SetText(self,HEALBOT_SORTBY_CLASS)</OnLoad>
-									<OnClick>
-										HealBot_Options_BarClassCustom_OnClick(self,self:GetID())</OnClick>
+									<OnClick>HealBot_Options_BarClassCustom_OnClick(self,self:GetID())</OnClick>
 								</Scripts>
 							</CheckButton>
 							<CheckButton name="HealBot_Options_BarClassCustomColour2"
@@ -5544,8 +5572,7 @@
 								</Anchors>
 								<Scripts>
 									<OnLoad>HealBot_Options_SetText(self,HEALBOT_CLASSES_CUSTOM)</OnLoad>
-									<OnClick>
-										HealBot_Options_BarClassCustom_OnClick(self,self:GetID())</OnClick>
+									<OnClick>HealBot_Options_BarClassCustom_OnClick(self,self:GetID())</OnClick>
 								</Scripts>
 							</CheckButton>
 							<Button name="HealBot_BarCustomColourb">
@@ -9578,7 +9605,11 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnTextChanged>SpellWacherOnTextChange(SpellWacherEditBox)</OnTextChanged>
+							<OnEnterPressed>self:ClearFocus();</OnEnterPressed>
+							<OnEscapePressed>self:ClearFocus();</OnEscapePressed>
+							<OnEditFocusLost>self:HighlightText(0, 0);</OnEditFocusLost>
+							<OnEditFocusGained>self:HighlightText();</OnEditFocusGained>
+							<OnTextChanged>Healbot_SpellWacherOnTextChange(SpellWacherEditBox)</OnTextChanged>
 						</Scripts>
 					</EditBox>
 					<Button name="SpellWacherButtonDisplaySpellButton"
@@ -9595,7 +9626,7 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								OnSpellButtonClickDisplayHotOption(self)
+								Healbot_OnSpellButtonClickDisplayHotOption(self)
 							</OnLoad>
 						</Scripts>
 					</Button>
@@ -9613,7 +9644,7 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								OnSpellWacherScroll_Load(self)
+								Healbot_OnSpellWacherScroll_Load(self)
 							</OnLoad>
 						</Scripts>
 					</ScrollFrame>
@@ -9630,7 +9661,7 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>OnSpellWacher_TabChange("Helpful")</OnClick>
+							<OnClick>Healbot_OnSpellWacher_TabChange("Helpful")</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="Button_HealBot_Track_FrameSelect_Harmful_Frameb"
@@ -9648,7 +9679,7 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>OnSpellWacher_TabChange("Harmful")</OnClick>
+							<OnClick>Healbot_OnSpellWacher_TabChange("Harmful")</OnClick>
 						</Scripts>
 					</Button>
 

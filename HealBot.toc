@@ -2,10 +2,10 @@
 ## Title: HealBot
 ## Author: Strife , (Modded by Rukstone and Pirne)
 ## Notes: Adds a panel with skinable bars for healing, decursive, buffing, ressing, range checking and aggro tracking
-## SavedVariablesPerCharacter:  HealBot_Config , HealBot_ComboSetProfiles
+## SavedVariablesPerCharacter:  HealBot_Config , HealBot_ComboSetProfiles,Healbot_Custom_SpellManager
 ## SavedVariables: Healbot_Config_Skins, HealBot_Globals
 ## OptionalDeps: LibSharedMedia-3.0, LibHealComm-4.0, LibQuickHealth-2.0, LibTalentQuery-1.0
-## Version: Ascension v1.0.1
+## Version: Ascension v1.0.2
 
 
 Locale\HealBot_Localization.en.lua
@@ -15,4 +15,5 @@ HealBot.xml
 HealBot_Action.xml
 HealBot_Options.xml
 libs\UTF8\utf8.lua
+HealBot_Options_ManageSpells.xml
 

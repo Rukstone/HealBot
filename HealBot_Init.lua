@@ -1,4 +1,3 @@
-local i = nil
 local HB_mana = nil
 local HB_cast = nil
 local HB_HealsMin = nil
@@ -21,11 +20,12 @@ local line2 = nil
 local line3 = nil
 local SmartCast_Res = nil;
 local HealBot_Spec = {}
-local TempSkins = {}
 local tonumber = tonumber
 local strfind = strfind
 local floor = floor
-local strsub = strsub
+local i = nil
+--local TempSkins = {}
+--local strsub = strsub
 
 function HealBot_Init_retSmartCast_Res()
     return SmartCast_Res
@@ -44,6 +44,30 @@ function HealBot_Init_SetSpec()
         [HEALBOT_WARLOCK] = { [1] = HEALBOT_AFFLICTION, [2] = HEALBOT_DEMONOLOGY, [3] = HEALBOT_DESTRUCTION, },
         [HEALBOT_DEATHKNIGHT] = { [1] = HEALBOT_BLOOD, [2] = HEALBOT_FROST, [3] = HEALBOT_UNHOLY },
         [HEALBOT_HERO] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION, },
+        [HEALBOT_WITCH_DOCTOR] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_DEMON_HUNTER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_STORMBRINGER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_KNIGHT_OF_XOROTH] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_GUARDIAN] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_MONK] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+
+        [HEALBOT_RANGER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_CHRONOMANCER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_NECROMANCER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_PYROMANCER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_CULTIST] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_STARCALLER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_TINKER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_VENOMANCER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_REAPER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_PRIMALIST] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_RUNEMASTER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_SUNCLERIC] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_WITCHHUNTER] = { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+        [HEALBOT_BARBARIAN] =  { [1] = HEALBOT_BALANCE, [2] = HEALBOT_FERAL, [3] = HEALBOT_RESTORATION },
+
+
+
     }
 end
 
@@ -333,7 +357,6 @@ function HealBot_Init_Spells_Defaults()
             CastTime = 2.5, Cast = 2.5, Mana = 1585, HealsMin = 4199, HealsMax = 4677, Level = 75 },
         [HEALBOT_HOLY_LIGHT .. HEALBOT_RANK_13] = {
             CastTime = 2.5, Cast = 2.5, Mana = 1880, HealsMin = 4888, HealsMax = 5444, Level = 80 },
-
         [HEALBOT_FLASH_OF_LIGHT] = {},
         [HEALBOT_FLASH_OF_LIGHT .. HEALBOT_RANK_1] = {
             CastTime = 1.5, Cast = 1.5, Duration = 15, Mana = 35, HealsMin = 81, HealsMax = 93, Level = 20 },
@@ -574,7 +597,7 @@ function HealBot_Init_Spells_Defaults()
             Mana = 1400,
             HealsMin = 1883,
             HealsMax = 2187,
-            Level = 80 
+            Level = 80
         },
         [HEALBOT_REGROWTH] = {},
         [HEALBOT_REGROWTH .. HEALBOT_RANK_1] = {
@@ -1409,7 +1432,6 @@ function HealBot_Init_Spells_Defaults()
             Buff = HEALBOT_POWER_WORD_SHIELD,
             Duration = 30
         },
-
         [HEALBOT_HEALING_WAVE] = {},
         [HEALBOT_HEALING_WAVE .. HEALBOT_RANK_1] = {
             CastTime = 1.5, Cast = 1.5, Mana = 25, HealsMin = 34, HealsMax = 44, Level = 1 },
@@ -1439,7 +1461,6 @@ function HealBot_Init_Spells_Defaults()
             CastTime = 3.0, Cast = 3.0, Mana = 1355, HealsMin = 2624, HealsMax = 2996, Level = 75 },
         [HEALBOT_HEALING_WAVE .. HEALBOT_RANK_14] = {
             CastTime = 3.0, Cast = 3.0, Mana = 1600, HealsMin = 3034, HealsMax = 3466, Level = 80 },
-
         [HEALBOT_LESSER_HEALING_WAVE] = {},
         [HEALBOT_LESSER_HEALING_WAVE .. HEALBOT_RANK_1] = {
             CastTime = 1.5, Cast = 1.5, Mana = 105, HealsMin = 162, HealsMax = 186, Level = 20 },
@@ -1459,7 +1480,6 @@ function HealBot_Init_Spells_Defaults()
             CastTime = 1.5, Cast = 1.5, Mana = 805, HealsMin = 1382, HealsMax = 1578, Level = 72 },
         [HEALBOT_LESSER_HEALING_WAVE .. HEALBOT_RANK_9] = {
             CastTime = 1.5, Cast = 1.5, Mana = 965, HealsMin = 1606, HealsMax = 1834, Level = 77 },
-
         [HEALBOT_CHAIN_HEAL] = {},
         [HEALBOT_CHAIN_HEAL .. HEALBOT_RANK_1] = {
             CastTime = 2.5, Cast = 2.5, Mana = 260, HealsMin = 320, HealsMax = 368, Level = 40 },
@@ -1475,7 +1495,6 @@ function HealBot_Init_Spells_Defaults()
             CastTime = 2.5, Cast = 2.5, Mana = 1020, HealsMin = 906, HealsMax = 1034, Level = 74 },
         [HEALBOT_CHAIN_HEAL .. HEALBOT_RANK_7] = {
             CastTime = 2.5, Cast = 2.5, Mana = 1260, HealsMin = 1055, HealsMax = 1205, Level = 80 },
-
         [HEALBOT_EARTH_SHIELD] = {},
         [HEALBOT_EARTH_SHIELD .. HEALBOT_RANK_1] = {
             CastTime = 0, Cast = 0, Duration = 600, Mana = 0, HealsMin = 0, HealsMax = 0, HealsExt = 0, Level = 50 },
@@ -1487,7 +1506,6 @@ function HealBot_Init_Spells_Defaults()
             CastTime = 0, Cast = 0, Duration = 600, Mana = 0, HealsMin = 0, HealsMax = 0, HealsExt = 0, Level = 75 },
         [HEALBOT_EARTH_SHIELD .. HEALBOT_RANK_5] = {
             CastTime = 0, Cast = 0, Duration = 600, Mana = 0, HealsMin = 0, HealsMax = 0, HealsExt = 0, Level = 80 },
-
         [HEALBOT_WATER_SHIELD] = {},
         [HEALBOT_WATER_SHIELD .. HEALBOT_RANK_1] = {
             CastTime = 0, Cast = 0, Duration = 600, Mana = 0, HealsMin = 0, HealsMax = 0, HealsExt = 0, Level = 20 },
@@ -1507,7 +1525,6 @@ function HealBot_Init_Spells_Defaults()
             CastTime = 0, Cast = 0, Duration = 600, Mana = 0, HealsMin = 0, HealsMax = 0, HealsExt = 0, Level = 69 },
         [HEALBOT_WATER_SHIELD .. HEALBOT_RANK_9] = {
             CastTime = 0, Cast = 0, Duration = 600, Mana = 0, HealsMin = 0, HealsMax = 0, HealsExt = 0, Level = 76 },
-
         [HEALBOT_RIPTIDE] = {},
         [HEALBOT_RIPTIDE .. HEALBOT_RANK_1] = {
             CastTime = 0, Cast = 0, Duration = 15, Mana = 250, HealsMin = 639, HealsMax = 691, HealsExt = 500, Level = 60 },
@@ -1527,8 +1544,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 125,
             Level = 12,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_2] = {
             CastTime = 0,
@@ -1539,8 +1555,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 250,
             Level = 20,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_3] = {
             CastTime = 0,
@@ -1551,8 +1566,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 450,
             Level = 28,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_4] = {
             CastTime = 0,
@@ -1563,8 +1577,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 700,
             Level = 36,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_5] = {
             CastTime = 0,
@@ -1575,8 +1588,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 1000,
             Level = 44,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_6] = {
             CastTime = 0,
@@ -1587,8 +1599,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 1400,
             Level = 52,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_7] = {
             CastTime = 0,
@@ -1599,8 +1610,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 1825,
             Level = 60,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_8] = {
             CastTime = 0,
@@ -1611,8 +1621,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 2375,
             Level = 68,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_9] = {
             CastTime = 0,
@@ -1623,8 +1632,7 @@ function HealBot_Init_Spells_Defaults()
             HealsMax = 0,
             HealsExt = 4250,
             Level = 74,
-            Buff =
-                HEALBOT_MENDPET
+            Buff = HEALBOT_MENDPET
         },
         [HEALBOT_MENDPET .. HEALBOT_RANK_10] = {
             CastTime = 0,
@@ -1638,17 +1646,62 @@ function HealBot_Init_Spells_Defaults()
             Buff =
                 HEALBOT_MENDPET
         },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination] = {},
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_1] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 22, HealsMin = 50, HealsMax = 100, Level = 1 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_2] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 45, HealsMin = 64, HealsMax = 78, Level = 6 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_3] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 80, HealsMin = 129, HealsMax = 155, Level = 12 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_4] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 155, HealsMin = 268, HealsMax = 316, Level = 18 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_5] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 200, HealsMin = 376, HealsMax = 440, Level = 24 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_6] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 265, HealsMin = 536, HealsMax = 622, Level = 32 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_7] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 340, HealsMin = 740, HealsMax = 854, Level = 40 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_8] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 440, HealsMin = 1017, HealsMax = 1167, Level = 48 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_9] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 560, HealsMin = 1367, HealsMax = 1561, Level = 56 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_10] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 620, HealsMin = 1620, HealsMax = 1850, Level = 60 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_11] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 655, HealsMin = 1725, HealsMax = 1969, Level = 63 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_12] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 720, HealsMin = 2134, HealsMax = 2436, Level = 70 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_13] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 1355, HealsMin = 2624, HealsMax = 2996, Level = 75 },
+        [HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Illumination .. HEALBOT_RANK_14] = {
+            CastTime = 2.0, Cast = 2.0, Mana = 1600, HealsMin = 3034, HealsMax = 3466, Level = 80 },
     };
 end
 
 function HealBot_Init_SmartCast()
-    SmartCast_Res = HEALBOT_REVIVE;
-    if IsSpellKnown(7328) then
-        SmartCast_Res = HEALBOT_REDEMPTION;
-    elseif IsSpellKnown(2006) then
-        SmartCast_Res = HEALBOT_RESURRECTION;
-    elseif IsSpellKnown(2008) then
-        SmartCast_Res = HEALBOT_ANCESTRALSPIRIT;
+
+    if Healbot_SmartCastCustom_Ress[HealBot_PlayerClass_ER]then
+        SmartCast_Res = Healbot_SmartCastCustom_Ress[HealBot_PlayerClass_ER];
     end
+    if HealBot_PlayerClass_ER == HEALBOT_SUNCLERIC then
+        SmartCast_Res = HEALBOT_CLASS_SPELLS[HEALBOT_SUNCLERIC].SunCleric_Revivify
+    elseif HealBot_PlayerClass_ER == HEALBOT_WITCH_DOCTOR then
+        SmartCast_Res = HEALBOT_CLASS_SPELLS[HEALBOT_WITCH_DOCTOR].WichDoctor_Reclaim_Soul
+    elseif HealBot_PlayerClass_ER == HEALBOT_VENOMANCER then
+        SmartCast_Res = HEALBOT_CLASS_SPELLS[HEALBOT_VENOMANCER].Venomancer_Prayer_Beads
+    elseif HealBot_PlayerClass_ER == HEALBOT_PRIMALIST then
+        SmartCast_Res = HEALBOT_CLASS_SPELLS[HEALBOT_PRIMALIST].Return_to_Life;
+    else
+        if IsSpellKnown(7328) then
+            SmartCast_Res = HEALBOT_REDEMPTION;
+        elseif IsSpellKnown(2006) then
+            SmartCast_Res = HEALBOT_RESURRECTION;
+        elseif IsSpellKnown(2008) then
+            SmartCast_Res = HEALBOT_ANCESTRALSPIRIT;
+        else
+            SmartCast_Res = HEALBOT_REVIVE;
+        end
+    end
+
     return SmartCast_Res;
 end

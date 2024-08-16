@@ -12,9 +12,9 @@ local hbtmpver = {}
 local linenum = 0
 local addon_id = nil
 local sender_id = nil
-local i, v, x, z = nil, nil, nil, nil
 local g = nil
-local HBclient = nil
+--local i, v, x, z = nil, nil, nil, nil
+--local HBclient = nil
 local HB_errtext = nil
 
 function HealBot_Comms_SendAddonMsg(addon_id, msg, aType, pName)
@@ -165,9 +165,9 @@ end
 
 function HealBot_Comms_TargetInfo()
     HealBot_AddChat(HEALBOT_CHAT_ADDONID ..
-    "  UnitHealth=" .. UnitHealth("target") .. "   UnitHealthMax=" .. UnitHealthMax("target"))
+        "  UnitHealth=" .. UnitHealth("target") .. "   UnitHealthMax=" .. UnitHealthMax("target"))
     HealBot_AddChat(HEALBOT_CHAT_ADDONID .. "  UnitMana=" .. UnitMana("target") ..
-    "   UnitManaMax=" .. UnitManaMax("target"))
+        "   UnitManaMax=" .. UnitManaMax("target"))
 end
 
 function HealBot_Comms_Zone()
@@ -191,11 +191,36 @@ function HealBot_Comm_round(num, idp)
 end
 
 local HealBot_MsgUpdateAvail = nil
+local hbMajor, hbMinor, hbPatch, hbHealbot = string.split(".", HEALBOT_PACH_VERSION)
+local tMajor, tMinor, tPatch, tHealbot = 0, 0, 0, 0
 local hbVersionChecked = {}
+local tNewVer = nil
 function HealBot_Comms_CheckVer(userName, version)
     if not hbVersionChecked[userName] then
+        tNewVer = nil
         hbVersionChecked[userName] = true
-        HealBot_Options_sethbOptCompatUsers(userName, version)
+        tMajor, tMinor, tPatch, tHealbot = string.split(".", version)
+        if tonumber(tMajor) > tonumber(hbMajor) then
+            tNewVer = true
+        elseif tonumber(tMajor) == tonumber(hbMajor) and tonumber(tMinor) > tonumber(hbMinor) then
+            tNewVer = true
+        elseif tonumber(tMajor) == tonumber(hbMajor) and tonumber(tMinor) == tonumber(hbMinor) and tonumber(tPatch) > tonumber(hbPatch) then
+            tNewVer = true
+        elseif tonumber(tMajor) == tonumber(hbMajor) and tonumber(tMinor) == tonumber(hbMinor) and tonumber(tPatch) == tonumber(hbPatch) and tonumber(tHealbot) > tonumber(hbHealbot) then
+            tNewVer = true
+        end
+        if tonumber(tMajor) >= 3 and tonumber(tMinor) >= 3 then HealBot_Options_sethbOptCompatUsers(userName, version) end
+        if tNewVer then
+            hbMajor = tMajor
+            hbMinor = tMinor
+            hbPatch = tPatch
+            hbHealbot = tHealbot
+            if not HealBot_MsgUpdateAvail then
+                HealBot_AddChat(HEALBOT_CHAT_ADDONID .. HEALBOT_CHAT_NEWVERSION1)
+                HealBot_AddChat(HEALBOT_CHAT_ADDONID .. HEALBOT_CHAT_NEWVERSION2)
+            end
+            HealBot_MsgUpdateAvail = hbMajor .. "." .. hbMinor .. "." .. hbPatch .. "." .. hbHealbot
+        end
         HealBot_setOptions_Timer(190)
         HealBot_IncHeals_sethbUsers()
     end

@@ -1,6 +1,6 @@
-HEALBOT_VERSION                                = "Ascention";
-HealBotSkinVersion                             = 17;
-HEALBOT_PACH_VERSION                           = 0.1;
+HEALBOT_VERSION                          = "Ascension";
+HealBotSkinVersion                       = 17;
+HEALBOT_PACH_VERSION                     = "0.0.0.1";
 -------------
 -- ENGLISH --
 -------------
@@ -8,717 +8,903 @@ HEALBOT_PACH_VERSION                           = 0.1;
 -------------------
 -- Compatibility --
 -------------------
-_, HealBot_PlayerClass_ER                       = UnitClass("player")
-HealBot_PlayerRace, HealBot_PlayerRaceEN       = UnitRace("player")
-HealBot_PlayerName                             = UnitName("player")
+_, HealBot_PlayerClass_ER                = UnitClass("player")
+HealBot_PlayerRace, HealBot_PlayerRaceEN = UnitRace("player")
+HealBot_PlayerName                       = UnitName("player")
+HEALBOT_REALM_NAME                       = GetRealmName();
 
-HEALBOT_HERO                                  = "HERO";
-HEALBOT_DRUID                                  = "DRUID";
-HEALBOT_HUNTER                                 = "HUNTER";
-HEALBOT_MAGE                                   = "MAGE";
-HEALBOT_PALADIN                                = "PALADIN";
-HEALBOT_PRIEST                                 = "PRIEST";
-HEALBOT_ROGUE                                  = "ROUGE";
-HEALBOT_SHAMAN                                 = "SHAMAN";
-HEALBOT_WARLOCK                                = "WARLOCK";
-HEALBOT_WARRIOR                                = "WARRIOR";
-HEALBOT_DEATHKNIGHT                            = "DEATH KNIGHT";
+HEALBOT_BARBARIAN = "BARBARIAN"
+HEALBOT_WITCHHUNTER                      = "WITCHHUNTER"
+HEALBOT_WITCH_DOCTOR                     = "WITCHDOCTOR";
+HEALBOT_DEMON_HUNTER                     = "DEMONHUNTER";
+HEALBOT_STORMBRINGER                     = "STORMBRINGER";
+HEALBOT_KNIGHT_OF_XOROTH                 = "FLESHWARDEN";
+HEALBOT_GUARDIAN                         = "GUARDIAN";
+HEALBOT_MONK                             = "MONK";
+HEALBOT_RANGER                           = "RANGER";
+HEALBOT_CHRONOMANCER                     = "CHRONOMANCER";
+HEALBOT_NECROMANCER                      = "NECROMANCER";
+HEALBOT_PYROMANCER                       = "PYROMANCER";
+HEALBOT_CULTIST                          = "CULTIST";
+HEALBOT_STARCALLER                       = "STARCALLER";
+HEALBOT_TINKER                           = "TINKER";
+HEALBOT_VENOMANCER                       = "PROPHET"     -- AKA Venomancer;
+HEALBOT_REAPER                           = "REAPER";
+HEALBOT_PRIMALIST                        = "WILDWALKER"; -- AKA Primalist
+HEALBOT_RUNEMASTER                       = "SPIRITMAGE"; -- AKA RUNEMASTER
+HEALBOT_SUNCLERIC                        = "SUNCLERIC";
+
+
+HEALBOT_HERO                           = "HERO";
+HEALBOT_DRUID                          = "DRUID";
+HEALBOT_HUNTER                         = "HUNTER";
+HEALBOT_MAGE                           = "MAGE";
+HEALBOT_PALADIN                        = "PALADIN";
+HEALBOT_PRIEST                         = "PRIEST";
+HEALBOT_ROGUE                          = "ROUGE";
+HEALBOT_SHAMAN                         = "SHAMAN";
+HEALBOT_WARLOCK                        = "WARLOCK";
+HEALBOT_WARRIOR                        = "WARRIOR";
+HEALBOT_DEATHKNIGHT                    = "DEATH KNIGHT";
+----------------CUSTOM ASCENTION (COA) From RUKSTONE---------------
+
+HEALBOT_CLASS_SPELLS                   = {
+    [HEALBOT_TINKER] = {
+        Med_Pack = GetSpellInfo(502536) or "Med Pack",
+        Zap = GetSpellInfo(680196) or "Zap!",
+        My_Greatest_Invention = GetSpellInfo(560744) or "My Greatest Invention!",
+        Antimagic_Grenades = GetSpellInfo(804861) or "Antimagic Grenades",
+        Arcanoreflector = GetSpellInfo(806229) or "Arcanoreflector",
+        Bandage_Gun = GetSpellInfo(705780) or "Bandage Gun",
+        Basic_Intuition = GetSpellInfo(504060) or "Basic Intuition",
+        Battery_Swap = GetSpellInfo(805319) or "Battery Swap",
+        Build_Alarm_Beacon = GetSpellInfo(560754) or "Build: Alarm Beacon",
+        Build_Battery_Recharge_Station = GetSpellInfo(805308) or "Build: Battery Recharge Station",
+        Build_Restorative_Beacon = GetSpellInfo(801801) or "Build: Restorative Beacon",
+        Build_ZIGGI_6K = GetSpellInfo(524840) or "Build: ZIGGI-6K",
+        E_M_P = GetSpellInfo(706374) or "E.M.P", --dispell
+        Magic_Cleanser_4000X = GetSpellInfo(560472) or "Magic-Cleanser 4000X",
+        --ID 801707 Repair Shot
+        --ID Nanobot Reconstruction
+        
+
+    },
+    [HEALBOT_VENOMANCER] = {
+        --ID:502982
+        Venomancer_Unity                = GetSpellInfo(502982) or "Venomancer_Unity",
+        --ID:805775
+        Venomancer_Fang_Venom_Lifeblood = GetSpellInfo(805775) or "Fang Venom: Lifeblood",
+        --ID:706014 Widow's Watch
+        Venomancer_Widows_Watch         = GetSpellInfo(706014) or "Widow's Watch",
+        --ID:804687
+        Venomancer_Venom_Resistance     = GetSpellInfo(804687) or "Venom Resistance",
+        --ID:503275
+        Venomancer_Toxic_Renewa         = GetSpellInfo(503275) or "Toxic Renewa",
+        --ID: 502974 Dark Barrier
+        Venomancer_Dark_Barrier         = GetSpellInfo(502974) or "Dark Barrier",
+        --ID 502951 Regeneration
+        Venomancer_Regeneration         = GetSpellInfo(502951) or "Regeneration",
+        --ID 502968 Gift of Shadra
+        Venomancer_Gift_of_Shadra       = GetSpellInfo(502968) or "Gift of Shadra",
+        --ID 502947 Vizier's Gift
+        Venomancer_Viziers_Gift         = GetSpellInfo(502947) or "Vizier's Gift",
+        --ID 502939 Shadra's Vigil
+        Venomancer_Shadras_Vigil        = GetSpellInfo(502939) or "Shadra's Vigil",
+        --ID 800874 Shadra's Favor
+        Venomancer_Shadras_Favor        = GetSpellInfo(800874) or "Shadra's Favor",
+        --ID 805731 Fang Venom: Creeping Poison
+        Venomancer_Fang_Venom           = GetSpellInfo(805731) or "Fang Venom: Creeping Poison",
+        --ID 803177 Shadra's Wisdom
+        Venomancer_Shadras_Wisdom       = GetSpellInfo(803177) or "Shadra's Wisdom",
+        --ID 800905 Antivenom
+        Venomancer_Antivenom            = GetSpellInfo(800905) or "Antivenom",
+        --ID 520681 Prayer Beads
+        Venomancer_Prayer_Beads         = GetSpellInfo(520681) or "Prayer Beads",
+
+    },
+    [HEALBOT_WITCH_DOCTOR] = {
+        --ID 500017 Serpent Beam
+        WichDoctor_Serpent_Beam                = GetSpellInfo(500017) or "Serpent Beam",
+        --ID 560294 Spirit of Sen'jin
+        WichDoctor_Spirit_Of_Sen_jin           = GetSpellInfo(560294) or "Spirit of Sen'jin",
+        --ID 29744 Loa's Brew
+        WichDoctor_Loas_Brew                   = GetSpellInfo(560294) or "Loa's Brew",
+        --ID 802208 Vitality of Sseratus
+        WichDoctor_Vitality_Of_Sseratus        = GetSpellInfo(802208) or "Vitality of Sseratus",
+        --ID 802207 Quickness of Kimbul
+        WichDoctor_Quickness_Of_Kimbul         = GetSpellInfo(802207) or "Quickness of Kimbul",
+        --ID 802215 Cunning of Quetz'lun
+        WichDoctor_Cunning_Of_Quetzlun         = GetSpellInfo(802215) or "Cunning of Quetz'lun",
+        --ID 802216 Touch of Torta
+        WichDoctor_Touch_Of_Torta              = GetSpellInfo(802216) or "Touch of Torta",
+        --ID 500952 Flask of Transmogrification
+        WichDoctor_Flask_Of_Transmogrification = GetSpellInfo(500952) or "Flask of Transmogrification",
+        --ID 501213 Snakeblood Brew
+        WichDoctor_Snakeblood_Brew             = GetSpellInfo(501213) or "Snakeblood Brew",
+        --ID 500961 Spirit Ward
+        WichDoctor_Spirit_Ward                 = GetSpellInfo(500961) or "Spirit Ward",
+        --ID 520497 Cleansing Ward
+        WichDoctor_Cleansing_Ward              = GetSpellInfo(520497) or "Cleansing Ward",
+        --ID 501117 Mojo Beam
+        WichDoctor_Mojo_Beam                   = GetSpellInfo(501117) or "Mojo Beam",
+        --ID 500018 Greater Voodoo Zone
+        WichDoctor_Greater_Voodoo_Zone         = GetSpellInfo(500018) or "Greater Voodoo Zone",
+        --ID 806130 Soothing Juju
+        WichDoctor_Soothing_Juju               = GetSpellInfo(806130) or "Soothing Juju",
+        --ID 560544 Sen'jin's Presence
+        WichDoctor_Senjins_Presence            = GetSpellInfo(560544) or "Sen'jin's Presence",
+        --ID 500053 Brewing Witch Doctor
+        WichDoctor_Brewing_Witch_Doctor        = GetSpellInfo(500053) or "Brewing Witch Doctor",
+        --ID 801697 Dance of the Loa
+        WichDoctor_Dance_Of_The_Loa            = GetSpellInfo(801697) or "Dance of the Loa",
+        --ID 801689 Flask of Shadows
+        WichDoctor_Flask_Of_Shadows            = GetSpellInfo(801689) or "Flask of Shadows",
+        --ID 801690 Flask of the Alchemist
+        WichDoctor_Flask_Of_The_Alchemist      = GetSpellInfo(801690) or "Flask of the Alchemist",
+        --ID 801667 Revitalize
+        WichDoctor_Revitalize                  = GetSpellInfo(801667) or "Revitalize",
+        --ID 503800 Revitalize_Hot
+        WichDoctor_Revitalize_Hot              = GetSpellInfo(503800) or "Revitalize",
+        --ID 806240 Hexbreak
+        WichDoctor_Hexbreak                    = GetSpellInfo(806240) or "Hexbreak",
+        --ID 520155 Magicbreak
+        WichDoctor_Magicbreak                  = GetSpellInfo(520155) or "Magicbreak",
+        --ID 500954 Flash of Mana
+        WichDoctor_Flash_Of_Mana               = GetSpellInfo(500954) or "Flash of Mana",
+        --ID 801796 Reclaim Soul
+        WichDoctor_Reclaim_Soul                = GetSpellInfo(801796) or "Reclaim Soul",
+        --ID 800195 Voodoo Alchemy
+        WichDoctor_Voodoo_Alchemy              = GetSpellInfo(800195) or "Voodoo Alchemy",
+        --ID 804049 Allcure Elixir
+        WichDoctor_Allcure_Elixir              = GetSpellInfo(804049) or "Allcure Elixir",
+        --ID 680872 Greater Spirit of Sen'jin
+        WichDoctor_Greater_Spirit_Of_Sen_jin   = GetSpellInfo(680872) or "Greater Spirit of Sen'jin",
+        --ID 806282 Shrink Ally
+        WichDoctor_Shrink_Ally                 = GetSpellInfo(806282) or "Shrink Ally",
+        --ID 801697 Dance of the Loa
+        WichDoctor_Dance_of_the_Loa            = GetSpellInfo(801697) or "Dance of the Loa",
+        --ID 804226 Army of the Loa
+        WichDoctor_Army_of_the_Loa             = GetSpellInfo(804226) or "Army of the Loa",
+
+    },
+    [HEALBOT_SUNCLERIC] = {
+
+        SunCleric_Illumination                     = GetSpellInfo(502423) or "Illumination",
+        SunCleric_Shine                            = GetSpellInfo(502449) or "Shine",
+        SunCleric_Sunshine                         = GetSpellInfo(502412) or "Sunshine",
+        SunCleric_Prayer_Of_The_Sands              = GetSpellInfo(502432) or "Prayer of the Sands",
+        SunCleric_Guidance_Touch_Of_Light          = GetSpellInfo(503509) or "Guidance: Touch of Light",
+        SunCleric_Guidance_Calamity                = GetSpellInfo(503498) or "Guidance: Calamity",
+        SunCleric_Guidance_Sanctify                = GetSpellInfo(503521) or "Guidance: Sanctify",
+        SunCleric_Devotion                         = GetSpellInfo(502440) or "Devotion",
+        SunCleric_Solar_Beam                       = GetSpellInfo(502407) or "Solar Beam",
+        SunCleric_Bless                            = GetSpellInfo(300858) or "Bless",
+        SunCleric_Blessings_Sun_Cleric             = GetSpellInfo(500209) or "Blessings Sun Cleric",
+        SunCleric_Divine_Vision                    = GetSpellInfo(800234) or "Divine Vision",
+        SunCleric_Guidance_Calamity_Override       = GetSpellInfo(804249) or "Guidance: Calamity",
+        SunCleric_Guidance_Intervention            = GetSpellInfo(503517) or "Guidance: Intervention",
+        SunCleric_Guidance_Touch_Of_Light_Override = GetSpellInfo(804251) or "Guidance: Touch of Light",
+        SunCleric_Prayer_Of_The_Sands_Override     = GetSpellInfo(500147) or "Prayer of the Sands",
+        SunCleric_Shine_Override                   = GetSpellInfo(800357) or "Shine",
+        SunCleric_Solar_Embrace                    = GetSpellInfo(502434) or "Solar Embrace",
+        SunCleric_Sunshine_Override                = GetSpellInfo(500142) or "Sunshine",
+        SunCleric_Dawnsear                         = GetSpellInfo(500146) or "Dawnsear",
+        SunCleric_Flash                            = GetSpellInfo(500144) or "Flash",
+        SunCleric_Transgression                    = GetSpellInfo(503368) or "Transgression",
+        SunCleric_Gleaming_Vigil                   = GetSpellInfo(502486) or "Gleaming Vigil",
+        SunCleric_Sunset                           = GetSpellInfo(804584) or "Sunset",
+        SunCleric_Revivify                         = GetSpellInfo(801790) or "Revivify",
+        SunCleric_Sanctify                         = GetSpellInfo(524968) or "Sanctify",
+        Shatter_Magic                              = GetSpellInfo(804067) or "Shatter Magic",
+        Blightbreaker                              = GetSpellInfo(804050) or "Blightbreaker",
+        Lightward                                  = GetSpellInfo(800233) or "Lightward",
+
+    },
+    [HEALBOT_PRIMALIST] = {
+
+        Hand_of_the_Earthmother = GetSpellInfo(502802) or " Hand of the Earthmother ",
+        Primal_Instinct         = GetSpellInfo(800197) or "Primal Instinct", --Buff
+        Primal_Infusion         = GetSpellInfo(500300) or "Primal Infusion", --HOT
+        Flourishing_Growth      = GetSpellInfo(805442) or "Flourishing Growth",
+        Earthmothers_Binding    = GetSpellInfo(805107) or "Earthmother's Binding",
+        Dreamslip               = GetSpellInfo(805867) or "Dreamslip",
+        Earthen_Resolve         = GetSpellInfo(706141) or "Earthen Resolve",
+        Dreamshield             = GetSpellInfo(805105) or "Dreamshield",
+        Neptulons_Chosen        = GetSpellInfo(800134) or "Neptulon's Chosen",
+        Spirit_Rush             = GetSpellInfo(800144) or "Spirit Rush",
+        Return_to_Life          = GetSpellInfo(801794) or "Return to Life",
+        Venomshake              = GetSpellInfo(804155) or "Venomshake",
+        Boon_of_the_Bear        = GetSpellInfo(500939) or "Boon of the Bear",
+    },
+
+}
 
 ----------------CUSTOM ASCENTION From PIRNE---------------
 --ID 272661 Mending Tide
-Mending_Tide = GetSpellInfo(272661) or "Mending Tide";
+Mending_Tide                           = GetSpellInfo(272661) or "Mending Tide";
 --ID: 286458 Potion Toss
-Potion_Toss = GetSpellInfo(286458) or "Potion Toss";
+Potion_Toss                            = GetSpellInfo(286458) or "Potion Toss";
 --ID: 23028 Arcane Brilliance
-Arcane_Brilliance = GetSpellInfo(10157) or "Arcane Brilliance";
+Arcane_Brilliance                      = GetSpellInfo(10157) or "Arcane Brilliance";
 --ID: 10157 Arcane Intellect
-Arcane_Intellect = GetSpellInfo(10157) or "Arcane Intellect";
+Arcane_Intellect                       = GetSpellInfo(10157) or "Arcane Intellect";
 --ID: 48090 Demonic Pact
-Demonic_Pact = GetSpellInfo(2782) or "Demonic Pact";
+Demonic_Pact                           = GetSpellInfo(2782) or "Demonic Pact";
 --ID: 2782 Abolish Curse
-Abolish_Curse = GetSpellInfo(2782) or "Abolish Curse";
+Abolish_Curse                          = GetSpellInfo(2782) or "Abolish Curse";
 --ID: 86381 Leap of Faith
-Leap_of_Faith = GetSpellInfo(86381) or "Leap of Faith";
+Leap_of_Faith                          = GetSpellInfo(86381) or "Leap of Faith";
 --ID: 954836 Healing Rain
-Healing_Rain = GetSpellInfo(954836) or "Healing Rain";
+Healing_Rain                           = GetSpellInfo(954836) or "Healing Rain";
 --ID: 944828 Bloom
-Seed_of_life_Bloom = GetSpellInfo(944828) or "Bloom";
+Seed_of_life_Bloom                     = GetSpellInfo(944828) or "Bloom";
 --ID: 7600179 Flourish
-Flourish = GetSpellInfo(7600179) or "Flourish";
-----------------CUSTOM ASCENTION From RUKSTONE---------------
---[[
-Orb_of_Power_Blue                              = GetSpellInfo(844536) or "Orb of Power: Blue";
-Orb_of_Power_Green                             = GetSpellInfo(844540) or "Orb of Power: Green";
-Orb_of_Power_Orange                            = GetSpellInfo(844542) or "Orb of Power: Orange";
-Orb_of_Power_Purple                            = GetSpellInfo(844538) or "Orb of Power: Purple";
+Flourish                               = GetSpellInfo(7600179) or "Flourish";
 
-Horde_Flag                                     = GetSpellInfo(23333) or "Horde Flag";
-Alliance_Flag                                  = GetSpellInfo(23335) or "Alliance Flag";
---954687 Primary Stat: Strength  
-PrimaryStat_Strenght                           = GetSpellInfo(954687) or "Primary Stat: Strength";
---954689 Primary Stat: Intellect
-PrimaryStat_Intellect                          = GetSpellInfo(954689) or "Primary Stat: Intellect";
---954690 Primary Stat: Spirit
-PrimaryStat_Spirit                             = GetSpellInfo(954690) or "Primary Stat: Spirit";
-]]
+------------------------------------------------------------------------------------
+--Summoner's Armor 701521
+SUMMONERS_ARMOR                        = GetSpellInfo(701521) or "Summoner's Armor";
+--Mending Chains 272660
+HEALBOT_MENDING_CHAINS                 = GetSpellInfo(272660) or "Mending Chains";
+--1566842 Call of the Elements
+HEALBOT_CALL_OF_THE_ELEMENTS           = GetSpellInfo(1566842) or "Call of the Elements";
 --301001 Halo (Circle of Life)
-Halo_Circle_of_Life                            = GetSpellInfo(301001) or "Halo (Circle of Life)";
+Halo_Circle_of_Life                    = GetSpellInfo(301001) or "Halo (Circle of Life)";
 --954803 Halo
-Halo                                           = GetSpellInfo(954803) or "Halo";
+Halo                                   = GetSpellInfo(954803) or "Halo";
 --270187 Holy Supernova
-Holy_Supernova                                 = GetSpellInfo(270187) or "Holy Supernova";
+Holy_Supernova                         = GetSpellInfo(270187) or "Holy Supernova";
 --86577 Cryotherapist
-Cryotherapist                                  = GetSpellInfo(86577) or "Cryotherapist";
+Cryotherapist                          = GetSpellInfo(86577) or "Cryotherapist";
 --997007 Radiant Flame
-Radiant_Flames                                 = GetSpellInfo(997007) or "Radiant Flames";
+Radiant_Flames                         = GetSpellInfo(997007) or "Radiant Flames";
 --997000 Flames of the Apostate
-Flames_of_the_Apostate                         = GetSpellInfo(997000) or "Flames of the Apostate";
+Flames_of_the_Apostate                 = GetSpellInfo(997000) or "Flames of the Apostate";
 --2128020 Focus of Auslese
-Focus_of_Auslese                               = GetSpellInfo(2128020) or "Focus of Auslese";
+Focus_of_Auslese                       = GetSpellInfo(2128020) or "Focus of Auslese";
 --2128021 Swiftness of Aulese
-Swiftness_of_Aulese                            = GetSpellInfo(2128021) or "Swiftness of Aulese";
+Swiftness_of_Aulese                    = GetSpellInfo(2128021) or "Swiftness of Aulese";
 --ID 986165 [Synchronize]
-Synchronize                                    = GetSpellInfo(986165) or "Synchronize";
+Synchronize                            = GetSpellInfo(986165) or "Synchronize";
 --ID 986164 Time-Bind
-Time_Bind                                      = GetSpellInfo(986164) or "Time-Bind";
+Time_Bind                              = GetSpellInfo(986164) or "Time-Bind";
 --ID 986163 Align
-Align                                          = GetSpellInfo(986163) or "Align";
+Align                                  = GetSpellInfo(986163) or "Align";
 --ID 847753 Tidal Shield
-TidalShield_Absorve                            = GetSpellInfo(847753) or "Tidal Shield";
+TidalShield_Absorve                    = GetSpellInfo(847753) or "Tidal Shield";
 --86536 [Cauterizing Fire]
-Cauterizing_Fire_HOT                           = GetSpellInfo(86536) or "Cauterizing Fire";
+Cauterizing_Fire_HOT                   = GetSpellInfo(86536) or "Cauterizing Fire";
 --954801  [Light's Hammer]
-Lights_Hammer                                  = GetSpellInfo(954801) or "Light's Hammer";
+Lights_Hammer                          = GetSpellInfo(954801) or "Light's Hammer";
 --965281  [Blooming Growth]
-BloomingGrowth                                 = GetSpellInfo(965281) or "Blooming Growth";
+BloomingGrowth                         = GetSpellInfo(965281) or "Blooming Growth";
 --2127120  [Tidecaller's Gift] this make part on the same stack of Tidecaller
-TidecallersGift                                = GetSpellInfo(990119) or "Tidecaller's Gift";
+TidecallersGift                        = GetSpellInfo(990119) or "Tidecaller's Gift";
 --954075 [Tidecaller's Boon]
-TidecallerBoon                                 = GetSpellInfo(954075) or "Tidecaller's Boon";
+TidecallerBoon                         = GetSpellInfo(954075) or "Tidecaller's Boon";
 --ID 986035 [Growing Light]
-GrowingLight                                   = GetSpellInfo(986035) or "Growing Light";
+GrowingLight                           = GetSpellInfo(986035) or "Growing Light";
 --ID 986113 [Overflowing]
-Overflowing                                    = GetSpellInfo(986113) or "Overflowing";
+Overflowing                            = GetSpellInfo(986113) or "Overflowing";
 --ID 86382  [Efflorescence]
-Efflorescence                                  = GetSpellInfo(86382) or "Efflorescence";
+Efflorescence                          = GetSpellInfo(86382) or "Efflorescence";
 --ID 86397  [Alter Time]
-Alter_Time                                     = GetSpellInfo(86397) or "Alter Time";
+Alter_Time                             = GetSpellInfo(86397) or "Alter Time";
 --ID 81514 [Fungal Disposition]
-Frugal_Disposition                             = GetSpellInfo(81514) or "Frugal Disposition";
+Frugal_Disposition                     = GetSpellInfo(81514) or "Frugal Disposition";
 --954349 Indulgent Disposition
-Indulgent_Disposition                          = GetSpellInfo(954349) or "Indulgent Disposition";
+Indulgent_Disposition                  = GetSpellInfo(954349) or "Indulgent Disposition";
 --ID 8170 Cleasing Totem
-Cleasing_Totem                                 = GetSpellInfo(8170) or "Cleansing Totem";
+Cleasing_Totem                         = GetSpellInfo(8170) or "Cleansing Totem";
 --ID 965938 [Seed of Life]
-Seed_of_Life_hot                               = GetSpellInfo(965937) or "Seed of Life";
+Seed_of_Life_hot                       = GetSpellInfo(965937) or "Seed of Life";
 --ID 31821 [Aura Mastery]
-Aura_Mastery                                   = GetSpellInfo(31821) or "Aura Mastery";
+Aura_Mastery                           = GetSpellInfo(31821) or "Aura Mastery";
 --ID 20216 [Divine Favor]
-Divine_Favor                                   = GetSpellInfo(20216) or "Divine Favor";
+Divine_Favor                           = GetSpellInfo(20216) or "Divine Favor";
 --ID 31842  [Divine Illumination]
-Divine_Illumination                            = GetSpellInfo(31842) or "Divine Illumination";
+Divine_Illumination                    = GetSpellInfo(31842) or "Divine Illumination";
 --ID 64205  [Divine Sacrifice]
-Divine_Sacrifice                               = GetSpellInfo(64205) or "Divine Sacrifice";
+Divine_Sacrifice                       = GetSpellInfo(64205) or "Divine Sacrifice";
 --ID 6940  [Hand of Sacrifice]
-Hand_of_Sacrifice                              = GetSpellInfo(6940) or "Hand of Sacrifice";
+Hand_of_Sacrifice                      = GetSpellInfo(6940) or "Hand of Sacrifice";
 --ID 31884  [Avenging Wrath]
-Avenging_Wrath                                 = GetSpellInfo(31884) or "Avenging Wrath";
+Avenging_Wrath                         = GetSpellInfo(31884) or "Avenging Wrath";
 --ID 47788  [Guardian Spirit]
-Guardian_Spirit                                = GetSpellInfo(47788) or "Guardian Spirit";
+Guardian_Spirit                        = GetSpellInfo(47788) or "Guardian Spirit";
 --ID 47585  [Dispersion]
-Dispersion                                     = GetSpellInfo(47585) or "Dispersion";
+Dispersion                             = GetSpellInfo(47585) or "Dispersion";
 --ID 15286  [Vampiric Embrace]
-Vampiric_Embrace                               = GetSpellInfo(15286) or "Vampiric Embrace";
+Vampiric_Embrace                       = GetSpellInfo(15286) or "Vampiric Embrace";
 --ID 15473  [Shadowform]
-Shadowform                                     = GetSpellInfo(15473) or "Shadowform";
+Shadowform                             = GetSpellInfo(15473) or "Shadowform";
 --ID 5277  [Evasion]
-Evasion                                        = GetSpellInfo(5277) or "Evasion";
+Evasion                                = GetSpellInfo(5277) or "Evasion";
 --ID 2983  [Sprint]
-Sprint                                         = GetSpellInfo(2983) or "Sprint";
+Sprint                                 = GetSpellInfo(2983) or "Sprint";
 --ID 13877  [Blade Flurry]
-Blade_Flurry                                   = GetSpellInfo(13877) or "Blade Flurry";
+Blade_Flurry                           = GetSpellInfo(13877) or "Blade Flurry";
 --ID 13750  [Adrenaline Rush]
-Adrenaline_Rush                                = GetSpellInfo(13750) or "Adrenaline Rush";
+Adrenaline_Rush                        = GetSpellInfo(13750) or "Adrenaline Rush";
 --ID 1784  [Stealth]
-Stealth                                        = GetSpellInfo(1784) or "Stealth";
+Stealth                                = GetSpellInfo(1784) or "Stealth";
 --ID 954514  [Skull Banner]
-Skull_Banner                                   = GetSpellInfo(954514) or "Skull Banner";
+Skull_Banner                           = GetSpellInfo(954514) or "Skull Banner";
 --ID 86358  [Heroic Leap]
-Heroic_Leap                                    = GetSpellInfo(86358) or "Heroic Leap";
+Heroic_Leap                            = GetSpellInfo(86358) or "Heroic Leap";
 --ID 86380  [Avatar]
-Avatar                                         = GetSpellInfo(86380) or "Avatar";
+Avatar                                 = GetSpellInfo(86380) or "Avatar";
 --ID 46924  [Bladestorm]
-Bladestorm                                     = GetSpellInfo(46924) or "Bladestorm";
+Bladestorm                             = GetSpellInfo(46924) or "Bladestorm";
 --ID 23920  [Spell Reflection]
-Spell_Reflection                               = GetSpellInfo(23920) or "Spell Reflection";
+Spell_Reflection                       = GetSpellInfo(23920) or "Spell Reflection";
 --ID 12975  [Last Stand]
-Last_Stand                                     = GetSpellInfo(12975) or "Last Stand";
+Last_Stand                             = GetSpellInfo(12975) or "Last Stand";
 --ID 50720  [Vigilance]
-Vigilance                                      = GetSpellInfo(50720) or "Vigilance";
+Vigilance                              = GetSpellInfo(50720) or "Vigilance";
 --ID 48505  [Starfall]
-Starfall                                       = GetSpellInfo(48505) or "Starfall";
+Starfall                               = GetSpellInfo(48505) or "Starfall";
 --ID 24858  [Moonkin Form]
-Moonkin_Form                                   = GetSpellInfo(24858) or "Moonkin Form";
+Moonkin_Form                           = GetSpellInfo(24858) or "Moonkin Form";
 --ID 22842  [Frenzied Regeneration]
-Frenzied_Regeneration                          = GetSpellInfo(22842) or "Frenzied Regeneration";
+Frenzied_Regeneration                  = GetSpellInfo(22842) or "Frenzied Regeneration";
 --ID 19263  [Deterrence]
-Deterrence                                     = GetSpellInfo(19263) or "Deterrence";
+Deterrence                             = GetSpellInfo(19263) or "Deterrence";
 --ID 86514  [Cauterizing Fire]
-Cauterizing_Fire                               = GetSpellInfo(86514) or "Cauterizing Fire";
+Cauterizing_Fire                       = GetSpellInfo(86514) or "Cauterizing Fire";
 --ID 888593 Preservation
-Preservation                                   = GetSpellInfo(888593) or "Preservation";
+Preservation                           = GetSpellInfo(888593) or "Preservation";
 --ID 8495 Mana Shield
-Mana_Shield                                    = GetSpellInfo(8495) or "Mana Shield";
+Mana_Shield                            = GetSpellInfo(8495) or "Mana Shield";
 --ID 831842 Guiding Heal
-Guiding_Heal                                   = GetSpellInfo(831842) or "Guiding Heal";
+Guiding_Heal                           = GetSpellInfo(831842) or "Guiding Heal";
 --ID 986001 Adorned
-Adorned                                        = GetSpellInfo(986001) or "Adorned";
+Adorned                                = GetSpellInfo(986001) or "Adorned";
 --ID 978698 Tidal Swell
-Tidal_Swell                                    = GetSpellInfo(978698) or "Tidal Swell";
+Tidal_Swell                            = GetSpellInfo(978698) or "Tidal Swell";
 --ID 978692 Diciple of the Tides
-Diciple_of_the_Tides                           = GetSpellInfo(978692) or "Diciple of the Tides";
+Diciple_of_the_Tides                   = GetSpellInfo(978692) or "Diciple of the Tides";
 --ID 32374 [Mass Dispel]
-Mass_Dispell                                   = GetSpellInfo(32374) or "Mass Dispel";
-
-Tidal_Shield                                   = GetSpellInfo(978690) or "Tidal Shield";
+Mass_Dispell                           = GetSpellInfo(32374) or "Mass Dispel";
+Tidal_Shield                           = GetSpellInfo(978690) or "Tidal Shield";
 
 -----------------------------------------------
 
-HEALBOT_SILK_BANDAGE                           = GetItemInfo(6450) or "Silk Bandage";
-HEALBOT_HEAVY_SILK_BANDAGE                     = GetItemInfo(6451) or "Heavy Silk Bandage";
-HEALBOT_MAGEWEAVE_BANDAGE                      = GetItemInfo(8544) or "Mageweave Bandage";
-HEALBOT_HEAVY_MAGEWEAVE_BANDAGE                = GetItemInfo(8545) or "Heavy Mageweave Bandage";
-HEALBOT_RUNECLOTH_BANDAGE                      = GetItemInfo(14529) or "Runecloth Bandage";
-HEALBOT_HEAVY_RUNECLOTH_BANDAGE                = GetItemInfo(14530) or "Heavy Runecloth Bandage";
-HEALBOT_NETHERWEAVE_BANDAGE                    = GetItemInfo(21990) or "Netherweave Bandage";
-HEALBOT_HEAVY_NETHERWEAVE_BANDAGE              = GetItemInfo(21991) or "Heavy Netherweave Bandage";
-HEALBOT_FROSTWEAVE_BANDAGE                     = GetItemInfo(34721) or "Frostweave Bandage";
-HEALBOT_HEAVY_FROSTWEAVE_BANDAGE               = GetItemInfo(34722) or "Heavy Frostweave Bandage";
-HEALBOT_MAJOR_HEALING_POTION                   = GetItemInfo(13446) or "Major Healing Potion";
-HEALBOT_SUPER_HEALING_POTION                   = GetItemInfo(22829) or "Super Healing Potion";
-HEALBOT_MAJOR_COMBAT_HEALING_POTION            = GetItemInfo(31838) or "Major Combat Healing Potion";
-HEALBOT_RUNIC_HEALING_POTION                   = GetItemInfo(33447) or "Runic Healing Potion";
-HEALBOT_ENDLESS_HEALING_POTION                 = GetItemInfo(43569) or "Endless Healing Potion";
-HEALBOT_MAJOR_MANA_POTION                      = GetItemInfo(13444) or "Major Mana Potion";
-HEALBOT_SUPER_MANA_POTION                      = GetItemInfo(22832) or "Super Mana Potion";
-HEALBOT_MAJOR_COMBAT_MANA_POTION               = GetItemInfo(31840) or "Major Combat Mana Potion";
-HEALBOT_RUNIC_MANA_POTION                      = GetItemInfo(33448) or "Runic Mana Potion";
-HEALBOT_ENDLESS_MANA_POTION                    = GetItemInfo(43570) or "Endless Mana Potion";
-HEALBOT_PURIFICATION_POTION                    = GetItemInfo(13462) or "Purification Potion";
-HEALBOT_ANTI_VENOM                             = GetItemInfo(6452) or "Anti-Venom";
-HEALBOT_POWERFUL_ANTI_VENOM                    = GetItemInfo(19440) or "Powerful Anti-Venom";
-HEALBOT_ELIXIR_OF_POISON_RES                   = GetItemInfo(3386) or "Potion of Curing";
-HEALBOT_STONEFORM                              = GetSpellInfo(20594) or "Stoneform";
-HEALBOT_ANCESTRAL_FORTITUDE                    = GetSpellInfo(16237) or "Ancestral Fortitude";
-HEALBOT_INSPIRATION                            = GetSpellInfo(14892) or "Inspiration";
-HEALBOT_WATER_BREATHING                        = GetSpellInfo(131) or "Water Breathing";
-HEALBOT_WATER_WALKING                          = GetSpellInfo(546) or "Water Walking";
-HEALBOT_EARTHLIVING                            = GetSpellInfo(51945) or "Earthliving";
+HEALBOT_SILK_BANDAGE                   = GetItemInfo(6450) or "Silk Bandage";
+HEALBOT_HEAVY_SILK_BANDAGE             = GetItemInfo(6451) or "Heavy Silk Bandage";
+HEALBOT_MAGEWEAVE_BANDAGE              = GetItemInfo(8544) or "Mageweave Bandage";
+HEALBOT_HEAVY_MAGEWEAVE_BANDAGE        = GetItemInfo(8545) or "Heavy Mageweave Bandage";
+HEALBOT_RUNECLOTH_BANDAGE              = GetItemInfo(14529) or "Runecloth Bandage";
+HEALBOT_HEAVY_RUNECLOTH_BANDAGE        = GetItemInfo(14530) or "Heavy Runecloth Bandage";
+HEALBOT_NETHERWEAVE_BANDAGE            = GetItemInfo(21990) or "Netherweave Bandage";
+HEALBOT_HEAVY_NETHERWEAVE_BANDAGE      = GetItemInfo(21991) or "Heavy Netherweave Bandage";
+HEALBOT_FROSTWEAVE_BANDAGE             = GetItemInfo(34721) or "Frostweave Bandage";
+HEALBOT_HEAVY_FROSTWEAVE_BANDAGE       = GetItemInfo(34722) or "Heavy Frostweave Bandage";
+HEALBOT_MAJOR_HEALING_POTION           = GetItemInfo(13446) or "Major Healing Potion";
+HEALBOT_SUPER_HEALING_POTION           = GetItemInfo(22829) or "Super Healing Potion";
+HEALBOT_MAJOR_COMBAT_HEALING_POTION    = GetItemInfo(31838) or "Major Combat Healing Potion";
+HEALBOT_RUNIC_HEALING_POTION           = GetItemInfo(33447) or "Runic Healing Potion";
+HEALBOT_ENDLESS_HEALING_POTION         = GetItemInfo(43569) or "Endless Healing Potion";
+HEALBOT_MAJOR_MANA_POTION              = GetItemInfo(13444) or "Major Mana Potion";
+HEALBOT_SUPER_MANA_POTION              = GetItemInfo(22832) or "Super Mana Potion";
+HEALBOT_MAJOR_COMBAT_MANA_POTION       = GetItemInfo(31840) or "Major Combat Mana Potion";
+HEALBOT_RUNIC_MANA_POTION              = GetItemInfo(33448) or "Runic Mana Potion";
+HEALBOT_ENDLESS_MANA_POTION            = GetItemInfo(43570) or "Endless Mana Potion";
+HEALBOT_PURIFICATION_POTION            = GetItemInfo(13462) or "Purification Potion";
+HEALBOT_ANTI_VENOM                     = GetItemInfo(6452) or "Anti-Venom";
+HEALBOT_POWERFUL_ANTI_VENOM            = GetItemInfo(19440) or "Powerful Anti-Venom";
+HEALBOT_ELIXIR_OF_POISON_RES           = GetItemInfo(3386) or "Potion of Curing";
+HEALBOT_STONEFORM                      = GetSpellInfo(20594) or "Stoneform";
+HEALBOT_ANCESTRAL_FORTITUDE            = GetSpellInfo(16237) or "Ancestral Fortitude";
+HEALBOT_INSPIRATION                    = GetSpellInfo(14892) or "Inspiration";
+HEALBOT_WATER_BREATHING                = GetSpellInfo(131) or "Water Breathing";
+HEALBOT_WATER_WALKING                  = GetSpellInfo(546) or "Water Walking";
+HEALBOT_EARTHLIVING                    = GetSpellInfo(51945) or "Earthliving";
 
-HEALBOT_GIFT_OF_THE_NAARU                      = GetSpellInfo(59547) or "Gift of the Naaru";
+HEALBOT_GIFT_OF_THE_NAARU              = GetSpellInfo(59547) or "Gift of the Naaru";
 
-HEALBOT_FLASH_HEAL                             = GetSpellInfo(2061) or "Flash Heal";
-HEALBOT_FLASH_OF_LIGHT                         = GetSpellInfo(19750) or "Flash of Light";
-HEALBOT_GREATER_HEAL                           = GetSpellInfo(2050) or "Greater Heal";
-HEALBOT_BINDING_HEAL                           = GetSpellInfo(32546) or "Binding Heal"
-HEALBOT_PENANCE                                = GetSpellInfo(47540) or "Penance"
-HEALBOT_PRAYER_OF_MENDING                      = GetSpellInfo(33076) or "Prayer of Mending";
-HEALBOT_HEALING_TOUCH                          = GetSpellInfo(5185) or "Healing Touch";
-HEALBOT_HEAL                                   = GetSpellInfo(2054) or "Heal";
-HEALBOT_HEALING_WAVE                           = GetSpellInfo(331) or "Healing Wave";
-HEALBOT_RIPTIDE                                = GetSpellInfo(61295) or "Riptide";
-HEALBOT_HEALING_WAY                            = GetSpellInfo(29206) or "Healing Way";
-HEALBOT_HOLY_LIGHT                             = GetSpellInfo(635) or "Holy Light";
+HEALBOT_FLASH_HEAL                     = GetSpellInfo(2061) or "Flash Heal";
+HEALBOT_FLASH_OF_LIGHT                 = GetSpellInfo(19750) or "Flash of Light";
+HEALBOT_GREATER_HEAL                   = GetSpellInfo(2050) or "Greater Heal";
+HEALBOT_BINDING_HEAL                   = GetSpellInfo(32546) or "Binding Heal"
+HEALBOT_PENANCE                        = GetSpellInfo(47540) or "Penance"
+HEALBOT_PRAYER_OF_MENDING              = GetSpellInfo(33076) or "Prayer of Mending";
+HEALBOT_HEALING_TOUCH                  = GetSpellInfo(5185) or "Healing Touch";
+HEALBOT_HEAL                           = GetSpellInfo(2054) or "Heal";
+HEALBOT_HEALING_WAVE                   = GetSpellInfo(331) or "Healing Wave";
+HEALBOT_RIPTIDE                        = GetSpellInfo(61295) or "Riptide";
+HEALBOT_HEALING_WAY                    = GetSpellInfo(29206) or "Healing Way";
+HEALBOT_HOLY_LIGHT                     = GetSpellInfo(635) or "Holy Light";
 --ID: 1102050 Lesser Heal
-HEALBOT_LESSER_HEAL                            = GetSpellInfo(1102050) or "Lesser Heal";
-HEALBOT_LESSER_HEALING_WAVE                    = GetSpellInfo(8004) or "Lesser Healing Wave";
-HEALBOT_POWER_WORD_SHIELD                      = GetSpellInfo(17) or "Power Word:Shield";
-HEALBOT_REGROWTH                               = GetSpellInfo(8936) or "Regrowth";
-HEALBOT_RENEW                                  = GetSpellInfo(139) or "Renew";
-HEALBOT_LIGHTWELL_RENEW                        = GetSpellInfo(7001) or "Lightwell Renew";
-HEALBOT_REJUVENATION                           = GetSpellInfo(774) or "Rejuvenation";
-HEALBOT_LIFEBLOOM                              = GetSpellInfo(33763) or "Lifebloom";
-HEALBOT_WILD_GROWTH                            = GetSpellInfo(48438) or "Wild Growth";
-HEALBOT_REVIVE                                 = GetSpellInfo(50769) or "Revive";
-HEALBOT_TRANQUILITY                            = GetSpellInfo(740) or "Tranquility";
-HEALBOT_SWIFTMEND                              = GetSpellInfo(18562) or "Swiftmend";
-HEALBOT_LIVING_SEED                            = GetSpellInfo(48496) or "Living Seed";
-HEALBOT_PRAYER_OF_HEALING                      = GetSpellInfo(596) or "Prayer of Healing";
-HEALBOT_CHAIN_HEAL                             = GetSpellInfo(1064) or "Chain Heal";
-HEALBOT_NOURISH                                = GetSpellInfo(50464) or "Nourish";
-HEALBOT_PROTANCIENTKINGS                       = GetSpellInfo(64413) or "Protection of Ancient Kings";
-HEALBOT_FOUNTAIN_OF_LIGHT                      = GetSpellInfo(71864) or "Fountain of Light";
-HEALBOT_HANDOFPROTECTION                       = GetSpellInfo(1022) or "Hand of Protection";
-HEALBOT_ENERGIZED                              = GetSpellInfo(71220) or "Energized";
-HEALBOT_CHAINHEALHOT                           = GetSpellInfo(70809) or "Chain Heal";
-HEALBOT_DESPERATE_PRAYER                       = GetSpellInfo(19236) or "Desperate Prayer";
+HEALBOT_LESSER_HEAL                    = GetSpellInfo(1102050) or "Lesser Heal";
+HEALBOT_LESSER_HEALING_WAVE            = GetSpellInfo(8004) or "Lesser Healing Wave";
+HEALBOT_POWER_WORD_SHIELD              = GetSpellInfo(17) or "Power Word:Shield";
+HEALBOT_REGROWTH                       = GetSpellInfo(8936) or "Regrowth";
+HEALBOT_RENEW                          = GetSpellInfo(139) or "Renew";
+HEALBOT_LIGHTWELL_RENEW                = GetSpellInfo(7001) or "Lightwell Renew";
+HEALBOT_REJUVENATION                   = GetSpellInfo(774) or "Rejuvenation";
+HEALBOT_LIFEBLOOM                      = GetSpellInfo(33763) or "Lifebloom";
+HEALBOT_WILD_GROWTH                    = GetSpellInfo(48438) or "Wild Growth";
+HEALBOT_REVIVE                         = GetSpellInfo(50769) or "Revive";
+HEALBOT_TRANQUILITY                    = GetSpellInfo(740) or "Tranquility";
+HEALBOT_SWIFTMEND                      = GetSpellInfo(18562) or "Swiftmend";
+HEALBOT_LIVING_SEED                    = GetSpellInfo(48496) or "Living Seed";
+HEALBOT_PRAYER_OF_HEALING              = GetSpellInfo(596) or "Prayer of Healing";
+HEALBOT_CHAIN_HEAL                     = GetSpellInfo(1064) or "Chain Heal";
+HEALBOT_NOURISH                        = GetSpellInfo(50464) or "Nourish";
+HEALBOT_PROTANCIENTKINGS               = GetSpellInfo(64413) or "Protection of Ancient Kings";
+HEALBOT_FOUNTAIN_OF_LIGHT              = GetSpellInfo(71864) or "Fountain of Light";
+HEALBOT_HANDOFPROTECTION               = GetSpellInfo(1022) or "Hand of Protection";
+HEALBOT_ENERGIZED                      = GetSpellInfo(71220) or "Energized";
+HEALBOT_CHAINHEALHOT                   = GetSpellInfo(70809) or "Chain Heal";
+HEALBOT_DESPERATE_PRAYER               = GetSpellInfo(19236) or "Desperate Prayer";
 
-HEALBOT_GRACE                                  = GetSpellInfo(47516) or "Grace";
-HEALBOT_GUARDIAN_SPIRIT                        = GetSpellInfo(47788) or "Guardian Spirit";
-HEALBOT_LEVITATE                               = GetSpellInfo(1706) or "Levitate";
-HEALBOT_DIVINE_AEGIS                           = GetSpellInfo(47509) or "Divine Aegis";
-HEALBOT_BODY_AND_SOUL                          = GetSpellInfo(64127) or "Body and Soul";
-HEALBOT_SURGE_OF_LIGHT                         = GetSpellInfo(33154) or "Surge of Light";
-HEALBOT_CIRCLE_OF_HEALING                      = GetSpellInfo(34863) or "Circle of Healing";
-HEALBOT_BLESSED_HEALING                        = GetSpellInfo(70772) or "Blessed Healing";
-HEALBOT_BLESSED_RESILIENCE                     = GetSpellInfo(33142) or "Blessed Resilience";
-HEALBOT_PAIN_SUPPRESSION                       = GetSpellInfo(33206) or "Pain Suppression";
-HEALBOT_POWER_INFUSION                         = GetSpellInfo(10060) or "Power Infusion";
-HEALBOT_POWER_WORD_FORTITUDE                   = GetSpellInfo(1243) or "Power Word: Fortitude";
-HEALBOT_PRAYER_OF_FORTITUDE                    = GetSpellInfo(21562) or "Prayer of Fortitude";
-HEALBOT_DIVINE_SPIRIT                          = GetSpellInfo(14752) or "Divine Spirit";
-HEALBOT_PRAYER_OF_SPIRIT                       = GetSpellInfo(27681) or "Prayer of Spirit";
-HEALBOT_FEL_INTELLECT                          = GetSpellInfo(54424) or "Fel Intellect"
-HEALBOT_SHADOW_PROTECTION                      = GetSpellInfo(976) or "Shadow Protection";
-HEALBOT_PRAYER_OF_SHADOW_PROTECTION            = GetSpellInfo(27683) or "Prayer of Shadow Protection";
-HEALBOT_INNER_FIRE                             = GetSpellInfo(588) or "Inner Fire";
-HEALBOT_SHADOWFORM                             = GetSpellInfo(15473) or "Shadowform"
-HEALBOT_INNER_FOCUS                            = GetSpellInfo(14751) or "Inner Focus";
-HEALBOT_TWIN_DISCIPLINES                       = GetSpellInfo(47586) or "Twin Disciplines";
-HEALBOT_SPIRITAL_HEALING                       = GetSpellInfo(14898) or "Spiritual Healing";
-HEALBOT_SPIRITAL_GUIDANCE                      = GetSpellInfo(14901) or "Spiritual Guidance";
-HEALBOT_EMPOWERED_HEALING                      = GetSpellInfo(33158) or "Empowered Healing";
-HEALBOT_DIVINE_PROVIDENCE                      = GetSpellInfo(47562) or "Divine Providence";
-HEALBOT_IMPROVED_RENEW                         = GetSpellInfo(14908) or "Improved Renew";
-HEALBOT_EMPOWERED_RENEW                        = GetSpellInfo(63534) or "Empowered Renew";
-HEALBOT_FOCUSED_POWER                          = GetSpellInfo(33186) or "Focused Power";
-HEALBOT_GENESIS                                = GetSpellInfo(57810) or "Genesis";
-HEALBOT_NURTURING_INSTINCT                     = GetSpellInfo(33872) or "Nurturing Instinct";
-HEALBOT_IMPROVED_REJUVENATION                  = GetSpellInfo(17111) or "Improved Rejuvenation";
-HEALBOT_GIFT_OF_NATURE                         = GetSpellInfo(17104) or "Gift of Nature";
-HEALBOT_EMPOWERED_TOUCH                        = GetSpellInfo(33879) or "Empowered Touch";
-HEALBOT_EMPOWERED_REJUVENATION                 = GetSpellInfo(33886) or "Empowered Rejuvenation";
-HEALBOT_MASTER_SHAPESHIFTER                    = GetSpellInfo(48412) or "Master Shapeshifter";
-HEALBOT_HEALING_LIGHT                          = GetSpellInfo(20237) or "Healing Light";
-HEALBOT_DIVINITY                               = GetSpellInfo(63646) or "Divinity";
-HEALBOT_TOUCHED_BY_THE_LIGHT                   = GetSpellInfo(53590) or "Touched by the Light";
-HEALBOT_HOLY_GUIDANCE                          = GetSpellInfo(31841) or "Holy Guidance";
-HEALBOT_PURIFICATION                           = GetSpellInfo(16178) or "Purification";
-HEALBOT_IMPROVED_CHAIN_HEAL                    = GetSpellInfo(30872) or "Improved Chain Heal";
-HEALBOT_TIDAL_WAVES                            = GetSpellInfo(51562) or "Tidal Waves";
-HEALBOT_TIDAL_FORCE                            = GetSpellInfo(55198) or "Tidal Force";
-HEALBOT_NATURES_BLESSING                       = GetSpellInfo(30867) or "Nature's Blessing";
-HEALBOT_HEALTH_FUNNEL                          = GetSpellInfo(755) or "Health Funnel";
-HEALBOT_LIFE_TAP                               = GetSpellInfo(1454) or "Lift Tap";
-HEALBOT_FEAR_WARD                              = GetSpellInfo(6346) or "Fear Ward";
-HEALBOT_ARCANE_INTELLECT                       = GetSpellInfo(1459) or "Arcane Intellect";
-HEALBOT_ARCANE_BRILLIANCE                      = GetSpellInfo(23028) or "Arcane Brilliance";
-HEALBOT_DALARAN_INTELLECT                      = GetSpellInfo(61024) or "Dalaran Intellect"
-HEALBOT_DALARAN_BRILLIANCE                     = GetSpellInfo(61316) or "Dalaran Brilliance"
-HEALBOT_FROST_ARMOR                            = GetSpellInfo(168) or "Frost Armor";
-HEALBOT_ICE_ARMOR                              = GetSpellInfo(7302) or "Ice Armor";
-HEALBOT_MAGE_ARMOR                             = GetSpellInfo(6117) or "Mage Armor";
-HEALBOT_MOLTEN_ARMOR                           = GetSpellInfo(30482) or "Molten Armor";
-HEALBOT_DEMON_ARMOR                            = GetSpellInfo(706) or "Demon Armor";
-HEALBOT_DEMON_SKIN                             = GetSpellInfo(687) or "Demon Skin";
-HEALBOT_FEL_ARMOR                              = GetSpellInfo(28176) or "Fel Armor";
-HEALBOT_SOUL_LINK                              = GetSpellInfo(19028) or "Soul Link";
-HEALBOT_DAMPEN_MAGIC                           = GetSpellInfo(604) or "Dampen Magic";
-HEALBOT_AMPLIFY_MAGIC                          = GetSpellInfo(1008) or "Amplify Magic";
-HEALBOT_DETECT_INV                             = GetSpellInfo(132) or "Detect Invisibility";
-HEALBOT_FOCUS_MAGIC                            = GetSpellInfo(54646) or "Focus Magic";
-HEALBOT_NATURE_SWIFTNESS                       = GetSpellInfo(17116) or "Nature's Swiftness";
+HEALBOT_GRACE                          = GetSpellInfo(47516) or "Grace";
+HEALBOT_GUARDIAN_SPIRIT                = GetSpellInfo(47788) or "Guardian Spirit";
+HEALBOT_LEVITATE                       = GetSpellInfo(1706) or "Levitate";
+HEALBOT_DIVINE_AEGIS                   = GetSpellInfo(47509) or "Divine Aegis";
+HEALBOT_BODY_AND_SOUL                  = GetSpellInfo(64127) or "Body and Soul";
+HEALBOT_SURGE_OF_LIGHT                 = GetSpellInfo(33154) or "Surge of Light";
+HEALBOT_CIRCLE_OF_HEALING              = GetSpellInfo(34863) or "Circle of Healing";
+HEALBOT_BLESSED_HEALING                = GetSpellInfo(70772) or "Blessed Healing";
+HEALBOT_BLESSED_RESILIENCE             = GetSpellInfo(33142) or "Blessed Resilience";
+HEALBOT_PAIN_SUPPRESSION               = GetSpellInfo(33206) or "Pain Suppression";
+HEALBOT_POWER_INFUSION                 = GetSpellInfo(10060) or "Power Infusion";
+HEALBOT_POWER_WORD_FORTITUDE           = GetSpellInfo(1243) or "Power Word: Fortitude";
+HEALBOT_PRAYER_OF_FORTITUDE            = GetSpellInfo(21562) or "Prayer of Fortitude";
+HEALBOT_DIVINE_SPIRIT                  = GetSpellInfo(14752) or "Divine Spirit";
+HEALBOT_PRAYER_OF_SPIRIT               = GetSpellInfo(27681) or "Prayer of Spirit";
+HEALBOT_FEL_INTELLECT                  = GetSpellInfo(54424) or "Fel Intellect"
+HEALBOT_SHADOW_PROTECTION              = GetSpellInfo(976) or "Shadow Protection";
+HEALBOT_PRAYER_OF_SHADOW_PROTECTION    = GetSpellInfo(27683) or "Prayer of Shadow Protection";
+HEALBOT_INNER_FIRE                     = GetSpellInfo(588) or "Inner Fire";
+HEALBOT_SHADOWFORM                     = GetSpellInfo(15473) or "Shadowform"
+HEALBOT_INNER_FOCUS                    = GetSpellInfo(14751) or "Inner Focus";
+HEALBOT_TWIN_DISCIPLINES               = GetSpellInfo(47586) or "Twin Disciplines";
+HEALBOT_SPIRITAL_HEALING               = GetSpellInfo(14898) or "Spiritual Healing";
+HEALBOT_SPIRITAL_GUIDANCE              = GetSpellInfo(14901) or "Spiritual Guidance";
+HEALBOT_EMPOWERED_HEALING              = GetSpellInfo(33158) or "Empowered Healing";
+HEALBOT_DIVINE_PROVIDENCE              = GetSpellInfo(47562) or "Divine Providence";
+HEALBOT_IMPROVED_RENEW                 = GetSpellInfo(14908) or "Improved Renew";
+HEALBOT_EMPOWERED_RENEW                = GetSpellInfo(63534) or "Empowered Renew";
+HEALBOT_FOCUSED_POWER                  = GetSpellInfo(33186) or "Focused Power";
+HEALBOT_GENESIS                        = GetSpellInfo(57810) or "Genesis";
+HEALBOT_NURTURING_INSTINCT             = GetSpellInfo(33872) or "Nurturing Instinct";
+HEALBOT_IMPROVED_REJUVENATION          = GetSpellInfo(17111) or "Improved Rejuvenation";
+HEALBOT_GIFT_OF_NATURE                 = GetSpellInfo(17104) or "Gift of Nature";
+HEALBOT_EMPOWERED_TOUCH                = GetSpellInfo(33879) or "Empowered Touch";
+HEALBOT_EMPOWERED_REJUVENATION         = GetSpellInfo(33886) or "Empowered Rejuvenation";
+HEALBOT_MASTER_SHAPESHIFTER            = GetSpellInfo(48412) or "Master Shapeshifter";
+HEALBOT_HEALING_LIGHT                  = GetSpellInfo(20237) or "Healing Light";
+HEALBOT_DIVINITY                       = GetSpellInfo(63646) or "Divinity";
+HEALBOT_TOUCHED_BY_THE_LIGHT           = GetSpellInfo(53590) or "Touched by the Light";
+HEALBOT_HOLY_GUIDANCE                  = GetSpellInfo(31841) or "Holy Guidance";
+HEALBOT_PURIFICATION                   = GetSpellInfo(16178) or "Purification";
+HEALBOT_IMPROVED_CHAIN_HEAL            = GetSpellInfo(30872) or "Improved Chain Heal";
+HEALBOT_TIDAL_WAVES                    = GetSpellInfo(51562) or "Tidal Waves";
+HEALBOT_TIDAL_FORCE                    = GetSpellInfo(55198) or "Tidal Force";
+HEALBOT_NATURES_BLESSING               = GetSpellInfo(30867) or "Nature's Blessing";
+HEALBOT_HEALTH_FUNNEL                  = GetSpellInfo(755) or "Health Funnel";
+HEALBOT_LIFE_TAP                       = GetSpellInfo(1454) or "Lift Tap";
+HEALBOT_FEAR_WARD                      = GetSpellInfo(6346) or "Fear Ward";
+HEALBOT_ARCANE_INTELLECT               = GetSpellInfo(1459) or "Arcane Intellect";
+HEALBOT_ARCANE_BRILLIANCE              = GetSpellInfo(23028) or "Arcane Brilliance";
+HEALBOT_DALARAN_INTELLECT              = GetSpellInfo(61024) or "Dalaran Intellect"
+HEALBOT_DALARAN_BRILLIANCE             = GetSpellInfo(61316) or "Dalaran Brilliance"
+HEALBOT_FROST_ARMOR                    = GetSpellInfo(168) or "Frost Armor";
+HEALBOT_ICE_ARMOR                      = GetSpellInfo(7302) or "Ice Armor";
+HEALBOT_MAGE_ARMOR                     = GetSpellInfo(6117) or "Mage Armor";
+HEALBOT_MOLTEN_ARMOR                   = GetSpellInfo(30482) or "Molten Armor";
+HEALBOT_DEMON_ARMOR                    = GetSpellInfo(706) or "Demon Armor";
+HEALBOT_DEMON_SKIN                     = GetSpellInfo(687) or "Demon Skin";
+HEALBOT_FEL_ARMOR                      = GetSpellInfo(28176) or "Fel Armor";
+HEALBOT_SOUL_LINK                      = GetSpellInfo(19028) or "Soul Link";
+HEALBOT_DAMPEN_MAGIC                   = GetSpellInfo(604) or "Dampen Magic";
+HEALBOT_AMPLIFY_MAGIC                  = GetSpellInfo(1008) or "Amplify Magic";
+HEALBOT_DETECT_INV                     = GetSpellInfo(132) or "Detect Invisibility";
+HEALBOT_FOCUS_MAGIC                    = GetSpellInfo(54646) or "Focus Magic";
+HEALBOT_NATURE_SWIFTNESS               = GetSpellInfo(17116) or "Nature's Swiftness";
 
-HEALBOT_LIGHTNING_SHIELD                       = GetSpellInfo(324) or "Lightning Shield";
-HEALBOT_ROCKBITER_WEAPON                       = GetSpellInfo(8017) or "Rockbiter Weapon";
-HEALBOT_FLAMETONGUE_WEAPON                     = GetSpellInfo(8024) or "Flametongue Weapon";
-HEALBOT_EARTHLIVING_WEAPON                     = GetSpellInfo(51730) or "Earthliving Weapon";
-HEALBOT_WINDFURY_WEAPON                        = GetSpellInfo(8232) or "Windfury Weapon";
-HEALBOT_FROSTBRAND_WEAPON                      = GetSpellInfo(8033) or "Frostbrand Weapon";
-HEALBOT_EARTH_SHIELD                           = GetSpellInfo(974) or "Earth Shield";
-HEALBOT_WATER_SHIELD                           = GetSpellInfo(52127) or "Water Shield";
+HEALBOT_LIGHTNING_SHIELD               = GetSpellInfo(324) or "Lightning Shield";
+HEALBOT_ROCKBITER_WEAPON               = GetSpellInfo(8017) or "Rockbiter Weapon";
+HEALBOT_FLAMETONGUE_WEAPON             = GetSpellInfo(8024) or "Flametongue Weapon";
+HEALBOT_EARTHLIVING_WEAPON             = GetSpellInfo(51730) or "Earthliving Weapon";
+HEALBOT_WINDFURY_WEAPON                = GetSpellInfo(8232) or "Windfury Weapon";
+HEALBOT_FROSTBRAND_WEAPON              = GetSpellInfo(8033) or "Frostbrand Weapon";
+HEALBOT_EARTH_SHIELD                   = GetSpellInfo(974) or "Earth Shield";
+HEALBOT_WATER_SHIELD                   = GetSpellInfo(52127) or "Water Shield";
 
-HEALBOT_MARK_OF_THE_WILD                       = GetSpellInfo(1126) or "Mark of the Wild";
-HEALBOT_GIFT_OF_THE_WILD                       = GetSpellInfo(21849) or "Gift of the Wild";
-HEALBOT_THORNS                                 = GetSpellInfo(467) or "Thorns";
-HEALBOT_OMEN_OF_CLARITY                        = GetSpellInfo(16864) or "Omen of Clarity";
+HEALBOT_MARK_OF_THE_WILD               = GetSpellInfo(1126) or "Mark of the Wild";
+HEALBOT_GIFT_OF_THE_WILD               = GetSpellInfo(21849) or "Gift of the Wild";
+HEALBOT_THORNS                         = GetSpellInfo(467) or "Thorns";
+HEALBOT_OMEN_OF_CLARITY                = GetSpellInfo(16864) or "Omen of Clarity";
 
-HEALBOT_BEACON_OF_LIGHT                        = GetSpellInfo(53563) or "Beacon of Light";
-HEALBOT_LIGHT_BEACON                           = GetSpellInfo(53651) or "Light Beacon";
-HEALBOT_SACRED_SHIELD                          = GetSpellInfo(53601) or "Sacred Shield";
-HEALBOT_SACRED_CLEANSING                       = GetSpellInfo(53551) or "Sacred Cleansing";
-HEALBOT_LAY_ON_HANDS                           = GetSpellInfo(27154) or "Lay on Hands";
-HEALBOT_IMPROVED_LAY_ON_HANDS                  = GetSpellInfo(27154) or "Lay on Hands"; -- Improved didnt show icon - Aura has 'Lay On Hands' and id 27154 works.  Improved is GetSpellInfo(20234)
-HEALBOT_INFUSION_OF_LIGHT                      = GetSpellInfo(53569) or "Infusion of Light";
-HEALBOT_HOLY_SHOCK                             = GetSpellInfo(20473) or "Holy Shock";
-HEALBOT_SERENDIPITY                            = GetSpellInfo(63730) or "Serendipity";
-HEALBOT_DIVINE_FAVOR                           = GetSpellInfo(20216) or "Divine Favor";
-HEALBOT_DIVINE_PLEA                            = GetSpellInfo(54428) or "Divine Plea"
-HEALBOT_DIVINE_ILLUMINATION                    = GetSpellInfo(31842) or "Divine Illumination";
-HEALBOT_DIVINE_SHIELD                          = GetSpellInfo(642) or "Divine Shield";
-HEALBOT_RIGHTEOUS_DEFENSE                      = GetSpellInfo(31789) or "Righteous Defense";
-HEALBOT_SHEATH_OF_LIGHT                        = GetSpellInfo(53501) or "Sheath of Light";
-HEALBOT_BLESSED                                = GetSpellInfo(71192) or "Blessed";
-HEALBOT_BLESSING_OF_MIGHT                      = GetSpellInfo(19740) or "Blessing of Might";
-HEALBOT_BLESSING_OF_WISDOM                     = GetSpellInfo(19742) or "Blessing of Wisdom";
-HEALBOT_BLESSING_OF_SANCTUARY                  = GetSpellInfo(20911) or "Blessing of Sanctuary";
-HEALBOT_BLESSING_OF_PROTECTION                 = GetSpellInfo(41450) or "Blessing of Protection";
-HEALBOT_BLESSING_OF_KINGS                      = GetSpellInfo(20217) or "Blessing of Kings";
-HEALBOT_GREATER_BLESSING_OF_MIGHT              = GetSpellInfo(25782) or "Greater Blessing of Might";
-HEALBOT_GREATER_BLESSING_OF_WISDOM             = GetSpellInfo(25894) or "Greater Blessing of Wisdom";
-HEALBOT_GREATER_BLESSING_OF_KINGS              = GetSpellInfo(25898) or "Greater Blessing of Kings";
-HEALBOT_GREATER_BLESSING_OF_SANCTUARY          = GetSpellInfo(25899) or "Greater Blessing of Sanctuary";
-HEALBOT_SEAL_OF_RIGHTEOUSNESS                  = GetSpellInfo(21084) or "Seal of Righteousness";
-HEALBOT_SEAL_OF_BLOOD                          = GetSpellInfo(31892) or "Seal of Blood";
-HEALBOT_SEAL_OF_CORRUPTION                     = GetSpellInfo(53736) or "Seal of Corruption";
-HEALBOT_SEAL_OF_JUSTICE                        = GetSpellInfo(20164) or "Seal of Justice";
-HEALBOT_SEAL_OF_LIGHT                          = GetSpellInfo(20165) or "Seal of Light";
-HEALBOT_SEAL_OF_VENGEANCE                      = GetSpellInfo(31801) or "Seal of Vengeance";
-HEALBOT_SEAL_OF_WISDOM                         = GetSpellInfo(20166) or "Seal of Wisdom";
-HEALBOT_SEAL_OF_COMMAND                        = GetSpellInfo(20375) or "Seal of Command";
-HEALBOT_SEAL_OF_THE_MARTYR                     = GetSpellInfo(53720) or "Seal of the Martyr";
-HEALBOT_HAND_OF_FREEDOM                        = GetSpellInfo(1044) or "Hand of Freedom";
-HEALBOT_HAND_OF_PROTECTION                     = GetSpellInfo(1022) or "Hand of Protection";
-HEALBOT_HAND_OF_SACRIFICE                      = GetSpellInfo(6940) or "Hand of Sacrifice";
-HEALBOT_HAND_OF_SALVATION                      = GetSpellInfo(1038) or "Hand of Salvation";
-HEALBOT_RIGHTEOUS_FURY                         = GetSpellInfo(25780) or "Righteous Fury";
-HEALBOT_DEVOTION_AURA                          = GetSpellInfo(465) or "Devotion Aura";
-HEALBOT_RETRIBUTION_AURA                       = GetSpellInfo(7294) or "Retribution Aura";
-HEALBOT_CONCENTRATION_AURA                     = GetSpellInfo(19746) or "Concentration Aura";
-HEALBOT_SHR_AURA                               = GetSpellInfo(19876) or "Shadow Resistance Aura";
-HEALBOT_FRR_AURA                               = GetSpellInfo(19888) or "Frost Resistance Aura";
-HEALBOT_FIR_AURA                               = GetSpellInfo(19891) or "Fire Resistance Aura";
-HEALBOT_CRUSADER_AURA                          = GetSpellInfo(32223) or "Crusader Aura";
+HEALBOT_BEACON_OF_LIGHT                = GetSpellInfo(53563) or "Beacon of Light";
+HEALBOT_LIGHT_BEACON                   = GetSpellInfo(53651) or "Light Beacon";
+HEALBOT_SACRED_SHIELD                  = GetSpellInfo(53601) or "Sacred Shield";
+HEALBOT_SACRED_CLEANSING               = GetSpellInfo(53551) or "Sacred Cleansing";
+HEALBOT_LAY_ON_HANDS                   = GetSpellInfo(27154) or "Lay on Hands";
+HEALBOT_IMPROVED_LAY_ON_HANDS          = GetSpellInfo(27154) or "Lay on Hands"; -- Improved didnt show icon - Aura has 'Lay On Hands' and id 27154 works.  Improved is GetSpellInfo(20234)
+HEALBOT_INFUSION_OF_LIGHT              = GetSpellInfo(53569) or "Infusion of Light";
+HEALBOT_HOLY_SHOCK                     = GetSpellInfo(20473) or "Holy Shock";
+HEALBOT_SERENDIPITY                    = GetSpellInfo(63730) or "Serendipity";
+HEALBOT_DIVINE_FAVOR                   = GetSpellInfo(20216) or "Divine Favor";
+HEALBOT_DIVINE_PLEA                    = GetSpellInfo(54428) or "Divine Plea"
+HEALBOT_DIVINE_ILLUMINATION            = GetSpellInfo(31842) or "Divine Illumination";
+HEALBOT_DIVINE_SHIELD                  = GetSpellInfo(642) or "Divine Shield";
+HEALBOT_RIGHTEOUS_DEFENSE              = GetSpellInfo(31789) or "Righteous Defense";
+HEALBOT_SHEATH_OF_LIGHT                = GetSpellInfo(53501) or "Sheath of Light";
+HEALBOT_BLESSED                        = GetSpellInfo(71192) or "Blessed";
+HEALBOT_BLESSING_OF_MIGHT              = GetSpellInfo(19740) or "Blessing of Might";
+HEALBOT_BLESSING_OF_WISDOM             = GetSpellInfo(19742) or "Blessing of Wisdom";
+HEALBOT_BLESSING_OF_SANCTUARY          = GetSpellInfo(20911) or "Blessing of Sanctuary";
+HEALBOT_BLESSING_OF_PROTECTION         = GetSpellInfo(41450) or "Blessing of Protection";
+HEALBOT_BLESSING_OF_KINGS              = GetSpellInfo(20217) or "Blessing of Kings";
+HEALBOT_GREATER_BLESSING_OF_MIGHT      = GetSpellInfo(25782) or "Greater Blessing of Might";
+HEALBOT_GREATER_BLESSING_OF_WISDOM     = GetSpellInfo(25894) or "Greater Blessing of Wisdom";
+HEALBOT_GREATER_BLESSING_OF_KINGS      = GetSpellInfo(25898) or "Greater Blessing of Kings";
+HEALBOT_GREATER_BLESSING_OF_SANCTUARY  = GetSpellInfo(25899) or "Greater Blessing of Sanctuary";
+HEALBOT_SEAL_OF_RIGHTEOUSNESS          = GetSpellInfo(21084) or "Seal of Righteousness";
+HEALBOT_SEAL_OF_BLOOD                  = GetSpellInfo(31892) or "Seal of Blood";
+HEALBOT_SEAL_OF_CORRUPTION             = GetSpellInfo(53736) or "Seal of Corruption";
+HEALBOT_SEAL_OF_JUSTICE                = GetSpellInfo(20164) or "Seal of Justice";
+HEALBOT_SEAL_OF_LIGHT                  = GetSpellInfo(20165) or "Seal of Light";
+HEALBOT_SEAL_OF_VENGEANCE              = GetSpellInfo(31801) or "Seal of Vengeance";
+HEALBOT_SEAL_OF_WISDOM                 = GetSpellInfo(20166) or "Seal of Wisdom";
+HEALBOT_SEAL_OF_COMMAND                = GetSpellInfo(20375) or "Seal of Command";
+HEALBOT_SEAL_OF_THE_MARTYR             = GetSpellInfo(53720) or "Seal of the Martyr";
+HEALBOT_HAND_OF_FREEDOM                = GetSpellInfo(1044) or "Hand of Freedom";
+HEALBOT_HAND_OF_PROTECTION             = GetSpellInfo(1022) or "Hand of Protection";
+HEALBOT_HAND_OF_SACRIFICE              = GetSpellInfo(6940) or "Hand of Sacrifice";
+HEALBOT_HAND_OF_SALVATION              = GetSpellInfo(1038) or "Hand of Salvation";
+HEALBOT_RIGHTEOUS_FURY                 = GetSpellInfo(25780) or "Righteous Fury";
+HEALBOT_DEVOTION_AURA                  = GetSpellInfo(465) or "Devotion Aura";
+HEALBOT_RETRIBUTION_AURA               = GetSpellInfo(7294) or "Retribution Aura";
+HEALBOT_CONCENTRATION_AURA             = GetSpellInfo(19746) or "Concentration Aura";
+HEALBOT_SHR_AURA                       = GetSpellInfo(19876) or "Shadow Resistance Aura";
+HEALBOT_FRR_AURA                       = GetSpellInfo(19888) or "Frost Resistance Aura";
+HEALBOT_FIR_AURA                       = GetSpellInfo(19891) or "Fire Resistance Aura";
+HEALBOT_CRUSADER_AURA                  = GetSpellInfo(32223) or "Crusader Aura";
 
-HEALBOT_BATTLE_SHOUT                           = GetSpellInfo(6673) or "Battle Shout";
-HEALBOT_COMMANDING_SHOUT                       = GetSpellInfo(469) or "Commanding Shout";
-HEALBOT_INTERVENE                              = GetSpellInfo(3411) or "Intervene";
-HEALBOT_VAMPIRIC_EMBRACE                       = GetSpellInfo(15286) or "Vampiric Embrace";
-HEALBOT_VIGILANCE                              = GetSpellInfo(50720) or "Vigilance";
-HEALBOT_LAST_STAND                             = GetSpellInfo(12975) or "Last Stand";
-HEALBOT_SHIELD_WALL                            = GetSpellInfo(871) or "Shield Wall";
-HEALBOT_SHIELD_BLOCK                           = GetSpellInfo(2565) or "Shield Block";
-HEALBOT_ENRAGED_REGEN                          = GetSpellInfo(55694) or "Enraged Regeneration";
-HEALBOT_DIVINE_PROTECTION                      = GetSpellInfo(498) or "Divine Protection";
-HEALBOT_BARKSKIN                               = GetSpellInfo(22812) or "Barkskin";
-HEALBOT_SURVIVAL_INSTINCTS                     = GetSpellInfo(61336) or "Survival Instincts";
-HEALBOT_FRENZIED_REGEN                         = GetSpellInfo(22842) or "Frenzied Regeneration";
-HEALBOT_ICEBOUND_FORTITUDE                     = GetSpellInfo(48792) or "Icebound Fortitude";
-HEALBOT_ANTIMAGIC_SHELL                        = GetSpellInfo(48707) or "Antimagic Shell";
-HEALBOT_ARMY_OF_THE_DEAD                       = GetSpellInfo(42650) or "Army of the Dead";
-HEALBOT_LICHBORNE                              = GetSpellInfo(49039) or "Lichborne";
-HEALBOT_ANTIMAGIC_ZONE                         = GetSpellInfo(51052) or "Antimagic Zone";
-HEALBOT_VAMPIRIC_BLOOD                         = GetSpellInfo(55233) or "Vampiric Blood";
-HEALBOT_UNBREAKABLE_ARMOR                      = GetSpellInfo(51271) or "Unbreakable Armor";
-HEALBOT_BONE_SHIELD                            = GetSpellInfo(49222) or "Bone Shield";
-HEALBOT_HORN_OF_WINTER                         = GetSpellInfo(57330) or "Horn of Winter";
-HEALBOT_HYSTERIA                               = GetSpellInfo(49016) or "Hysteria";
-HEALBOT_INNERVATE                              = GetSpellInfo(29166) or "Innervate";
+HEALBOT_BATTLE_SHOUT                   = GetSpellInfo(6673) or "Battle Shout";
+HEALBOT_COMMANDING_SHOUT               = GetSpellInfo(469) or "Commanding Shout";
+HEALBOT_INTERVENE                      = GetSpellInfo(3411) or "Intervene";
+HEALBOT_VAMPIRIC_EMBRACE               = GetSpellInfo(15286) or "Vampiric Embrace";
+HEALBOT_VIGILANCE                      = GetSpellInfo(50720) or "Vigilance";
+HEALBOT_LAST_STAND                     = GetSpellInfo(12975) or "Last Stand";
+HEALBOT_SHIELD_WALL                    = GetSpellInfo(871) or "Shield Wall";
+HEALBOT_SHIELD_BLOCK                   = GetSpellInfo(2565) or "Shield Block";
+HEALBOT_ENRAGED_REGEN                  = GetSpellInfo(55694) or "Enraged Regeneration";
+HEALBOT_DIVINE_PROTECTION              = GetSpellInfo(498) or "Divine Protection";
+HEALBOT_BARKSKIN                       = GetSpellInfo(22812) or "Barkskin";
+HEALBOT_SURVIVAL_INSTINCTS             = GetSpellInfo(61336) or "Survival Instincts";
+HEALBOT_FRENZIED_REGEN                 = GetSpellInfo(22842) or "Frenzied Regeneration";
+HEALBOT_ICEBOUND_FORTITUDE             = GetSpellInfo(48792) or "Icebound Fortitude";
+HEALBOT_ANTIMAGIC_SHELL                = GetSpellInfo(48707) or "Antimagic Shell";
+HEALBOT_ARMY_OF_THE_DEAD               = GetSpellInfo(42650) or "Army of the Dead";
+HEALBOT_LICHBORNE                      = GetSpellInfo(49039) or "Lichborne";
+HEALBOT_ANTIMAGIC_ZONE                 = GetSpellInfo(51052) or "Antimagic Zone";
+HEALBOT_VAMPIRIC_BLOOD                 = GetSpellInfo(55233) or "Vampiric Blood";
+HEALBOT_UNBREAKABLE_ARMOR              = GetSpellInfo(51271) or "Unbreakable Armor";
+HEALBOT_BONE_SHIELD                    = GetSpellInfo(49222) or "Bone Shield";
+HEALBOT_HORN_OF_WINTER                 = GetSpellInfo(57330) or "Horn of Winter";
+HEALBOT_HYSTERIA                       = GetSpellInfo(49016) or "Hysteria";
+HEALBOT_INNERVATE                      = GetSpellInfo(29166) or "Innervate";
 
-HEALBOT_A_MONKEY                               = GetSpellInfo(13163) or "Aspect of the Monkey"
-HEALBOT_A_HAWK                                 = GetSpellInfo(13165) or "Aspect of the Hawk"
-HEALBOT_A_CHEETAH                              = GetSpellInfo(5118) or "Aspect of the Cheetah"
-HEALBOT_A_BEAST                                = GetSpellInfo(13161) or "Aspect of the Beast"
-HEALBOT_A_PACK                                 = GetSpellInfo(13159) or "Aspect of the Pack"
-HEALBOT_A_WILD                                 = GetSpellInfo(20043) or "Aspect of the Wild"
-HEALBOT_A_VIPER                                = GetSpellInfo(34074) or "Aspect of the Viper"
-HEALBOT_A_DRAGONHAWK                           = GetSpellInfo(61846) or "Aspect of the Dragonhawk"
-HEALBOT_MENDPET                                = GetSpellInfo(136) or "Mend Pet"
+HEALBOT_A_MONKEY                       = GetSpellInfo(13163) or "Aspect of the Monkey"
+HEALBOT_A_HAWK                         = GetSpellInfo(13165) or "Aspect of the Hawk"
+HEALBOT_A_CHEETAH                      = GetSpellInfo(5118) or "Aspect of the Cheetah"
+HEALBOT_A_BEAST                        = GetSpellInfo(13161) or "Aspect of the Beast"
+HEALBOT_A_PACK                         = GetSpellInfo(13159) or "Aspect of the Pack"
+HEALBOT_A_WILD                         = GetSpellInfo(20043) or "Aspect of the Wild"
+HEALBOT_A_VIPER                        = GetSpellInfo(34074) or "Aspect of the Viper"
+HEALBOT_A_DRAGONHAWK                   = GetSpellInfo(61846) or "Aspect of the Dragonhawk"
+HEALBOT_MENDPET                        = GetSpellInfo(136) or "Mend Pet"
 
-HEALBOT_UNENDING_BREATH                        = GetSpellInfo(5697) or "Unending Breath"
+HEALBOT_UNENDING_BREATH                = GetSpellInfo(5697) or "Unending Breath"
 
-HEALBOT_RESURRECTION                           = GetSpellInfo(2006) or "Resurrection";
-HEALBOT_REDEMPTION                             = GetSpellInfo(7328) or "Redemption";
-HEALBOT_REBIRTH                                = GetSpellInfo(20484) or "Rebirth";
-HEALBOT_ANCESTRALSPIRIT                        = GetSpellInfo(2008) or "Ancestral Spirit";
+HEALBOT_RESURRECTION                   = GetSpellInfo(2006) or "Resurrection";
+HEALBOT_REDEMPTION                     = GetSpellInfo(7328) or "Redemption";
+HEALBOT_REBIRTH                        = GetSpellInfo(20484) or "Rebirth";
+HEALBOT_ANCESTRALSPIRIT                = GetSpellInfo(2008) or "Ancestral Spirit";
 
-HEALBOT_PURIFY                                 = GetSpellInfo(1152) or "Purify";
-HEALBOT_CLEANSE                                = GetSpellInfo(4987) or "Cleanse";
-HEALBOT_CURE_POISON                            = GetSpellInfo(8946) or "Cure Poison";
-HEALBOT_REMOVE_CURSE                           = GetSpellInfo(2782) or "Remove Curse";
-HEALBOT_DISPEL_CURSE                           = GetSpellInfo(475) or "Dispel Curse";
-HEALBOT_ABOLISH_POISON                         = GetSpellInfo(2893) or "Abolish Poison";
-HEALBOT_CURE_DISEASE                           = GetSpellInfo(528) or "Cure Disease";
-HEALBOT_ABOLISH_DISEASE                        = GetSpellInfo(552) or "Abolish Disease";
-HEALBOT_DISPEL_MAGIC                           = GetSpellInfo(527) or "Dispel Magic";
-HEALBOT_CLEANSE_SPIRIT                         = GetSpellInfo(51886) or "Cleanse Spirit";
-HEALBOT_CURE_TOXINS                            = GetSpellInfo(526) or "Cure Toxins"
+HEALBOT_PURIFY                         = GetSpellInfo(1152) or "Purify";
+HEALBOT_CLEANSE                        = GetSpellInfo(4987) or "Cleanse";
+HEALBOT_CURE_POISON                    = GetSpellInfo(8946) or "Cure Poison";
+HEALBOT_REMOVE_CURSE                   = GetSpellInfo(2782) or "Remove Curse";
+HEALBOT_DISPEL_CURSE                   = GetSpellInfo(475) or "Dispel Curse";
+HEALBOT_ABOLISH_POISON                 = GetSpellInfo(2893) or "Abolish Poison";
+HEALBOT_CURE_DISEASE                   = GetSpellInfo(528) or "Cure Disease";
+HEALBOT_ABOLISH_DISEASE                = GetSpellInfo(552) or "Abolish Disease";
+HEALBOT_DISPEL_MAGIC                   = GetSpellInfo(527) or "Dispel Magic";
+HEALBOT_CLEANSE_SPIRIT                 = GetSpellInfo(51886) or "Cleanse Spirit";
+HEALBOT_CURE_TOXINS                    = GetSpellInfo(526) or "Cure Toxins"
 
-HEALBOT_DISEASE                                = "Disease";
-HEALBOT_MAGIC                                  = "Magic";
-HEALBOT_CURSE                                  = "Curse";
-HEALBOT_POISON                                 = "Poison";
-HEALBOT_DISEASE_en                             = "Disease"; -- Do NOT localize this value.
-HEALBOT_MAGIC_en                               = "Magic"; -- Do NOT localize this value.
-HEALBOT_CURSE_en                               = "Curse"; -- Do NOT localize this value.
-HEALBOT_POISON_en                              = "Poison"; -- Do NOT localize this value.
-HEALBOT_CUSTOM_en                              = "Custom"; -- Do NOT localize this value.
+HEALBOT_DISEASE                        = "Disease";
+HEALBOT_MAGIC                          = "Magic";
+HEALBOT_CURSE                          = "Curse";
+HEALBOT_POISON                         = "Poison";
+HEALBOT_DISEASE_en                     = "Disease"; -- Do NOT localize this value.
+HEALBOT_MAGIC_en                       = "Magic";   -- Do NOT localize this value.
+HEALBOT_CURSE_en                       = "Curse";   -- Do NOT localize this value.
+HEALBOT_POISON_en                      = "Poison";  -- Do NOT localize this value.
+HEALBOT_CUSTOM_en                      = "Custom";  -- Do NOT localize this value.
 
-HEALBOT_DEBUFF_ANCIENT_HYSTERIA                = "Ancient Hysteria";
-HEALBOT_DEBUFF_IGNITE_MANA                     = "Ignite Mana";
-HEALBOT_DEBUFF_TAINTED_MIND                    = "Tainted Mind";
-HEALBOT_DEBUFF_VIPER_STING                     = "Viper Sting";
-HEALBOT_DEBUFF_SILENCE                         = "Silence";
-HEALBOT_DEBUFF_MAGMA_SHACKLES                  = "Magma Shackles";
-HEALBOT_DEBUFF_FROSTBOLT                       = "Frostbolt";
-HEALBOT_DEBUFF_HUNTERS_MARK                    = "Hunter's Mark";
-HEALBOT_DEBUFF_SLOW                            = "Slow";
-HEALBOT_DEBUFF_ARCANE_BLAST                    = "Arcane Blast";
-HEALBOT_DEBUFF_IMPOTENCE                       = "Curse of Impotence";
-HEALBOT_DEBUFF_DECAYED_STR                     = "Decayed Strength";
-HEALBOT_DEBUFF_DECAYED_INT                     = "Decayed Intellect";
-HEALBOT_DEBUFF_CRIPPLE                         = "Cripple";
-HEALBOT_DEBUFF_CHILLED                         = "Chilled";
-HEALBOT_DEBUFF_CONEOFCOLD                      = "Cone of Cold";
-HEALBOT_DEBUFF_CONCUSSIVESHOT                  = "Concussive Shot";
-HEALBOT_DEBUFF_THUNDERCLAP                     = "Thunderclap";
-HEALBOT_DEBUFF_HOWLINGSCREECH                  = "Howling Screech";
-HEALBOT_DEBUFF_DAZED                           = "Dazed";
-HEALBOT_DEBUFF_UNSTABLE_AFFL                   = "Unstable Affliction";
-HEALBOT_DEBUFF_DREAMLESS_SLEEP                 = "Dreamless Sleep";
-HEALBOT_DEBUFF_GREATER_DREAMLESS               = "Greater Dreamless Sleep";
-HEALBOT_DEBUFF_MAJOR_DREAMLESS                 = "Major Dreamless Sleep";
-HEALBOT_DEBUFF_FROST_SHOCK                     = "Frost Shock"
-HEALBOT_DEBUFF_WEAKENED_SOUL                   = GetSpellInfo(6788) or "Weakened Soul";
+HEALBOT_DEBUFF_ANCIENT_HYSTERIA        = "Ancient Hysteria";
+HEALBOT_DEBUFF_IGNITE_MANA             = "Ignite Mana";
+HEALBOT_DEBUFF_TAINTED_MIND            = "Tainted Mind";
+HEALBOT_DEBUFF_VIPER_STING             = "Viper Sting";
+HEALBOT_DEBUFF_SILENCE                 = "Silence";
+HEALBOT_DEBUFF_MAGMA_SHACKLES          = "Magma Shackles";
+HEALBOT_DEBUFF_FROSTBOLT               = "Frostbolt";
+HEALBOT_DEBUFF_HUNTERS_MARK            = "Hunter's Mark";
+HEALBOT_DEBUFF_SLOW                    = "Slow";
+HEALBOT_DEBUFF_ARCANE_BLAST            = "Arcane Blast";
+HEALBOT_DEBUFF_IMPOTENCE               = "Curse of Impotence";
+HEALBOT_DEBUFF_DECAYED_STR             = "Decayed Strength";
+HEALBOT_DEBUFF_DECAYED_INT             = "Decayed Intellect";
+HEALBOT_DEBUFF_CRIPPLE                 = "Cripple";
+HEALBOT_DEBUFF_CHILLED                 = "Chilled";
+HEALBOT_DEBUFF_CONEOFCOLD              = "Cone of Cold";
+HEALBOT_DEBUFF_CONCUSSIVESHOT          = "Concussive Shot";
+HEALBOT_DEBUFF_THUNDERCLAP             = "Thunderclap";
+HEALBOT_DEBUFF_HOWLINGSCREECH          = "Howling Screech";
+HEALBOT_DEBUFF_DAZED                   = "Dazed";
+HEALBOT_DEBUFF_UNSTABLE_AFFL           = "Unstable Affliction";
+HEALBOT_DEBUFF_DREAMLESS_SLEEP         = "Dreamless Sleep";
+HEALBOT_DEBUFF_GREATER_DREAMLESS       = "Greater Dreamless Sleep";
+HEALBOT_DEBUFF_MAJOR_DREAMLESS         = "Major Dreamless Sleep";
+HEALBOT_DEBUFF_FROST_SHOCK             = "Frost Shock"
+HEALBOT_DEBUFF_WEAKENED_SOUL           = GetSpellInfo(6788) or "Weakened Soul";
 
-HEALBOT_DEBUFF_ICE_TOMB                        = GetSpellInfo(29670) or "Ice Tomb";
-HEALBOT_DEBUFF_SACRIFICE                       = GetSpellInfo(30115) or "Sacrifice";
-HEALBOT_DEBUFF_ICEBOLT                         = GetSpellInfo(31249) or "Icebolt";
-HEALBOT_DEBUFF_DOOMFIRE                        = GetSpellInfo(31944) or "Doomfire";
-HEALBOT_DEBUFF_IMPALING_SPINE                  = GetSpellInfo(39837) or "Impaling Spine";
-HEALBOT_DEBUFF_FEL_RAGE                        = GetSpellInfo(40604) or "Fel Rage";
-HEALBOT_DEBUFF_FEL_RAGE2                       = GetSpellInfo(40616) or "Fel Rage 2";
-HEALBOT_DEBUFF_FATAL_ATTRACTION                = GetSpellInfo(41001) or "Fatal Attraction";
-HEALBOT_DEBUFF_AGONIZING_FLAMES                = GetSpellInfo(40932) or "Agonizing Flames";
-HEALBOT_DEBUFF_DARK_BARRAGE                    = GetSpellInfo(40585) or "Dark Barrage";
-HEALBOT_DEBUFF_PARASITIC_SHADOWFIEND           = GetSpellInfo(41917) or "Parasitic Shadowfiend";
-HEALBOT_DEBUFF_GRIEVOUS_THROW                  = GetSpellInfo(43093) or "Grievous Throw";
-HEALBOT_DEBUFF_BURN                            = GetSpellInfo(46394) or "Burn";
-HEALBOT_DEBUFF_ENCAPSULATE                     = GetSpellInfo(45662) or "Encapsulate";
-HEALBOT_DEBUFF_CONFLAGRATION                   = GetSpellInfo(45342) or "Conflagration";
-HEALBOT_DEBUFF_FLAME_SEAR                      = GetSpellInfo(46771) or "Flame Sear";
-HEALBOT_DEBUFF_FIRE_BLOOM                      = GetSpellInfo(45641) or "Fire Bloom";
-HEALBOT_DEBUFF_GRIEVOUS_BITE                   = GetSpellInfo(48920) or "Grievous Bite";
-HEALBOT_DEBUFF_FROST_TOMB                      = GetSpellInfo(25168) or "Frost Tomb";
-HEALBOT_DEBUFF_IMPALE                          = GetSpellInfo(67478) or "Impale";
-HEALBOT_DEBUFF_WEB_WRAP                        = GetSpellInfo(28622) or "Web Wrap";
-HEALBOT_DEBUFF_JAGGED_KNIFE                    = GetSpellInfo(55550) or "Jagged Knife";
-HEALBOT_DEBUFF_FROST_BLAST                     = GetSpellInfo(27808) or "Frost Blast";
-HEALBOT_DEBUFF_SLAG_PIT                        = GetSpellInfo(63477) or "Slag Pit";
-HEALBOT_DEBUFF_GRAVITY_BOMB                    = GetSpellInfo(64234) or "Gravity Bomb";
-HEALBOT_DEBUFF_LIGHT_BOMB                      = GetSpellInfo(63018) or "Light Bomb";
-HEALBOT_DEBUFF_STONE_GRIP                      = GetSpellInfo(64292) or "Stone Grip";
-HEALBOT_DEBUFF_FERAL_POUNCE                    = GetSpellInfo(64669) or "Feral Pounce";
-HEALBOT_DEBUFF_NAPALM_SHELL                    = GetSpellInfo(63666) or "Napalm Shell";
-HEALBOT_DEBUFF_IRON_ROOTS                      = GetSpellInfo(62283) or "Iron Roots";
-HEALBOT_DEBUFF_SARA_BLESSING                   = GetSpellInfo(63134) or "Sara's Blessing";
-HEALBOT_DEBUFF_SNOBOLLED                       = GetSpellInfo(66406) or "Snobolled!";
-HEALBOT_DEBUFF_FIRE_BOMB                       = GetSpellInfo(67475) or "Fire Bomb";
-HEALBOT_DEBUFF_BURNING_BILE                    = GetSpellInfo(66869) or "Burning Bile";
-HEALBOT_DEBUFF_PARALYTIC_TOXIN                 = GetSpellInfo(67618) or "Paralytic Toxin";
-HEALBOT_DEBUFF_INCINERATE_FLESH                = GetSpellInfo(67049) or "Incinerate Flesh";
-HEALBOT_DEBUFF_LEGION_FLAME                    = GetSpellInfo(68123) or "Legion Flame";
-HEALBOT_DEBUFF_MISTRESS_KISS                   = GetSpellInfo(67078) or "Mistress' Kiss";
-HEALBOT_DEBUFF_SPINNING_PAIN_SPIKE             = GetSpellInfo(66283) or "Spinning Pain Spike";
-HEALBOT_DEBUFF_TOUCH_OF_LIGHT                  = GetSpellInfo(67297) or "Touch of Light";
-HEALBOT_DEBUFF_TOUCH_OF_DARKNESS               = GetSpellInfo(66001) or "Touch of Darkness";
-HEALBOT_DEBUFF_PENETRATING_COLD                = GetSpellInfo(66013) or "Penetrating Cold";
-HEALBOT_DEBUFF_ACID_DRENCHED_MANDIBLES         = GetSpellInfo(67861) or "Acid-Drenched Mandibles";
-HEALBOT_DEBUFF_EXPOSE_WEAKNESS                 = GetSpellInfo(67847) or "Expose Weakness";
-HEALBOT_DEBUFF_IMPALED                         = GetSpellInfo(69065) or "Impaled";
-HEALBOT_DEBUFF_NECROTIC_STRIKE                 = GetSpellInfo(70659) or "Necrotic Strike";
-HEALBOT_DEBUFF_FALLEN_CHAMPION                 = GetSpellInfo(72293) or "Mark of the Fallen Champion";
-HEALBOT_DEBUFF_BOILING_BLOOD                   = GetSpellInfo(72385) or "Boiling Blood";
-HEALBOT_DEBUFF_RUNE_OF_BLOOD                   = GetSpellInfo(72409) or "Rune of Blood";
-HEALBOT_DEBUFF_VILE_GAS                        = GetSpellInfo(72273) or "Vile Gas";
-HEALBOT_DEBUFF_GASTRIC_BLOAT                   = GetSpellInfo(72219) or "Gastric Bloat";
-HEALBOT_DEBUFF_GAS_SPORE                       = GetSpellInfo(69278) or "Gas Spore";
-HEALBOT_DEBUFF_INOCULATED                      = GetSpellInfo(72103) or "Inoculated";
-HEALBOT_DEBUFF_MUTATED_INFECTION               = GetSpellInfo(71224) or "Mutated Infection";
-HEALBOT_DEBUFF_GASEOUS_BLOAT                   = GetSpellInfo(72455) or "Gaseous Bloat";
-HEALBOT_DEBUFF_VOLATILE_OOZE                   = GetSpellInfo(70447) or "Volatile Ooze Adhesive";
-HEALBOT_DEBUFF_MUTATED_PLAGUE                  = GetSpellInfo(72745) or "Mutated Plague";
-HEALBOT_DEBUFF_GLITTERING_SPARKS               = GetSpellInfo(72796) or "Glittering Sparks";
-HEALBOT_DEBUFF_SHADOW_PRISON                   = GetSpellInfo(72999) or "Shadow Prison";
-HEALBOT_DEBUFF_SWARMING_SHADOWS                = GetSpellInfo(72638) or "Swarming Shadows";
-HEALBOT_DEBUFF_PACT_DARKFALLEN                 = GetSpellInfo(71340) or "Pact of the Darkfallen";
-HEALBOT_DEBUFF_ESSENCE_BLOOD_QUEEN             = GetSpellInfo(70867) or "Essence of the Blood Queen";
-HEALBOT_DEBUFF_DELIRIOUS_SLASH                 = GetSpellInfo(71624) or "Delirious Slash";
-HEALBOT_DEBUFF_CORROSION                       = GetSpellInfo(70751) or "Corrosion";
-HEALBOT_DEBUFF_GUT_SPRAY                       = GetSpellInfo(70633) or "Gut Spray";
-HEALBOT_DEBUFF_ICE_TOMB                        = GetSpellInfo(70157) or "Ice Tomb";
-HEALBOT_DEBUFF_FROST_BEACON                    = GetSpellInfo(70126) or "Frost Beacon";
-HEALBOT_DEBUFF_CHILLED_BONE                    = GetSpellInfo(70106) or "Chilled to the Bone";
-HEALBOT_DEBUFF_INSTABILITY                     = GetSpellInfo(69766) or "Instabilty";
-HEALBOT_DEBUFF_MYSTIC_BUFFET                   = GetSpellInfo(70127) or "Mystic Buffet";
-HEALBOT_DEBUFF_FROST_BREATH                    = GetSpellInfo(69649) or "Frost Breath";
-HEALBOT_DEBUFF_INFEST                          = GetSpellInfo(70541) or "Infest";
-HEALBOT_DEBUFF_NECROTIC_PLAGUE                 = GetSpellInfo(70338) or "Necrotic Plague";
-HEALBOT_DEBUFF_DEFILE                          = GetSpellInfo(72754) or "Defile";
-HEALBOT_DEBUFF_HARVEST_SOUL                    = GetSpellInfo(68980) or "Harvest Soul";
+HEALBOT_DEBUFF_ICE_TOMB                = GetSpellInfo(29670) or "Ice Tomb";
+HEALBOT_DEBUFF_SACRIFICE               = GetSpellInfo(30115) or "Sacrifice";
+HEALBOT_DEBUFF_ICEBOLT                 = GetSpellInfo(31249) or "Icebolt";
+HEALBOT_DEBUFF_DOOMFIRE                = GetSpellInfo(31944) or "Doomfire";
+HEALBOT_DEBUFF_IMPALING_SPINE          = GetSpellInfo(39837) or "Impaling Spine";
+HEALBOT_DEBUFF_FEL_RAGE                = GetSpellInfo(40604) or "Fel Rage";
+HEALBOT_DEBUFF_FEL_RAGE2               = GetSpellInfo(40616) or "Fel Rage 2";
+HEALBOT_DEBUFF_FATAL_ATTRACTION        = GetSpellInfo(41001) or "Fatal Attraction";
+HEALBOT_DEBUFF_AGONIZING_FLAMES        = GetSpellInfo(40932) or "Agonizing Flames";
+HEALBOT_DEBUFF_DARK_BARRAGE            = GetSpellInfo(40585) or "Dark Barrage";
+HEALBOT_DEBUFF_PARASITIC_SHADOWFIEND   = GetSpellInfo(41917) or "Parasitic Shadowfiend";
+HEALBOT_DEBUFF_GRIEVOUS_THROW          = GetSpellInfo(43093) or "Grievous Throw";
+HEALBOT_DEBUFF_BURN                    = GetSpellInfo(46394) or "Burn";
+HEALBOT_DEBUFF_ENCAPSULATE             = GetSpellInfo(45662) or "Encapsulate";
+HEALBOT_DEBUFF_CONFLAGRATION           = GetSpellInfo(45342) or "Conflagration";
+HEALBOT_DEBUFF_FLAME_SEAR              = GetSpellInfo(46771) or "Flame Sear";
+HEALBOT_DEBUFF_FIRE_BLOOM              = GetSpellInfo(45641) or "Fire Bloom";
+HEALBOT_DEBUFF_GRIEVOUS_BITE           = GetSpellInfo(48920) or "Grievous Bite";
+HEALBOT_DEBUFF_FROST_TOMB              = GetSpellInfo(25168) or "Frost Tomb";
+HEALBOT_DEBUFF_IMPALE                  = GetSpellInfo(67478) or "Impale";
+HEALBOT_DEBUFF_WEB_WRAP                = GetSpellInfo(28622) or "Web Wrap";
+HEALBOT_DEBUFF_JAGGED_KNIFE            = GetSpellInfo(55550) or "Jagged Knife";
+HEALBOT_DEBUFF_FROST_BLAST             = GetSpellInfo(27808) or "Frost Blast";
+HEALBOT_DEBUFF_SLAG_PIT                = GetSpellInfo(63477) or "Slag Pit";
+HEALBOT_DEBUFF_GRAVITY_BOMB            = GetSpellInfo(64234) or "Gravity Bomb";
+HEALBOT_DEBUFF_LIGHT_BOMB              = GetSpellInfo(63018) or "Light Bomb";
+HEALBOT_DEBUFF_STONE_GRIP              = GetSpellInfo(64292) or "Stone Grip";
+HEALBOT_DEBUFF_FERAL_POUNCE            = GetSpellInfo(64669) or "Feral Pounce";
+HEALBOT_DEBUFF_NAPALM_SHELL            = GetSpellInfo(63666) or "Napalm Shell";
+HEALBOT_DEBUFF_IRON_ROOTS              = GetSpellInfo(62283) or "Iron Roots";
+HEALBOT_DEBUFF_SARA_BLESSING           = GetSpellInfo(63134) or "Sara's Blessing";
+HEALBOT_DEBUFF_SNOBOLLED               = GetSpellInfo(66406) or "Snobolled!";
+HEALBOT_DEBUFF_FIRE_BOMB               = GetSpellInfo(67475) or "Fire Bomb";
+HEALBOT_DEBUFF_BURNING_BILE            = GetSpellInfo(66869) or "Burning Bile";
+HEALBOT_DEBUFF_PARALYTIC_TOXIN         = GetSpellInfo(67618) or "Paralytic Toxin";
+HEALBOT_DEBUFF_INCINERATE_FLESH        = GetSpellInfo(67049) or "Incinerate Flesh";
+HEALBOT_DEBUFF_LEGION_FLAME            = GetSpellInfo(68123) or "Legion Flame";
+HEALBOT_DEBUFF_MISTRESS_KISS           = GetSpellInfo(67078) or "Mistress' Kiss";
+HEALBOT_DEBUFF_SPINNING_PAIN_SPIKE     = GetSpellInfo(66283) or "Spinning Pain Spike";
+HEALBOT_DEBUFF_TOUCH_OF_LIGHT          = GetSpellInfo(67297) or "Touch of Light";
+HEALBOT_DEBUFF_TOUCH_OF_DARKNESS       = GetSpellInfo(66001) or "Touch of Darkness";
+HEALBOT_DEBUFF_PENETRATING_COLD        = GetSpellInfo(66013) or "Penetrating Cold";
+HEALBOT_DEBUFF_ACID_DRENCHED_MANDIBLES = GetSpellInfo(67861) or "Acid-Drenched Mandibles";
+HEALBOT_DEBUFF_EXPOSE_WEAKNESS         = GetSpellInfo(67847) or "Expose Weakness";
+HEALBOT_DEBUFF_IMPALED                 = GetSpellInfo(69065) or "Impaled";
+HEALBOT_DEBUFF_NECROTIC_STRIKE         = GetSpellInfo(70659) or "Necrotic Strike";
+HEALBOT_DEBUFF_FALLEN_CHAMPION         = GetSpellInfo(72293) or "Mark of the Fallen Champion";
+HEALBOT_DEBUFF_BOILING_BLOOD           = GetSpellInfo(72385) or "Boiling Blood";
+HEALBOT_DEBUFF_RUNE_OF_BLOOD           = GetSpellInfo(72409) or "Rune of Blood";
+HEALBOT_DEBUFF_VILE_GAS                = GetSpellInfo(72273) or "Vile Gas";
+HEALBOT_DEBUFF_GASTRIC_BLOAT           = GetSpellInfo(72219) or "Gastric Bloat";
+HEALBOT_DEBUFF_GAS_SPORE               = GetSpellInfo(69278) or "Gas Spore";
+HEALBOT_DEBUFF_INOCULATED              = GetSpellInfo(72103) or "Inoculated";
+HEALBOT_DEBUFF_MUTATED_INFECTION       = GetSpellInfo(71224) or "Mutated Infection";
+HEALBOT_DEBUFF_GASEOUS_BLOAT           = GetSpellInfo(72455) or "Gaseous Bloat";
+HEALBOT_DEBUFF_VOLATILE_OOZE           = GetSpellInfo(70447) or "Volatile Ooze Adhesive";
+HEALBOT_DEBUFF_MUTATED_PLAGUE          = GetSpellInfo(72745) or "Mutated Plague";
+HEALBOT_DEBUFF_GLITTERING_SPARKS       = GetSpellInfo(72796) or "Glittering Sparks";
+HEALBOT_DEBUFF_SHADOW_PRISON           = GetSpellInfo(72999) or "Shadow Prison";
+HEALBOT_DEBUFF_SWARMING_SHADOWS        = GetSpellInfo(72638) or "Swarming Shadows";
+HEALBOT_DEBUFF_PACT_DARKFALLEN         = GetSpellInfo(71340) or "Pact of the Darkfallen";
+HEALBOT_DEBUFF_ESSENCE_BLOOD_QUEEN     = GetSpellInfo(70867) or "Essence of the Blood Queen";
+HEALBOT_DEBUFF_DELIRIOUS_SLASH         = GetSpellInfo(71624) or "Delirious Slash";
+HEALBOT_DEBUFF_CORROSION               = GetSpellInfo(70751) or "Corrosion";
+HEALBOT_DEBUFF_GUT_SPRAY               = GetSpellInfo(70633) or "Gut Spray";
+HEALBOT_DEBUFF_ICE_TOMB                = GetSpellInfo(70157) or "Ice Tomb";
+HEALBOT_DEBUFF_FROST_BEACON            = GetSpellInfo(70126) or "Frost Beacon";
+HEALBOT_DEBUFF_CHILLED_BONE            = GetSpellInfo(70106) or "Chilled to the Bone";
+HEALBOT_DEBUFF_INSTABILITY             = GetSpellInfo(69766) or "Instabilty";
+HEALBOT_DEBUFF_MYSTIC_BUFFET           = GetSpellInfo(70127) or "Mystic Buffet";
+HEALBOT_DEBUFF_FROST_BREATH            = GetSpellInfo(69649) or "Frost Breath";
+HEALBOT_DEBUFF_INFEST                  = GetSpellInfo(70541) or "Infest";
+HEALBOT_DEBUFF_NECROTIC_PLAGUE         = GetSpellInfo(70338) or "Necrotic Plague";
+HEALBOT_DEBUFF_DEFILE                  = GetSpellInfo(72754) or "Defile";
+HEALBOT_DEBUFF_HARVEST_SOUL            = GetSpellInfo(68980) or "Harvest Soul";
 
-HEALBOT_RANK_1                                 = "(Rank 1)";
-HEALBOT_RANK_2                                 = "(Rank 2)";
-HEALBOT_RANK_3                                 = "(Rank 3)";
-HEALBOT_RANK_4                                 = "(Rank 4)";
-HEALBOT_RANK_5                                 = "(Rank 5)";
-HEALBOT_RANK_6                                 = "(Rank 6)";
-HEALBOT_RANK_7                                 = "(Rank 7)";
-HEALBOT_RANK_8                                 = "(Rank 8)";
-HEALBOT_RANK_9                                 = "(Rank 9)";
-HEALBOT_RANK_10                                = "(Rank 10)";
-HEALBOT_RANK_11                                = "(Rank 11)";
-HEALBOT_RANK_12                                = "(Rank 12)";
-HEALBOT_RANK_13                                = "(Rank 13)";
-HEALBOT_RANK_14                                = "(Rank 14)";
-HEALBOT_RANK_15                                = "(Rank 15)";
-HEALBOT_RANK_16                                = "(Rank 16)";
-HEALBOT_RANK_17                                = "(Rank 17)";
-HEALBOT_RANK_18                                = "(Rank 18)";
+HEALBOT_RANK_1                         = "(Rank 1)";
+HEALBOT_RANK_2                         = "(Rank 2)";
+HEALBOT_RANK_3                         = "(Rank 3)";
+HEALBOT_RANK_4                         = "(Rank 4)";
+HEALBOT_RANK_5                         = "(Rank 5)";
+HEALBOT_RANK_6                         = "(Rank 6)";
+HEALBOT_RANK_7                         = "(Rank 7)";
+HEALBOT_RANK_8                         = "(Rank 8)";
+HEALBOT_RANK_9                         = "(Rank 9)";
+HEALBOT_RANK_10                        = "(Rank 10)";
+HEALBOT_RANK_11                        = "(Rank 11)";
+HEALBOT_RANK_12                        = "(Rank 12)";
+HEALBOT_RANK_13                        = "(Rank 13)";
+HEALBOT_RANK_14                        = "(Rank 14)";
+HEALBOT_RANK_15                        = "(Rank 15)";
+HEALBOT_RANK_16                        = "(Rank 16)";
+HEALBOT_RANK_17                        = "(Rank 17)";
+HEALBOT_RANK_18                        = "(Rank 18)";
 
-HB_SPELL_PATTERN_LESSER_HEAL                   = "Heal your target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_HEAL                          = "Heal your target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_GREATER_HEAL                  = "A slow casting spell that heals a single target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_FLASH_HEAL                    = "Heals a friendly target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_RENEW1                        = "Heals the target for (%d+) to (%d+) over (%d+) sec";
-HB_SPELL_PATTERN_RENEW                         = "Heals the target for (%d+) over (%d+) sec";
-HB_SPELL_PATTERN_RENEW2                        = "Not needed for en";
-HB_SPELL_PATTERN_RENEW3                        = "Not needed for en";
-HB_SPELL_PATTERN_SHIELD                        = "absorbing (%d+) damage.  Lasts (%d+) sec.";
-HB_SPELL_PATTERN_HEALING_TOUCH                 = "Heals a friendly target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_REGROWTH                      = "Heals a friendly target for (%d+) to (%d+) and another (%d+) over (%d+) sec";
-HB_SPELL_PATTERN_REGROWTH1                     = "Heals a friendly target for (%d+) to (%d+) and another (%d+) to (%d+) over (%d+) sec";
-HB_SPELL_PATTERN_HOLY_LIGHT                    = "Heals a friendly target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_FLASH_OF_LIGHT                = "Heals a friendly target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_HEALING_WAVE                  = "Heals a friendly target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_LESSER_HEALING_WAVE           = "Heals a friendly target for (%d+) to (%d+)";
-HB_SPELL_PATTERN_REJUVENATION                  = "Heals the target for (%d+) over (%d+) sec";
-HB_SPELL_PATTERN_REJUVENATION1                 = "Heals the target for (%d+) to (%d+) over (%d+) sec";
-HB_SPELL_PATTERN_REJUVENATION2                 = "Not needed for en";
-HB_SPELL_PATTERN_MEND_PET                      = "Heals your pet (%d+) health every second while you focus.  Lasts (%d+) sec";
+HB_SPELL_PATTERN_LESSER_HEAL           = "Heal your target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_HEAL                  = "Heal your target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_GREATER_HEAL          = "A slow casting spell that heals a single target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_FLASH_HEAL            = "Heals a friendly target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_RENEW1                = "Heals the target for (%d+) to (%d+) over (%d+) sec";
+HB_SPELL_PATTERN_RENEW                 = "Heals the target for (%d+) over (%d+) sec";
+HB_SPELL_PATTERN_RENEW2                = "Not needed for en";
+HB_SPELL_PATTERN_RENEW3                = "Not needed for en";
+HB_SPELL_PATTERN_SHIELD                = "absorbing (%d+) damage.  Lasts (%d+) sec.";
+HB_SPELL_PATTERN_HEALING_TOUCH         = "Heals a friendly target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_REGROWTH              = "Heals a friendly target for (%d+) to (%d+) and another (%d+) over (%d+) sec";
+HB_SPELL_PATTERN_REGROWTH1             = "Heals a friendly target for (%d+) to (%d+) and another (%d+) to (%d+) over (%d+) sec";
+HB_SPELL_PATTERN_HOLY_LIGHT            = "Heals a friendly target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_FLASH_OF_LIGHT        = "Heals a friendly target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_HEALING_WAVE          = "Heals a friendly target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_LESSER_HEALING_WAVE   = "Heals a friendly target for (%d+) to (%d+)";
+HB_SPELL_PATTERN_REJUVENATION          = "Heals the target for (%d+) over (%d+) sec";
+HB_SPELL_PATTERN_REJUVENATION1         = "Heals the target for (%d+) to (%d+) over (%d+) sec";
+HB_SPELL_PATTERN_REJUVENATION2         = "Not needed for en";
+HB_SPELL_PATTERN_MEND_PET              = "Heals your pet (%d+) health every second while you focus.  Lasts (%d+) sec";
 
-HB_TOOLTIP_MANA                                = "^(%d+) Mana$";
-HB_TOOLTIP_RANGE                               = "(%d+) yd range";
-HB_TOOLTIP_INSTANT_CAST                        = "Instant cast";
-HB_TOOLTIP_CAST_TIME                           = "(%d+.?%d*) sec cast";
-HB_TOOLTIP_CHANNELED                           = "Channeled";
-HB_TOOLTIP_OFFLINE                             = "Offline";
-HB_OFFLINE                                     = "offline"; -- has gone offline msg
-HB_ONLINE                                      = "online"; -- has come online msg
+HB_TOOLTIP_MANA                        = "^(%d+) Mana$";
+HB_TOOLTIP_RANGE                       = "(%d+) yd range";
+HB_TOOLTIP_INSTANT_CAST                = "Instant cast";
+HB_TOOLTIP_CAST_TIME                   = "(%d+.?%d*) sec cast";
+HB_TOOLTIP_CHANNELED                   = "Channeled";
+HB_TOOLTIP_OFFLINE                     = "Offline";
+HB_OFFLINE                             = "offline"; -- has gone offline msg
+HB_ONLINE                              = "online";  -- has come online msg
 
 -----------------
 -- Translation --
 -----------------
 
-HEALBOT_ADDON                                  = "HealBot " .. HEALBOT_VERSION;
-HEALBOT_LOADED                                 = " loaded.";
+HEALBOT_ADDON                          = "HealBot " .. HEALBOT_VERSION;
+HEALBOT_LOADED                         = " loaded.";
 
-HEALBOT_ACTION_OPTIONS                         = "Options";
+HEALBOT_ACTION_OPTIONS                 = "Options";
 
-HEALBOT_OPTIONS_TITLE                          = HEALBOT_ADDON;
-HEALBOT_OPTIONS_DEFAULTS                       = "Defaults";
-HEALBOT_OPTIONS_CLOSE                          = "Close";
-HEALBOT_OPTIONS_HARDRESET                      = "ReloadUI"
-HEALBOT_OPTIONS_SOFTRESET                      = "ResetHB"
-HEALBOT_OPTIONS_INFO                           = "Info"
-HEALBOT_OPTIONS_TAB_GENERAL                    = "General";
-HEALBOT_OPTIONS_TAB_SPELLS                     = "Spells";
-HEALBOT_OPTIONS_TAB_HEALING                    = "Healing";
-HEALBOT_OPTIONS_TAB_CDC                        = "Cure";
-HEALBOT_OPTIONS_TAB_SKIN                       = "Skins";
-HEALBOT_OPTIONS_TAB_TIPS                       = "Tips";
-HEALBOT_OPTIONS_TAB_BUFFS                      = "Buffs"
+HEALBOT_OPTIONS_TITLE                  = HEALBOT_ADDON;
+HEALBOT_OPTIONS_DEFAULTS               = "Defaults";
+HEALBOT_OPTIONS_CLOSE                  = "Close";
+HEALBOT_OPTIONS_HARDRESET              = "ReloadUI"
+HEALBOT_OPTIONS_SOFTRESET              = "ResetHB"
+HEALBOT_OPTIONS_INFO                   = "Info"
+HEALBOT_OPTIONS_TAB_GENERAL            = "General";
+HEALBOT_OPTIONS_TAB_SPELLS             = "Spells";
+HEALBOT_OPTIONS_TAB_HEALING            = "Healing";
+HEALBOT_OPTIONS_TAB_CDC                = "Cure";
+HEALBOT_OPTIONS_TAB_SKIN               = "Skins";
+HEALBOT_OPTIONS_TAB_TIPS               = "Tips";
+HEALBOT_OPTIONS_TAB_BUFFS              = "Buffs"
 
-HEALBOT_OPTIONS_PANEL_TEXT                     = "Healing panel options"
-HEALBOT_OPTIONS_BARALPHA                       = "Enabled opacity";
-HEALBOT_OPTIONS_BARALPHAINHEAL                 = "Incoming heals opacity";
-HEALBOT_OPTIONS_BARALPHAEOR                    = "Out of range opacity";
-HEALBOT_OPTIONS_ACTIONLOCKED                   = "Lock position";
-HEALBOT_OPTIONS_AUTOSHOW                       = "Close automatically";
-HEALBOT_OPTIONS_PANELSOUNDS                    = "Play sound on open";
-HEALBOT_OPTIONS_HIDEOPTIONS                    = "Hide options button";
-HEALBOT_OPTIONS_PROTECTPVP                     = "Avoid accidental PvP";
-HEALBOT_OPTIONS_HEAL_CHATOPT                   = "Chat Options";
+HEALBOT_OPTIONS_PANEL_TEXT             = "Healing panel options"
+HEALBOT_OPTIONS_BARALPHA               = "Enabled opacity";
+HEALBOT_OPTIONS_BARALPHAINHEAL         = "Incoming heals opacity";
+HEALBOT_OPTIONS_BARALPHAEOR            = "Out of range opacity";
+HEALBOT_OPTIONS_ACTIONLOCKED           = "Lock position";
+HEALBOT_OPTIONS_AUTOSHOW               = "Close automatically";
+HEALBOT_OPTIONS_PANELSOUNDS            = "Play sound on open";
+HEALBOT_OPTIONS_HIDEOPTIONS            = "Hide options button";
+HEALBOT_OPTIONS_PROTECTPVP             = "Avoid accidental PvP";
+HEALBOT_OPTIONS_HEAL_CHATOPT           = "Chat Options";
 
-HEALBOT_OPTIONS_SKINTEXT                       = "Use skin"
-HEALBOT_SKINS_STD                              = "Standard"
-HEALBOT_OPTIONS_SKINTEXTURE                    = "Texture"
-HEALBOT_OPTIONS_SKINHEIGHT                     = "Height"
-HEALBOT_OPTIONS_SKINWIDTH                      = "Width"
-HEALBOT_OPTIONS_SKINNUMCOLS                    = "No. columns"
-HEALBOT_OPTIONS_SKINNUMHCOLS                   = "No. groups per column"
-HEALBOT_OPTIONS_SKINBRSPACE                    = "Row spacer"
-HEALBOT_OPTIONS_SKINBCSPACE                    = "Col spacer"
-HEALBOT_OPTIONS_EXTRASORT                      = "Sort raid bars by"
-HEALBOT_SORTBY_NAME                            = "Name"
-HEALBOT_SORTBY_CLASS                           = "Class"
-HEALBOT_SORTBY_GROUP                           = "Group"
-HEALBOT_SORTBY_MAXHEALTH                       = "Max health"
-HEALBOT_OPTIONS_NEWDEBUFFTEXT                  = "New debuff"
-HEALBOT_OPTIONS_DELSKIN                        = "Delete"
-HEALBOT_OPTIONS_NEWSKINTEXT                    = "New skin"
-HEALBOT_OPTIONS_SAVESKIN                       = "Save"
-HEALBOT_OPTIONS_SKINBARS                       = "Bar options"
-HEALBOT_OPTIONS_SKINPANEL                      = "Panel colours"
-HEALBOT_SKIN_ENTEXT                            = "Enabled"
-HEALBOT_SKIN_DISTEXT                           = "Disabled"
-HEALBOT_SKIN_DEBTEXT                           = "Debuff"
-HEALBOT_SKIN_BACKTEXT                          = "Background"
-HEALBOT_SKIN_BORDERTEXT                        = "Border"
-HEALBOT_OPTIONS_SKINFONT                       = "Font"
-HEALBOT_OPTIONS_SKINFHEIGHT                    = "Font Size"
-HEALBOT_OPTIONS_BARALPHADIS                    = "Disabled opacity"
-HEALBOT_OPTIONS_SHOWHEADERS                    = "Show headers"
+HEALBOT_OPTIONS_SKINTEXT               = "Use skin"
+HEALBOT_SKINS_STD                      = "Standard"
+HEALBOT_OPTIONS_SKINTEXTURE            = "Texture"
+HEALBOT_OPTIONS_SKINHEIGHT             = "Height"
+HEALBOT_OPTIONS_SKINWIDTH              = "Width"
+HEALBOT_OPTIONS_SKINNUMCOLS            = "No. columns"
+HEALBOT_OPTIONS_SKINNUMHCOLS           = "No. groups per column"
+HEALBOT_OPTIONS_SKINBRSPACE            = "Row spacer"
+HEALBOT_OPTIONS_SKINBCSPACE            = "Col spacer"
+HEALBOT_OPTIONS_EXTRASORT              = "Sort raid bars by"
+HEALBOT_SORTBY_NAME                    = "Name"
+HEALBOT_SORTBY_CLASS                   = "Class"
+HEALBOT_SORTBY_GROUP                   = "Group"
+HEALBOT_SORTBY_MAXHEALTH               = "Max health"
+HEALBOT_OPTIONS_NEWDEBUFFTEXT          = "New debuff"
+HEALBOT_OPTIONS_DELSKIN                = "Delete"
+HEALBOT_OPTIONS_NEWSKINTEXT            = "New skin"
+HEALBOT_OPTIONS_SAVESKIN               = "Save"
+HEALBOT_OPTIONS_SKINBARS               = "Bar options"
+HEALBOT_OPTIONS_SKINPANEL              = "Panel colours"
+HEALBOT_SKIN_ENTEXT                    = "Enabled"
+HEALBOT_SKIN_DISTEXT                   = "Disabled"
+HEALBOT_SKIN_DEBTEXT                   = "Debuff"
+HEALBOT_SKIN_BACKTEXT                  = "Background"
+HEALBOT_SKIN_BORDERTEXT                = "Border"
+HEALBOT_OPTIONS_SKINFONT               = "Font"
+HEALBOT_OPTIONS_SKINFHEIGHT            = "Font Size"
+HEALBOT_OPTIONS_BARALPHADIS            = "Disabled opacity"
+HEALBOT_OPTIONS_SHOWHEADERS            = "Show headers"
 
-HEALBOT_OPTIONS_ITEMS                          = "Items";
-HEALBOT_OPTIONS_SPELLS                         = "Spells";
+HEALBOT_OPTIONS_ITEMS                  = "Items";
+HEALBOT_OPTIONS_SPELLS                 = "Spells";
 
-HEALBOT_OPTIONS_COMBOCLASS                     = "Key combos for";
-HEALBOT_OPTIONS_CLICK                          = "Click";
-HEALBOT_OPTIONS_SHIFT                          = "Shift";
-HEALBOT_OPTIONS_CTRL                           = "Ctrl";
-HEALBOT_OPTIONS_ENABLEHEALTHY                  = "Always use enabled settings";
+HEALBOT_OPTIONS_COMBOCLASS             = "Key combos for";
+HEALBOT_OPTIONS_CLICK                  = "Click";
+HEALBOT_OPTIONS_SHIFT                  = "Shift";
+HEALBOT_OPTIONS_CTRL                   = "Ctrl";
+HEALBOT_OPTIONS_ENABLEHEALTHY          = "Always use enabled settings";
 
-HEALBOT_OPTIONS_CASTNOTIFY1                    = "No messages";
-HEALBOT_OPTIONS_CASTNOTIFY2                    = "Notify self";
-HEALBOT_OPTIONS_CASTNOTIFY3                    = "Notify target";
-HEALBOT_OPTIONS_CASTNOTIFY4                    = "Notify party";
-HEALBOT_OPTIONS_CASTNOTIFY5                    = "Notify raid";
-HEALBOT_OPTIONS_CASTNOTIFY6                    = "Notify chan";
-HEALBOT_OPTIONS_CASTNOTIFYRESONLY              = "Notify for resurrection only";
-HEALBOT_OPTIONS_TARGETWHISPER                  = "Whisper target when healing";
+HEALBOT_OPTIONS_CASTNOTIFY1            = "No messages";
+HEALBOT_OPTIONS_CASTNOTIFY2            = "Notify self";
+HEALBOT_OPTIONS_CASTNOTIFY3            = "Notify target";
+HEALBOT_OPTIONS_CASTNOTIFY4            = "Notify party";
+HEALBOT_OPTIONS_CASTNOTIFY5            = "Notify raid";
+HEALBOT_OPTIONS_CASTNOTIFY6            = "Notify chan";
+HEALBOT_OPTIONS_CASTNOTIFYRESONLY      = "Notify for resurrection only";
+HEALBOT_OPTIONS_TARGETWHISPER          = "Whisper target when healing";
 
-HEALBOT_OPTIONS_CDCBARS                        = "Bar colours";
-HEALBOT_OPTIONS_CDCSHOWHBARS                   = "Change health bar colour";
-HEALBOT_OPTIONS_CDCSHOWABARS                   = "Change aggro bar colour";
-HEALBOT_OPTIONS_CDCCLASS                       = "Monitor classes";
-HEALBOT_OPTIONS_CDCWARNINGS                    = "Debuff warnings";
-HEALBOT_OPTIONS_SHOWDEBUFFICON                 = "Show debuff";
-HEALBOT_OPTIONS_SHOWDEBUFFWARNING              = "Display warning on debuff";
-HEALBOT_OPTIONS_SOUNDDEBUFFWARNING             = "Play sound on debuff";
-HEALBOT_OPTIONS_SOUND                          = "Sound"
-HEALBOT_OPTIONS_SOUND1                         = "Sound 1"
-HEALBOT_OPTIONS_SOUND2                         = "Sound 2"
-HEALBOT_OPTIONS_SOUND3                         = "Sound 3"
+HEALBOT_OPTIONS_CDCBARS                = "Bar colours";
+HEALBOT_OPTIONS_CDCSHOWHBARS           = "Change health bar colour";
+HEALBOT_OPTIONS_CDCSHOWABARS           = "Change aggro bar colour";
+HEALBOT_OPTIONS_CDCCLASS               = "Monitor classes";
+HEALBOT_OPTIONS_CDCWARNINGS            = "Debuff warnings";
+HEALBOT_OPTIONS_SHOWDEBUFFICON         = "Show debuff";
+HEALBOT_OPTIONS_SHOWDEBUFFWARNING      = "Display warning on debuff";
+HEALBOT_OPTIONS_SOUNDDEBUFFWARNING     = "Play sound on debuff";
+HEALBOT_OPTIONS_SOUND                  = "Sound"
+HEALBOT_OPTIONS_SOUND1                 = "Sound 1"
+HEALBOT_OPTIONS_SOUND2                 = "Sound 2"
+HEALBOT_OPTIONS_SOUND3                 = "Sound 3"
 
-HEALBOT_OPTIONS_HEAL_BUTTONS                   = "Healing bars";
-HEALBOT_OPTIONS_SELFHEALS                      = "Self"
-HEALBOT_OPTIONS_PETHEALS                       = "Pets"
-HEALBOT_OPTIONS_GROUPHEALS                     = "Group";
-HEALBOT_OPTIONS_TANKHEALS                      = "Main tanks";
-HEALBOT_OPTIONS_MAINASSIST                     = "Main assist";
-HEALBOT_OPTIONS_PRIVATETANKS                   = "Private main tanks";
-HEALBOT_OPTIONS_TARGETHEALS                    = "Targets";
-HEALBOT_OPTIONS_EMERGENCYHEALS                 = "Raid";
-HEALBOT_OPTIONS_ALERTLEVEL                     = "Alert Level";
-HEALBOT_OPTIONS_EMERGFILTER                    = "Show raid bars for";
-HEALBOT_OPTIONS_EMERGFCLASS                    = "Configure classes for";
-HEALBOT_OPTIONS_COMBOBUTTON                    = "Button";
-HEALBOT_OPTIONS_BUTTONLEFT                     = "Left";
-HEALBOT_OPTIONS_BUTTONMIDDLE                   = "Middle";
-HEALBOT_OPTIONS_BUTTONRIGHT                    = "Right";
-HEALBOT_OPTIONS_BUTTON4                        = "Button4";
-HEALBOT_OPTIONS_BUTTON5                        = "Button5";
-HEALBOT_OPTIONS_BUTTON6                        = "Button6";
-HEALBOT_OPTIONS_BUTTON7                        = "Button7";
-HEALBOT_OPTIONS_BUTTON8                        = "Button8";
-HEALBOT_OPTIONS_BUTTON9                        = "Button9";
-HEALBOT_OPTIONS_BUTTON10                       = "Button10";
-HEALBOT_OPTIONS_BUTTON11                       = "Button11";
-HEALBOT_OPTIONS_BUTTON12                       = "Button12";
-HEALBOT_OPTIONS_BUTTON13                       = "Button13";
-HEALBOT_OPTIONS_BUTTON14                       = "Button14";
-HEALBOT_OPTIONS_BUTTON15                       = "Button15";
+HEALBOT_OPTIONS_HEAL_BUTTONS           = "Healing bars";
+HEALBOT_OPTIONS_SELFHEALS              = "Self"
+HEALBOT_OPTIONS_PETHEALS               = "Pets"
+HEALBOT_OPTIONS_GROUPHEALS             = "Group";
+HEALBOT_OPTIONS_TANKHEALS              = "Main tanks";
+HEALBOT_OPTIONS_MAINASSIST             = "Main assist";
+HEALBOT_OPTIONS_PRIVATETANKS           = "Private main tanks";
+HEALBOT_OPTIONS_TARGETHEALS            = "Targets";
+HEALBOT_OPTIONS_EMERGENCYHEALS         = "Raid";
+HEALBOT_OPTIONS_ALERTLEVEL             = "Alert Level";
+HEALBOT_OPTIONS_EMERGFILTER            = "Show raid bars for";
+HEALBOT_OPTIONS_EMERGFCLASS            = "Configure classes for";
+HEALBOT_OPTIONS_COMBOBUTTON            = "Button";
+HEALBOT_OPTIONS_BUTTONLEFT             = "Left";
+HEALBOT_OPTIONS_BUTTONMIDDLE           = "Middle";
+HEALBOT_OPTIONS_BUTTONRIGHT            = "Right";
+HEALBOT_OPTIONS_BUTTON4                = "Button4";
+HEALBOT_OPTIONS_BUTTON5                = "Button5";
+HEALBOT_OPTIONS_BUTTON6                = "Button6";
+HEALBOT_OPTIONS_BUTTON7                = "Button7";
+HEALBOT_OPTIONS_BUTTON8                = "Button8";
+HEALBOT_OPTIONS_BUTTON9                = "Button9";
+HEALBOT_OPTIONS_BUTTON10               = "Button10";
+HEALBOT_OPTIONS_BUTTON11               = "Button11";
+HEALBOT_OPTIONS_BUTTON12               = "Button12";
+HEALBOT_OPTIONS_BUTTON13               = "Button13";
+HEALBOT_OPTIONS_BUTTON14               = "Button14";
+HEALBOT_OPTIONS_BUTTON15               = "Button15";
 
 
 HEALBOT_CLASSES_ALL                    = "All classes";
@@ -971,7 +1157,8 @@ HEALBOT_HELP                           = {
     [7] = "[HealBot] /hb bt -- Toggle Buff Monitor between disabled and enabled",
     [8] = "[HealBot] /hb dt -- Toggle Debuff Monitor between disabled and enabled",
     [9] = "[HealBot] /hb skin <skinName> -- Switch Skins",
-    [10] = "[HealBot] /hb tr <Role> -- Set highest role priority for SubSort by Role. Valid Roles are 'TANK', 'HEALER' or 'DPS'",
+    [10] =
+    "[HealBot] /hb tr <Role> -- Set highest role priority for SubSort by Role. Valid Roles are 'TANK', 'HEALER' or 'DPS'",
 }
 
 HEALBOT_OPTION_HIGHLIGHTACTIVEBAR      = "Highlight mouseover"
@@ -1212,4 +1399,3 @@ HEALBOT_OPTIONS_COMBATPROT = "Combat Protection"
 HEALBOT_COMBATPROT_INFO    = "Combat Protection allows HealBot to recover from\nchanges to the party/raid during combat."
 HEALBOT_COMBATPROT_PARTYNO = "bars Reserved for Party"
 HEALBOT_COMBATPROT_RAIDNO  = "bars Reserved for Raid"
-
