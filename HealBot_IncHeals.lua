@@ -905,7 +905,7 @@ end
 function HealBot_IncHeals_parseLHC4(htGUID, casterName, endTime, casterGUID, spellID, spellType)
     if Healbot_Config_Skins.ShowIncHeals[Healbot_Config_Skins.Current_Skin]==1 and HealBot_Config.HealCommMethod==1 then
         if strfind(htGUID,":") then 
-            utGUID = HealBot_Split(htGUID, ":");
+            utGUID = HealBot_Split(htGUID, ":"); 
         else
             utGUID = htGUID
         end

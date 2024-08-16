@@ -20,6 +20,12 @@ With the new window, it's easy to track the spells you want to display or hide. 
 <img src="https://github.com/Rukstone/Healbot_Updateds/blob/Rukstone/Features_Updates/Images/Spell_Combo_Set_Profile.png?raw=true" alt="Image Alt Text" style="width: 250px;">
 
 
+### New Spell Manager
+###### With this new tool, you can easily add new spells, dispels, and buffs to Healbot without relying on future updates. The tool is versatile and not limited to just simple spells, allowing you to customize Healbot to suit your needs.
+
+<img src="https://github.com/Rukstone/Healbot_Updateds/blob/Rukstone/Features_Updates/Images/Spell_Manager_Options_Window.png?raw=true" alt="Image Alt Text" style="width: 250px;">
+
+
 ### New RE Add:
  ###### <img src="https://db.ascension.gg/static/images/wow/icons/large/spell_fire_flamebolt.jpg" alt="Image Alt Text" style="width: 25px;"> Cauterizing Fire
  ###### <img src="https://db.ascension.gg/static/images/wow/icons/large/spell_nature_regeneration_02.jpg" alt="Image Alt Text" style="width: 25px;"> Seed of Life

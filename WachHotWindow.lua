@@ -10,7 +10,7 @@ local SPellWacherButtonDisplay; -- the button that control the display of the sp
 local SelectedSpellWacher;      -- the current selected spell (ID) from the GLOBAL wacher
 local SelectedSpellDescription;
 local SelectedSpellType = "Helpful";
-function OnSpellWacher_TabChange(key)
+function Healbot_OnSpellWacher_TabChange(key)
     if key ~= SelectedSpellType then
         SelectedSpellDescription:SetText("Select Spell");
         SelectedSpellWacher = nil;
@@ -36,7 +36,7 @@ function OnSpellWacher_TabChange(key)
 
     SPellWacherButtonDisplay:Hide();
 end
-function OnSpellWacherScroll_Load(ScrollView) --this function is called only on "OnLoad"
+function Healbot_OnSpellWacherScroll_Load(ScrollView) --this function is called only on "OnLoad"
     ScrollViewSpellList_BG = CreateFrame("Frame", nil, ScrollView);
     ScrollViewSpellList_BG:SetSize(200, 300);
     ScrollViewSpellList_BG.bg = ScrollViewSpellList_BG:CreateTexture(nil, "BACKGROUND");
@@ -45,29 +45,31 @@ function OnSpellWacherScroll_Load(ScrollView) --this function is called only on 
     SelectedSpellDescription = ScrollView:CreateFontString(nil, "OVERLAY", "GameFontNormal");
     SelectedSpellDescription:SetPoint("TOPLEFT", 250, 170);
     SelectedSpellDescription:SetSize(200, 300);
-    SelectedSpellDescription:SetText(
-        "Select the spell in the list at your left and change the display mode using the button below");
+    SelectedSpellDescription:SetText("Select the spell in the list at your left and change the display mode using the button below");
     SelectedSpellDescription:SetTextHeight(18);
-    for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HealBot_PlayerClass_ER]) do
-        Create_Spell_Button(k, "Helpful")
+    if HealBot_GlobalsDefaults.WatchHoT[HealBot_PlayerClass_ER] then
+        for k, v in pairs(HealBot_GlobalsDefaults.WatchHoT[HealBot_PlayerClass_ER]) do
+            Healbot_WatchHot_Create_Spell_Button(k, "Helpful")
+        end
     end
+
     indexEE = 0;
     for k, v in pairs(HealBot_GlobalsDefaults.Debuff_IgnoreList_R) do
-        Create_Spell_Button(k, "Harmful")
+        Healbot_WatchHot_Create_Spell_Button(k, "Harmful")
     end
     Hb_WachHotBlock()
-    OnSpellWacher_TabChange("Helpful");
+    Healbot_OnSpellWacher_TabChange("Helpful");
 end
-function SpellWacherOnTextChange(button)
+function Healbot_SpellWacherOnTextChange(button)
     if ScrollViewSpellsButton[SelectedSpellType] then
         SpellWacherSearchBox = button:GetText()
         indexEE = 0;
         for k, value in pairs(ScrollViewSpellsButton[SelectedSpellType]) do
-            if StringSearch(k, SpellWacherSearchBox) then
+            if Healbot_StringSearch(k, SpellWacherSearchBox) then
                 value:Show();
                 value:SetPoint("TOP", ScrollViewSpellList_BG, "TOP", 0, indexEE)
                 indexEE = indexEE - 30;
-            elseif not StringSearch(k, SpellWacherSearchBox) then
+            elseif not Healbot_StringSearch(k, SpellWacherSearchBox) then
                 value:Hide();
             else
                 value:Show();
@@ -75,7 +77,7 @@ function SpellWacherOnTextChange(button)
         end
     end
 end
-function StringSearch(value, StartWith)
+function Healbot_StringSearch(value, StartWith)
     StartWith = string.lower(StartWith);
     value = string.lower(value);
 
@@ -121,17 +123,16 @@ local function MyFrameOnclick(self)
     end
 
 end
-
-function OnSpellButtonClickDisplayHotOption(self) --this function is called on LOAD.
+function Healbot_OnSpellButtonClickDisplayHotOption(self) --this function is called on LOAD.
     SelectedSpellWacher = HEALBOT_RENEW;
     SPellWacherButtonDisplay = self;
     SPellWacherButtonDisplay:HookScript("OnClick", MyFrameOnclick)
-    SPellWacherButtonDisplay:HookScript("OnEnter", OnEnter_123)
-    SPellWacherButtonDisplay:HookScript("OnLeave", OnLeave_123)
+    SPellWacherButtonDisplay:HookScript("OnEnter", Healbot_OnEnter_123)
+    SPellWacherButtonDisplay:HookScript("OnLeave", Healbot_OnLeave_123)
     --SPellWacherButtonDisplay:SetText("Self Cast Only");
     --MyFrameOnclick(self,SPellWacherButtonDisplay)
 end
-function OnEnter_123(self, motion)
+function Healbot_OnEnter_123(self, motion)
     GameTooltip:SetOwner(self, "ANCHOR_TOP")
     if self:GetText() == "Self Cast Only" then
         GameTooltip:AddLine("" .. "[" .. SelectedSpellWacher .. "]" .. " Will only show on the HUD if casted by yorself.")
@@ -143,33 +144,26 @@ function OnEnter_123(self, motion)
     end
     GameTooltip:Show()
 end
-function OnLeave_123(self, motion)
+function Healbot_OnLeave_123(self, motion)
     GameTooltip:Hide()
 end
 local function Btt_click_ed(self, ...) --this function is called when player click on one of the spells / it will select the current spell and the current state of it.
     SPellWacherButtonDisplay:Show();
-
     SelectedSpellWacher = self:GetText();
-
-
     if SelectedSpellType == "Helpful" then
         if HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] then
             if HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 1 then
-                -- body
                 SPellWacherButtonDisplay:SetText("Dont Show")
                 SelectedSpellDescription:SetText("[" ..
                     SelectedSpellWacher .. "]" .. " Will be hidden in the UI.")
             elseif HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 2 then
-                -- body
                 SPellWacherButtonDisplay:SetText("Self Cast Only")
                 SelectedSpellDescription:SetText("[" ..
                     SelectedSpellWacher .. "]" .. " Will only be displayed if casted by yourself.")
             elseif HealBot_Globals.WatchHoT[HealBot_PlayerClass_ER][SelectedSpellWacher] == 3 then
-                -- body
                 SPellWacherButtonDisplay:SetText("ALL")
                 SelectedSpellDescription:SetText("[" ..
                     SelectedSpellWacher .. "]" .. " Will be displayed if enyone cast it.")
-
             end
         end
     else
@@ -185,12 +179,10 @@ local function Btt_click_ed(self, ...) --this function is called when player cli
         end
     end
 end
-function Create_Spell_Button(spell, tab)
+function Healbot_WatchHot_Create_Spell_Button(spell, tab)
     if not spell or not tab then
         return
     end
-
-
     if not ScrollViewSpellsButton[tab][spell] then
         local button = CreateFrame("Button", nil, ScrollViewSpellList_BG)
         ScrollViewSpellsButton[tab][spell] = button;
